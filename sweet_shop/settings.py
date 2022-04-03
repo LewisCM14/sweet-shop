@@ -28,11 +28,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-
 # If DEVELOPMENT variable set within environment DEBUG = True
 # DEBUG = False on Heroku as no DEVELOPMENT variable
 DEBUG = 'DEVELOPMENT' in os.environ
 
+# Hosts - allows Heroku app and IDE
 ALLOWED_HOSTS = ['sweet-shop-lewiscm.herokuapp.com', 'localhost', ]
 
 
@@ -49,6 +49,9 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
+
+    # Other
+    'storages',
 ]
 
 MIDDLEWARE = [
@@ -114,7 +117,7 @@ WSGI_APPLICATION = 'sweet_shop.wsgi.application'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 # when the app is running on Heroku, where DATABASE_URL is defined
-# Connect to Postgres, otherwise connect to sqlite light.
+# Connect to Postgres, otherwise connect locally to sqlite light.
 
 if 'DATABASE_URL' in os.environ:
     DATABASES = {
