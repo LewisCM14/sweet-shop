@@ -30,8 +30,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 # If DEVELOPMENT variable set within environment DEBUG = True
 # DEBUG = False on Heroku as no DEVELOPMENT variable
-DEBUG = True
-# DEBUG = 'DEVELOPMENT' in os.environ
+DEBUG = 'DEVELOPMENT' in os.environ
 
 # Hosts - allows Heroku app and IDE
 ALLOWED_HOSTS = ['sweet-shop-lewiscm.herokuapp.com', 'localhost', ]
@@ -98,7 +97,6 @@ AUTHENTICATION_BACKENDS = [
 
 SITE_ID = 1
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # allauth settings
 
@@ -213,3 +211,23 @@ if 'USE_AWS' in os.environ:
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+# Email Settings
+
+# check if DEVELOPMENT is in os.environ
+# If that variable is set, log emails to the console
+# If DEVELOPMENT not in environment,
+# Specify email backend is an smtp, & define settings
+
+if 'DEVELOPMENT' in os.environ:
+    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+    DEFAULT_FROM_EMAIL = 'classicconfectionery.notice@example.com'
+else:
+    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+    EMAIL_USE_TLS = True
+    EMAIL_PORT = 587
+    EMAIL_HOST = 'smtp.gmail.com'
+    EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
+    EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASS')
+    DEFAULT_FROM_EMAIL = os.environ.get('EMAIL_HOST_USER')
