@@ -190,7 +190,7 @@ ___
      
     *Ensure all requirements for the project are added to the requirements.txt file prior to deployment. The command **pip3 freeze --local > requirements.txt** can be ran in the terminal to do this.*
 
-    *It is also assumed that the Django project is setup as intended, necessary dependencies installed with all apps required added to the INSTALLED_APPS variable within settings.py. For this project the booking app is all that is required.*
+    *It is also assumed that the Django project is setup as intended, necessary dependencies installed with all apps required added to the INSTALLED_APPS variable and the TEMPLATES variable within settings.py defined correctly, as well as the static and media files.*
 
     * STAGE ONE - Create a New App in Heroku
 
@@ -198,39 +198,44 @@ ___
         
         2: Enter an individual app name into the text box, select a relevant region from the dropdown and then press Create app.
         
-        3: A Heroku app has now been created.
+        *A Heroku app has now been created.*
     
     ---
     
-    * STAGE TWO - Add a Database
+    * STAGE TWO - Add the Database
 
         1: Navigate to the resources tab for the app that has just been created.
 
         2: In the Add-Ons section, search for the Heroku Postgres add on and submit an order form.
         
-        3: Select the Settings tab for the app.
+        *The Heroku app is now using a Postgres database, from within the settings tab on the Heroku app the config vars now has a DATABASE_URL variable set.*
 
-        4: Reveal Config Vars and copy the DATABASE_URL string provided.
+        3: At this point, using the psycopg2-binary and dj_database_url packages preform a migration to the Postgres database from within the IDE. Within the settings.py file, comment out the existing database definition and replace it with the code below, ensuring once the migrations have been completed the settings file is reverted back before any commits are made.
 
-        5: Create a env.py file within the project and use the copied string to create a DATABASE_URL environment variable. The Python OS module will be required for this.
-
-        *The env.py file is used to protect keys which should only be viewed by the developer. This file will not be pushed to GutHub for public display.*
+            DATABASES = {
+                'default': dj_database_url.parse('The DATABASE_URL String from within the config vars on the Heroku app')
 
     ---
     
     * STAGE THREE - Create a SECRET_KEY
 
-        1: Within the env.py file, create a SECRET_KEY environment variable. The string for this variable is decided by the developer.
+        1: Within the root directory create a env.py file, ensuring env.py is added in the .gitignore file.
 
-        2: On the settings tab of the Heroku app, reveal config vars and add the SECRET_KEY variable along with the corresponding string.
+        2: Within the env.py file, import os at the top and create a SECRET_KEY environment variable. The string for this variable is decided by the developer.
+            
+            os.environ["SECRET_KEY"] = "some string"
+
+        3: On the settings tab of the Heroku app, reveal config vars and add the SECRET_KEY variable along with the corresponding string that has just been created.
 
     ---
     
     * STAGE FOUR - Update the settings.py file
 
-        1: Import dj_database_url and env.py into the settings.py file within the project.
-
+        1: Import dj_database_url and env.py into the settings.py file for the project.
+            
+            import os
             import dj_database_url
+
             if os.path.isfile('env.py'):
                 import env
 
@@ -238,76 +243,146 @@ ___
 
             SECRET_KEY = os.environ.get('SECRET_KEY')
 
-        3: Using an if/else statement update the DATABASES dictionary for the deployed project to use the DATABASE_URL environment variable, the dj_database_url library is utilized here.
+        3: Define the database. The dj_database_url package is utilized here.
 
-            if development:
+            if 'DATABASE_URL' in os.environ:
+                DATABASES = {
+                    'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))
+                }
+            else:
                 DATABASES = {
                     'default': {
                         'ENGINE': 'django.db.backends.sqlite3',
                         'NAME': BASE_DIR / 'db.sqlite3',
                     }
                 }
+        
+        *when the app is running on Heroku, where DATABASE_URL is defined in the config vars the application connects to Postgres, otherwise it connects locally to sqlite light.*
+
+        4: Update the allowed hosts.
+            
+            ALLOWED_HOSTS = ['sweet-shop-lewiscm.herokuapp.com', 'localhost', ]
+        
+        *Allows the Heroku app to host the project as well as it be hosted locally within the IDE*
+
+    ---
+
+    * STAGE FIVE - Turn DEBUG off in Deployment
+
+        1: Within the settings tab on gitpod workspaces, navigate to the variable tab and create the 'DEVELOPMENT = True' variable for the projects workspace.
+
+        2: Alter the DEBUG variable within the settings.py file.
+
+            DEBUG = 'DEVELOPMENT' in os.environ
+        
+        *If DEVELOPMENT variable set within environment DEBUG = True else DEBUG = False on Heroku as no DEVELOPMENT variable*
+
+    ---
+
+    * STAGE SIX - Define Email Backend Settings
+
+        *This stage assumes that a gmail smtp already setup for use in the application with an app specific password.*
+
+        1: Within the settings.py file for the project, at the email backend definition, update the code to the below settings.
+
+            if 'DEVELOPMENT' in os.environ:
+                EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+                DEFAULT_FROM_EMAIL = 'classicconfectionery.notice@example.com'
             else:
-                DATABASES = {
-                    'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))
-            }
+                EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+                EMAIL_USE_TLS = True
+                EMAIL_PORT = 587
+                EMAIL_HOST = 'smtp.gmail.com'
+                EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
+                EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASS')
+                DEFAULT_FROM_EMAIL = os.environ.get('EMAIL_HOST_USER')
         
-        *The database for developing the project remains as the sqlite one provided*
+        *This code checks if DEVELOPMENT is in the environment If that variable is set,  emails are logged to the console. If DEVELOPMENT not in environment, email backend is an smtp and required settings are defined.*
 
-        4: Preform a migration.
+        2: Then from within the settings tab on the Heroku app, add the below variables with the corresponding string to the config vars.
 
-        *The Heroku database is now being used as the backend, within the resources tab of the app, the Heroku Postgres link will bring up a window demonstrating this.*
-
-    ---
-
-    * STAGE FIVE - Connect app to AWS
-
-    ---
-     
-    * STAGE SIX - Tell Django where the templates are stored
-
-        1: Under the BASE_DIR on settings.py, add in the below templates directory. 
+            EMAIL_HOST_PASS = 'App specific password provided by google'
+            EMAIL_HOST_USER = 'classicconfectionery.notice@gmail.com'
         
-            TEMPLATES_DIR =  os.path.join(BASE_DIR, 'templates')
+        *The deployed project now uses gmail for email backend and locally emails are shown in the console.*
+    
+    ---
+
+    * STAGE SEVEN - Connect app to AWS
+
+        *It is assumed an S3 bucket is already setup correctly at this point*
+
+        1: Within the projects settings.py file, at the static file's definition for the project add the below code.
+
+            STATIC_URL = '/static/'
+            STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
+
+            MEDIA_URL = '/media/'
+            MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+            if 'USE_AWS' in os.environ:
+
+                # Cache control
+                AWS_S3_OBJECT_PARAMETERS = {
+                    'Expires': 'Thu, 31 Dec 2099 20:00:00 GMT',
+                    'CacheControl': 'max-age=94608000',
+                }
+
+                # Bucket Config
+                AWS_STORAGE_BUCKET_NAME = 'sweet-shop-lewiscm'
+                AWS_S3_REGION_NAME = 'eu-west-2'
+                AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
+                AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
+                AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
+
+                # Static and media files
+                # see custom_storages.py
+                STATICFILES_STORAGE = 'custom_storages.StaticStorage'
+                STATICFILES_LOCATION = 'static'
+                DEFAULT_FILE_STORAGE = 'custom_storages.MediaStorage'
+                MEDIAFILES_LOCATION = 'media'
+
+                # Override static and media URLs in production
+                STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{STATICFILES_LOCATION}/'
+                MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{MEDIAFILES_LOCATION}/'
+
+        2: Within the settings tab on the Heroku app, update the config vars to include the AWS_ACCESS_KEY_ID & AWS_SECRET_ACCESS_KEY variables with the corresponding string from the AWS management page
+
+        3: Add the USE_AWS variable to the config vars, set to True.
+
+            USE_AWS = True
+
+        *The deployed project now uses Amazon Web Services S3 to host static files and the IDE hosts them locally.*
+    
+    ---
+
+    * STAGE EIGHT - Link Deployed Project to Stripe
+
+        1: Add the below variables to the Heroku apps config vars with the corresponding string from the Stripe dashboard.
+
+            STRIPE_PUBLIC_KEY
+            STRIPE_SECRET_KEY
+            STRIPE_WH_SECRET
         
-        2: Then within the TEMPLATES setting, update the DIRS key to point towards this variable.
-
-            'DIRS': [TEMPLATES_DIR]
+        2: FINISH LATER
     
     ---
     
-    * STAGE SEVEN - Update ALLOWED_HOSTS
+    * STAGE NINE - Create a Procfile
 
-        1: At this point, within settings.py, set the DEBUG variable to development.
+        1: Ensure gunicorn is installed.
 
-        2: Using an if/else statement update the ALLOWED_HOSTS variable for the deployed project to be the name of your Heroku app with ".herokuapp.com" appended to the end.
-
-            DEBUG = development
-
-            if development:
-                ALLOWED_HOSTS = [
-                    'localhost',
-                ]
-            else:
-                ALLOWED_HOSTS = ['sweet-shop-lewiscm.herokuapp.com']
-
-        *For development the host is set to localhost, so that the project can be ran locally. This is also a good point to add the Media, Static and Template directories, these folders should be added at the top level.*
-    
-    ---
-    
-    * STAGE EIGHT - Create a Procfile
-
-        1: Create a Procfile at the top level of the directory.
+        2: Create a Procfile at the top level of the directory.
 
         2: Within this file, declare the below command. This command ensures gunicorn is used as the web server.
 
-            web: gunicorn restobook.wsgi
+            web: gunicorn sweet_shop.wsgi:application
         
         *Add, commit and push to the repository at this point*
     
     ---
     
-    * STAGE NINE - Connect the GitHub repository to the Heroku App
+    * STAGE TEN - Connect the GitHub repository to the Heroku App
 
         1: Within the Deploy tab on the Heroku app, choose GitHub as the deployment method.
 
@@ -319,7 +394,7 @@ ___
 
         *The app has now been deployed successfully. The live link can be found [here](https://sweet-shop-lewiscm.herokuapp.com/)*
 
-        **Be aware, from this point onwards, all changes made to the database in development will have to be migrated to the deployed database separately in order to take effect. This can be done by changing the DATABASES dictionary in the settings.py file to point directly at the heroku database, DO NOT commit to GitHub with this setting saved.**
+        **Be aware, from this point onwards, all changes made to the database in development will have to be migrated to the deployed database separately in order to take effect. This can be done by changing the DATABASES dictionary in the settings.py file to point directly at the heroku database, as done in stage 2, DO NOT commit to GitHub with this setting saved.**
 
     ---
 [Return to Table of Contents](#contents)
