@@ -48,6 +48,8 @@ ___
 
 - **Typography**
 
+    * For this project i wanted a font that echoed the fonts used across popular sweets in the UK from the 90's & '00s. Using this [article](https://metro.co.uk/2015/03/06/23-sweets-that-got-all-our-mouths-watering-in-the-90s-5091799/) and this [blog post](https://www.typewolf.com/google-fonts) I decided that the [Chivo](https://fonts.google.com/specimen/Chivo?query=chiv) font was a good fit. The main body content is styled in the light 300 weight and the headers styled with the italic 900 weight. This mixture brings both the big bold text with crisp edges as well as the light and rounded text, popular on sweet packaging familiar to millennials, to the project. 
+
 
 - **Imagery**
 
