@@ -57,15 +57,17 @@
                 <div class="container">
                     <!-- Product Management Dropdown Links  -->
                     <ul class="nav-item dropdown nav navbar-nav">
-                        <a class="me-auto nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Hello</a>
+                        <a class="me-auto nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-user fa-lg"></i> Hello
+                        </a>
                         <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                             {% if user.is_authenticated %}
-                            <li>
-                                <a class="dropdown-item" href="#">Favorites</a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href="#">Reviews</a>
-                            </li>
+                                <li>
+                                    <a class="dropdown-item" href="#">Favorites</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="#">Reviews</a>
+                                </li>
                                 {% if request.user.is_superuser %}
                                     <li>
                                         <a class="dropdown-item" href="#">Manage Products</a>
@@ -105,7 +107,46 @@
                 </div>
             </nav>
             <!-- End Topbar -->
+
             <!-- Start Header Middle -->
+            <div class="container-fluid">
+                <div class="row">
+                    <!-- Website Logo -->
+                    <div class="col-4 my-auto py-1 py-lg-0 text-center text-md-left">
+                        <a href="{% url 'home' %}" class="nav-link main-logo-link">
+                            <span class="logo-font text-black my-0">Classic <strong>Confectionery</strong></span>
+                        </a>
+                    </div>
+                    <!-- Website Search Form -->
+                    <div class="col-4 my-auto py-1 py-lg-0">
+                        <form method="GET" action="#">
+                            <div class="input-group w-100">
+                                <input class="form-control border border-black rounded-0" type="text" name="q"
+                                    placeholder="SEARCH OUR SWEETS">
+                                <div class="input-group-append">
+                                    <button class="form-control btn btn-black border border-black rounded-0" type="submit">
+                                        <span class="icon">
+                                            <i class="fas fa-search"></i>
+                                        </span>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- Shopping Cart Link -->
+                    <div class="col-4 my-auto py-1 py-lg-0">
+                        <ul class="list-inline list-unstyled text-center text-lg-right my-0">
+                            <li class="list-inline-item">
+                                <a class="text-black" href="#">
+                                    <div class="text-center">
+                                        <div><i class="fas fa-shopping-bag fa-lg"></i></div>
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
             <!-- End Header Middle -->
             <!-- Start Header Bottom -->
             <!-- End Header Bottom -->
