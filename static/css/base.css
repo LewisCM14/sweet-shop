@@ -1,3 +1,33 @@
-.user-login {
-    display: inline-block;
+/* Allows for h100 and vertical center classes to work */
+html {
+    height: 100%;
+}
+
+body {
+    background-color: white;
+    font-family: 'Chivo', sans-serif;
+}
+
+.logo-font {
+    font-weight: 900;
+    font-style: italic;
+}
+
+/* From Bulma, ensures font awesome icons are centered and sized consistently */
+.icon {
+    align-items: center;
+    display: inline-flex;
+    justify-content: center;
+    height: 1.5rem;
+    width: 1.5rem;
+}
+
+/* Used in middle header  */
+.text-black {
+    color: #000;
+}
+
+/* Search Bar */
+.border-black {
+    border: 1px solid black;
 }
