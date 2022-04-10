@@ -71,6 +71,9 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'sweet_shop.urls'
 
+# Tell crispy_forms which template pack to use
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -87,6 +90,10 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'django.template.context_processors.media',  # req for no media
             ],
+            'builtins': [  # Contains all the tags avaliable in templates
+                'crispy_forms.templatetags.crispy_forms_tags',
+                'crispy_forms.templatetags.crispy_forms_field',
+            ]
         },
     },
 ]
