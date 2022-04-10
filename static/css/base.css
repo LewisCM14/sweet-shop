@@ -43,3 +43,7 @@ body {
 .border-black {
     border: 1px solid black;
 }
+
+/* .allauth-form-inner-content label:not([for='id_remember']) {
+    display: none;
+} */
