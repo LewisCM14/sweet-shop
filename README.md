@@ -443,7 +443,7 @@ ___
         * A front-end open source toolkit, used across the application.
     
     * **[Font Awesome](https://fontawesome.com/).**
-        * Icon set and toolkit used across the application.
+        * The [font awesome free](https://pypi.org/project/fontawesomefree/) kit is used for icons across the site.
 
 - **DBMS**
     
@@ -524,6 +524,8 @@ ___
 * Finally thanks to my peers on Slack who responded to my questions.  
 
 - **Content**
+
+* The footer for the site is developed from this [md bootstrap template](https://mdbootstrap.com/snippets/standard/mdbootstrap/2885008?view=side).
 
 - **Media**
 
