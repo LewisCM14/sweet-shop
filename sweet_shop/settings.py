@@ -46,13 +46,15 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
+    # Authentication
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
+    # Project Apps
     'home',
-
     # Other
     'storages',
+    'fontawesomefree',
 ]
 
 MIDDLEWARE = [
