@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     # Project Apps
     'home',
+    'profiles',
     # Other
     'storages',
     'fontawesomefree',
