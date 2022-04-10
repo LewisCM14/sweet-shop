@@ -498,6 +498,9 @@ ___
     
     * **[crispy-forms](https://django-crispy-forms.readthedocs.io/en/latest/index.html).**
         * Used for rendering forms.
+
+    * **[Django Countries](https://pypi.org/project/django-countries/).**
+        * Used on the country field in relevant models.
     
     * **[coverage](https://coverage.readthedocs.io/en/6.3/).**
         * Used to access the coverage of my automated tests for python code.
