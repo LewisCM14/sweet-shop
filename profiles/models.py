@@ -21,7 +21,7 @@ class UserProfile(models.Model):
     all these fields are optional.
     """
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    deafault_forname = models.CharField(max_length=20, null=True, blank=True)
+    default_forname = models.CharField(max_length=20, null=True, blank=True)
     default_surname = models.CharField(max_length=20, null=True, blank=True)
     default_phone_number = models.CharField(max_length=20, null=True, blank=True)  # noqa
     default_street_address1 = models.CharField(max_length=80, null=True, blank=True)  # noqa

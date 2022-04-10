@@ -3,8 +3,10 @@
 from django.shortcuts import render, get_object_or_404
 
 from .models import UserProfile
+from .forms import UserProfileForm
 
 
+# pylint: disable=redefined-outer-name
 def profile(request):
     """
     Renders the user profile in the profile.html template.
@@ -14,9 +16,12 @@ def profile(request):
     returning it in the context.
     """
     profile = get_object_or_404(UserProfile, user=request.user)
+
+    form = UserProfileForm(instance=profile)
+
     template = 'profiles/profile.html'
     context = {
-        'profile': profile,
+        'form': form,
     }
 
     return render(request, template, context)
