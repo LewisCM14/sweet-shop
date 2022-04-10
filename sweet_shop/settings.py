@@ -56,6 +56,7 @@ INSTALLED_APPS = [
     # Other
     'storages',
     'fontawesomefree',
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [
