@@ -12,12 +12,23 @@ def profile(request):
     Renders the user profile in the profile.html template.
 
     Uses get_object_or_404 to fetch the current signed in
-    users profile from the UserProfile model before
-    returning it in the context.
+    users profile from the UserProfile model, stores this in
+    the profile variable. This variable is then used to
+    populate the UserProfileForm.
+
+    Upon a POST request, checks the form is valid and if so,
+    updates it.
+
+    NEED TO ADD TOASTS FOR MESSAGES AND ADD ON PROFILE PAGE = TRUE TO CONTEXT
     """
     profile = get_object_or_404(UserProfile, user=request.user)
 
-    form = UserProfileForm(instance=profile)
+    if request.method == 'POST':
+        form = UserProfileForm(request.POST, instance=profile)
+        if form.is_valid():
+            form.save()
+    else:  # return the form data back to the view if form not valid
+        form = UserProfileForm(instance=profile)
 
     template = 'profiles/profile.html'
     context = {
