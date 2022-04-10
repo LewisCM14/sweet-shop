@@ -1,12 +1,14 @@
 """ This module contains the views for the profiles app """
 
 from django.shortcuts import render, get_object_or_404
+from django.contrib.auth.decorators import login_required
 
 from .models import UserProfile
 from .forms import UserProfileForm
 
 
 # pylint: disable=redefined-outer-name
+@login_required
 def profile(request):
     """
     Renders the user profile in the profile.html template.
