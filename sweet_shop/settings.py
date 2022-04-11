@@ -46,13 +46,17 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
+    # Authentication
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
+    # Project Apps
     'home',
-
+    'profiles',
     # Other
     'storages',
+    'fontawesomefree',
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [
@@ -66,6 +70,9 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'sweet_shop.urls'
+
+# Tell crispy_forms which template pack to use
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 TEMPLATES = [
     {
@@ -83,6 +90,10 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'django.template.context_processors.media',  # req for no media
             ],
+            'builtins': [  # Contains all the tags avaliable in templates
+                'crispy_forms.templatetags.crispy_forms_tags',
+                'crispy_forms.templatetags.crispy_forms_field',
+            ]
         },
     },
 ]
