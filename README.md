@@ -530,6 +530,8 @@ ___
 
 * The footer for the site is developed from this [md bootstrap template](https://mdbootstrap.com/snippets/standard/mdbootstrap/2885008?view=side).
 
+* This [blog post](https://micropyramid.com/blog/django-unit-test-cases-with-forms-and-views/) was used to help develop my understanding of writing tests with Django's TestCase package. Particularly for the test_views.py file in the profiles app.
+
 - **Media**
 
 [Return to Table of Contents](#contents)
