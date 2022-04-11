@@ -48,6 +48,8 @@ ___
 
 - **Typography**
 
+    * For this project i wanted a font that echoed the fonts used across popular sweets in the UK from the 90's & '00s. Using this [article](https://metro.co.uk/2015/03/06/23-sweets-that-got-all-our-mouths-watering-in-the-90s-5091799/) and this [blog post](https://www.typewolf.com/google-fonts) I decided that the [Chivo](https://fonts.google.com/specimen/Chivo?query=chiv) font was a good fit. The main body content is styled in the light 300 weight and the headers styled with the italic 900 weight. This mixture brings both the big bold text with crisp edges as well as the light and rounded text, popular on sweet packaging familiar to millennials, to the project. 
+
 
 - **Imagery**
 
@@ -441,7 +443,7 @@ ___
         * A front-end open source toolkit, used across the application.
     
     * **[Font Awesome](https://fontawesome.com/).**
-        * Icon set and toolkit used across the application.
+        * The [font awesome free](https://pypi.org/project/fontawesomefree/) kit is used for icons across the site.
 
 - **DBMS**
     
@@ -496,6 +498,9 @@ ___
     
     * **[crispy-forms](https://django-crispy-forms.readthedocs.io/en/latest/index.html).**
         * Used for rendering forms.
+
+    * **[Django Countries](https://pypi.org/project/django-countries/).**
+        * Used on the country field in relevant models.
     
     * **[coverage](https://coverage.readthedocs.io/en/6.3/).**
         * Used to access the coverage of my automated tests for python code.
@@ -522,6 +527,10 @@ ___
 * Finally thanks to my peers on Slack who responded to my questions.  
 
 - **Content**
+
+* The footer for the site is developed from this [md bootstrap template](https://mdbootstrap.com/snippets/standard/mdbootstrap/2885008?view=side).
+
+* This [blog post](https://micropyramid.com/blog/django-unit-test-cases-with-forms-and-views/) was used to help develop my understanding of writing tests with Django's TestCase package. Particularly for the test_views.py file in the profiles app.
 
 - **Media**
 
