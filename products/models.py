@@ -3,9 +3,9 @@
 from django.db import models
 
 
-class Category(models.Model):
+class Type(models.Model):
     """
-    A Model to give the prodcuts a category.
+    A Model to give the prodcuts a type.
     """
     name = models.CharField(max_length=254)
     friendly_name = models.CharField(max_length=254, null=True, blank=True)
@@ -14,7 +14,7 @@ class Category(models.Model):
         """
         Inbuilt method to adjust name in admin panel.
         """
-        verbose_name_plural = "Categories"
+        verbose_name_plural = "Type"
 
     # pylint: disable=invalid-str-returned
     def __str__(self):
@@ -34,7 +34,7 @@ class Product(models.Model):
     """
     A Model to hold the product info.
 
-    category field is a forign key to the Category Model above.
+    category field is a forign key to the Type Model above.
     Each product requires a name, description, year and price.
     Everything else is optional.
     """
@@ -42,8 +42,8 @@ class Product(models.Model):
     # A tuple to hold the key for the year field.
     YEAR = ((0, "90s & 00s"), (1, "90s"), (2, "00s"))
 
-    category = models.ForeignKey(
-        'Category', null=True, blank=True, on_delete=models.SET_NULL
+    type = models.ForeignKey(
+        'Type', null=True, blank=True, on_delete=models.SET_NULL
     )
     name = models.CharField(max_length=254)
     description = models.TextField()
