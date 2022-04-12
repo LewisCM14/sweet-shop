@@ -35,7 +35,7 @@ class Product(models.Model):
     A Model to hold the product info.
 
     category field is a forign key to the Category Model above.
-    Each product requires a name, description, weight and price.
+    Each product requires a name, description and price.
     Everything else is optional.
     """
     category = models.ForeignKey(
@@ -43,7 +43,7 @@ class Product(models.Model):
     )
     name = models.CharField(max_length=254)
     description = models.TextField()
-    weight_in_grams = models.IntegerField()
+    has_weights = models.BooleanField(default=False, null=True, blank=True)
     price = models.DecimalField(max_digits=6, decimal_places=2)
     image_url = models.URLField(max_length=1024, null=True, blank=True)
     image = models.ImageField(null=True, blank=True)
