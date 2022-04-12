@@ -504,6 +504,9 @@ ___
     
     * **[coverage](https://coverage.readthedocs.io/en/6.3/).**
         * Used to access the coverage of my automated tests for python code.
+    
+    * **[pillow](https://pypi.org/project/Pillow/).**
+        * Used to allow for ImageField type on the applications models.
      
 - **Programs**
 
