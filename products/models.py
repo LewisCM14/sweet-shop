@@ -35,7 +35,7 @@ class Product(models.Model):
     A Model to hold the product info.
 
     category field is a forign key to the Type Model above.
-    Each product requires a name, description, year and price.
+    Each product requires a name, description, year, weight and price.
     Everything else is optional.
     """
 
