@@ -24,7 +24,7 @@ class ProductAdmin(admin.ModelAdmin):
 
 
 @admin.register(Type)
-class CatergoryAdmin(admin.ModelAdmin):
+class TypeAdmin(admin.ModelAdmin):
     """
     The admin class for the Type model.
     extends from the base.
