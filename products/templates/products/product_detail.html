@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block page_header %}
+    <div class="container header-container">
+        <div class="row">
+            <div class="col">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                      <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+                      <li class="breadcrumb-item"><a href="{% url 'products' %}">Products</a></li>
+                      <li class="breadcrumb-item active" aria-current="page">{{ product.name }}</li>
+                    </ol>
+                  </nav>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <!-- Product Image -->
+            <div class="col-lg-6 col-md-12">
+                <div class="image-container">
+                    {% if product.image %}
+                        <a href="{{ product.image.url }}" target="_blank">
+                            <img class="card-img-top img-fluid" src="{{ product.image.url }}" alt="{{ product.name }}">
+                        </a>
+                        {% else %}
+                        <a href="">
+                            <img class="card-img-top img-fluid" src="{{ MEDIA_URL }}noimage.png" alt="{{ product.name }}">
+                        </a>
+                    {% endif %}
+                </div>
+            </div>
+            <!-- Product Info -->
+            <div class="col-lg-6 col-md-12">
+                <div class="product-details-container">
+                    <h1>{{ product.name }}</h1>
+                    {% if product.type %}
+                        <h3><a href="#"><i class="fa-solid fa-candy-cane"></i> {{ product.type.friendly_name }}</a></h3>
+                    {% endif %}
+                    <p class="lead font-weight-bold">£{{ product.price }}</p>
+                    <p class="mt-3">{{ product.description }}</p>
+                </div>
+                <!-- Action Buttons -->
+                <div class="container-fluid text-center">
+                    <!-- Weight & Quantity -->
+                    <div class="row">
+                        <div class="col-lg-6 col-md-12">
+                            {{ product.weight_in_grams }}
+                        </div>
+                        <div class="col-lg-6 col-md-12">
+                            Quantity
+                        </div>
+                    </div>
+                    <!-- Keep Shopping & Add to Bag -->
+                    <div class="row">
+                        <div class="col-lg-6 col-md-12">
+                            <a href="{% url 'products' %}" class="btn btn-outline-black rounded-0">
+                                <span class="text-uppercase"><i class="fas fa-chevron-left"></i> Keep Shopping</span>
+                            </a>
+                        </div>
+                        <div class="col-lg-6 col-md-12">
+                            Add to Bag
+                        </div>
+                    </div>
+                    <!-- Edit & Delete -->
+                    {% if request.user.is_superuser %}
+                        <div class="row justify-content-lg-end">
+                            <div class="col-lg-6 col-md-6">
+                                Edit | Delete
+                            </div>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
