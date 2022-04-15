@@ -7,7 +7,7 @@ from .models import Type, Product
 class TestModel(TestCase):
     """
     Contains the tests for the views.
-    Located in the profile app in views.py.
+    Located in the product app in views.py.
     """
 
     def setUp(self):
@@ -21,7 +21,7 @@ class TestModel(TestCase):
         )
 
         # pylint: disable=no-member
-        toxic_waste = Product.objects.create(
+        Product.objects.create(
             type=sour,
             name='Toxic Waste',
             description='A Sour Sweet',
@@ -32,12 +32,30 @@ class TestModel(TestCase):
 
     def test_get_products_page(self):
         """
-        Tests the profile page renders.
+        Tests the product page renders.
 
-        Uses the login helper method to sign into the test case User.
-        Passing the views authentication conditions.
-        Uses Django's in-built HTTP client to get the profile page URL.
+        Uses Django's in-built HTTP client to get the product page URL.
         Asserts equal to status code 200, a successful HTTP response.
         """
         response = self.client.get('/products/')
+        self.assertEqual(response.status_code, 200)
+
+    def test_get_product_detail_page(self):
+        """
+        Tests the product details page renders.
+
+        Collects the Product object created in the setUp method,
+        storing it in the product variable.
+        Asserts it is the object created in the method via it's
+        name = Toxic Waste.
+
+        Then Uses Django's in-built HTTP client to get the product_detail URL.
+        Which is an ID value of 1, as it is the only object in the database.
+        Asserts equal to status code 200, a successful HTTP response.
+        """
+        # pylint: disable=no-member
+        product = Product.objects.get(id=1)
+        self.assertEqual(product.name, 'Toxic Waste')
+
+        response = self.client.get('/products/1/')
         self.assertEqual(response.status_code, 200)
