@@ -37,6 +37,7 @@ ___
     * [Frameworks & Toolkits](#frametool)
     * [Database Management Systems](#dbsm)
     * [Cloud Services](#cloud)
+    * [Marketing Services](#marketservice)
     * [Email Backend](#email)
     * [Server](#server)
     * [Version Control](#version)
@@ -546,6 +547,11 @@ ___
 
     * **[AWS S3](https://aws.amazon.com/s3/).**
         * A cloud-based storage service. Used to store my static files in deployment.
+
+- **Marketing Services** <a name='marketservice'></a>
+
+    * **[Mailchimp](https://mailchimp.com/).**
+        * Used to gather and store the email address of people who sign up for the newsletter.
 
 - **Email Backend** <a name='email'></a>
 
