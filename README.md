@@ -5,7 +5,17 @@ ___
 ## Table of Contents <a name='contents'></a>
 
 * [User Experience (UX)](#userexperience)
+    * [Site Goal](#sitegoal)
+    * [Target Audience](#targetaudience)
+    * [Owner Goals](#ownergoals)
+    * [How These Goals are Addressed](#goalsadressed)
+    * [Data Required](#datarequired)
+    * [Security Features](#securityfeatures)
 * [Design](#design)
+    * [Color Scheme](#colorscheme)
+    * [Typography](#typography)
+    * [Imagery](#imagery)
+    * [Layout](#layout)
 * [Web Marketing](#marketing)
 * [SEO](#seo)
 * [Development](#development)
@@ -13,48 +23,127 @@ ___
 * [Existing Features](#existingfeatures)
 * [Features Left to Implement](#toimplement)
 * [Testing](#testing)
+    * [Bugs Found in Development](#developmentbugs)
+    * [Validator Testing](#validators)
+    * [Lighthouse](#lighthouse)
+    * [Automated Testing](#automated)
+    * [Running the Automated Tests](#runningauto)
+    * [Manual](#manual)
 * [Unfixed Bugs](#bugs)
 * [Deployment](#deployment)
 * [Create a Clone](#clone)
 * [Technologies Used](#tech)
+    * [Languages Used](#lang)
+    * [Frameworks & Toolkits](#frametool)
+    * [Database Management Systems](#dbsm)
+    * [Cloud Services](#cloud)
+    * [Email Backend](#email)
+    * [Server](#server)
+    * [Version Control](#version)
+    * [Libraries, Packages & Applications](#lib)
+    * [Programs](#program)
 * [Credits](#credits)
+    * [Content](#concred)
+    * [Media](#media)
 ___
 ### User Experience (UX) <a name='userexperience'></a>
 
-**Site Goal**
+*For this project i initially developed a selection of user personas which my user stories have all been developed from, creating my epics. Below these user personas can be seen.*
+
+* **Peyton Post**
+
+    * Who are they?
+        * | *Gender*: Female | *Age*: 21 | *Nationality*: British | *Location*: Stevenage | *Occupation*: Student |
+        ---
+    * What is their main goal?
+        * To order sweets as a birthday present for their 30-year-old brother that he would have eaten as a pre-teen/young child.
+        ---
+    * What is their barrier to achieving this goal?
+        * Unsure of what sweets where popular in the 90’s/’00s.
+        ---
+
+* **Rorie Wyatt**
+
+    * Who are they?
+        * | *Gender*: Female | *Age*: 38 | *Nationality*: British | *Location*: Edinburgh | *Occupation*: Nurse |
+        ---
+    * What is their main goal?
+        * To buy some sweets their two young children can try (12 & 10), that they ate as a kid.
+        ---
+    * What is their barrier to achieving this goal?
+        * The ability to order a varied selection of sweets in a reasonable quantity. 
+        ---
+
+* **Blair Horn**
+
+    * Who are they?
+        * | *Gender*: Male | *Age*: 26 | *Nationality*: British | *Location*: Berkshire | *Occupation*: Accountant |
+        ---
+    * What is their main goal?
+        * To buy a large selection of their favorite sweets to take into work and share with their colleagues.
+        ---
+    * What is their barrier to achieving this goal?
+        * The ability to order a large and varied selection of sweets that come in a container suitable for being taken on a work commute. 
+        ---
+
+* **Rhys Powell**
+
+    * Who are they?
+        * | *Gender*: Male | *Age*: 40 | *Nationality*: British | *Location*: Swansea | *Occupation*: Brick Layer |
+        ---
+    * What is their main goal?
+        * To regularly buy a selection of sweets to keep in the treat draw at home.
+        ---
+    * What is their barrier to achieving this goal?
+        * The ability to browse an online sweet store and create themselves a pick’n’mix style bundle for themselves. 
+        ---
+
+* **Augustine Evanson**
+
+    * Who are they?
+        * | *Gender*: Male | *Age*: 33 | *Nationality*: British | *Location*: Warrington | *Occupation*: Sweet Seller |
+        ---
+    * What is their main goal?
+        * To start an e-commerce business selling sweets online.
+        ---
+    * What is their barrier to achieving this goal?
+        * They currently don’t have a website.
+___
+
+**Site Goal** <a name='sitegoal'></a>
 
 
-**Target Audience**
+**Target Audience** <a name='targetaudience'></a>
 
 
-**Owner Goals**
+**Owner Goals** <a name='ownergoals'></a>
 
 
-**How These Goals are Addressed**   
+**How These Goals are Addressed** <a name='goalsaddressed'></a>
 
 
-**Data Required**
+**Data Required** <a name='daterequired'></a>
 
 
-**Security Features**
+**Security Features** <a name='securityfeatures'></a>
 
 
 [Return to Table of Contents](#contents)
 ___
 ### Design <a name='design'></a>
 
-- **Color Scheme**
+- **Color Scheme** <a name='colorscheme'></a>
 
 
-- **Typography**
+- **Typography** <a name='typography'></a>
 
     * For this project i wanted a font that echoed the fonts used across popular sweets in the UK from the 90's & '00s. Using this [article](https://metro.co.uk/2015/03/06/23-sweets-that-got-all-our-mouths-watering-in-the-90s-5091799/) and this [blog post](https://www.typewolf.com/google-fonts) I decided that the [Chivo](https://fonts.google.com/specimen/Chivo?query=chiv) font was a good fit. The main body content is styled in the light 300 weight and the headers styled with the italic 900 weight. This mixture brings both the big bold text with crisp edges as well as the light and rounded text, popular on sweet packaging familiar to millennials, to the project. 
 
 
-- **Imagery**
+- **Imagery** <a name='imagery'></a>
 
 
-- **Layout**
+- **Layout** <a name='layout'></a>
 
 
 [Return to Table of Contents](#contents)
@@ -119,11 +208,11 @@ ___
 ___
 ### Testing <a name ='testing'></a> 
 
-- **Bugs found in Development**
+- **Bugs found in Development** <a name='developmentbugs'></a>
 
     ---
 
-- **Validator Testing**
+- **Validator Testing** <a name='validators'></a>
 
     - HTML
         - No errors were found when passing through the [W3C Validator tool](https://validator.w3.org/nu/)
@@ -138,17 +227,17 @@ ___
         - No errors were found when passing through the [PEP8 Validator tool](http://pep8online.com/).
     ---
 
-- **Lighthouse**
+- **Lighthouse** <a name='lighthouse'></a>
 
     ---
 
-- **Automated Tests**
+- **Automated Tests** <a name='automated'></a>
 
     * Using the coverage package, i have generated reports for the app
 
     ---
 
-- **Running the Automated Tests**
+- **Running the Automated Tests** <a name='runningauto'></a>
 
     * Within the terminal on the IDE run the below command, this runs the automated tests.
         
@@ -172,7 +261,7 @@ ___
     
     ---
 
-- **Manual Testing**
+- **Manual Testing** <a name='manual'></a>
 
     * Using devtools on google chrome the application has been tested on various devices to ensure it is fully responsive. 
     
@@ -426,7 +515,7 @@ ___
 ___
 ## Technologies Used <a name ='tech'></a>
 
-- **Languages Used**
+- **Languages Used** <a name='lang'></a>
 
     * HTML
     * CSS
@@ -434,7 +523,7 @@ ___
     * PYTHON
     * MARKDOWN
 
-- **Frameworks & Toolkits**
+- **Frameworks & Toolkits** <a name='frametool'></a>
 
     * **[Django 3.2](https://www.djangoproject.com/download/).**
         * Python based web framework, used to build the application.
@@ -445,12 +534,12 @@ ___
     * **[Font Awesome](https://fontawesome.com/).**
         * The [font awesome free](https://pypi.org/project/fontawesomefree/) kit is used for icons across the site.
 
-- **DBMS**
+- **DBMS** <a name='dbsm'></a>
     
     * **[PostgreSQL](https://www.postgresql.org/).**
         * The relational database management system used.
 
-- **Cloud Services**
+- **Cloud Services** <a name='cloud'></a>
 
     * **[Heroku](https://id.heroku.com/login).**
         * The platform my project is deployed on.
@@ -458,17 +547,17 @@ ___
     * **[AWS S3](https://aws.amazon.com/s3/).**
         * A cloud-based storage service. Used to store my static files in deployment.
 
-- **Email Backend**
+- **Email Backend** <a name='email'></a>
 
     * **[Gmail](https://mail.google.com).**
         * Mail provider used as the smtp host for email backend.
 
-- **Server**
+- **Server** <a name='server'></a>
 
     * **[Gunicorn](https://gunicorn.org/).**
         * The server used to run Django on Heroku.
 
-- **Version Control**
+- **Version Control** <a name='version'></a>
     
     * **Git.**
         * Git was used for version control by utilizing the GitPod terminal to commit to Git and Push to GitHub.
@@ -479,7 +568,7 @@ ___
     * **[Gitpod](https://www.gitpod.io/docs/).**
         * The IDE used to build the project.
 
-- **Libraries, Packages and Applications**
+- **Libraries, Packages and Applications** <a name='lib'></a>
 
     * **[dj_database_url](https://pypi.org/project/dj-database-url/).**
         * A PostgreSQL supporting library. Allows you to utilize the 12factor inspired DATABASE_URL environment variable to configure your Django application.
@@ -504,8 +593,11 @@ ___
     
     * **[coverage](https://coverage.readthedocs.io/en/6.3/).**
         * Used to access the coverage of my automated tests for python code.
+    
+    * **[pillow](https://pypi.org/project/Pillow/).**
+        * Used to allow for ImageField type on the applications models.
      
-- **Programs**
+- **Programs** <a name='program'></a>
 
     * **Slack.**
         * Specifically the peer-code_review channel on Code Institutes Slack workspace. Used to increase the scope of my testing.
@@ -526,13 +618,13 @@ ___
 
 * Finally thanks to my peers on Slack who responded to my questions.  
 
-- **Content**
+- **Content** <a name='concred'></a>
 
 * The footer for the site is developed from this [md bootstrap template](https://mdbootstrap.com/snippets/standard/mdbootstrap/2885008?view=side).
 
 * This [blog post](https://micropyramid.com/blog/django-unit-test-cases-with-forms-and-views/) was used to help develop my understanding of writing tests with Django's TestCase package. Particularly for the test_views.py file in the profiles app.
 
-- **Media**
+- **Media** <a name='media'></a>
 
 [Return to Table of Contents](#contents)
 ___
