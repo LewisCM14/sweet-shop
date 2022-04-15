@@ -8,7 +8,7 @@ ___
     * [Site Goal](#sitegoal)
     * [Target Audience](#targetaudience)
     * [Owner Goals](#ownergoals)
-    * [How These Goals are Addressed](#goalsadressed)
+    * [How These Goals are Addressed](#goaladdress)
     * [Data Required](#datarequired)
     * [Security Features](#securityfeatures)
 * [Design](#design)
@@ -119,10 +119,10 @@ ___
 **Owner Goals** <a name='ownergoals'></a>
 
 
-**How These Goals are Addressed** <a name='goalsaddressed'></a>
+**How These Goals are Addressed** <a name='goaladdress'></a>
 
 
-**Data Required** <a name='daterequired'></a>
+**Data Required** <a name='datarequired'></a>
 
 
 **Security Features** <a name='securityfeatures'></a>
@@ -623,6 +623,8 @@ ___
 * The footer for the site is developed from this [md bootstrap template](https://mdbootstrap.com/snippets/standard/mdbootstrap/2885008?view=side).
 
 * This [blog post](https://micropyramid.com/blog/django-unit-test-cases-with-forms-and-views/) was used to help develop my understanding of writing tests with Django's TestCase package. Particularly for the test_views.py file in the profiles app.
+
+* I used this [blog post](https://www.hotjar.com/blog/user-personas/) to help be develop my user personas.
 
 - **Media** <a name='media'></a>
 
