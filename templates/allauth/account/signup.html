@@ -2,6 +2,21 @@
 
 {% load i18n %}
 
+{% block page_header %}
+    <div class="container header-container">
+        <div class="row">
+            <div class="col">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                      <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+                      <li class="breadcrumb-item active" aria-current="page">Register</li>
+                    </ol>
+                  </nav>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
 {% block head_title %}{% trans "Signup" %}{% endblock %}
 
 {% block inner_content %}

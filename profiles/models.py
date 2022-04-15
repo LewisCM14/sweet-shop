@@ -33,6 +33,9 @@ class UserProfile(models.Model):
 
     # pylint: disable=no-member
     def __str__(self):
+        """
+        Returns the username of the user instance as a string
+        """
         return self.user.username
 
 

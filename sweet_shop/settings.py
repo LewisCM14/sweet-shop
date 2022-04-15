@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     # Project Apps
     'home',
     'profiles',
+    'products',
     # Other
     'storages',
     'fontawesomefree',
