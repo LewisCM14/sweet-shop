@@ -179,11 +179,19 @@
             <!-- Container for messages returned from Django. See toast directory in root templates folder -->
             {% if messages %}
                 <div class="message-container">
-                    {% for message in messages %}
-                        {% if message.tags == 'success' %}
+                {% for message in messages %}
+                    {% with message.level as level %}
+                        {% if level == 40 %}
+                            {% include 'includes/toasts/toast_error.html' %}
+                        {% elif level == 30 %}
+                            {% include 'includes/toasts/toast_warning.html' %}
+                        {% elif level == 25 %}
                             {% include 'includes/toasts/toast_success.html' %}
+                        {% else %}
+                            {% include 'includes/toasts/toast_info.html' %}
                         {% endif %}
-                    {% endfor %}
+                    {% endwith %}
+                {% endfor %}
                 </div>
             {% endif %}
 

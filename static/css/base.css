@@ -95,9 +95,17 @@ body {
 
 .message-container {
     position: fixed;
-    top: 72px;
-    right: 15px;
+    width: 250px;
+    top: 125px;
+    right: 115px;
     z-index: 99999999999;
+}
+
+@media screen and (max-width: 576px) {
+    .message-container {
+        top: 72px;
+        right: 15px;
+    }
 }
 
 .custom-toast {
