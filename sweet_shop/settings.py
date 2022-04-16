@@ -99,6 +99,13 @@ TEMPLATES = [
     },
 ]
 
+
+# Django messages
+
+# Allows messages to be stored in the session
+MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
+
+
 AUTHENTICATION_BACKENDS = [
     # Needed to login by username in Django admin, regardless of `allauth`
     'django.contrib.auth.backends.ModelBackend',
