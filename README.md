@@ -633,15 +633,15 @@ ___
 
 - **Content** <a name='concred'></a>
 
-* The footer for the site is developed from this [md bootstrap template](https://mdbootstrap.com/snippets/standard/mdbootstrap/2885008?view=side).
+    * The footer for the site is developed from this [md bootstrap template](https://mdbootstrap.com/snippets/standard/mdbootstrap/2885008?view=side).
 
-* This [blog post](https://micropyramid.com/blog/django-unit-test-cases-with-forms-and-views/) was used to help develop my understanding of writing tests with Django's TestCase package. Particularly for the test_views.py file in the profiles app.
+    * This [blog post](https://micropyramid.com/blog/django-unit-test-cases-with-forms-and-views/) was used to help develop my understanding of writing tests with Django's TestCase package. Particularly for the test_views.py file in the profiles app.
 
-* I used this [blog post](https://www.hotjar.com/blog/user-personas/) to help be develop my user personas.
+    * I used this [blog post](https://www.hotjar.com/blog/user-personas/) to help be develop my user personas.
 
-* I used this [blog post](https://juiceboxinteractive.com/blog/color/) to aide in developing the color scheme for the site.
+    * I used this [blog post](https://juiceboxinteractive.com/blog/color/) to aide in developing the color scheme for the site.
 
-* I used Marko Denic's [buttons generator](https://markodenic.com/tools/buttons-generator/) to develop the buttons across the application.
+    * I used Marko Denic's [buttons generator](https://markodenic.com/tools/buttons-generator/) to develop the buttons across the application.
 
 - **Media** <a name='media'></a>
 
