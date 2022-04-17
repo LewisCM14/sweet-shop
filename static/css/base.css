@@ -1,4 +1,6 @@
-/* General Styling */
+/* SITE WIDE CSS STYLING */
+
+/* CORE DISPLAY */
 
 /* Allows for h100 and vertical center classes to work */
 html {
@@ -10,18 +12,21 @@ body {
     font-family: 'Chivo', sans-serif;
 }
 
+/* Pushes footer to bottom of viewport */
 .site {
     display: flex;
     min-height: 100vh;
     flex-direction: column;
 }
-  
+
+/* Ensures site content is above footer */
 .site-content {
     flex: 1;
     width: 100%;
     height: 100%;
 }
 
+/* Used to style site logo text */
 .logo-font {
     font-weight: 900;
     font-style: italic;
@@ -36,29 +41,43 @@ body {
     width: 1.5rem;
 }
 
+/* HEADER STYLING */
+
+/* Topbar background color */
+.bg-baseblue {
+    background-color: #020075;
+}
+
+/* Topbar text color */
+.navbar-grey {
+    text-decoration: none;
+    color: #A8ADB3;
+}
+
+/* Topbar text hover effect */
+.navbar-grey:hover {
+    text-decoration: none;
+    color: white;
+}
+
+
 /* Used in middle header  */
 .text-black {
     color: #000;
 }
 
-/* Search Bar */
+/* Search bar input border */
 .border-black {
     border: 1px solid black;
 }
 
-/* Footer */
+/* FOOTER STYLING */
 
 .margin-neg {
     margin-top: -10px;
 }
 
-/* All Auth */
-
-/* .allauth-form-inner-content label:not([for='id_remember']) {
-    display: none;
-} */
-
-/* Mail Chimp */
+/* Mail Chimp newsletter */
 
 .newsletter-email {
     width: 300px;
@@ -91,8 +110,9 @@ body {
     }
 }
 
-/* Bootstrap Toasts */
+/* BOOTSTRAP TOASTS */
 
+/* Container positioning */
 .message-container {
     position: fixed;
     width: 250px;
@@ -107,11 +127,13 @@ body {
         right: 15px;
     }
 }
-
+/* 
+Top Border for toasts */
 .custom-toast {
     overflow: visible;
 }
 
+/* Top Border for toasts */
 .toast-capper {
     height: 2px;
 }
