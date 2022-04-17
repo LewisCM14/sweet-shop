@@ -617,6 +617,9 @@ ___
 
     * **[Iconifier](https://iconifier.net/).**
         * Used to convert the favicon image to the correct size and file type.
+    
+    * **[WebAIM Contrast Checker](https://webaim.org/resources/contrastchecker/).**
+        * Used to ensure my color pallet met WCAG AAA accessibility guidelines.
        
 [Return to Table of Contents](#contents)
 ___
