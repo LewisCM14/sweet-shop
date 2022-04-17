@@ -87,7 +87,7 @@ body {
     background: #333333;
     border: 2px solid #333333;
     color: #FFFFFF
-  }
+  } /* Taken from https://markodenic.com/tools/buttons-generator/ */
 
 
 /* ------------------------------------------- HEADER STYLING */
@@ -138,6 +138,12 @@ body {
 
 @media screen and (min-width: 1201px) and (max-width: 1453px) {
     .newsletter-email {
+        width: 65%;
+    }
+
+    .newsletter-subscribe {
+        margin-left: 0px;
+        margin-top: 10px;
         width: 65%;
     }
 }

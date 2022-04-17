@@ -6,3 +6,8 @@ from django.shortcuts import render
 def index(request):
     """ Renders the index.html template in the browser """
     return render(request, 'home/index.html')
+
+
+def faq(request):
+    """ Renders the faq.html template in the browser """
+    return render(request, 'home/faq.html')
