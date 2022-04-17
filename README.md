@@ -643,6 +643,8 @@ ___
 
     * I used Marko Denic's [buttons generator](https://markodenic.com/tools/buttons-generator/) to develop the buttons across the application.
 
+    * I used this [post](https://stackoverflow.com/questions/66231936/change-accordion-button-collapsed-icon-color-in-bootstrap-5) on stackoverflow to alter the toggle button on my FAQ accordion.
+
 - **Media** <a name='media'></a>
 
 [Return to Table of Contents](#contents)
