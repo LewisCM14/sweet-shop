@@ -62,18 +62,18 @@
         <!-- Start Header Section -->
         <header>
             <!-- Start Topbar -->
-            <nav class="navbar navbar-expand-md justify-content-center navbar-dark bg-dark">
-                <div class="container">
+            <nav class="navbar navbar-expand-md justify-content-center bg-charcoal">
+                <div class="container white-yellow">
                     <!-- Product Management Dropdown Links  -->
                     <ul class="nav-item dropdown nav navbar-nav">
-                        <a class="me-auto nav-link dropdown-toggle" href="#" id="productManagementDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <a class="me-auto dropdown-toggle white-yellow" href="#" id="productManagementDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             {% if user.is_authenticated %}
                                 Hello {{ user }}
                             {% else %}
                                 Hello
                             {% endif %}
                         </a>
-                        <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="productManagementDropdown">
+                        <ul class="dropdown-menu dropdown-menu-right white-yellow" aria-labelledby="productManagementDropdown">
                             {% if user.is_authenticated %}
                                 <li>
                                     <a class="dropdown-item" href="#">Favorites</a>
@@ -94,7 +94,7 @@
                         </ul>
                     </ul>
                     <!-- Toggle Button for Account Management -->
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsingAccountManagement">
+                    <button class="navbar-toggler white-yellow" type="button" data-bs-toggle="collapse" data-bs-target="#collapsingAccountManagement">
                         <span class="icon"><i class="fas fa-user fa-lg"></i></span>
                     </button>
                     <!-- Account Management Links -->
@@ -102,17 +102,17 @@
                         <ul class="nav navbar-nav ms-auto w-100 justify-content-end">
                             {% if user.is_authenticated %}
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{% url 'profile' %}">Account</a>
+                                    <a class="nav-link white-yellow" href="{% url 'profile' %}">Account</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{% url 'account_logout' %}">Logout</a>
+                                    <a class="nav-link white-yellow" href="{% url 'account_logout' %}">Logout</a>
                                 </li>
                             {% else %}
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{% url 'account_login' %}">Login</a>
+                                    <a class="nav-link white-yellow" href="{% url 'account_login' %}">Login</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{% url 'account_signup' %}">Register</a>
+                                    <a class="nav-link white-yellow" href="{% url 'account_signup' %}">Register</a>
                                 </li>
                             {% endif %}
                         </ul>
@@ -127,19 +127,19 @@
                 <div id="main-header" class="row bg-white pt-lg-2 d-none d-lg-flex">
                     <div class="col-12 col-lg-4 my-auto py-1 py-lg-0 text-center text-lg-left">
                         <a href="{% url 'home' %}" class="nav-link main-logo-link">
-                            <span class="h3 logo-font text-black my-0">Classic <strong>Confectionery</strong></span>
+                            <span class="h3 logo-font text-charcoal my-0">Classic <strong>Confectionery</strong></span>
                         </a>
                     </div>
                     <!-- Product Search Form -->
                     <div class="col-12 col-lg-4 my-auto py-1 py-lg-0 text-center text-lg-left">
                         <form method="GET" action="#">
                             <div class="input-group w-100">
-                                <input class="form-control border border-black rounded-0" type="text" name="q"
+                                <input class="form-control border border-charcoal rounded-0" type="text" name="q"
                                     placeholder="SEARCH OUR SWEETS">
                                 <div class="input-group-append">
                                     <button class="form-control btn btn-black border border-black rounded-0"
                                         type="submit">
-                                        <span class="icon">
+                                        <span class="icon charcoal-navy">
                                             <i class="fas fa-search fa-lg"></i>
                                         </span>
                                     </button>
@@ -151,7 +151,7 @@
                     <div class="col-12 col-lg-4 my-auto py-1 py-lg-0 text-center text-lg-left">
                         <ul class="list-inline list-unstyled text-center text-lg-right my-0">
                             <li class="list-inline-item">
-                                <a class="text-black nav-link" href="#">
+                                <a class="charcoal-navy nav-link" href="#">
                                     <div class="text-center">
                                         <div class="icon"><i class="fa-solid fa-cart-shopping fa-lg"></i></div>
                                     </div>
@@ -175,7 +175,7 @@
         </header>
         <!-- End Header Section -->
 
-        <main class="site-content">
+        <main class="site-content bg-light">
             <!-- Container for messages returned from Django. See toast directory in root templates folder -->
             {% if messages %}
                 <div class="message-container">
@@ -203,7 +203,7 @@
         </main>
 
         <!-- Start Footer -->
-        <footer class="text-center text-lg-start bg-dark text-white">
+        <footer class="text-center text-lg-start bg-charcoal text-white">
             <!-- Start Newsletter Section -->
             <section class="container-fluid text-center">
                 <div class="row mt-3 d-flex justify-content-between">
@@ -233,7 +233,7 @@
                                     <div class="mc-field-group">
                                         <input type="email" value="" name="EMAIL" placeholder="Email address here..." class="required email newsletter-email" id="mce-EMAIL">
                                         <input type="submit" value="Subscribe" name="subscribe"
-                                        id="mc-embedded-subscribe" class="btn btn-danger newsletter-subscribe">
+                                        id="mc-embedded-subscribe" class="subscribe-button newsletter-subscribe">
                                     </div>
                                     <div id="mce-responses" class="clear foot">
                                         <div class="response" id="mce-error-response" style="display:none"></div>
@@ -251,16 +251,19 @@
                     <!-- End Right/Newsletter Sign-Up -->
                 </div>
             </section>
+            <div class="container-fluid d-flex justify-content-center">
+                <hr style="width: 1500px; background-color: #F5E532; height: 2px" />
+            </div>
             <!-- End Newsletter Section -->
             <!-- Start Footer Content -->
             <section>
-                <div class="container text-center text-md-start">
+                <div class="container text-center text-md-start text-white">
                     <div class="row mt-3">
                         <!-- Start Get In Touch With Us Section -->
                         <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
                             <p class="h6 text-uppercase fw-bold">Get In Touch With Us</p>
                             <hr class="mb-4 mt-0 d-inline-block mx-auto"
-                                style="width: 60px; background-color: white; height: 2px" />
+                                style="width: 60px; background-color: #F5E532; height: 2px" />
                             <p>
                                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo totam doloribus
                                 repudiandae eligendi tempora a nostrum ut saepe possimus in.
@@ -271,19 +274,19 @@
                         <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
                             <p class="h6 text-uppercase fw-bold">Our Socials</p>
                             <hr class="mb-4 mt-0 d-inline-block mx-auto"
-                                style="width: 60px; background-color: white; height: 2px" />
+                                style="width: 60px; background-color: #F5E532; height: 2px" />
                             <p>
-                                <a href="https://en-gb.facebook.com/" class="text-white icon" target="_blank"
+                                <a href="https://en-gb.facebook.com/" class="white-yellow icon" target="_blank"
                                     rel="noopener" aria-label="visit our Facebook page (opens in a new tab)"><i
                                         class="fa-brands fa-facebook-f fa-lg"></i></a>
                             </p>
                             <p>
-                                <a href="https://twitter.com/" class="text-white icon" target="_blank" rel="noopener"
+                                <a href="https://twitter.com/" class="white-yellow icon" target="_blank" rel="noopener"
                                     aria-label="visit our Twitter page (opens in a new tab)"><i
                                         class="fa-brands fa-twitter fa-lg"></i></a>
                             </p>
                             <p>
-                                <a href="https://www.instagram.com/" class="text-white icon" target="_blank"
+                                <a href="https://www.instagram.com/" class="white-yellow icon" target="_blank"
                                     rel="noopener" aria-label="visit our Instagram page (opens in a new tab)"><i
                                         class="fa-brands fa-instagram fa-lg"></i></a>
                             </p>
@@ -293,21 +296,21 @@
                         <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
                             <p class="h6 text-uppercase fw-bold">Information</p>
                             <hr class="mb-4 mt-0 d-inline-block mx-auto"
-                                style="width: 60px; background-color: white; height: 2px" />
+                                style="width: 60px; background-color: #F5E532; height: 2px" />
                             <p>
-                                <a href="#" class="text-white">About Us</a>
+                                <a href="#" class="white-yellow">About Us</a>
                             </p>
                             <p>
-                                <a href="#" class="text-white">Privacy Policy</a>
+                                <a href="#" class="white-yellow">Privacy Policy</a>
                             </p>
                             <p>
-                                <a href="#" class="text-white">FAQ</a>
+                                <a href="#" class="white-yellow">FAQ</a>
                             </p>
                             <p>
-                                <a href="#" class="text-white">Link to Health Charity</a>
+                                <a href="#" class="white-yellow">Link to Health Charity</a>
                             </p>
                             <p>
-                                <a href="#" class="text-white">Link to Health Charity</a>
+                                <a href="#" class="white-yellow">Link to Health Charity</a>
                             </p>
                         </div>
                         <!-- End Information Section -->
@@ -315,18 +318,18 @@
                         <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
                             <p class="h6 text-uppercase fw-bold">Shop Categories</p>
                             <hr class="mb-4 mt-0 d-inline-block mx-auto"
-                                style="width: 60px; background-color: white; height: 2px" />
+                                style="width: 60px; background-color: #F5E532; height: 2px" />
                                 <p>
-                                    <a href="#" class="text-white">Some Category</a>
+                                    <a href="#" class="white-yellow">Some Category</a>
                                 </p>
                                 <p>
-                                    <a href="#" class="text-white">Some Category</a>
+                                    <a href="#" class="white-yellow">Some Category</a>
                                 </p>
                                 <p>
-                                    <a href="#" class="text-white">Some Category</a>
+                                    <a href="#" class="white-yellow">Some Category</a>
                                 </p>
                                 <p>
-                                    <a href="#" class="text-white">Some Category</a>
+                                    <a href="#" class="white-yellow">Some Category</a>
                                 </p>
                         <!-- End Shop Categories Section -->
                     </div>
