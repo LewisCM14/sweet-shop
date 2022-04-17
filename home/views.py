@@ -11,3 +11,8 @@ def index(request):
 def faq(request):
     """ Renders the faq.html template in the browser """
     return render(request, 'home/faq.html')
+
+
+def deliver_info(request):
+    """ Renders the deliver_info.html template in the browser """
+    return render(request, 'home/deliver_info.html')
