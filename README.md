@@ -135,6 +135,10 @@ ___
 
 - **Color Scheme** <a name='colorscheme'></a>
 
+    * When developing the color scheme for this project i began by scrolling through images of sweets that span the time period of 1980-2010, as this period captured when millennials would have been children/teenagers, from here i got a vague idea of what colors would be reflective of a typical millennial childhood. I then reinforced my ideas with this [blog post](https://juiceboxinteractive.com/blog/color/). Finally deciding on a scheme that incorporated blue, yellow and pink. From here i began testing different variations of these colors together in the [web aim contrast checker](https://webaim.org/resources/contrastchecker/) to ensure my scheme met [WCAG](https://www.w3.org/WAI/standards-guidelines/wcag/) AAA accessibility guidelines. Not wanting to create a garish display, My final scheme consists of predominantly a charcoal color, set against white (FFFFFF) or cream (The bootstrap color of F8F9FA), with yellow and blue used against it. The color pallet can be seen below.
+
+        ![image of the color pallet](media/color_scheme.png)
+
 
 - **Typography** <a name='typography'></a>
 
@@ -613,6 +617,9 @@ ___
 
     * **[Iconifier](https://iconifier.net/).**
         * Used to convert the favicon image to the correct size and file type.
+    
+    * **[WebAIM Contrast Checker](https://webaim.org/resources/contrastchecker/).**
+        * Used to ensure my color pallet met WCAG AAA accessibility guidelines.
        
 [Return to Table of Contents](#contents)
 ___
@@ -626,11 +633,15 @@ ___
 
 - **Content** <a name='concred'></a>
 
-* The footer for the site is developed from this [md bootstrap template](https://mdbootstrap.com/snippets/standard/mdbootstrap/2885008?view=side).
+    * The footer for the site is developed from this [md bootstrap template](https://mdbootstrap.com/snippets/standard/mdbootstrap/2885008?view=side).
 
-* This [blog post](https://micropyramid.com/blog/django-unit-test-cases-with-forms-and-views/) was used to help develop my understanding of writing tests with Django's TestCase package. Particularly for the test_views.py file in the profiles app.
+    * This [blog post](https://micropyramid.com/blog/django-unit-test-cases-with-forms-and-views/) was used to help develop my understanding of writing tests with Django's TestCase package. Particularly for the test_views.py file in the profiles app.
 
-* I used this [blog post](https://www.hotjar.com/blog/user-personas/) to help be develop my user personas.
+    * I used this [blog post](https://www.hotjar.com/blog/user-personas/) to help be develop my user personas.
+
+    * I used this [blog post](https://juiceboxinteractive.com/blog/color/) to aide in developing the color scheme for the site.
+
+    * I used Marko Denic's [buttons generator](https://markodenic.com/tools/buttons-generator/) to develop the buttons across the application.
 
 - **Media** <a name='media'></a>
 
