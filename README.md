@@ -639,6 +639,8 @@ ___
 
 * I used this [blog post](https://www.hotjar.com/blog/user-personas/) to help be develop my user personas.
 
+* I used Marko Denic's [buttons generator](https://markodenic.com/tools/buttons-generator/) to develop the buttons across the application.
+
 - **Media** <a name='media'></a>
 
 [Return to Table of Contents](#contents)
