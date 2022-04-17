@@ -135,6 +135,10 @@ ___
 
 - **Color Scheme** <a name='colorscheme'></a>
 
+    * When developing the color scheme for this project i began by scrolling through images of sweets that span the time period of 1980-2010, as this period captured when millennials would have been children/teenagers, from here i got a vague idea of what colors would be reflective of a typical millennial childhood. I then reinforced my ideas with this [blog post](https://juiceboxinteractive.com/blog/color/). Finally deciding on a scheme that incorporated blue, yellow and pink. From here i began testing different variations of these colors together in the [web aim contrast checker](https://webaim.org/resources/contrastchecker/) to ensure my scheme met [WCAG](https://www.w3.org/WAI/standards-guidelines/wcag/) AAA accessibility guidelines. Not wanting to create a garish display, My final scheme consists of predominantly a charcoal color, set against white (FFFFFF) or cream (The bootstrap color of F8F9FA), with yellow and blue used against it. The color pallet can be seen below.
+
+        ![image of the color pallet](media/color_scheme.png)
+
 
 - **Typography** <a name='typography'></a>
 
