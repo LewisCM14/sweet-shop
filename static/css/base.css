@@ -5,8 +5,9 @@ html {
 } /* Allows for h100 and vertical center classes to work */
 
 body {
-    background-color: white;
+    background-color: #F8F9FA;
     font-family: 'Chivo', sans-serif;
+    color: #333333;
 }
 
 .site {
@@ -20,6 +21,9 @@ body {
     width: 100%;
     height: 100%;
 } /* Ensures site content is above footer */
+
+
+/* ------------------------------------------- TEXT & BACKGROUND STYLES */
 
 .logo-font {
     font-weight: 900;
@@ -36,26 +40,60 @@ body {
 
 .white-yellow {
     text-decoration: none;
-    color: #ffffff;
+    color: #FFFFFF;
     }
     .white-yellow:hover {
         text-decoration: none;
         color: #F5E532;
-    } /* text color & hover styling, used to contract bg-charcoal */
+    } /* text color & hover styling, used to contrast bg-charcoal */
 
 .bg-charcoal {
     background-color: #333333;
 } /* background color class */
 
+.charcoal-navy {
+    text-decoration: none;
+    color: #333333 !important;
+    }
+    .charcoal-navy:hover {
+        text-decoration: none;
+        color: #000080 !important;
+    } /* text color & hover styling, used to contrast bg-light & bg-white,
+        important is used to over ride bootstrap styling on nav-links. */
+
+.text-charcoal {
+    color: #333333;
+} /* Text color class  */
+
+
+/* ------------------------------------------- BUTTON STYLING */
+
+.blue-charcoal-btn {
+    min-width: 130px;
+    height: 40px;
+    color: #FFFFFF;
+    padding: 5px 10px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    display: inline-block;
+    outline: none;
+    border-radius: 5px;
+    border: 2px solid #000080;
+    background: #000080;
+  }
+  .blue-charcoal-btn:hover {
+    background: #333333;
+    border: 2px solid #333333;
+    color: #FFFFFF
+  }
+
 
 /* ------------------------------------------- HEADER STYLING */
 
-.text-black {
-    color: #000;
-} /* Used in middle header  */
-
-.border-black {
-    border: 1px solid black;
+.border-charcoal {
+    border: 1px solid #333333;
 } /* Search bar input border */
 
 
@@ -68,7 +106,7 @@ body {
 .newsletter-email {
     width: 300px;
     height: 36px;
-    background-color: white;
+    background-color: #FFFFFF;
     border-radius: 4px;
     border: none;
     padding: 0px 20px;
@@ -136,8 +174,8 @@ body {
 
 .custom-toast {
     overflow: visible;
-} /* Top Border for toasts */
+} /* Top border for toasts */
 
 .toast-capper {
     height: 2px;
-} /* Top Border for toasts */
+} /* Top border for toasts */
