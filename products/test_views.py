@@ -1,6 +1,7 @@
 """ This module tests the product app views """
 
 from django.test import TestCase
+from django.contrib.messages import get_messages
 from .models import Type, Product
 
 
@@ -59,3 +60,53 @@ class TestModel(TestCase):
 
         response = self.client.get('/products/1/')
         self.assertEqual(response.status_code, 200)
+
+    def test_valid_search_input_returns_objects(self):
+        """
+        Tests the all_products view returns objects when a q value is sent.
+
+        Collects the product created in the setUp method,
+        storing it in the products variable. Asserts the length of this is 1.
+        Sets the 'q' value as the string toxic,
+        then passes it to the query variable. Ensuring it is equal to 'toxic'.
+
+        Then Uses Django's in-built HTTP client to get the query URL.
+        Ensuring when the string 'toxic' is searched
+        a status code 200 is returned, a successful HTTP response.
+        """
+        # pylint: disable=no-member
+        products = Product.objects.all()
+        self.assertEqual(len(products), 1)
+
+        # pylint: disable=invalid-name
+        q = 'toxic'
+        query = q
+        self.assertEqual(query, 'toxic')
+
+        response = self.client.get('/products/?q=toxic')
+        self.assertEqual(response.status_code, 200)
+
+    def test_blank_search_input_is_handled(self):
+        """
+        Tests the all_products view handles a blank input q value.
+
+        Sets q as None, then sets the query variable equal to q.
+        Then asserts the query value is infact equal to None.
+
+        Then Uses Django's in-built HTTP client to get the query URL.
+        Ensuring the correct error message is returned in the response.
+        Before then ensuring the user is redirected to the all products url.
+
+        """
+        # pylint: disable=invalid-name
+        q = None
+        query = q
+        self.assertEqual(query, None)
+
+        response = self.client.get('/products/?q=')
+
+        messages = list(get_messages(response.wsgi_request))
+        self.assertEqual(len(messages), 1)
+        self.assertEqual(str(messages[0]), "You didn't enter any search criteria!")  # noqa
+
+        self.assertRedirects(response, '/products/')

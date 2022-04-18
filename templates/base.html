@@ -132,7 +132,7 @@
                     </div>
                     <!-- Product Search Form -->
                     <div class="col-12 col-lg-4 my-auto py-1 py-lg-0 text-center text-lg-left">
-                        <form method="GET" action="#">
+                        <form method="GET" action="{% url 'products' %}">
                             <div class="input-group w-100">
                                 <input class="form-control border border-charcoal rounded-0" type="text" name="q"
                                     placeholder="SEARCH OUR SWEETS">
@@ -195,9 +195,11 @@
                 </div>
             {% endif %}
 
+            <!-- Contains the breadcrumb navigation -->
             {% block page_header %}
             {% endblock %}
-
+            
+            <!-- Main page content -->
             {% block content %}
             {% endblock %}
         </main>
