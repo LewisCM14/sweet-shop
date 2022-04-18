@@ -18,12 +18,12 @@
                 Sweets By Type
             </a>
             <div class="dropdown-menu border-0" aria-labelledby="sweet-type-link">
-                <a href="#" class="dropdown-item">Chewy</a>
-                <a href="#" class="dropdown-item">Chocolate</a>
-                <a href="#" class="dropdown-item">Fizzy</a>
-                <a href="#" class="dropdown-item">Jellies & Gums</a>
-                <a href="#" class="dropdown-item">Sherbet</a>
-                <a href="#" class="dropdown-item">Sour</a>
+                <a href="{% url 'products' %}?type_query=chewy" class="dropdown-item">Chewy</a>
+                <a href="{% url 'products' %}?type_query=chocolate" class="dropdown-item">Chocolate</a>
+                <a href="{% url 'products' %}?type_query=fizzy" class="dropdown-item">Fizzy</a>
+                <a href="{% url 'products' %}?type_query=jellies_gums" class="dropdown-item">Jellies & Gums</a>
+                <a href="{% url 'products' %}?type_query=sherbet" class="dropdown-item">Sherbet</a>
+                <a href="{% url 'products' %}?type_query=sour" class="dropdown-item">Sour</a>
             </div>
         </li>
         <!-- By Year -->
