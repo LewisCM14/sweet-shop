@@ -1,6 +1,7 @@
 """ This module tests the product app views """
 
 from django.test import TestCase
+from django.contrib.messages import get_messages
 from .models import Type, Product
 
 
@@ -84,3 +85,28 @@ class TestModel(TestCase):
 
         response = self.client.get('/products/?q=toxic')
         self.assertEqual(response.status_code, 200)
+
+    def test_blank_search_input_is_handled(self):
+        """
+        Tests the all_products view handles a blank input q value.
+
+        Sets q as None, then sets the query variable equal to q.
+        Then asserts the query value is infact equal to None.
+
+        Then Uses Django's in-built HTTP client to get the query URL.
+        Ensuring the correct error message is returned in the response.
+        Before then ensuring the user is redirected to the all products url.
+
+        """
+        # pylint: disable=invalid-name
+        q = None
+        query = q
+        self.assertEqual(query, None)
+
+        response = self.client.get('/products/?q=')
+
+        messages = list(get_messages(response.wsgi_request))
+        self.assertEqual(len(messages), 1)
+        self.assertEqual(str(messages[0]), "You didn't enter any search criteria!")  # noqa
+
+        self.assertRedirects(response, '/products/')
