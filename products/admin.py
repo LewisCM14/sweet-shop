@@ -13,12 +13,13 @@ class ProductAdmin(admin.ModelAdmin):
     list_display = (
         'name',
         'type',
-        'year',
         'price',
         'image'
     )
 
-    list_filter = ('type', 'year',)
+    list_filter = (
+        'type', 'popular_in_80s', 'popular_in_90s', 'popular_in_00s',
+    )
 
     ordering = ('name',)
 

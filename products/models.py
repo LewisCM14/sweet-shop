@@ -36,18 +36,21 @@ class Product(models.Model):
 
     category field is a forign key to the Type Model above.
     Each product requires a name, description, year, weight and price.
+    The boolean fields for years popular then default to True,
+    this ensures the products will be displayed in the store regardless.
+    It is up to the site owner to ensure these fields are correct.
+
     Everything else is optional.
     """
-
-    # A tuple to hold the key for the year field.
-    YEAR = ((0, "90s & 00s"), (1, "90s"), (2, "00s"))
 
     type = models.ForeignKey(
         'Type', null=True, blank=True, on_delete=models.SET_NULL
     )
     name = models.CharField(max_length=254)
     description = models.TextField()
-    year = models.IntegerField(choices=YEAR, default=0)
+    popular_in_80s = models.BooleanField(default=True)
+    popular_in_90s = models.BooleanField(default=True)
+    popular_in_00s = models.BooleanField(default=True)
     weight_in_grams = models.IntegerField()
     price = models.DecimalField(max_digits=6, decimal_places=2)
     image_url = models.URLField(max_length=1024, null=True, blank=True)
