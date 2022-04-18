@@ -189,7 +189,7 @@ ___
     * Iteration 2 board can be found [here](https://github.com/LewisCM14/sweet-shop/projects/2)
 
 - **Iteration 3**
-    * The iteration 3 milestone can be found [here]https://github.com/LewisCM14/sweet-shop/milestone/4?closed=1)
+    * The iteration 3 milestone can be found [here](https://github.com/LewisCM14/sweet-shop/milestone/4?closed=1)
     * Iteration 3 board can be found here [here](https://github.com/LewisCM14/sweet-shop/projects/3)
 
 - **Iteration 4**
