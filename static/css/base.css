@@ -99,9 +99,17 @@ body {
 
 /* ------------------------------------------- FOOTER STYLING */
 
-.margin-neg {
+.mt-neg-10 {
     margin-top: -10px;
 } /* Newsletter grab styling */
+
+.mt-neg-15 {
+    margin-top: -20px;
+} /* shop categories styling */
+
+.mt-neg-20 {
+    margin-top: -20px;
+}
 
 .newsletter-email {
     width: 300px;
