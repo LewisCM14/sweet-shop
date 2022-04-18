@@ -65,6 +65,13 @@ body {
     color: #333333;
 } /* Text color class  */
 
+.fw-900 {
+    font-weight: 900;
+} /* Taken from the Chivo docs on google fonts */
+
+.fw-700 {
+    font-weight: 700;
+} /* Taken from the Chivo docs on google fonts */
 
 /* ------------------------------------------- BUTTON STYLING */
 
@@ -110,6 +117,10 @@ body {
 .border-charcoal {
     border: 1px solid #333333;
 } /* Search bar input border */
+
+.header-container {
+    margin-top: 15px;
+} /* Adds top margin to the breadcrumb container */
 
 
 /* ------------------------------------------- FOOTER STYLING */
