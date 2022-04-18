@@ -179,19 +179,21 @@ ___
     * The product backlog for the project can be found [here](https://github.com/LewisCM14/sweet-shop/milestone/1)
 
 - **Iteration 1**
-    * The iteration 1 milestone can be found [here](https://github.com/LewisCM14/sweet-shop/milestone/2)
+    ![image of the iteration 1 milestone](media/iteration1.png)
+    * The iteration 1 milestone can be found [here](https://github.com/LewisCM14/sweet-shop/milestone/2?closed=1)
     * Iteration 1 board can be found [here](https://github.com/LewisCM14/sweet-shop/projects/1)
 
 - **Iteration 2**
-    * The iteration 2 milestone can be found [here](https://github.com/LewisCM14/sweet-shop/milestone/3)
-    * Iternation 2 board can be found [here](https://github.com/LewisCM14/sweet-shop/projects/2)
+    ![image of the iteration 2 milestone](media/iteration2.png)
+    * The iteration 2 milestone can be found [here](https://github.com/LewisCM14/sweet-shop/milestone/3?closed=1)
+    * Iteration 2 board can be found [here](https://github.com/LewisCM14/sweet-shop/projects/2)
 
 - **Iteration 3**
-    * The iteration 3 milestone can be found [here](https://github.com/LewisCM14/sweet-shop/milestone/4)
+    * The iteration 3 milestone can be found [here]https://github.com/LewisCM14/sweet-shop/milestone/4?closed=1)
     * Iteration 3 board can be found here [here](https://github.com/LewisCM14/sweet-shop/projects/3)
 
-- **Iternation 4**
-    * The Iternation 4 milestone can be found [here](https://github.com/LewisCM14/sweet-shop/milestone/5)
+- **Iteration 4**
+    * The Iteration 4 milestone can be found [here](https://github.com/LewisCM14/sweet-shop/milestone/5?closed=1)
     * Iteration 4 board can be found here [here](https://github.com/LewisCM14/sweet-shop/projects/4)
 
 [Return to Table of Contents](#contents)
