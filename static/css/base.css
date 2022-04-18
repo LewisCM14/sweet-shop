@@ -90,6 +90,21 @@ body {
   } /* Taken from https://markodenic.com/tools/buttons-generator/ */
 
 
+/* ------------------------------------------- MARGIN STYLINGS */
+
+.mt-neg-10 {
+    margin-top: -10px;
+}
+
+.mt-neg-15 {
+    margin-top: -15px;
+}
+
+.mt-neg-20 {
+    margin-top: -20px;
+}
+
+
 /* ------------------------------------------- HEADER STYLING */
 
 .border-charcoal {
@@ -98,18 +113,6 @@ body {
 
 
 /* ------------------------------------------- FOOTER STYLING */
-
-.mt-neg-10 {
-    margin-top: -10px;
-} /* Newsletter grab styling */
-
-.mt-neg-15 {
-    margin-top: -20px;
-} /* shop categories styling */
-
-.mt-neg-20 {
-    margin-top: -20px;
-}
 
 .newsletter-email {
     width: 300px;

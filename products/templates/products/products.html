@@ -17,12 +17,43 @@
 {% endblock %}
 
 {% block content %}
-    <div class="container">
+    <div class="container mb-5">
         <div class="row">
-            <!-- Product Type List -->
-            <section class="container-fluid col-lg-3 col-md-4 col-sm-12">
+            <!-- Product Category List -->
+            <section class="container-fluid bg-white col-lg-3 col-md-4 col-sm-12">
                 <div>
-                    <h1>type container</h1>
+                    <p class="h5 mt-2">
+                        All Categories
+                        <hr class="mb-4 mt-0 d-inline-block mx-auto"
+                        style="width: 100px; background-color: #000080; height: 2px" />
+                    </p>
+                    <p class="mt-neg-10">
+                        <a href="{% url 'products' %}?type_query=chewy" class="charcoal-navy">Chewy</a>
+                    </p>
+                    <p class="mt-neg-10">
+                        <a href="{% url 'products' %}?type_query=chocolate" class="charcoal-navy">Chocolate</a>
+                    </p>
+                    <p class="mt-neg-10">
+                        <a href="{% url 'products' %}?type_query=fizzy" class="charcoal-navy">Fizzy</a>
+                    </p>
+                    <p class="mt-neg-10">
+                        <a href="{% url 'products' %}?type_query=jellies_gums" class="charcoal-navy">Jellies & Gums</a>
+                    </p>
+                    <p class="mt-neg-10">
+                        <a href="{% url 'products' %}?type_query=sherbet" class="charcoal-navy">Sherbet</a>
+                    </p>
+                    <p class="mt-neg-10">
+                        <a href="{% url 'products' %}?type_query=sour" class="charcoal-navy">Sour</a>
+                    </p>
+                    <p class="mt-neg-10">
+                        <a href="#" class="charcoal-navy">80's Sweets</a>
+                    </p>
+                    <p class="mt-neg-10">
+                        <a href="#" class="charcoal-navy">90's Sweets</a>
+                    </p>
+                    <p class="mt-neg-10">
+                        <a href="#" class="charcoal-navy">00's Sweets</a>
+                    </p>
                 </div>
             </section>
             <!-- Product Sort Options -->
