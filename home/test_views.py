@@ -3,7 +3,7 @@
 from django.test import TestCase
 
 
-class TestModel(TestCase):
+class TestView(TestCase):
     """
     Contains the tests for the views.
     Located in the home app in views.py.
