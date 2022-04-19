@@ -28,6 +28,11 @@ def all_products(request):
     of the type_filter. Then converts the list of strings of type names
     passed through the URL into a list of actual type objects,
     so that all their fields can be accessed in the template.
+
+    Year Filtering:
+    Filtering by year takes in the GET request, then uses an if/else
+    statement to filter prodcuts by the years_popular fields, based on
+    the value given in the request.
     """
     # pylint: disable=no-member
     products = Product.objects.all()
