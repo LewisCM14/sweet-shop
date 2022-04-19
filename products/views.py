@@ -36,6 +36,13 @@ def all_products(request):
     type_filter = None
 
     if request.GET:
+        if 'year_80' in request.GET:
+            products = Product.objects.filter(popular_in_80s=True)
+        elif 'year_90' in request.GET:
+            products = Product.objects.filter(popular_in_90s=True)
+        elif 'year_00' in request.GET:
+            products = Product.objects.filter(popular_in_00s=True)
+
         if 'type_query' in request.GET:
             type_filter = request.GET['type_query'].split(',')
             products = products.filter(type__name__in=type_filter)
