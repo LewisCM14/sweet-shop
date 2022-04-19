@@ -27,7 +27,14 @@
                         <hr class="mb-4 mt-0 d-inline-block mx-auto"
                             style="width: 100px; background-color: #000080; height: 2px" />
                     </p>
+                    <!-- All Products -->
                     <p class="mt-neg-10">
+                        <a href="{% url 'products' %}" class="charcoal-navy">
+                            <h6 class="fw-700">All Products</h6>
+                        </a>
+                    </p>
+                    <!-- Products by Type -->
+                    <p>
                         <a href="{% url 'products' %}?type_query=chewy" class="charcoal-navy">
                             <h6 class="fw-700">Chewy</h6>
                         </a>
@@ -57,7 +64,8 @@
                             <h6 class="fw-700">Sour</h6>
                         </a>
                     </p>
-                    <p class="mt-neg-10">
+                    <!-- Products by Year -->
+                    <p>
                         <a href="{% url 'products' %}?year_80" class="charcoal-navy">
                             <h6 class="fw-700">80s Sweets</h6>
                         </a>
