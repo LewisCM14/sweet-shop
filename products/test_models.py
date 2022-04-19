@@ -75,7 +75,9 @@ class TestModel(TestCase):
             type=sour,
             name='Toxic Waste',
             description='A Sour Sweet',
-            year=1,
+            popular_in_80s=False,
+            popular_in_90s=True,
+            popular_in_00s=True,
             weight_in_grams='42',
             price='4.99',
         )

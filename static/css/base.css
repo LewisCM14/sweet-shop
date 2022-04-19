@@ -65,6 +65,13 @@ body {
     color: #333333;
 } /* Text color class  */
 
+.fw-900 {
+    font-weight: 900;
+} /* Taken from the Chivo docs on google fonts */
+
+.fw-700 {
+    font-weight: 700;
+} /* Taken from the Chivo docs on google fonts */
 
 /* ------------------------------------------- BUTTON STYLING */
 
@@ -90,18 +97,33 @@ body {
   } /* Taken from https://markodenic.com/tools/buttons-generator/ */
 
 
+/* ------------------------------------------- MARGIN STYLINGS */
+
+.mt-neg-10 {
+    margin-top: -10px;
+}
+
+.mt-neg-15 {
+    margin-top: -15px;
+}
+
+.mt-neg-20 {
+    margin-top: -20px;
+}
+
+
 /* ------------------------------------------- HEADER STYLING */
 
 .border-charcoal {
     border: 1px solid #333333;
 } /* Search bar input border */
 
+.header-container {
+    margin-top: 15px;
+} /* Adds top margin to the breadcrumb container */
+
 
 /* ------------------------------------------- FOOTER STYLING */
-
-.margin-neg {
-    margin-top: -10px;
-} /* Newsletter grab styling */
 
 .newsletter-email {
     width: 300px;

@@ -17,12 +17,69 @@
 {% endblock %}
 
 {% block content %}
-    <div class="container">
+    <div class="container mb-5">
         <div class="row">
-            <!-- Product Type List -->
-            <section class="container-fluid col-lg-3 col-md-4 col-sm-12">
+            <!-- Product Category List -->
+            <section class="container-fluid bg-white col-lg-3 col-md-4 col-sm-12">
                 <div>
-                    <h1>type container</h1>
+                    <p class="h5 fw-700 mt-2">
+                        All Categories
+                        <hr class="mb-4 mt-0 d-inline-block mx-auto"
+                            style="width: 100px; background-color: #000080; height: 2px" />
+                    </p>
+                    <!-- All Products -->
+                    <p class="mt-neg-10">
+                        <a href="{% url 'products' %}" class="charcoal-navy">
+                            <h6 class="fw-700">All Products</h6>
+                        </a>
+                    </p>
+                    <!-- Products by Type -->
+                    <p>
+                        <a href="{% url 'products' %}?type_query=chewy" class="charcoal-navy">
+                            <h6 class="fw-700">Chewy</h6>
+                        </a>
+                    </p>
+                    <p class="mt-neg-10">
+                        <a href="{% url 'products' %}?type_query=chocolate" class="charcoal-navy">
+                            <h6 class="fw-700">Chocolate</h6>
+                        </a>
+                    </p>
+                    <p class="mt-neg-10">
+                        <a href="{% url 'products' %}?type_query=fizzy" class="charcoal-navy">
+                            <h6 class="fw-700">Fizzy</h6>
+                        </a>
+                    </p>
+                    <p class="mt-neg-10">
+                        <a href="{% url 'products' %}?type_query=jellies_gums" class="charcoal-navy">
+                            <h6 class="fw-700">Jellies & Gums</h6>
+                        </a>
+                    </p>
+                    <p class="mt-neg-10">
+                        <a href="{% url 'products' %}?type_query=sherbet" class="charcoal-navy">
+                            <h6 class="fw-700">Sherbet</h6>
+                        </a>
+                    </p>
+                    <p class="mt-neg-10">
+                        <a href="{% url 'products' %}?type_query=sour" class="charcoal-navy">
+                            <h6 class="fw-700">Sour</h6>
+                        </a>
+                    </p>
+                    <!-- Products by Year -->
+                    <p>
+                        <a href="{% url 'products' %}?year_80" class="charcoal-navy">
+                            <h6 class="fw-700">80s Sweets</h6>
+                        </a>
+                    </p>
+                    <p class="mt-neg-10">
+                        <a href="{% url 'products' %}?year_90" class="charcoal-navy">
+                            <h6 class="fw-700">90s Sweets</h6>
+                        </a>
+                    </p>
+                    <p class="mt-neg-10">
+                        <a href="{% url 'products' %}?year_00" class="charcoal-navy">
+                            <h6 class="fw-700">00s Sweets</h6>
+                        </a>
+                    </p>
                 </div>
             </section>
             <!-- Product Sort Options -->

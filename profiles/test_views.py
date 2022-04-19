@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 from .profile_form import UserProfileForm
 
 
-class TestModel(TestCase):
+class TestView(TestCase):
     """
     Contains the tests for the views.
     Located in the profile app in views.py.

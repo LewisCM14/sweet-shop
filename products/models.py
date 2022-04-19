@@ -34,20 +34,26 @@ class Product(models.Model):
     """
     A Model to hold the product info.
 
-    category field is a forign key to the Type Model above.
-    Each product requires a name, description, year, weight and price.
-    Everything else is optional.
-    """
+    type field is a forign key to the Type Model above.
 
-    # A tuple to hold the key for the year field.
-    YEAR = ((0, "90s & 00s"), (1, "90s"), (2, "00s"))
+    Each product requires a name, description, weight and price.
+
+    The years_popular fields are then optional.
+    These boolean check boxes allow the site owner
+    to dictate filtering by year within the store.
+
+    The image fields are then also optional. if no image is provided
+    this is handled within the app settings/root media folder.
+    """
 
     type = models.ForeignKey(
         'Type', null=True, blank=True, on_delete=models.SET_NULL
     )
     name = models.CharField(max_length=254)
     description = models.TextField()
-    year = models.IntegerField(choices=YEAR, default=0)
+    popular_in_80s = models.BooleanField()
+    popular_in_90s = models.BooleanField()
+    popular_in_00s = models.BooleanField()
     weight_in_grams = models.IntegerField()
     price = models.DecimalField(max_digits=6, decimal_places=2)
     image_url = models.URLField(max_length=1024, null=True, blank=True)
