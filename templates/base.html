@@ -8,10 +8,11 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <meta name="description" 
-            content="A web based sweet shop, selling the best sweets from the 90's & '00's" />
+        <meta name="description" content="A UK based online sweet shop, selling the best sweet selection for millennials" />
         <meta name="keywords"
-            content="classic sweets, bring back those childhood memories, vintage sweets, candy, sweets for any occasion, assorted sweets, pick & mix, goody bag, sweet delivery, promotional sweet gifts, bulk buy sweets cheap, sweets for millennials, 90's, '00s,' " />
+            content="classic, confectionery, sweets, chewy, chocolate, fizzy, jellies, gums, sherbet, sour, 80s, 90s,
+            00s, sweet sales and promotions, sweets for millennials, vintage, candy, sweets for any occasion, assorted
+            sweets, free delivery, tracked, deliver, UK, value for money,"/>
         {% endblock %}
 
         {% block extra_meta %}
@@ -122,12 +123,12 @@
             <!-- End Topbar -->
 
             <!-- Start Main Nav -->
-            <div class="container-fluid">
+            <section class="container-fluid">
                 <!-- Logo -->
                 <div id="main-header" class="row bg-white pt-lg-2 d-none d-lg-flex">
                     <div class="col-12 col-lg-4 my-auto py-1 py-lg-0 text-center text-lg-left">
                         <a href="{% url 'home' %}" class="nav-link main-logo-link">
-                            <span class="h3 logo-font text-charcoal my-0">Classic <strong>Confectionery</strong></span>
+                            <h3 class="logo-font text-charcoal my-0">Classic <strong>Confectionery</strong></h3>
                         </a>
                     </div>
                     <!-- Product Search Form -->
@@ -170,7 +171,7 @@
                         {% include 'includes/main-nav.html' %}
                     </nav>
                 </div>
-            </div>
+            </section>
             <!-- End Main Nav -->
         </header>
         <!-- End Header Section -->
@@ -220,7 +221,7 @@
                             Subscribe to our Newsletter
                         </p>
                         <p class="mt-neg-10">
-                            Get all the latest information, Sales and Offers
+                            Be the first to know about our <strong>sweet sales and promotions.</strong>
                         </p>
                     </div>
                     <!-- End Middle/Newsletter Grab -->
@@ -326,31 +327,49 @@
                             <hr class="mb-4 mt-0 d-inline-block mx-auto"
                                 style="width: 60px; background-color: #F5E532; height: 2px" />
                                 <p>
-                                    <a href="{% url 'products' %}?type_query=chewy" class="white-yellow">Chewy</a>
+                                    <a href="{% url 'products' %}?type_query=chewy" class="white-yellow">
+                                        <h6 class="mt-neg-10">Chewy</h6>
+                                    </a>
                                 </p>
-                                <p class='mt-neg-15'>
-                                    <a href="{% url 'products' %}?type_query=chocolate" class="white-yellow">Chocolate</a>
+                                <p>
+                                    <a href="{% url 'products' %}?type_query=chocolate" class="white-yellow">
+                                        <h6 class="mt-neg-10">Chocolate</h6>
+                                    </a>
                                 </p>
-                                <p class='mt-neg-15'>
-                                    <a href="{% url 'products' %}?type_query=fizzy" class="white-yellow">Fizzy</a>
+                                <p>
+                                    <a href="{% url 'products' %}?type_query=fizzy" class="white-yellow">
+                                        <h6 class="mt-neg-10">Fizzy</h6>
+                                    </a>
                                 </p>
-                                <p class='mt-neg-15'>
-                                    <a href="{% url 'products' %}?type_query=jellies_gums" class="white-yellow">Jellies & Gums</a>
+                                <p>
+                                    <a href="{% url 'products' %}?type_query=jellies_gums" class="white-yellow">
+                                        <h6 class="mt-neg-10">Jellies & Gums</h6>
+                                    </a>
                                 </p>
-                                <p class='mt-neg-15'>
-                                    <a href="{% url 'products' %}?type_query=sherbet" class="white-yellow">Sherbet</a>
+                                <p>
+                                    <a href="{% url 'products' %}?type_query=sherbet" class="white-yellow">
+                                        <h6 class="mt-neg-10">Sherbet</h6>
+                                    </a>
                                 </p>
-                                <p class='mt-neg-15'>
-                                    <a href="{% url 'products' %}?type_query=sour" class="white-yellow">Sour</a>
+                                <p>
+                                    <a href="{% url 'products' %}?type_query=sour" class="white-yellow">
+                                        <h6 class="mt-neg-10">Sour</h6>
+                                    </a>
                                 </p>
-                                <p class='mt-neg-15'>
-                                    <a href="#" class="white-yellow">80's Sweets</a>
+                                <p>
+                                    <a href="#" class="white-yellow">
+                                        <h6 class="mt-neg-10">80s Sweets</h6>
+                                    </a>
                                 </p>
-                                <p class='mt-neg-15'>
-                                    <a href="#" class="white-yellow">90's Sweets</a>
+                                <p>
+                                    <a href="#" class="white-yellow">
+                                        <h6 class="mt-neg-10">90s Sweets</h6>
+                                    </a>
                                 </p>
-                                <p class='mt-neg-15'>
-                                    <a href="#" class="white-yellow">00's Sweets</a>
+                                <p>
+                                    <a href="#" class="white-yellow">
+                                        <h6 class="mt-neg-10">00s Sweets</h6>
+                                    </a>
                                 </p>
                         <!-- End Shop Categories Section -->
                     </div>
