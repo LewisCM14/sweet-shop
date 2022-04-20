@@ -209,6 +209,8 @@ ___
 ___
 ### Future Features <a name ='toimplement'></a>
 
+    * Make a global variable that holds each type, so the templates can have their code abstracted, meaning as the site owner adds other types, they are reflected in the application. Preventing them needing to be 'hard' coded in.
+
 *The product backlog can be viewed [here](https://github.com/LewisCM14/sweet-shop/milestone/1).*
 
 [Return to Table of Contents](#contents)
