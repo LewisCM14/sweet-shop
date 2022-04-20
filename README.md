@@ -209,6 +209,8 @@ ___
 ___
 ### Future Features <a name ='toimplement'></a>
 
+* Make a global variable that holds each type, so the templates can have their code abstracted, meaning as the site owner adds other types, they are reflected in the application. Preventing them needing to be 'hard' coded in.
+
 *The product backlog can be viewed [here](https://github.com/LewisCM14/sweet-shop/milestone/1).*
 
 [Return to Table of Contents](#contents)
@@ -648,6 +650,8 @@ ___
     * I used this [post](https://stackoverflow.com/questions/66231936/change-accordion-button-collapsed-icon-color-in-bootstrap-5) on stackoverflow to alter the toggle button on my FAQ accordion.
 
     * I used this [post](https://stackoverflow.com/questions/2897609/how-can-i-unit-test-django-messages/14909727) on stackoverflow in order to develop my knowledge on how to test the Django message framework behaved as i intended.
+
+    * I used this [guide](https://developer.mozilla.org/en-US/docs/Web/CSS/filter-function/blur) for learning how to use the blur function in CSS. 
 
 - **Media** <a name='media'></a>
 
