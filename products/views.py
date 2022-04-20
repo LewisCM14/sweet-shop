@@ -2,6 +2,7 @@
 
 from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.contrib import messages
+from django.db.models.functions import Lower
 from django.db.models import Q
 from .models import Product, Type
 
@@ -33,20 +34,51 @@ def all_products(request):
     Filtering by year takes in the GET request, then uses an if/else
     statement to filter prodcuts by the years_popular fields, based on
     the value given in the request.
+
+    Product Sorting:
+    Takes in the sort criteria from the GET request.
+    Storing it in the sortkey variable for use in the function,
+    whilst also preserving the original sort criteria in a variable
+    for use in the template.
+
+    Then checks if direction was in the GET request.
+    Prepending a minus to the sortkey variable if the direction was
+    equal to descending (desc) Before ordering the products by the
+    final sortkey variable.
     """
     # pylint: disable=no-member
     products = Product.objects.all()
     # Set to none initially to ensure no error is returned in context
     query = None
     type_filter = None
+    year = None
+    sort = None
+    direction = None
 
     if request.GET:
-        if 'year_80' in request.GET:
-            products = Product.objects.filter(popular_in_80s=True)
-        elif 'year_90' in request.GET:
-            products = Product.objects.filter(popular_in_90s=True)
-        elif 'year_00' in request.GET:
-            products = Product.objects.filter(popular_in_00s=True)
+        if 'sort' in request.GET:
+            sortkey = request.GET['sort']
+            sort = sortkey
+            if sortkey == 'name':
+                sortkey = 'lower_name'
+                products = products.annotate(lower_name=Lower('name'))
+            if sortkey == 'type':
+                sortkey = 'type__name'
+
+            if 'direction' in request.GET:
+                direction = request.GET['direction']
+                if direction == 'desc':
+                    sortkey = f'-{sortkey}'
+            products = products.order_by(sortkey)
+
+        if 'year' in request.GET:
+            year = request.GET['year']
+            if year == '80':
+                products = Product.objects.filter(popular_in_80s=True)
+            elif year == '90':
+                products = Product.objects.filter(popular_in_90s=True)
+            elif year == '00':
+                products = Product.objects.filter(popular_in_00s=True)
 
         if 'type_query' in request.GET:
             type_filter = request.GET['type_query'].split(',')
@@ -62,10 +94,14 @@ def all_products(request):
             queries = Q(name__icontains=query) | Q(description__icontains=query)  # noqa
             products = products.filter(queries)
 
+    current_sorting = f'{sort}_{direction}'
+
     context = {
         'products': products,
         'search_term': query,
+        'year': year,
         'current_type': type_filter,
+        'current_sorting': current_sorting,
     }
 
     return render(request, 'products/products.html', context)

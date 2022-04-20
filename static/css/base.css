@@ -65,6 +65,10 @@ body {
     color: #333333;
 } /* Text color class  */
 
+.text-navy {
+    color: #000080;
+} /* Text color class  */
+
 .fw-900 {
     font-weight: 900;
 } /* Taken from the Chivo docs on google fonts */
@@ -109,6 +113,12 @@ body {
 
 .mt-neg-20 {
     margin-top: -20px;
+}
+
+@media screen and (max-width: 768px){
+    .mb-md-20 {
+        margin-bottom: 15px;
+    }
 }
 
 
@@ -221,3 +231,18 @@ marked important to make sure it over rides bootstrap styles. */
     background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23fff'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
 } /* Sets the toggle button to white.
 Taken from - https://stackoverflow.com/questions/66231936/change-accordion-button-collapsed-icon-color-in-bootstrap-5 */
+
+
+/* ------------------------------------------- PRODUCTS STYLES */
+
+.border-blur {
+    border-width: 1px;
+    border-style: ridge;
+    border-color: #333333
+    blur(5px)
+}
+
+.type-link {
+    text-decoration: none;
+    margin-left: 10px;
+}

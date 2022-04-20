@@ -39,7 +39,11 @@
                 <div class="product-details-container">
                     <h1>{{ product.name }}</h1>
                     {% if product.type %}
-                        <h3><a href="#"><i class="fa-solid fa-candy-cane"></i> {{ product.type.friendly_name }}</a></h3>
+                        <h3>
+                            <a href="{% url 'products' %}?type_query={{ product.type.name }}">
+                                <i class="fa-solid fa-candy-cane"></i> {{ product.type.friendly_name }}
+                            </a>
+                        </h3>
                     {% endif %}
                     <p class="lead font-weight-bold">£{{ product.price }}</p>
                     <p class="mt-3">{{ product.description }}</p>

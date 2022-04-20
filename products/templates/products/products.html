@@ -7,10 +7,26 @@
             <div class="col">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
-                      <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
-                      <li class="breadcrumb-item active" aria-current="page">Products</li>
+                        {% if current_type %}
+                            {% for type in current_type %}
+                                <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+                                <li class="breadcrumb-item"><a href="{% url 'products' %}">Products</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">{{ type.friendly_name }}</li>
+                            {% endfor %}
+                        {% elif search_term %}
+                            <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+                            <li class="breadcrumb-item"><a href="{% url 'products' %}">Products</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">{{ search_term }}</li>
+                        {% elif year %}
+                            <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+                            <li class="breadcrumb-item"><a href="{% url 'products' %}">Products</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">{{ year }}s</li>
+                        {% else %}
+                            <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Products</li>
+                        {% endif %}
                     </ol>
-                  </nav>
+                </nav>
             </div>
         </div>
     </div>
@@ -20,7 +36,7 @@
     <div class="container mb-5">
         <div class="row">
             <!-- Product Category List -->
-            <section class="container-fluid bg-white col-lg-3 col-md-4 col-sm-12">
+            <section class="container-fluid bg-white border-blur col-lg-3 col-md-4 col-sm-12 mb-md-20">
                 <div>
                     <p class="h5 fw-700 mt-2">
                         All Categories
@@ -66,34 +82,64 @@
                     </p>
                     <!-- Products by Year -->
                     <p>
-                        <a href="{% url 'products' %}?year_80" class="charcoal-navy">
+                        <a href="{% url 'products' %}?year=80" class="charcoal-navy">
                             <h6 class="fw-700">80s Sweets</h6>
                         </a>
                     </p>
                     <p class="mt-neg-10">
-                        <a href="{% url 'products' %}?year_90" class="charcoal-navy">
+                        <a href="{% url 'products' %}?year=90" class="charcoal-navy">
                             <h6 class="fw-700">90s Sweets</h6>
                         </a>
                     </p>
                     <p class="mt-neg-10">
-                        <a href="{% url 'products' %}?year_00" class="charcoal-navy">
+                        <a href="{% url 'products' %}?year=00" class="charcoal-navy">
                             <h6 class="fw-700">00s Sweets</h6>
                         </a>
                     </p>
                 </div>
             </section>
-            <!-- Product Sort Options -->
+            <!-- Container for product sort options and product cards -->
             <div class="container-fluid col-lg-9 col-md-8 col-sm-12">
-                <div class="row">
-                    <div class="col-12">
-                        <h1>sort filter</h1>
+                <!-- Product Sort Options -->
+                <div class="container bg-white border-blur mb-3">
+                    <!-- Container for sort content padding -->
+                    <div class="container p-2">
+                        <div class="row">
+                            <div class="col d-flex align-items-center">
+                                <div class="me-2">
+                                    Sort By:
+                                </div>
+                                <div class="sort-select-wrapper">
+                                    <select id="sort-selector" class="custom-select custom-select-sm rounded-0 border border-{% if current_sorting != 'None_None' %}info{% else %}black{% endif %}">
+                                        <!-- Compares the value of the current sorting view variable to what it would be under certain conditions -->
+                                        <option value="reset" {% if current_sorting == 'None_None' %}selected{% endif %}>Sort by...</option>
+                                        <option value="price_asc" {% if current_sorting == 'price_asc' %}selected{% endif %}>Price (low to high)</option>
+                                        <option value="price_desc" {% if current_sorting == 'price_desc' %}selected{% endif %}>Price (high to low)</option>
+                                        <option value="name_asc" {% if current_sorting == 'name_asc' %}selected{% endif %}>Name (A-Z)</option>
+                                        <option value="name_desc" {% if current_sorting == 'name_desc' %}selected{% endif %}>Name (Z-A)</option>
+                                        <option value="type_asc" {% if current_sorting == 'type_asc' %}selected{% endif %}>Type (A-Z)</option>
+                                        <option value="type_desc" {% if current_sorting == 'type_desc' %}selected{% endif %}>Type (Z-A)</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Product Count Returned -->
+                        <div class="row mt-2">
+                            <div class="col">
+                                <!-- Uses the length built-in template filter to count the number of products.
+                                    If there's a search term returned in the context from the all_products view.
+                                    append to let the user know what they've searched for -->
+                                {{ products|length }} Products{% if search_term %} found for
+                                <strong>"{{ search_term }}"</strong>{% endif %}
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <!-- Product Cards - 3x1 on Large, 2x1 on Medium, 1x1 on Small -->
                 <section class="row">
                     {% for product in products %}
-                    <div class="col-lg-4 col-md-6 col-sm-12">
-                        <div class="h-100 border-0">
+                    <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+                        <div class="h-100 border-blur bg-white">
                             <!-- Card Top - Product Image -->
                             {% if product.image %}
                                 <a href="{% url 'product_detail' product.id %}">
@@ -106,21 +152,21 @@
                             {% endif %}
                             <!-- Card Body - Product Type & Name -->
                             {% if product.type %}
-                            <p class="small">
-                                <a class="text-muted" href="#">
-                                    <i class="fa-solid fa-candy-cane"></i> {{ product.type.friendly_name }}
-                                </a>
-                            </p>
+                                <h6 class="small">
+                                    <a class="text-muted type-link" href="{% url 'products' %}?type_query={{ product.type.name }}">
+                                        {{ product.type.friendly_name }}
+                                    </a>
+                                </h6>
                             {% endif %}
-                            <div class="card-body">
-                                <p class="lead">{{ product.name }}</p>
+                            <div class="card-body mt-neg-10">
+                                <h4 class="lead fw-900">{{ product.name }}</h4>
                             </div>
                             <!-- Card Footer - Product Weight & Price, Plus Management Buttons -->
                             <div class="card-footer bg-white border-0">
                                 <div class="row">
                                     <div class="col">
-                                        <p class="lead">{{ product.weight_in_grams }}g</p>
-                                        <p class="lead font-weight-bold">£{{ product.price }}</p>
+                                        <p>Price Per {{ product.weight_in_grams }}g</p>
+                                        <p class="lead mt-neg-20 fw-700 text-navy">£{{ product.price }}</p>
                                         {% if request.user.is_superuser %}
                                         <small>
                                             <a href="#">Edit</a> | 
@@ -137,4 +183,48 @@
             </div>
         </div>
     </div>
+{% endblock %}
+
+{% block postloadjs %}
+    {{ block.super }}
+    <!-- Capture the change event from the sort selector.
+    Set a variable for the selector equal to this event,
+    plus one for the current url which is equal to a new url object.
+
+    Gets the selected value from the selector box.
+    determine if the selected value is reset. 
+    Indicating that we want to reset the sorting to the default.
+
+    If it's not get the sort and direction by splitting the selected value.
+    The first item will be the item to sort on. The second is the direction.
+
+    Replace those get parameters in the URL.
+    Using the search params dot set method from the URL object.
+    with the new URL constructed replace the current location with the updated URL 
+
+    If the user has selected the reset option.
+    delete the sort and direction get parameters and then replace the location. -->
+
+    <script type="text/javascript">
+        $('#sort-selector').change(function () {
+            var selector = $(this);
+            var currentUrl = new URL(window.location);
+
+            var selectedVal = selector.val();
+            if (selectedVal != "reset") {
+                var sort = selectedVal.split("_")[0];
+                var direction = selectedVal.split("_")[1];
+
+                currentUrl.searchParams.set("sort", sort);
+                currentUrl.searchParams.set("direction", direction);
+
+                window.location.replace(currentUrl);
+            } else {
+                currentUrl.searchParams.delete("sort");
+                currentUrl.searchParams.delete("direction");
+
+                window.location.replace(currentUrl);
+            }
+        })
+    </script>
 {% endblock %}
