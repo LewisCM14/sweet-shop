@@ -31,10 +31,10 @@
 {% endblock %}
 
 {% block content %}
-    <div class="container border-blur mb-5">
+    <div class="container mb-5">
         <div class="row">
             <!-- Product Category List -->
-            <section class="container-fluid bg-white col-lg-3 col-md-4 col-sm-12">
+            <section class="container-fluid bg-white border-blur col-lg-3 col-md-4 col-sm-12">
                 <div>
                     <p class="h5 fw-700 mt-2">
                         All Categories
@@ -98,9 +98,25 @@
             </section>
             <!-- Product Sort Options -->
             <div class="container-fluid col-lg-9 col-md-8 col-sm-12">
-                <div class="row">
-                    <div class="col-12">
-                        <h1>sort filter</h1>
+                <div class="container bg-white border-blur mb-3">
+                    <div class="row p-2">
+                        <div class="col-12 d-flex align-items-center">
+                            <div class="me-2">
+                                Sort By:
+                            </div>
+                            <div class="sort-select-wrapper w-50">
+                                <select id="sort-selector" class="custom-select custom-select-sm rounded-0 border border-{% if current_sorting != 'None_None' %}info{% else %}black{% endif %}">
+                                    <!-- Compares the value of the current sorting view variable to what it would be under certain conditions -->
+                                    <option value="reset" {% if current_sorting == 'None_None' %}selected{% endif %}>Sort by...</option>
+                                    <option value="price_asc" {% if current_sorting == 'price_asc' %}selected{% endif %}>Price (low to high)</option>
+                                    <option value="price_desc" {% if current_sorting == 'price_desc' %}selected{% endif %}>Price (high to low)</option>
+                                    <option value="name_asc" {% if current_sorting == 'name_asc' %}selected{% endif %}>Name (A-Z)</option>
+                                    <option value="name_desc" {% if current_sorting == 'name_desc' %}selected{% endif %}>Name (Z-A)</option>
+                                    <option value="type_asc" {% if current_sorting == 'type_asc' %}selected{% endif %}>Type (A-Z)</option>
+                                    <option value="type_desc" {% if current_sorting == 'type_desc' %}selected{% endif %}>Type (Z-A)</option>
+                                </select>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <!-- Product Cards - 3x1 on Large, 2x1 on Medium, 1x1 on Small -->
@@ -151,4 +167,48 @@
             </div>
         </div>
     </div>
+{% endblock %}
+
+{% block postloadjs %}
+    {{ block.super }}
+    <!-- Capture the change event from the sort selector.
+    Set a variable for the selector equal to this event,
+    plus one for the current url which is equal to a new url object.
+
+    Gets the selected value from the selector box.
+    determine if the selected value is reset. 
+    Indicating that we want to reset the sorting to the default.
+
+    If it's not get the sort and direction by splitting the selected value.
+    The first item will be the item to sort on. The second is the direction.
+
+    Replace those get parameters in the URL.
+    Using the search params dot set method from the URL object.
+    with the new URL constructed replace the current location with the updated URL 
+
+    If the user has selected the reset option.
+    delete the sort and direction get parameters and then replace the location. -->
+
+    <script type="text/javascript">
+        $('#sort-selector').change(function () {
+            var selector = $(this);
+            var currentUrl = new URL(window.location);
+
+            var selectedVal = selector.val();
+            if (selectedVal != "reset") {
+                var sort = selectedVal.split("_")[0];
+                var direction = selectedVal.split("_")[1];
+
+                currentUrl.searchParams.set("sort", sort);
+                currentUrl.searchParams.set("direction", direction);
+
+                window.location.replace(currentUrl);
+            } else {
+                currentUrl.searchParams.delete("sort");
+                currentUrl.searchParams.delete("direction");
+
+                window.location.replace(currentUrl);
+            }
+        })
+    </script>
 {% endblock %}
