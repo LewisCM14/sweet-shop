@@ -17,7 +17,7 @@
 {% endblock %}
 
 {% block content %}
-    <div class="container mb-5">
+    <div class="container border-blur mb-5">
         <div class="row">
             <!-- Product Category List -->
             <section class="container-fluid bg-white col-lg-3 col-md-4 col-sm-12">
@@ -92,8 +92,8 @@
                 <!-- Product Cards - 3x1 on Large, 2x1 on Medium, 1x1 on Small -->
                 <section class="row">
                     {% for product in products %}
-                    <div class="col-lg-4 col-md-6 col-sm-12">
-                        <div class="h-100 border-0">
+                    <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+                        <div class="h-100 border-blur bg-white">
                             <!-- Card Top - Product Image -->
                             {% if product.image %}
                                 <a href="{% url 'product_detail' product.id %}">
@@ -106,21 +106,21 @@
                             {% endif %}
                             <!-- Card Body - Product Type & Name -->
                             {% if product.type %}
-                            <p class="small">
-                                <a class="text-muted" href="#">
-                                    <i class="fa-solid fa-candy-cane"></i> {{ product.type.friendly_name }}
-                                </a>
-                            </p>
+                                <h6 class="small">
+                                    <a class="text-muted type-link" href="{% url 'products' %}?type_query={{ product.type.name }}">
+                                        {{ product.type.friendly_name }}
+                                    </a>
+                                </h6>
                             {% endif %}
-                            <div class="card-body">
-                                <p class="lead">{{ product.name }}</p>
+                            <div class="card-body mt-neg-10">
+                                <h4 class="lead fw-900">{{ product.name }}</h4>
                             </div>
                             <!-- Card Footer - Product Weight & Price, Plus Management Buttons -->
                             <div class="card-footer bg-white border-0">
                                 <div class="row">
                                     <div class="col">
-                                        <p class="lead">{{ product.weight_in_grams }}g</p>
-                                        <p class="lead font-weight-bold">£{{ product.price }}</p>
+                                        <p>Price Per {{ product.weight_in_grams }}g</p>
+                                        <p class="lead mt-neg-20 fw-700 text-navy">£{{ product.price }}</p>
                                         {% if request.user.is_superuser %}
                                         <small>
                                             <a href="#">Edit</a> | 
