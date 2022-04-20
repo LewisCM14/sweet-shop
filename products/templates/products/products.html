@@ -7,10 +7,24 @@
             <div class="col">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
-                      <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
-                      <li class="breadcrumb-item active" aria-current="page">Products</li>
+                        {% if current_type %}
+                            <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+                            <li class="breadcrumb-item"><a href="{% url 'products' %}">Products</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">{{ t.friendly_name }}</li>
+                        {% elif search_term %}
+                            <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+                            <li class="breadcrumb-item"><a href="{% url 'products' %}">Products</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">{{ search_term }}</li>
+                        {% elif year %}
+                            <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+                            <li class="breadcrumb-item"><a href="{% url 'products' %}">Products</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">{{ year }}s</li>
+                        {% else %}
+                            <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Products</li>
+                        {% endif %}
                     </ol>
-                  </nav>
+                </nav>
             </div>
         </div>
     </div>
@@ -66,17 +80,17 @@
                     </p>
                     <!-- Products by Year -->
                     <p>
-                        <a href="{% url 'products' %}?year_80" class="charcoal-navy">
+                        <a href="{% url 'products' %}?year=80" class="charcoal-navy">
                             <h6 class="fw-700">80s Sweets</h6>
                         </a>
                     </p>
                     <p class="mt-neg-10">
-                        <a href="{% url 'products' %}?year_90" class="charcoal-navy">
+                        <a href="{% url 'products' %}?year=90" class="charcoal-navy">
                             <h6 class="fw-700">90s Sweets</h6>
                         </a>
                     </p>
                     <p class="mt-neg-10">
-                        <a href="{% url 'products' %}?year_00" class="charcoal-navy">
+                        <a href="{% url 'products' %}?year=00" class="charcoal-navy">
                             <h6 class="fw-700">00s Sweets</h6>
                         </a>
                     </p>

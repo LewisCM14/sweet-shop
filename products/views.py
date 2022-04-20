@@ -50,6 +50,7 @@ def all_products(request):
     # Set to none initially to ensure no error is returned in context
     query = None
     type_filter = None
+    year = None
     sort = None
     direction = None
 
@@ -64,12 +65,14 @@ def all_products(request):
                     sortkey = f'-{sortkey}'
             products = products.order_by(sortkey)
 
-        if 'year_80' in request.GET:
-            products = Product.objects.filter(popular_in_80s=True)
-        elif 'year_90' in request.GET:
-            products = Product.objects.filter(popular_in_90s=True)
-        elif 'year_00' in request.GET:
-            products = Product.objects.filter(popular_in_00s=True)
+        if 'year' in request.GET:
+            year = request.GET['year']
+            if year == '80':
+                products = Product.objects.filter(popular_in_80s=True)
+            elif year == '90':
+                products = Product.objects.filter(popular_in_90s=True)
+            elif year == '00':
+                products = Product.objects.filter(popular_in_00s=True)
 
         if 'type_query' in request.GET:
             type_filter = request.GET['type_query'].split(',')
@@ -90,6 +93,7 @@ def all_products(request):
     context = {
         'products': products,
         'search_term': query,
+        'year': year,
         'current_type': type_filter,
         'current_sorting': current_sorting,
     }
