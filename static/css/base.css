@@ -115,6 +115,12 @@ body {
     margin-top: -20px;
 }
 
+@media screen and (max-width: 768px){
+    .mb-md-20 {
+        margin-bottom: 15px;
+    }
+}
+
 
 /* ------------------------------------------- HEADER STYLING */
 
