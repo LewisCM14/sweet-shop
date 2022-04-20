@@ -8,9 +8,11 @@
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
                         {% if current_type %}
-                            <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
-                            <li class="breadcrumb-item"><a href="{% url 'products' %}">Products</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">{{ t.friendly_name }}</li>
+                            {% for type in current_type %}
+                                <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+                                <li class="breadcrumb-item"><a href="{% url 'products' %}">Products</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">{{ type.friendly_name }}</li>
+                            {% endfor %}
                         {% elif search_term %}
                             <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
                             <li class="breadcrumb-item"><a href="{% url 'products' %}">Products</a></li>
