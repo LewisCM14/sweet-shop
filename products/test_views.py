@@ -184,3 +184,16 @@ class TestView(TestCase):
 
         response = self.client.get('/products/?sort=type&direction=desc')
         self.assertEqual(response.status_code, 200)
+
+    def test_can_sort_products_by_price(self):
+        """
+        Tests the all_products view sorts objects by price.
+
+        Uses Django's in-built HTTP client to get the sort URL's.
+        Ensuring a status code 200 is returned. A successful HTTP response.
+        """
+        response = self.client.get('/products/?sort=price&direction=asc')
+        self.assertEqual(response.status_code, 200)
+
+        response = self.client.get('/products/?sort=price&direction=desc')
+        self.assertEqual(response.status_code, 200)
