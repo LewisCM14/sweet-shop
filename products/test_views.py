@@ -150,11 +150,16 @@ class TestView(TestCase):
         products = Product.objects.filter(popular_in_00s=True)
         self.assertEqual(len(products), 2)
 
-        response = self.client.get('/products/?year_80')
+        response = self.client.get('/products/?year=80')
         self.assertEqual(response.status_code, 200)
 
-        response = self.client.get('/products/?year_90')
+        response = self.client.get('/products/?year=90')
         self.assertEqual(response.status_code, 200)
 
-        response = self.client.get('/products/?year_00')
+        response = self.client.get('/products/?year=00')
         self.assertEqual(response.status_code, 200)
+
+    # def test_can_sort_products(self):
+    #     """
+    #     Tests the all_products view sorts objects by given params.
+    #     """
