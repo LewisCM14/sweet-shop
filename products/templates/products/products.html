@@ -182,11 +182,25 @@
                 </section>
             </div>
         </div>
+        <!-- A button to return to the top of the search window -->
+        <div class="btt-button bg-navy">
+            <a class="btt-link d-flex h-100">
+                <i class="fa-solid fa-angles-up fa-lg mx-auto my-auto text-white"></i>
+            </a>	
+        </div>
     </div>
 {% endblock %}
 
 {% block postloadjs %}
     {{ block.super }}
+    <!-- Sends the user back to the top of the page -->
+
+    <script type="text/javascript">
+		$('.btt-link').click(function(e) {
+			window.scrollTo(0,0)
+		})
+	</script>
+
     <!-- Capture the change event from the sort selector.
     Set a variable for the selector equal to this event,
     plus one for the current url which is equal to a new url object.

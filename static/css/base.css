@@ -47,10 +47,6 @@ body {
         color: #F5E532;
     } /* text color & hover styling, used to contrast bg-charcoal */
 
-.bg-charcoal {
-    background-color: #333333;
-} /* background color class */
-
 .charcoal-navy {
     text-decoration: none;
     color: #333333 !important;
@@ -76,6 +72,14 @@ body {
 .fw-700 {
     font-weight: 700;
 } /* Taken from the Chivo docs on google fonts */
+
+.bg-charcoal {
+    background-color: #333333;
+} /* background color class */
+
+.bg-navy {
+    background-color: #000080;
+} /* background color class */
 
 /* ------------------------------------------- BUTTON STYLING */
 
@@ -246,3 +250,19 @@ Taken from - https://stackoverflow.com/questions/66231936/change-accordion-butto
     text-decoration: none;
     margin-left: 10px;
 }
+
+.btt-button {
+    border-radius: 10px;
+    height: 42px;
+    width: 42px;
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    z-index: 999999999;
+} /* Sets a static width height and position to the bottom right of the screen */
+
+.btt-link,
+.update-link,
+.remove-item {
+    cursor: pointer;
+} /* makes the cursor into a pointer. for return to top JS function on products.html */
