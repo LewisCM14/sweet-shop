@@ -20,141 +20,156 @@
 {% block content %}
 
 <div class="container">
-    <!-- Shopping Cart Headings -->
-    <div class="row d-none d-md-block d-lg-block d-xl-block d-xxl-block">
-        <!-- Container -->
-        <div class="fw-700 col">
-            <!-- Heading Row -->
-            <div class="row">
-                <!-- Image -->
-                <div class="col-md-1">
-                    <p>
-                        Image
-                    </p>
-                </div>
-                <!-- Product -->
-                <div class="col-md-5">
-                    <p>
-                        Product
-                    </p>
-                </div>
-                <!-- Quantity -->
-                <div class="text-center col-md-2">
-                    <p>
-                        Quantity
-                    </p>
-                </div>
-                <!-- Price -->
-                <div class="text-center col-md-2">
-                    <p>
-                        Subtotal
-                    </p>
-                </div>
-                <!-- Remove -->
-                <div class="text-center col-md-2">
-                    <p>
-                        Remove
-                    </p>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Shopping Cart Items -->
-    <div class="row p-1 d-flex justify-content-center">
-        <!-- Container -->
-        <div class="border p-1 col-md-12 col-sm-8">
-            <!-- Item Row -->
-            <div class="row d-flex align-items-center">
-                <!-- Image -->
-                <div class="col-md-1">
-                    <p>
-                        IMG
-                    </p>
-                </div>
-                <!-- Product Name & Weight -->
-                <div class="col-md-5">
-                    <p>
-                        Product Name
-                        <br>
-                        Product Weight
-                    </p>
-                </div>
-                <!-- Item Quantity -->
-                <div class="text-center col-md-2">
-                    <p>
-                        1
-                    </p>
-                </div>
-                <!-- Item Price -->
-                <div class="text-center col-md-2">
-                    <p>
-                        £2.99
-                    </p>
-                </div>
-                <!-- Remove Item -->
-                <div class="text-center col-md-2">
-                    <p>
-                        <i class="fa-solid fa-trash-can fa-lg"></i>
-                    </p>
+    {% if cart_items %}
+        <!-- Shopping Cart Headings -->
+        <div class="row d-none d-md-block d-lg-block d-xl-block d-xxl-block">
+            <!-- Container -->
+            <div class="fw-700 col">
+                <!-- Heading Row -->
+                <div class="row">
+                    <!-- Image -->
+                    <div class="col-md-1">
+                        <p>
+                            Image
+                        </p>
+                    </div>
+                    <!-- Product -->
+                    <div class="col-md-5">
+                        <p>
+                            Product
+                        </p>
+                    </div>
+                    <!-- Quantity -->
+                    <div class="text-center col-md-2">
+                        <p>
+                            Quantity
+                        </p>
+                    </div>
+                    <!-- Price -->
+                    <div class="text-center col-md-2">
+                        <p>
+                            Subtotal
+                        </p>
+                    </div>
+                    <!-- Remove -->
+                    <div class="text-center col-md-2">
+                        <p>
+                            Remove
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <!-- Shopping Cart Total -->
-    <div class="row p-1 mt-4 mb-4 text-center d-flex justify-content-md-end justify-content-sm-center">
-        <!-- Container -->
-        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-8 border">
-            <!-- Total Row -->
-            <div class="row">
-                <!-- Item Total -->
-                <div class="col-6">
-                    <p>
-                        Cart Subtotal
-                    </p>
-                </div>
-                <div class="col-6">
-                    <p>
-                        £30
-                    </p>
-                </div>
-            </div>
-            <!-- Shipping Total -->
-            <div class="row">
-                <div class="col-6">
-                    <p>
-                        Shipping
-                    </p>
-                </div>
-                <div class="col-6">
-                    <p>
-                        £5
-                    </p>
-                </div>
-            </div>
-            <!-- Order Total -->
-            <div class="row">
-                <div class="col-6">
-                    <p>
-                        Grand Total
-                    </p>
-                </div>
-                <div class="col-6">
-                    <p>
-                        £35
-                    </p>
+        <!-- Shopping Cart Items -->
+        {% for item in cart_items %}
+            <div class="row p-1 d-flex justify-content-center">
+                <!-- Container -->
+                <div class="border p-1 col-md-12 col-sm-8">
+                    <!-- Item Row -->
+                    <div class="row d-flex align-items-center">
+                        <!-- Image -->
+                        <div class="col-md-1">
+                            <p>
+                                IMG
+                            </p>
+                        </div>
+                        <!-- Product Name & Weight -->
+                        <div class="col-md-5">
+                            <p>
+                                Product Name
+                                <br>
+                                Product Weight
+                            </p>
+                        </div>
+                        <!-- Item Quantity -->
+                        <div class="text-center col-md-2">
+                            <p>
+                                1
+                            </p>
+                        </div>
+                        <!-- Item Price -->
+                        <div class="text-center col-md-2">
+                            <p>
+                                £2.99
+                            </p>
+                        </div>
+                        <!-- Remove Item -->
+                        <div class="text-center col-md-2">
+                            <p>
+                                <i class="fa-solid fa-trash-can fa-lg"></i>
+                            </p>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <!-- Action Buttons -->
-            <div class="row mb-1">
-                <div class="col-12">
-                    <button>Checkout</button>
+        {% endfor %}
+        <!-- Shopping Cart Total -->
+        <div class="row p-1 mt-4 mb-4 text-center d-flex justify-content-md-end justify-content-sm-center">
+            <!-- Container -->
+            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-8 border">
+                <!-- Total Row -->
+                <div class="row">
+                    <!-- Item Total -->
+                    <div class="col-6">
+                        <p>
+                            Cart Subtotal
+                        </p>
+                    </div>
+                    <div class="col-6">
+                        <p>
+                            £30
+                        </p>
+                    </div>
                 </div>
-                <div class="col-12 mt-1">
-                    <button>Continue Shopping</button>
+                <!-- Shipping Total -->
+                <div class="row">
+                    <div class="col-6">
+                        <p>
+                            Shipping
+                        </p>
+                    </div>
+                    <div class="col-6">
+                        <p>
+                            £5
+                        </p>
+                    </div>
+                </div>
+                <!-- Order Total -->
+                <div class="row">
+                    <div class="col-6">
+                        <p>
+                            Grand Total
+                        </p>
+                    </div>
+                    <div class="col-6">
+                        <p>
+                            £35
+                        </p>
+                    </div>
+                </div>
+                <!-- Action Buttons -->
+                <div class="row mb-1">
+                    <div class="col-12">
+                        <button>Checkout</button>
+                    </div>
+                    <div class="col-12 mt-1">
+                        <button>Continue Shopping</button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    {% else %}
+        <div class="row text-center mb-4">
+            <div class="col d-flex flex-column align-items-center">
+                <span class="h4 text-uppercase">Your cart is empty!</span>
+                <button class="shopping-button blue-charcoal-btn">
+                    <a class="text-white text-decoration-none" href="{% url 'products' %}">
+                        Continue Shopping
+                    </a>
+                </button>
+            </div>
+        </div>
+    {% endif %}
 </div>
 
 {% endblock %}

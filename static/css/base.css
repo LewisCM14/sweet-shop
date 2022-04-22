@@ -269,3 +269,7 @@ Taken from - https://stackoverflow.com/questions/66231936/change-accordion-butto
 
 
 /* ------------------------------------------- CART STYLES */
+
+.shopping-button {
+    width: 200px;
+}
