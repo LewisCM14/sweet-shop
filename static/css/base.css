@@ -23,7 +23,7 @@ body {
 } /* Ensures site content is above footer */
 
 
-/* ------------------------------------------- TEXT & BACKGROUND STYLES */
+/* ------------------------------------------- TEXT & ICON STYLES */
 
 .logo-font {
     font-weight: 900;
@@ -57,6 +57,16 @@ body {
     } /* text color & hover styling, used to contrast bg-light & bg-white,
         important is used to over ride bootstrap styling on nav-links. */
 
+.navy-charcoal {
+    text-decoration: none;
+    color: #000080 !important;
+    }
+    .navy-charcoal:hover {
+        text-decoration: none;
+        color: #333333 !important;
+    } /* text color & hover styling, used to contrast bg-light & bg-white,
+        important is used to over ride bootstrap styling. */
+
 .text-charcoal {
     color: #333333;
 } /* Text color class  */
@@ -73,6 +83,9 @@ body {
     font-weight: 700;
 } /* Taken from the Chivo docs on google fonts */
 
+
+/* ------------------------------------------- BACKGROUND STYLING */
+
 .bg-charcoal {
     background-color: #333333;
 } /* background color class */
@@ -80,6 +93,7 @@ body {
 .bg-navy {
     background-color: #000080;
 } /* background color class */
+
 
 /* ------------------------------------------- BUTTON STYLING */
 
@@ -106,6 +120,10 @@ body {
 
 
 /* ------------------------------------------- MARGIN STYLINGS */
+
+.mt-neg-5 {
+    margin-top: -5px;
+}
 
 .mt-neg-10 {
     margin-top: -10px;
