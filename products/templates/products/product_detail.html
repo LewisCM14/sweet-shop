@@ -105,7 +105,7 @@
                         </div>
                     </div>
                     <!-- Add to Cart Form -->
-                    <form class="border-blur p-2" action="#" method="POST">
+                    <form class="border-blur p-2" action="{% url 'add_to_cart' product.id %}" method="POST">
                         {% csrf_token %}
                         <!-- Weight & Quantity -->
                         <div class="row fw-bold">
