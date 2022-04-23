@@ -29,9 +29,6 @@
                 <div class="row">
                     <!-- Image -->
                     <div class="col-md-1">
-                        <p>
-                            Image
-                        </p>
                     </div>
                     <!-- Product -->
                     <div class="col-md-5">
@@ -68,35 +65,43 @@
                     <!-- Item Row -->
                     <div class="row d-flex align-items-center">
                         <!-- Image -->
-                        <div class="col-md-1">
-                            <p>
-                                IMG
-                            </p>
-                        </div>
+                        {% if item.product.image %}
+                            <div class="col-md-1">
+                                <p>
+                                    <img class="img-fluid rounded" src="{{ item.product.image.url }}" alt="{{ item.product.name }}">
+                                </p>
+                            </div>
+                        {% else %}
+                            <div class="col-md-1">
+                                <p>
+                                    <img class="img-fluid rounded" src="{{ MEDIA_URL }}noimage.png" alt="{{ item.product.name }}">
+                                </p>
+                            </div>
+                        {% endif %}
                         <!-- Product Name & Weight -->
-                        <div class="col-md-5">
+                        <div class="col-md-5 fw-700">
                             <p>
-                                Product Name
+                                {{ item.product.name }}
                                 <br>
-                                Product Weight
+                                {{ item.product.weight_in_grams }}g
                             </p>
                         </div>
                         <!-- Item Quantity -->
                         <div class="text-center col-md-2">
                             <p>
-                                1
+                                {{ item.quantity}}
                             </p>
                         </div>
                         <!-- Item Price -->
                         <div class="text-center col-md-2">
                             <p>
-                                £2.99
+                                {{ item.product.price }} WRONG
                             </p>
                         </div>
                         <!-- Remove Item -->
                         <div class="text-center col-md-2">
                             <p>
-                                <i class="fa-solid fa-trash-can fa-lg"></i>
+                                <i class="fa-solid fa-trash-can fa-lg text-danger"></i>
                             </p>
                         </div>
                     </div>
@@ -117,7 +122,7 @@
                     </div>
                     <div class="col-6">
                         <p>
-                            £30
+                            £{{ total|floatformat:2 }}
                         </p>
                     </div>
                 </div>
@@ -130,7 +135,7 @@
                     </div>
                     <div class="col-6">
                         <p>
-                            £5
+                            £{{ delivery|floatformat:2 }}
                         </p>
                     </div>
                 </div>
@@ -143,17 +148,21 @@
                     </div>
                     <div class="col-6">
                         <p>
-                            £35
+                            £{{ grand_total|floatformat:2 }}
                         </p>
                     </div>
                 </div>
                 <!-- Action Buttons -->
                 <div class="row mb-1">
                     <div class="col-12">
-                        <button>Checkout</button>
+                        <a class="shopping-button blue-charcoal-btn text-decoration-none mt-1" href="#">
+                            Checkout
+                        </a>
                     </div>
                     <div class="col-12 mt-1">
-                        <button>Continue Shopping</button>
+                        <a class="shopping-button blue-charcoal-btn text-decoration-none mt-1" href="{% url 'products' %}">
+                            Continue Shopping
+                        </a>
                     </div>
                 </div>
             </div>
