@@ -1,0 +1,185 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block page_header %}
+    <div class="container header-container">
+        <div class="row">
+            <div class="col">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+                        <li class="breadcrumb-item"><a href="{% url 'products' %}">Products</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Shopping Cart</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+
+<div class="container">
+    {% if cart_items %}
+        <!-- Shopping Cart Headings -->
+        <div class="row d-none d-md-block d-lg-block d-xl-block d-xxl-block">
+            <!-- Container -->
+            <div class="fw-700 col">
+                <!-- Heading Row -->
+                <div class="row">
+                    <!-- Image -->
+                    <div class="col-md-1">
+                    </div>
+                    <!-- Product -->
+                    <div class="col-md-5">
+                        <p>
+                            Product
+                        </p>
+                    </div>
+                    <!-- Quantity -->
+                    <div class="text-center col-md-2">
+                        <p>
+                            Quantity
+                        </p>
+                    </div>
+                    <!-- Price -->
+                    <div class="text-center col-md-2">
+                        <p>
+                            Subtotal
+                        </p>
+                    </div>
+                    <!-- Remove -->
+                    <div class="text-center col-md-2">
+                        <p>
+                            Remove
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Shopping Cart Items -->
+        {% for item in cart_items %}
+            <div class="row p-1 d-flex justify-content-center">
+                <!-- Container -->
+                <div class="border p-1 col-md-12 col-sm-8">
+                    <!-- Item Row -->
+                    <div class="row d-flex align-items-center">
+                        <!-- Image -->
+                        {% if item.product.image %}
+                            <div class="col-md-1">
+                                <p>
+                                    <img class="img-fluid rounded" src="{{ item.product.image.url }}" alt="{{ item.product.name }}">
+                                </p>
+                            </div>
+                        {% else %}
+                            <div class="col-md-1">
+                                <p>
+                                    <img class="img-fluid rounded" src="{{ MEDIA_URL }}noimage.png" alt="{{ item.product.name }}">
+                                </p>
+                            </div>
+                        {% endif %}
+                        <!-- Product Name & Weight -->
+                        <div class="col-md-5 fw-700">
+                            <p>
+                                {{ item.product.name }}
+                                <br>
+                                {{ item.product.weight_in_grams }}g
+                            </p>
+                        </div>
+                        <!-- Item Quantity -->
+                        <div class="text-center col-md-2">
+                            <p>
+                                {{ item.quantity}}
+                            </p>
+                        </div>
+                        <!-- Item Price -->
+                        <div class="text-center col-md-2">
+                            <p>
+                                {{ item.product.price }} WRONG
+                            </p>
+                        </div>
+                        <!-- Remove Item -->
+                        <div class="text-center col-md-2">
+                            <p>
+                                <i class="fa-solid fa-trash-can fa-lg text-danger"></i>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+        <!-- Shopping Cart Total -->
+        <div class="row p-1 mt-4 mb-4 text-center d-flex justify-content-md-end justify-content-sm-center">
+            <!-- Container -->
+            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-8 border">
+                <!-- Total Row -->
+                <div class="row">
+                    <!-- Item Total -->
+                    <div class="col-6">
+                        <p>
+                            Cart Subtotal
+                        </p>
+                    </div>
+                    <div class="col-6">
+                        <p>
+                            £{{ total|floatformat:2 }}
+                        </p>
+                    </div>
+                </div>
+                <!-- Delivery Total -->
+                <div class="row">
+                    <div class="col-6">
+                        <p>
+                            Delivery
+                        </p>
+                    </div>
+                    <div class="col-6">
+                        <p>
+                            £{{ delivery|floatformat:2 }}
+                        </p>
+                    </div>
+                </div>
+                <!-- Order Total -->
+                <div class="row">
+                    <div class="col-6">
+                        <p>
+                            Grand Total
+                        </p>
+                    </div>
+                    <div class="col-6">
+                        <p>
+                            £{{ grand_total|floatformat:2 }}
+                        </p>
+                    </div>
+                </div>
+                <!-- Action Buttons -->
+                <div class="row mb-1">
+                    <div class="col-12">
+                        <a class="shopping-button blue-charcoal-btn text-decoration-none mt-1" href="#">
+                            Checkout
+                        </a>
+                    </div>
+                    <div class="col-12 mt-1">
+                        <a class="shopping-button blue-charcoal-btn text-decoration-none mt-1" href="{% url 'products' %}">
+                            Continue Shopping
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% else %}
+        <!-- Display if no Cart Items -->
+        <div class="row text-center mb-4">
+            <div class="col d-flex flex-column align-items-center">
+                <span class="h4 text-uppercase">Your cart is empty!</span>
+                <button class="shopping-button blue-charcoal-btn">
+                    <a class="text-white text-decoration-none" href="{% url 'products' %}">
+                        Continue Shopping
+                    </a>
+                </button>
+            </div>
+        </div>
+    {% endif %}
+</div>
+
+{% endblock %}

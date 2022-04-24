@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     'home',
     'profiles',
     'products',
+    'cart',
     # Other
     'storages',
     'fontawesomefree',
@@ -90,6 +91,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'django.template.context_processors.media',  # req for no media
+                'cart.contexts.cart_contents',  # cart app context processor
             ],
             'builtins': [  # Contains all the tags avaliable in templates
                 'crispy_forms.templatetags.crispy_forms_tags',
@@ -250,3 +252,8 @@ else:
     EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
     EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASS')
     DEFAULT_FROM_EMAIL = os.environ.get('EMAIL_HOST_USER')
+
+
+# Delivery Variables
+
+FREE_DELIVERY_THRESHOLD = 50

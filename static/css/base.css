@@ -23,7 +23,7 @@ body {
 } /* Ensures site content is above footer */
 
 
-/* ------------------------------------------- TEXT & BACKGROUND STYLES */
+/* ------------------------------------------- TEXT & ICON STYLES */
 
 .logo-font {
     font-weight: 900;
@@ -47,10 +47,6 @@ body {
         color: #F5E532;
     } /* text color & hover styling, used to contrast bg-charcoal */
 
-.bg-charcoal {
-    background-color: #333333;
-} /* background color class */
-
 .charcoal-navy {
     text-decoration: none;
     color: #333333 !important;
@@ -60,6 +56,16 @@ body {
         color: #000080 !important;
     } /* text color & hover styling, used to contrast bg-light & bg-white,
         important is used to over ride bootstrap styling on nav-links. */
+
+.navy-charcoal {
+    text-decoration: none;
+    color: #000080 !important;
+    }
+    .navy-charcoal:hover {
+        text-decoration: none;
+        color: #333333 !important;
+    } /* text color & hover styling, used to contrast bg-light & bg-white,
+        important is used to over ride bootstrap styling. */
 
 .text-charcoal {
     color: #333333;
@@ -76,6 +82,18 @@ body {
 .fw-700 {
     font-weight: 700;
 } /* Taken from the Chivo docs on google fonts */
+
+
+/* ------------------------------------------- BACKGROUND STYLING */
+
+.bg-charcoal {
+    background-color: #333333;
+} /* background color class */
+
+.bg-navy {
+    background-color: #000080;
+} /* background color class */
+
 
 /* ------------------------------------------- BUTTON STYLING */
 
@@ -102,6 +120,10 @@ body {
 
 
 /* ------------------------------------------- MARGIN STYLINGS */
+
+.mt-neg-5 {
+    margin-top: -5px;
+}
 
 .mt-neg-10 {
     margin-top: -10px;
@@ -245,4 +267,78 @@ Taken from - https://stackoverflow.com/questions/66231936/change-accordion-butto
 .type-link {
     text-decoration: none;
     margin-left: 10px;
+}
+
+.btt-button {
+    border-radius: 10px;
+    height: 42px;
+    width: 42px;
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    z-index: 999999999;
+} /* Sets a static width height and position to the bottom right of the screen */
+
+.btt-link,
+.update-link,
+.remove-item {
+    cursor: pointer;
+} /* makes the cursor into a pointer. for return to top JS function on products.html */
+
+.qty_input {
+    height: 80%;
+} /* Sets the height of the input box itself */
+
+.qty-group {
+    width: 60%;
+} /* Sets the width of the +/- buttons and input box */
+
+
+@media screen and (max-width: 1200px) {
+    .qty-group {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 992px) {
+    .qty-group {
+        width: 20%;
+    }
+    .weight-group {
+        width: 20%;
+    } /* Used to ensure weight and quantity ares display evenly */
+}
+
+@media screen and (max-width: 768px) {
+    .qty-group {
+        width: 30%;
+    }
+    .weight-group {
+        width: 30%;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .qty-group {
+        width: 65%;
+    }
+    .weight-group {
+        width: 65%;
+    }
+}
+
+.qty-buttons {
+        background-color: #333333;
+        color: #FFFFFF;
+    }
+    .qty-buttons:hover {
+        background-color: #000080;
+        color: #FFFFFF;
+    }
+
+
+/* ------------------------------------------- CART STYLES */
+
+.shopping-button {
+    width: 200px;
 }

@@ -18,11 +18,11 @@
 {% endblock %}
 
 {% block content %}
-    <div class="container">
-        <div class="row">
+    <section class="container mb-4">
+        <div class="row bg-white">
             <!-- Product Image -->
             <div class="col-lg-6 col-md-12">
-                <div class="image-container">
+                <div class="image-container border-blur">
                     {% if product.image %}
                         <a href="{{ product.image.url }}" target="_blank">
                             <img class="card-img-top img-fluid" src="{{ product.image.url }}" alt="{{ product.name }}">
@@ -36,50 +36,140 @@
             </div>
             <!-- Product Info -->
             <div class="col-lg-6 col-md-12">
-                <div class="product-details-container">
-                    <h1>{{ product.name }}</h1>
-                    {% if product.type %}
-                        <h3>
-                            <a href="{% url 'products' %}?type_query={{ product.type.name }}">
-                                <i class="fa-solid fa-candy-cane"></i> {{ product.type.friendly_name }}
-                            </a>
-                        </h3>
-                    {% endif %}
-                    <p class="lead font-weight-bold">£{{ product.price }}</p>
-                    <p class="mt-3">{{ product.description }}</p>
-                </div>
-                <!-- Action Buttons -->
-                <div class="container-fluid text-center">
-                    <!-- Weight & Quantity -->
+                <div class="container mb-4">
+                    <!-- Product Name -->
                     <div class="row">
-                        <div class="col-lg-6 col-md-12">
-                            {{ product.weight_in_grams }}
-                        </div>
-                        <div class="col-lg-6 col-md-12">
-                            Quantity
+                        <div class="col">
+                            <p class="h3 fw-700">{{ product.name }}</p>
+                            <hr class="mt-0 d-inline-block mx-auto"
+                            style="width: 100px; background-color: #000080; height: 2px" />
                         </div>
                     </div>
-                    <!-- Keep Shopping & Add to Bag -->
-                    <div class="row">
-                        <div class="col-lg-6 col-md-12">
-                            <a href="{% url 'products' %}" class="btn btn-outline-black rounded-0">
-                                <span class="text-uppercase"><i class="fas fa-chevron-left"></i> Keep Shopping</span>
-                            </a>
+                    <!-- Product Type & Years Popular Tags -->
+                    <div class="row mt-neg-5">
+                        <div class="col">
+                            <h6>
+                                {% if product.type %}
+                                    <a href="{% url 'products' %}?type_query={{ product.type.name }}" class="badge bg-charcoal white-yellow mt-1">
+                                        {{ product.type.friendly_name }}
+                                    </a>
+                                {% endif %}
+                                {% if product.popular_in_80s %}
+                                    <a href="{% url 'products' %}?year=80" class="badge bg-charcoal white-yellow mt-1">
+                                        80's Sweets
+                                    </a>
+                                {% endif %}
+                                {% if product.popular_in_90s %}
+                                    <a href="{% url 'products' %}?year=90" class="badge bg-charcoal white-yellow mt-1">
+                                        90's Sweets
+                                    </a>
+                                {% endif %}
+                                {% if product.popular_in_00s %}
+                                    <a href="{% url 'products' %}?year=00" class="badge bg-charcoal white-yellow mt-1">
+                                        00's Sweets
+                                    </a>
+                                {% endif %}
+                            </h6>   
                         </div>
-                        <div class="col-lg-6 col-md-12">
-                            Add to Bag
+                    </div>
+                    <!-- Product Price -->
+                    <div class="row">
+                        <div class="col">
+                            <p class="h2 fw-900 text-navy">£{{ product.price }}</p>
+                        </div>
+                    </div>
+                    <!-- Product Description -->
+                    <div class="row">
+                        <div class="col">
+                            <p class="mt-3">{{ product.description }}</p>
                         </div>
                     </div>
                     <!-- Edit & Delete -->
                     {% if request.user.is_superuser %}
-                        <div class="row justify-content-lg-end">
-                            <div class="col-lg-6 col-md-6">
-                                Edit | Delete
+                        <div class="row">
+                            <div class="col d-flex justify-content-end">
+                                <a class="text-success me-1" href="#">Edit</a>
+                                <span> | </span>
+                                <a class="text-danger ms-1" href="#">Delete</a>
                             </div>
                         </div>
                     {% endif %}
                 </div>
+                <!-- Action Buttons & Add to Cart Functionality -->
+                <div class="container mb-4 text-center">
+                    <div class="row mb-4">
+                        <!-- Review Button -->
+                        <div class="col-md-6 col-sm-12">
+                            <button class="mt-1">Review</button>
+                        </div>
+                        <!-- Favorite Button -->
+                        <div class="col-md-6 col-sm-12">
+                            <button class="mt-1">Favorites</button>
+                        </div>
+                    </div>
+                    <!-- Add to Cart Form -->
+                    <form class="border-blur p-2" action="{% url 'add_to_cart' product.id %}" method="POST">
+                        {% csrf_token %}
+                        <!-- Weight & Quantity -->
+                        <div class="row fw-bold d-flex align-items-center">
+                            <!-- Weight Section -->
+                            <div class="col-lg-6 col-md-12 d-flex justify-content-evenly flex-xl-row flex-lg-column flex-md-row">
+                                <p>
+                                    Weight:
+                                </p>
+                                <p class="weight-group">
+                                    200g
+                                </p>
+                            </div>
+                            <!-- Quantity Section -->
+                            <div class="col-lg-6 col-md-12 d-flex justify-content-evenly flex-xl-row flex-lg-column flex-md-row">
+                                <p>
+                                    Quantity:
+                                </p>
+                                <div class="input-group qty-group">
+                                    <!-- Minus Button -->
+                                    <div class="input-group-prepend">
+                                        <button class="decrement-qty qty-buttons" data-item_id="{{ product.id }}" id="decrement-qty_{{ product.id }}">
+                                            <span class="icon">
+                                                <i class="fa-solid fa-minus"></i>
+                                            </span>
+                                        </button>
+                                    </div>
+                                    <!-- Quantity Input -->
+                                    <input class="form-control qty_input" type="number" name="quantity" value="1"
+                                        min="1" max="99" data-item_id="{{ product.id }}" id="id_qty_{{ product.id }}">
+                                    <!-- Plus Button -->
+                                    <div class="input-group-append">
+                                        <button class="increment-qty qty-buttons" data-item_id="{{ product.id }}" id="increment-qty_{{ product.id }}">
+                                            <span class="icon">
+                                                <i class="fa-solid fa-plus"></i>
+                                            </span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Keep Shopping & Add to Bag -->
+                        <div class="row">
+                            <div class="col-lg-6 col-md-12">
+                                <a class="blue-charcoal-btn text-decoration-none mt-1 shopping-button" href="{% url 'products' %}">
+                                    Keep Shopping
+                                </a>
+                            </div>
+                            <div class="col-lg-6 col-md-12">
+                                <input class="blue-charcoal-btn mt-1 shopping-button" type="submit" value="Add to Cart">
+                            </div>
+                        </div>
+                        <!-- User Redirect upon Item Added -->
+                        <input type="hidden" name="redirect_url" value="{{ request.path }}">
+                    </form>
+                </div>
             </div>
         </div>
-    </div>
+    </section>
+{% endblock %}
+
+{% block postloadjs %}
+    {{ block.super }}
+    {% include 'products/includes/quantity_input_script.html' %}
 {% endblock %}
