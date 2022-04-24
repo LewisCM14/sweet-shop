@@ -123,9 +123,7 @@
                         </div>
                         <!-- Remove Item -->
                         <div class="text-center col-md-2">
-                            <div>
-                                <a class="remove-item text-decoration-none text-danger" href="#"><i class="fa-solid fa-trash-can fa-lg"></i></a>
-                            </div>
+                            <a class="remove-item text-decoration-none text-danger" id="remove_{{ item.item_id }}"><i class="fa-solid fa-trash-can fa-lg"></i></a>
                         </div>
                     </div>
                 </div>
@@ -218,6 +216,25 @@
             $('.update-link').click(function(e) {
                 var form = $(this).prev('.update-form');
                 form.submit();
+            })
+
+            // Remove Item & Reload
+            // On the click event of the remove-item button. 
+            // Collects the actual csrf template variable and the item ID,
+            // obtained by splitting the ID of the update link being clicked on.
+            // Then creates the url needed to POST the required data to, which is stored in the data object.
+            // Using the post method from jQuery. Sends the data to server and
+            // once the response comes back, reloads the page to reflect the updated bag.
+            $('.remove-item').click(function(e) {
+                var csrfToken = "{{ csrf_token }}";
+                var itemId = $(this).attr('id').split('remove_')[1];
+                var url = `/cart/remove/${itemId}/`;
+                var data = {'csrfmiddlewaretoken': csrfToken,};
+
+                $.post(url, data)
+                .done(function() {
+                    location.reload();
+                });
             })
         </script>
 {% endblock %}

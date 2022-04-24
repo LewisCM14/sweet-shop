@@ -1,6 +1,6 @@
 """ This module handles the views for the cart app """
 
-from django.shortcuts import render, redirect, reverse, get_object_or_404
+from django.shortcuts import render, redirect, reverse, HttpResponse, get_object_or_404  # noqa
 from django.contrib import messages
 
 from products.models import Product
@@ -48,7 +48,21 @@ def add_to_cart(request, item_id):
 
 def adjust_cart(request, item_id):
     """
-    Handles adjusting the items in the cart
+    A function to handle adjusting the items within the cart.
+
+    All data is posted from the form on cart.html
+    The cart itself is stored within the http session.
+
+    Collects the product being added for use in toasts.
+    Collects the quantity from the form converting it to a integer
+    collects the cart instance from the session or creates one.
+
+    Checks if the passed quantity is greater than 0,
+    updating the quantity of the item_id by the provided integer if so.
+    If the passed quantity is not greater than 0,
+    the item_id within the cart is passed to the pop method, removing it.
+    User feedback messages are returned at either point.
+    The user is then redirected back to the cart view.
     """
 
     product = get_object_or_404(Product, pk=item_id)
@@ -64,3 +78,24 @@ def adjust_cart(request, item_id):
 
     request.session['cart'] = cart
     return redirect(reverse('view_cart'))
+
+
+def remove_from_cart(request, item_id):
+    """
+    A function to handle removing the items within the cart.
+    """
+
+    try:
+        product = get_object_or_404(Product, pk=item_id)
+        cart = request.session.get('cart', {})
+
+        cart.pop(item_id)
+        messages.success(request, f'Removed {product.name} from your cart')
+
+        request.session['cart'] = cart
+        return HttpResponse(status=200)
+
+    # pylint: disable=broad-except
+    except Exception as error:
+        messages.error(request, f'Error removing item: {error}')
+        return HttpResponse(status=500)
