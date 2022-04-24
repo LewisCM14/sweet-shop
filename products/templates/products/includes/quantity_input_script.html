@@ -1,0 +1,55 @@
+<script type="text/javascript">
+    // Disable +/- buttons outside 1-99 range
+    // As the product ID is passed to the form, uses this to collect the value of the quantity input.
+    // Storing it in currentValue, then sets the disable minus/plus button variables based of this variable
+    // Then uses the 'prop' function to toggle the disable attribute on the buttons based off the 'currentValue'.
+    function handleEnableDisable(itemId) {
+        var currentValue = parseInt($(`#id_qty_${itemId}`).val());
+        var minusDisabled = currentValue < 2;
+        var plusDisabled = currentValue > 98;
+        $(`#decrement-qty_${itemId}`).prop('disabled', minusDisabled);
+        $(`#increment-qty_${itemId}`).prop('disabled', plusDisabled);
+    }
+
+    // Collects all quantity inputs on page load,
+    // iterates through them and calls the handleEnableDisable function
+    // Disabling the '-' button by default.
+    var allQtyInputs = $('.qty_input');
+    for(var i = 0; i < allQtyInputs.length; i++){
+        var itemId = $(allQtyInputs[i]).data('item_id');
+        handleEnableDisable(itemId);
+    }
+
+    // Calls the handleEnableDisable function every time the value within the input box is altered,
+    // passing it the item id and Preventing the user from selecting invalid quantities with the default input arrows.
+    $('.qty_input').change(function() {
+        var itemId = $(this).data('item_id');
+        handleEnableDisable(itemId);
+    });
+
+    // Increment Quantity
+    // Places a click event on the '+' button, upon each click traverses the DOM to the input field,
+    // incrementing the value within it by 1. Before collection the item id and passing it to the
+    // handleEnableDisable function above.
+    $('.increment-qty').click(function(e) {
+       e.preventDefault();
+       var closestInput = $(this).closest('.input-group').find('.qty_input')[0];
+       var currentValue = parseInt($(closestInput).val());
+       $(closestInput).val(currentValue + 1);
+       var itemId = $(this).data('item_id');
+       handleEnableDisable(itemId);
+    });
+
+    // Decrement Quantity
+    // Places a click event on the '-' button, upon each click traverses the DOM to the input field,
+    // decrementing the value within it by 1. Before collection the item id and passing it to the
+    // handleEnableDisable function above.
+    $('.decrement-qty').click(function(e) {
+       e.preventDefault();
+       var closestInput = $(this).closest('.input-group').find('.qty_input')[0];
+       var currentValue = parseInt($(closestInput).val());
+       $(closestInput).val(currentValue - 1);
+       var itemId = $(this).data('item_id');
+       handleEnableDisable(itemId);
+    });
+</script> 

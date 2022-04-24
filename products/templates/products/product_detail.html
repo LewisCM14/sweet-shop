@@ -111,34 +111,53 @@
                     <form class="border-blur p-2" action="{% url 'add_to_cart' product.id %}" method="POST">
                         {% csrf_token %}
                         <!-- Weight & Quantity -->
-                        <div class="row fw-bold">
-                            <div class="col-lg-6 col-md-12 d-flex justify-content-evenly align-items-center">
+                        <div class="row fw-bold d-flex align-items-center">
+                            <!-- Weight Section -->
+                            <div class="col-lg-6 col-md-12 d-flex justify-content-evenly flex-xl-row flex-lg-column flex-md-row">
                                 <p>
                                     Weight:
                                 </p>
-                                <p>
+                                <p class="weight-group">
                                     200g
                                 </p>
                             </div>
-                            <div class="col-lg-6 col-md-12 d-flex justify-content-evenly align-items-center">
+                            <!-- Quantity Section -->
+                            <div class="col-lg-6 col-md-12 d-flex justify-content-evenly flex-xl-row flex-lg-column flex-md-row">
                                 <p>
                                     Quantity:
                                 </p>
-                                <p>
+                                <div class="input-group qty-group">
+                                    <!-- Minus Button -->
+                                    <div class="input-group-prepend">
+                                        <button class="decrement-qty qty-buttons" data-item_id="{{ product.id }}" id="decrement-qty_{{ product.id }}">
+                                            <span class="icon">
+                                                <i class="fa-solid fa-minus"></i>
+                                            </span>
+                                        </button>
+                                    </div>
+                                    <!-- Quantity Input -->
                                     <input class="form-control qty_input" type="number" name="quantity" value="1"
                                         min="1" max="99" data-item_id="{{ product.id }}" id="id_qty_{{ product.id }}">
-                                </p>
+                                    <!-- Plus Button -->
+                                    <div class="input-group-append">
+                                        <button class="increment-qty qty-buttons" data-item_id="{{ product.id }}" id="increment-qty_{{ product.id }}">
+                                            <span class="icon">
+                                                <i class="fa-solid fa-plus"></i>
+                                            </span>
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <!-- Keep Shopping & Add to Bag -->
                         <div class="row">
                             <div class="col-lg-6 col-md-12">
-                                <a class="blue-charcoal-btn text-decoration-none mt-1" href="{% url 'products' %}">
+                                <a class="blue-charcoal-btn text-decoration-none mt-1 shopping-button" href="{% url 'products' %}">
                                     Keep Shopping
                                 </a>
                             </div>
                             <div class="col-lg-6 col-md-12">
-                                <input class="blue-charcoal-btn mt-1" type="submit" value="Add to Bag">
+                                <input class="blue-charcoal-btn mt-1 shopping-button" type="submit" value="Add to Bag">
                             </div>
                         </div>
                         <!-- User Redirect upon Item Added -->
@@ -148,4 +167,9 @@
             </div>
         </div>
     </section>
+{% endblock %}
+
+{% block postloadjs %}
+    {{ block.super }}
+    {% include 'products/includes/quantity_input_script.html' %}
 {% endblock %}
