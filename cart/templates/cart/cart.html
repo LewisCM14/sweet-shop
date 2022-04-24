@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
+{% load cart_tools %}
 
 {% block page_header %}
     <div class="container header-container">
@@ -117,8 +118,9 @@
                         </div>
                         <!-- Item Price -->
                         <div class="text-center col-md-2">
+                            <!-- Uses the calc_subtotal function located in the cart_tools.py file -->
                             <p>
-                                {{ item.product.price }} WRONG
+                                £{{ item.product.price | calc_subtotal:item.quantity }}
                             </p>
                         </div>
                         <!-- Remove Item -->
