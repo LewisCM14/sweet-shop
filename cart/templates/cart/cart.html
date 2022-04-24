@@ -31,13 +31,13 @@
                     <div class="col-md-1">
                     </div>
                     <!-- Product -->
-                    <div class="col-md-5">
+                    <div class="col-md-4">
                         <p>
                             Product
                         </p>
                     </div>
                     <!-- Quantity -->
-                    <div class="text-center col-md-2">
+                    <div class="text-center col-md-3">
                         <p>
                             Quantity
                         </p>
@@ -79,7 +79,7 @@
                             </div>
                         {% endif %}
                         <!-- Product Name & Weight -->
-                        <div class="col-md-5 fw-700">
+                        <div class="col-md-4 fw-700">
                             <p>
                                 {{ item.product.name }}
                                 <br>
@@ -87,10 +87,31 @@
                             </p>
                         </div>
                         <!-- Item Quantity -->
-                        <div class="text-center col-md-2">
-                            <p>
-                                {{ item.quantity}}
-                            </p>
+                        <div class="d-flex align-items-center justify-content-center col-md-3">
+                            <form class="item-qty-form-cart" method="POST" action="#">
+                                {% csrf_token %}
+                                <div class="input-group">
+                                    <!-- Minus Button -->
+                                    <div class="input-group-prepend">
+                                        <button class="decrement-qty qty-buttons" data-item_id="{{ item.item_.id }}" id="decrement-qty_{{ item.item_.id }}">
+                                            <span class="icon">
+                                                <i class="fa-solid fa-minus"></i>
+                                            </span>
+                                        </button>
+                                    </div>
+                                    <!-- Quantity Input -->
+                                    <input class="form-control qty_input edit-qty-input" type="number" name="quantity" value="{{ item.quantity }}"
+                                        min="1" max="99" data-item_id="{{ item.item_.id }}" id="id_qty_{{ item.item_.id }}">
+                                    <!-- Plus Button -->
+                                    <div class="input-group-append">
+                                        <button class="increment-qty qty-buttons" data-item_id="{{ item.item_.id }}" id="increment-qty_{{ item.item_.id }}">
+                                            <span class="icon">
+                                                <i class="fa-solid fa-plus"></i>
+                                            </span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
                         <!-- Item Price -->
                         <div class="text-center col-md-2">

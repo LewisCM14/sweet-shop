@@ -285,44 +285,44 @@ Taken from - https://stackoverflow.com/questions/66231936/change-accordion-butto
     cursor: pointer;
 } /* makes the cursor into a pointer. for return to top JS function on products.html */
 
-.qty_input {
+.add-qty-input { 
     height: 80%;
 } /* Sets the height of the input box itself */
 
-.qty-group {
+.add-qty-group {
     width: 60%;
 } /* Sets the width of the +/- buttons and input box */
 
 
 @media screen and (max-width: 1200px) {
-    .qty-group {
+    .add-qty-group {
         width: 100%;
     }
 }
 
 @media screen and (max-width: 992px) {
-    .qty-group {
+    .add-qty-group {
         width: 20%;
     }
-    .weight-group {
+    .add-weight-group {
         width: 20%;
     } /* Used to ensure weight and quantity ares display evenly */
 }
 
 @media screen and (max-width: 768px) {
-    .qty-group {
+    .add-qty-group {
         width: 30%;
     }
-    .weight-group {
+    .add-weight-group {
         width: 30%;
     }
 }
 
 @media screen and (max-width: 576px) {
-    .qty-group {
+    .add-qty-group {
         width: 65%;
     }
-    .weight-group {
+    .add-weight-group {
         width: 65%;
     }
 }
@@ -341,4 +341,24 @@ Taken from - https://stackoverflow.com/questions/66231936/change-accordion-butto
 
 .shopping-button {
     width: 200px;
+}
+
+.edit-qty-input {
+    height: 80%;
+}
+
+.item-qty-form-cart {
+    width: 80%;
+}
+
+@media screen and (max-width: 768px) {
+    .item-qty-form-cart {
+        width: 40%;
+    }
+}
+
+@media screen and (max-width: 325px) {
+    .item-qty-form-cart {
+        width: 60%;
+    }
 }
