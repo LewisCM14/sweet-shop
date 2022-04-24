@@ -30,6 +30,7 @@
                 <div class="row">
                     <!-- Image -->
                     <div class="col-md-1">
+                        Image
                     </div>
                     <!-- Product -->
                     <div class="col-md-4">
@@ -84,7 +85,9 @@
                             <p>
                                 {{ item.product.name }}
                                 <br>
-                                {{ item.product.weight_in_grams }}g
+                                <small>
+                                    £{{ item.product.price }} per {{ item.product.weight_in_grams }}g
+                                </small>
                             </p>
                         </div>
                         <!-- Item Quantity -->
