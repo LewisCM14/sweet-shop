@@ -88,7 +88,7 @@
                         </div>
                         <!-- Item Quantity -->
                         <div class="d-flex align-items-center justify-content-center col-md-3">
-                            <form class="item-qty-form-cart" method="POST" action="#">
+                            <form class="item-qty-form-cart text-center" method="POST" action="#">
                                 {% csrf_token %}
                                 <div class="input-group">
                                     <!-- Minus Button -->
@@ -111,6 +111,10 @@
                                         </button>
                                     </div>
                                 </div>
+                                <!-- Update Button -->
+                                <div>
+                                    <a class="text-decoration-none text-success" href="#"><small>Update</small></a>
+                                </div>
                             </form>
                         </div>
                         <!-- Item Price -->
@@ -121,9 +125,9 @@
                         </div>
                         <!-- Remove Item -->
                         <div class="text-center col-md-2">
-                            <p>
-                                <i class="fa-solid fa-trash-can fa-lg text-danger"></i>
-                            </p>
+                            <div>
+                                <a class="text-decoration-none text-danger" href="#"><i class="fa-solid fa-trash-can fa-lg"></i></a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -203,4 +207,9 @@
     {% endif %}
 </div>
 
+{% endblock %}
+
+{% block postloadjs %}
+    {{ block.super }}
+    {% include 'products/includes/quantity_input_script.html' %}
 {% endblock %}
