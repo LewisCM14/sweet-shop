@@ -87,8 +87,8 @@
                             </p>
                         </div>
                         <!-- Item Quantity -->
-                        <div class="d-flex align-items-center justify-content-center col-md-3">
-                            <form class="item-qty-form-cart text-center" method="POST" action="#">
+                        <div class="flex-column d-flex align-items-center justify-content-center col-md-3">
+                            <form class="update-form item-qty-form-cart text-center" method="POST" action="{% url 'adjust_cart' item.item_id %}">
                                 {% csrf_token %}
                                 <div class="input-group">
                                     <!-- Minus Button -->
@@ -111,11 +111,9 @@
                                         </button>
                                     </div>
                                 </div>
-                                <!-- Update Button -->
-                                <div>
-                                    <a class="text-decoration-none text-success" href="#"><small>Update</small></a>
-                                </div>
                             </form>
+                            <!-- Update Button -->
+                            <a class="update-link text-decoration-none text-success"><small>Update</small></a>
                         </div>
                         <!-- Item Price -->
                         <div class="text-center col-md-2">
@@ -126,7 +124,7 @@
                         <!-- Remove Item -->
                         <div class="text-center col-md-2">
                             <div>
-                                <a class="text-decoration-none text-danger" href="#"><i class="fa-solid fa-trash-can fa-lg"></i></a>
+                                <a class="remove-item text-decoration-none text-danger" href="#"><i class="fa-solid fa-trash-can fa-lg"></i></a>
                             </div>
                         </div>
                     </div>
@@ -212,4 +210,14 @@
 {% block postloadjs %}
     {{ block.super }}
     {% include 'products/includes/quantity_input_script.html' %}
+        <script type="text/javascript">
+            // Update Quantity
+            // On the click event of the update link. 
+            // Use the previous method to find the most recently seen update form in the DOM.
+            // Store the form in a variable. And then call the forms submit method.
+            $('.update-link').click(function(e) {
+                var form = $(this).prev('.update-form');
+                form.submit();
+            })
+        </script>
 {% endblock %}
