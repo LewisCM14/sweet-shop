@@ -30,6 +30,20 @@ class TestView(TestCase):
             price='4.99',
         )
 
+    def initiate_cart(self):
+        """
+        A helper method to initiate an instance of the cart object.
+        Then stored within the session, used to then prefrom tests on.
+        """
+
+        product = Product.objects.get(id=1)
+        quantity = 1
+
+        self.client.post(reverse("add_to_cart", args=[product.id]), {
+            'quantity': quantity,
+            'redirect_url': '/products/1/',
+        })
+
     def test_cart_view_renders(self):
         """
         Tests the view_cart page renders.
@@ -117,3 +131,44 @@ class TestView(TestCase):
         session = self.client.session
         cart = session['cart']
         self.assertEqual(cart.get('1'), 3)
+
+    def test_item_quantity_updates_within_cart(self):
+        """
+        Tests the product quantity can be updated within cart.html.
+
+        Runs the initiate_cart helper method, then asserting an instance
+        of the cart has been created within the session that has a len of 1.
+
+        Collects the Product object created in the setUp method, storing it
+        in the product variable. Initiates a quantity variable with a value
+        of 2. Passes these to the reverse of the adjust_cart url, stored in
+        the response variable.
+
+        Uses Django's in-built HTTP client to asserts the status code for the
+        response variable is equal to 302, a successful HTTP redirect response.
+        Before asserting the redirect url that of cart.html.
+
+        Collects the cart dict itself from the session again,
+        asserting that the new value for key '1' is 2.
+        The value of the quantity variables passed to it.
+        Meaning the adjust_cart view updated the key:value pair
+        of the passed product.
+        """
+        self.initiate_cart()
+        session = self.client.session
+        self.assertEqual(len(session['cart']), 1)
+
+        product = Product.objects.get(id=1)
+        quantity = 2
+
+        response = self.client.post(
+            reverse("adjust_cart", args=[product.id]), {
+                'quantity': quantity,
+            })
+
+        self.assertEqual(response.status_code, 302)
+        self.assertRedirects(response, '/cart/')
+
+        session = self.client.session
+        cart = session['cart']
+        self.assertEqual(cart.get('1'), 2)
