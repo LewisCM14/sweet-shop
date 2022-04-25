@@ -62,3 +62,58 @@ class TestView(TestCase):
 
         self.assertEqual(response.status_code, 302)
         self.assertRedirects(response, '/products/1/')
+
+    def test_cart_stores_and_updates_product_plus_quantity(self):
+        """
+        Tests the add_to_cart view stores and updates
+        the passed product and its quantity.
+
+        Collects the Product object created in the setUp method, storing it
+        in the product variable. Initiates a quantity variable with a value
+        of 1. Passes these to the reverse of the add_to_cart url,
+        with a redirect_url value for that of the product.
+
+        Then collects the created session,
+        storing it in the 'session' variable. From this variable
+        asserts the 'cart' key has a length of 1.
+        Meaing a cart object has been created and a key:value pair passed.
+
+        From the session variable then collects the cart dict itself,
+        storing it in the cart variable. From here asserts that the
+        value of the key '1' is the integer 1. Meaning the product with an ID
+        of '1' has a quantity of 1 stored within the cart dict.
+
+        Then Passes the ID for the product created in the setUp method as the
+        argument to the reverse of the add_to_cart url again,
+        with a new quantity of 2.
+
+        Collection the cart dict itself from the session again,
+        asserting that the new value for key '1' is 3.
+        The sum of the two quantity variables crated within the test case.
+        Meaning the add_to_cart view stores and updates the key:value pairs
+        of the passed products.
+        """
+        product = Product.objects.get(id=1)
+        quantity = 1
+
+        self.client.post(reverse("add_to_cart", args=[product.id]), {
+            'quantity': quantity,
+            'redirect_url': '/products/1/',
+        })
+
+        session = self.client.session
+        self.assertEqual(len(session['cart']), 1)
+
+        cart = session['cart']
+        self.assertEqual(cart.get('1'), quantity)
+
+        quantity = 2
+
+        self.client.post(reverse("add_to_cart", args=[product.id]), {
+            'quantity': quantity,
+            'redirect_url': '/products/1/',
+        })
+
+        session = self.client.session
+        cart = session['cart']
+        self.assertEqual(cart.get('1'), 3)
