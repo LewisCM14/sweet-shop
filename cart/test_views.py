@@ -166,7 +166,7 @@ class TestView(TestCase):
         response variable is equal to 302, a successful HTTP redirect response.
         Before asserting the redirect url that of cart.html.
 
-        Collects the cart dict itself from the session again,
+        Collects the cart dict from the session,
         asserting that the new value for key '1' is 2.
         The value of the quantity variables passed to it.
         Meaning the adjust_cart view updated the key:value pair
@@ -204,7 +204,7 @@ class TestView(TestCase):
         response variable is equal to 302, a successful HTTP redirect response.
         Before asserting the redirect url that of cart.html.
 
-        Collects the cart dict itself from the session again,
+        Collects the cart dict from the session,
         asserting the value of 1 for the key '1' is now false. Before then
         asserting that the new value for key '1' is None.
         Meaning that not only was the quantity set to 0, the key:pair itself
@@ -222,6 +222,32 @@ class TestView(TestCase):
 
         self.assertEqual(response.status_code, 302)
         self.assertRedirects(response, '/cart/')
+
+        session = self.client.session
+        cart = session['cart']
+        self.assertFalse(cart.get('1'), 1)
+        self.assertEqual(cart.get('1'), None)
+
+    def test_item_can_be_removed_from_cart(self):
+        """
+        Tests an item can be removed from the cart.
+
+        Runs the initiate_cart helper method.
+
+        Collects the Product object created in the setUp method, storing it
+        in the product variable. Then passes these to the reverse of
+        the remove_from_cart url.
+
+        Collects the cart dict itself from the session,
+        asserting the value of 1 for the key '1' is now false. Before then
+        asserting that the new value for key '1' is None.
+        Meaning that the product was removed from the cart dict.
+        """
+        self.initiate_cart()
+
+        product = Product.objects.get(id=1)
+
+        self.client.post(reverse("remove_from_cart", args=[product.id]))
 
         session = self.client.session
         cart = session['cart']
