@@ -34,6 +34,19 @@ class TestView(TestCase):
         """
         A helper method to initiate an instance of the cart object.
         Then stored within the session, used to then prefrom tests on.
+
+        Then collects the created session,
+        storing it in the 'session' variable. From this variable
+        asserts the 'cart' key has a length of 1.
+        Meaing a cart object has been created and a key:value pair passed.
+
+        From the session variable then collects the cart dict itself,
+        storing it in the cart variable. From here asserts that the
+        value of the key '1' is the integer 1. Meaning the product with an ID
+        of '1' has a quantity of 1 stored within the cart dict.
+
+        These tests are done as it is imperative the method creates a cart
+        object within the session, and the key:value pair in it is pre-defined.
         """
 
         product = Product.objects.get(id=1)
@@ -43,6 +56,12 @@ class TestView(TestCase):
             'quantity': quantity,
             'redirect_url': '/products/1/',
         })
+
+        session = self.client.session
+        self.assertEqual(len(session['cart']), 1)
+
+        cart = session['cart']
+        self.assertEqual(cart.get('1'), quantity)
 
     def test_cart_view_renders(self):
         """
@@ -136,8 +155,7 @@ class TestView(TestCase):
         """
         Tests the product quantity can be updated within cart.html.
 
-        Runs the initiate_cart helper method, then asserting an instance
-        of the cart has been created within the session that has a len of 1.
+        Runs the initiate_cart helper method.
 
         Collects the Product object created in the setUp method, storing it
         in the product variable. Initiates a quantity variable with a value
@@ -155,8 +173,6 @@ class TestView(TestCase):
         of the passed product.
         """
         self.initiate_cart()
-        session = self.client.session
-        self.assertEqual(len(session['cart']), 1)
 
         product = Product.objects.get(id=1)
         quantity = 2
@@ -172,3 +188,42 @@ class TestView(TestCase):
         session = self.client.session
         cart = session['cart']
         self.assertEqual(cart.get('1'), 2)
+
+    def test_item_with_quantity_0_is_removed_from_cart(self):
+        """
+        Tests an item updated with a quantity of 0, is removed from the cart.
+
+        Runs the initiate_cart helper method.
+
+        Collects the Product object created in the setUp method, storing it
+        in the product variable. Initiates a quantity variable with a value
+        of 0. Passes these to the reverse of the adjust_cart url, stored in
+        the response variable.
+
+        Uses Django's in-built HTTP client to asserts the status code for the
+        response variable is equal to 302, a successful HTTP redirect response.
+        Before asserting the redirect url that of cart.html.
+
+        Collects the cart dict itself from the session again,
+        asserting the value of 1 for the key '1' is now false. Before then
+        asserting that the new value for key '1' is None.
+        Meaning that not only was the quantity set to 0, the key:pair itself
+        was removed from the cart dict.
+        """
+        self.initiate_cart()
+
+        product = Product.objects.get(id=1)
+        quantity = 0
+
+        response = self.client.post(
+            reverse("adjust_cart", args=[product.id]), {
+                'quantity': quantity,
+            })
+
+        self.assertEqual(response.status_code, 302)
+        self.assertRedirects(response, '/cart/')
+
+        session = self.client.session
+        cart = session['cart']
+        self.assertFalse(cart.get('1'), 1)
+        self.assertEqual(cart.get('1'), None)
