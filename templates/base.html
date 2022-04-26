@@ -84,7 +84,7 @@
                                 </li>
                                 {% if request.user.is_superuser %}
                                     <li>
-                                        <a class="dropdown-item" href="#">Manage Products</a>
+                                        <a class="dropdown-item" href="{% url 'add_product' %}">Manage Products</a>
                                     </li>
                                 {% endif %}
                             {% else %}

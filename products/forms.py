@@ -26,10 +26,6 @@ class ProductForm(forms.ModelForm):
         of the friendly names associated with the IDs.
         Use the friendly names, to update the type field on the form
         to use those for choices instead of using the ID.
-
-        Then iterate through the rest of these fields
-        and set some classes on them to make them match
-        the theme of the store.
         """
         super().__init__(*args, **kwargs)
         types = Type.objects.all()
