@@ -88,7 +88,7 @@
                     {% if request.user.is_superuser %}
                         <div class="row">
                             <div class="col d-flex justify-content-end">
-                                <a class="text-success me-1" href="#">Edit</a>
+                                <a class="text-success me-1" href="{% url 'edit_product' product.id %}">Edit</a>
                                 <span> | </span>
                                 <a class="text-danger ms-1" href="#">Delete</a>
                             </div>

@@ -169,7 +169,7 @@
                                         <p class="lead mt-neg-20 fw-700 text-navy">£{{ product.price }}</p>
                                         {% if request.user.is_superuser %}
                                         <small>
-                                            <a href="#">Edit</a> | 
+                                            <a href="{% url 'edit_product' product.id %}">Edit</a> | 
                                             <a class="text-danger" href="#">Delete</a>
                                         </small>
                                         {% endif %}
