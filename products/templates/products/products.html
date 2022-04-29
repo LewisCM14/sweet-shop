@@ -20,7 +20,7 @@
                         {% elif year %}
                             <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
                             <li class="breadcrumb-item"><a href="{% url 'products' %}">Products</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">{{ year }}s</li>
+                            <li class="breadcrumb-item active" aria-current="page">{{ year }}'s Sweets</li>
                         {% else %}
                             <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
                             <li class="breadcrumb-item active" aria-current="page">Products</li>
@@ -83,17 +83,17 @@
                     <!-- Products by Year -->
                     <p>
                         <a href="{% url 'products' %}?year=80" class="charcoal-navy">
-                            <h6 class="fw-700">80s Sweets</h6>
+                            <h6 class="fw-700">80's Sweets</h6>
                         </a>
                     </p>
                     <p class="mt-neg-10">
                         <a href="{% url 'products' %}?year=90" class="charcoal-navy">
-                            <h6 class="fw-700">90s Sweets</h6>
+                            <h6 class="fw-700">90's Sweets</h6>
                         </a>
                     </p>
                     <p class="mt-neg-10">
                         <a href="{% url 'products' %}?year=00" class="charcoal-navy">
-                            <h6 class="fw-700">00s Sweets</h6>
+                            <h6 class="fw-700">00's Sweets</h6>
                         </a>
                     </p>
                 </div>
