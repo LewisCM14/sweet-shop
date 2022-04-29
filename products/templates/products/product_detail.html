@@ -88,9 +88,9 @@
                     {% if request.user.is_superuser %}
                         <div class="row">
                             <div class="col d-flex justify-content-end">
-                                <a class="text-success me-1" href="{% url 'edit_product' product.id %}">Edit</a>
+                                <a class="text-green me-1" href="{% url 'edit_product' product.id %}">Edit</a>
                                 <span> | </span>
-                                <a class="text-danger btt-link ms-1" data-bs-toggle='modal' data-bs-target='#delete'>Delete</a>
+                                <a class="text-red btt-link ms-1" data-bs-toggle='modal' data-bs-target='#delete'>Delete</a>
                             </div>
                         </div>
                         <!-- Delete Product Modal -->

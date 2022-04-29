@@ -75,6 +75,20 @@ body {
     color: #000080;
 } /* Text color class  */
 
+.text-red {
+    color: #B30012;
+    } 
+    .text-red:hover {
+    color: #B30012;
+    } /* Used in place of the bootstrap 'danger' color class */
+
+.text-green {
+    color: #12633C;
+    }
+    .text-green:hover {
+        color: #12633C;
+    } /* Used in place of the bootstrap 'success' color class */
+    
 .fw-900 {
     font-weight: 900;
 } /* Taken from the Chivo docs on google fonts */
@@ -130,12 +144,12 @@ body {
     display: inline-block;
     outline: none;
     border-radius: 20px;
-    border: 2px solid #dc3545;
-    background: #dc3545;
+    border: 2px solid #B30012;
+    background: #B30012;
   }
   .danger-btn:hover {
     background: #fff;
-    color: #dc3545
+    color: #B30012
   } /* Taken from https://markodenic.com/tools/buttons-generator/ */
 
 .cancel-btn {
@@ -156,6 +170,27 @@ body {
   .cancel-btn:hover {
     background: #fff;
     color: #333333
+  } /* Taken from https://markodenic.com/tools/buttons-generator/ */
+
+.update-btn {
+    text-decoration: none;
+    min-width: 130px;
+    height: 40px;
+    color: #fff;
+    padding: 5px 10px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    display: inline-block;
+    outline: none;
+    border-radius: 20px;
+    border: 2px solid #198754;
+    background: #198754;
+  }
+  .update-btn:hover {
+    background: #fff;
+    color: #198754
   } /* Taken from https://markodenic.com/tools/buttons-generator/ */
 
 
