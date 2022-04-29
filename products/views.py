@@ -6,7 +6,7 @@ from django.db.models.functions import Lower
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from .models import Product, Type
-from .forms import ProductForm
+from .product_form import ProductForm
 
 
 def all_products(request):
