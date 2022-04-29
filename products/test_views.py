@@ -429,3 +429,20 @@ class TestProductManagement(TestCase):
         self.assertEqual(product.popular_in_00s, False)
         self.assertEqual(product.weight_in_grams, 100)
         self.assertEqual(product.price, Decimal('10.99'))
+
+    def test_unregistered_users_cannot_access_delete_product_view(self):
+        """
+        Tests an unregistered site user cannot access the edit products page.
+
+        With no user signed in attempts to access the edit products url for the
+        product created in the setUp method, stored in the response variable.
+
+        Uses Django's in-built HTTP client to assert the status code on
+        the response variable is equal to 302, a successful HTTP redirect.
+        Then asserts this redirect url is the login page.
+        """
+
+        response = self.client.get('/products/delete/1/')
+
+        self.assertEqual(response.status_code, 302)
+        self.assertRedirects(response, '/accounts/login/?next=/products/delete/1/')  # noqa
