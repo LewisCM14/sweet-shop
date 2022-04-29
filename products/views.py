@@ -212,14 +212,12 @@ def delete_product(request, product_id):
     A view to allow superusers to edit products in the store.
 
     Superuser credentails must first be verified.
-    Delete a product from the store
 
     Takes in the request and the product id to be deleted.
     First collect the product with get_object_or_404,
     then call product.delete.
     Add a success message and redirect back to the all products page.
     """
-    # Allows only superusers access to this views functionality
     if not request.user.is_superuser:
         messages.error(request, 'Sorry, only store owners can do that.')
         return redirect(reverse('home'))
