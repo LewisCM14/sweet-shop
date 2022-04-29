@@ -468,6 +468,7 @@ Taken from - https://stackoverflow.com/questions/66231936/change-accordion-butto
 }
 
 .image-btn {
+    margin-top: 10px;
     min-width: 130px;
     height: 40px;
     color: #fff;
