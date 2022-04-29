@@ -1,9 +1,11 @@
 """ This module tests the product app views """
 
 from django.test import TestCase
+from django.urls import reverse
 from django.contrib.auth.models import User
 from django.contrib.messages import get_messages
 from .models import Type, Product
+from .product_form import ProductForm
 
 
 # pylint: disable=no-member
@@ -210,8 +212,25 @@ class TestProductManagement(TestCase):
 
     def setUp(self):
         """
+        Initiates the Type & Product database;s with a single object.
         Creates a test user with admin privileges.
         """
+
+        sour = Type.objects.create(
+            name='sour',
+            friendly_name='Sour',
+        )
+
+        Product.objects.create(
+            type=sour,
+            name='Toxic Waste',
+            description='A sour Sweet',
+            popular_in_80s=True,
+            popular_in_90s=True,
+            popular_in_00s=True,
+            weight_in_grams='42',
+            price='4.99',
+        )
 
         User.objects.create_superuser(
             username='JohnDoe',
@@ -219,9 +238,9 @@ class TestProductManagement(TestCase):
             email='johndoe@email.com',
         )
 
-    def login(self):
+    def admin_login(self):
         """
-        A helper method. Used to sign into the test user.
+        A helper method. Used to sign into a registered site owner.
         """
 
         self.client.login(
@@ -231,11 +250,80 @@ class TestProductManagement(TestCase):
 
     def test_add_product_page_renders(self):
         """
-        Uses the login method to pass super user credentials.
+        Tests the add_product page renders.
+
+        Uses the admin_login method to pass superuser credentials.
 
         Uses Django's in-built HTTP client to get the add product page URL.
         Asserts equal to status code 200, a successful HTTP response.
         """
-        self.login()
+
+        self.admin_login()
         response = self.client.get('/products/add/')
         self.assertEqual(response.status_code, 200)
+
+    def test_unregistered_users_cannot_access_add_product_page(self):
+        """
+        Tests an unregistered site user cannot access the add products page.
+
+        With no user signed in, attempts to access the add products url,
+        stored in the response variable.
+
+        Uses Django's in-built HTTP client to assert the status code on
+        the response variable is equal to 302, a successful HTTP redirect.
+        Then asserts this redirect url is the login page.
+        """
+
+        response = self.client.get('/products/add/')
+
+        self.assertEqual(response.status_code, 302)
+        self.assertRedirects(response, '/accounts/login/?next=/products/add/')
+
+    def test_add_product_view_stores_object_in_database(self):
+        """
+        Tests a product can be added to the database through add_product view.
+
+        Uses the admin_login method to pass superuser credentials.
+
+        Collects the Product database made in the setUp method, asserting the
+        total length of it is 1, the product added in the method.
+
+        Instantiates an instance of the ProductForm, asserting the dict
+        passed is a valid instance of the form.
+
+        Passes the same instance as a POST request to the reverse
+        of the add_product view, storing it in the response variable.
+        Uses Django's in-built HTTP client to assert the status code on
+        the response variable is equal to 302, a successful HTTP redirect.
+        Then asserts this redirect url is the product_detail page of the
+        Product object just created.
+
+        Then collects the Product database again, asserting the
+        total length of it is 2, meaning the view added the product passed
+        in the form.
+        """
+
+        self.admin_login()
+
+        products = Product.objects.all()
+        self.assertEqual(len(products), 1)
+
+        form = ProductForm(data={
+            'name': 'Drumstick',
+            'description': 'A chewy lollypop',
+            'weight_in_grams': 10,
+            'price': 1.99,
+        })
+        self.assertTrue(form.is_valid())
+
+        response = self.client.post(reverse("add_product"), {
+            'name': 'Drumstick',
+            'description': 'A chewy lollypop',
+            'weight_in_grams': 10,
+            'price': 1.99,
+        })
+
+        self.assertEqual(response.status_code, 302)
+        self.assertRedirects(response, '/products/2/')
+        products = Product.objects.all()
+        self.assertEqual(len(products), 2)
