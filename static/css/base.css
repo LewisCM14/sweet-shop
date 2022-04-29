@@ -185,12 +185,12 @@ body {
     display: inline-block;
     outline: none;
     border-radius: 20px;
-    border: 2px solid #198754;
-    background: #198754;
+    border: 2px solid #12633C;
+    background: #12633C;
   }
   .update-btn:hover {
     background: #fff;
-    color: #198754
+    color: #12633C
   } /* Taken from https://markodenic.com/tools/buttons-generator/ */
 
 

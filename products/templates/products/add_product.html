@@ -28,10 +28,8 @@
                     {{ form | crispy }}
                     <div class="row mt-3">
                         <div class="col d-flex justify-content-end">
-                            <a class="me-1 blue-charcoal-btn text-decoration-none text-white text-center" href="{% url 'products' %}">Cancel</a>
-                            <button class="blue-charcoal-btn ">
-                                <a class="text-decoration-none text-white" type="submit">Add Product</a>
-                            </button>
+                            <a class="me-1 cancel-btn text-decoration-none text-center" href="{% url 'products' %}">Cancel</a>
+                            <a><button class="update-btn text-decoration-none text-center" type="submit">Add Product</button></a>
                         </div>
                     </div>
                 </form>
