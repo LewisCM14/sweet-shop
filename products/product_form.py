@@ -11,14 +11,32 @@ class ProductForm(forms.ModelForm):
     Extends from the base model form.
     """
 
+    name = forms.CharField(
+        label='Name',
+        required=True,
+        widget=forms.TextInput(attrs={'placeholder': 'The Product Name'}),
+    )
+
+    weight_in_grams = forms.IntegerField(
+        label='Weight in Grams',
+        required=True,
+        widget=forms.TextInput(attrs={'placeholder': 'Max Value 1000g'}),
+    )
+
+    price = forms.DecimalField(
+        label='Price',
+        required=True,
+        widget=forms.TextInput(attrs={'placeholder': 'Minimum Value £0.01'}),
+    )
+
+    image = forms.ImageField(label='Image', required=False, widget=CustomClearableFileInput)  # noqa
+
     class Meta:
         """
         Defines model used and fields required.
         """
         model = Product
         fields = '__all__'
-
-    image = forms.ImageField(label='Image', required=False, widget=CustomClearableFileInput)  # noqa
 
     def __init__(self, *args, **kwargs):
         """
