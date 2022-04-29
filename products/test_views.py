@@ -1,14 +1,16 @@
 """ This module tests the product app views """
 
 from django.test import TestCase
+from django.contrib.auth.models import User
 from django.contrib.messages import get_messages
 from .models import Type, Product
 
 
 # pylint: disable=no-member
-class TestView(TestCase):
+class TestProductViews(TestCase):
     """
     Contains the tests for the views located in the product app in views.py.
+    Focusing on the views which render all and specific products.
     """
 
     def setUp(self):
@@ -196,4 +198,44 @@ class TestView(TestCase):
         self.assertEqual(response.status_code, 200)
 
         response = self.client.get('/products/?sort=price&direction=desc')
+        self.assertEqual(response.status_code, 200)
+
+
+# pylint: disable=no-member
+class TestProductManagement(TestCase):
+    """
+    Contains the tests for the views located in the product app in views.py.
+    Focusing on the views which allow store owners to manage products.
+    """
+
+    def setUp(self):
+        """
+        Creates a test user with admin privileges.
+        """
+
+        User.objects.create_superuser(
+            username='JohnDoe',
+            password='Password',
+            email='johndoe@email.com',
+        )
+
+    def login(self):
+        """
+        A helper method. Used to sign into the test user.
+        """
+
+        self.client.login(
+            email='johndoe@email.com',
+            password='Password',
+        )
+
+    def test_add_product_page_renders(self):
+        """
+        Uses the login method to pass super user credentials.
+
+        Uses Django's in-built HTTP client to get the add product page URL.
+        Asserts equal to status code 200, a successful HTTP response.
+        """
+        self.login()
+        response = self.client.get('/products/add/')
         self.assertEqual(response.status_code, 200)
