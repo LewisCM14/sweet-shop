@@ -458,12 +458,12 @@ Taken from - https://stackoverflow.com/questions/66231936/change-accordion-butto
 
 .custom-checkbox .custom-control-label::before {
     border-radius: 0;
-    border-color: #dc3545;
+    border-color: #B30012;
 }
 
 .custom-checkbox .custom-control-input:checked~.custom-control-label::before {
-    background-color: #dc3545;
-    border-color: #dc3545;
+    background-color: #B30012;
+    border-color: #B30012;
     border-radius: 0;
 }
 
