@@ -118,6 +118,46 @@ body {
     color: #FFFFFF
   } /* Taken from https://markodenic.com/tools/buttons-generator/ */
 
+.danger-btn {
+    min-width: 130px;
+    height: 40px;
+    color: #fff;
+    padding: 5px 10px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    display: inline-block;
+    outline: none;
+    border-radius: 20px;
+    border: 2px solid #dc3545;
+    background: #dc3545;
+  }
+  .danger-btn:hover {
+    background: #fff;
+    color: #dc3545
+  } /* Taken from https://markodenic.com/tools/buttons-generator/ */
+
+.cancel-btn {
+    min-width: 130px;
+    height: 40px;
+    color: #fff;
+    padding: 5px 10px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    display: inline-block;
+    outline: none;
+    border-radius: 20px;
+    border: 2px solid #333333;
+    background: #333333;
+  }
+  .cancel-btn:hover {
+    background: #fff;
+    color: #333333
+  } /* Taken from https://markodenic.com/tools/buttons-generator/ */
+
 
 /* ------------------------------------------- MARGIN STYLINGS */
 
