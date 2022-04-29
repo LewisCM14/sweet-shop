@@ -1,5 +1,6 @@
 """ This module tests the product app views """
 
+from decimal import Decimal
 from django.test import TestCase
 from django.urls import reverse
 from django.contrib.auth.models import User
@@ -288,8 +289,8 @@ class TestProductManagement(TestCase):
         Collects the Product database made in the setUp method, asserting the
         total length of it is 1, the product added in the method.
 
-        Instantiates an instance of the ProductForm, asserting the dict
-        passed is a valid instance of the form.
+        Instantiates an instance of the ProductForm, asserting the intended
+        dict to be passed is a valid instance of the form.
 
         Passes the same instance as a POST request to the reverse
         of the add_product view, storing it in the response variable.
@@ -359,3 +360,72 @@ class TestProductManagement(TestCase):
 
         self.assertEqual(response.status_code, 302)
         self.assertRedirects(response, '/accounts/login/?next=/products/edit/1/')  # noqa
+
+    def test_edit_product_view_updates_object_in_database(self):
+        """
+        Tests a product can be updated through edit_product view.
+
+        Uses the admin_login method to pass superuser credentials.
+
+        Collects the Product object made in the setUp method via ID,
+        asserting all the fields bar the image fields
+        are equal to the values set in the method.
+
+        Instantiates an instance of the ProductForm, asserting the intended
+        dict to be passed is a valid instance of the form.
+
+        Passes the same instance as a POST request to the reverse
+        of the edit_product view with the product ID, storing it in the
+        response variable. Uses Django's in-built HTTP client to assert the
+        status code on the response variable is equal to 302,
+        a successful HTTP redirect. Then asserts this redirect url is the
+        product_detail page of the Product object just updated.
+
+        Then collects the Product object from the database again, asserting the
+        values for all the fields, bar the image fields, are now equal to the
+        values passed through the edit_product url.
+        """
+
+        self.admin_login()
+
+        product = Product.objects.get(id=1)
+        self.assertEqual(product.name, 'Toxic Waste')
+        self.assertEqual(product.description, 'A sour Sweet')
+        self.assertEqual(product.popular_in_80s, True)
+        self.assertEqual(product.popular_in_90s, True)
+        self.assertEqual(product.popular_in_00s, True)
+        self.assertEqual(product.weight_in_grams, 42)
+        self.assertEqual(product.price, Decimal('4.99'))
+
+        form = ProductForm(data={
+            'name': 'Toxic Waste Sweets',
+            'description': 'A Really Sour Sweet',
+            "popular_in_80s": False,
+            "popular_in_90s": False,
+            "popular_in_00s": False,
+            'weight_in_grams': 100,
+            'price': 10.99,
+        })
+        self.assertTrue(form.is_valid())
+
+        response = self.client.post(reverse("edit_product", args=[1]), {
+            'name': 'Toxic Waste Sweets',
+            'description': 'A Really Sour Sweet',
+            "popular_in_80s": False,
+            "popular_in_90s": False,
+            "popular_in_00s": False,
+            'weight_in_grams': 100,
+            'price': 10.99,
+        })
+
+        self.assertEqual(response.status_code, 302)
+        self.assertRedirects(response, '/products/1/')
+
+        product = Product.objects.get(id=1)
+        self.assertEqual(product.name, 'Toxic Waste Sweets')
+        self.assertEqual(product.description, 'A Really Sour Sweet')
+        self.assertEqual(product.popular_in_80s, False)
+        self.assertEqual(product.popular_in_90s, False)
+        self.assertEqual(product.popular_in_00s, False)
+        self.assertEqual(product.weight_in_grams, 100)
+        self.assertEqual(product.price, Decimal('10.99'))
