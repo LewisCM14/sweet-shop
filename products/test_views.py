@@ -327,3 +327,18 @@ class TestProductManagement(TestCase):
         self.assertRedirects(response, '/products/2/')
         products = Product.objects.all()
         self.assertEqual(len(products), 2)
+
+    def test_edit_product_page_renders(self):
+        """
+        Tests the edit_product page renders.
+
+        Uses the admin_login method to pass superuser credentials.
+
+        Uses Django's in-built HTTP client to get the edit product page URL
+        for the product created in the setUp method.
+        Asserts equal to status code 200, a successful HTTP response.
+        """
+
+        self.admin_login()
+        response = self.client.get('/products/edit/1/')
+        self.assertEqual(response.status_code, 200)
