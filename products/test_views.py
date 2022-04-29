@@ -432,10 +432,11 @@ class TestProductManagement(TestCase):
 
     def test_unregistered_users_cannot_access_delete_product_view(self):
         """
-        Tests an unregistered site user cannot access the edit products page.
+        Tests an unregistered site user cannot access the delete products view.
 
-        With no user signed in attempts to access the edit products url for the
-        product created in the setUp method, stored in the response variable.
+        With no user signed in attempts to access the delete products url
+        for the product created in the setUp method,
+        stored in the response variable.
 
         Uses Django's in-built HTTP client to assert the status code on
         the response variable is equal to 302, a successful HTTP redirect.
@@ -446,3 +447,35 @@ class TestProductManagement(TestCase):
 
         self.assertEqual(response.status_code, 302)
         self.assertRedirects(response, '/accounts/login/?next=/products/delete/1/')  # noqa
+
+    def test_delete_product_view_removes_object_from_database(self):
+        """
+        Tests a product can be deleted through delete_product view.
+
+        Uses the admin_login method to pass superuser credentials.
+
+        Collects the Product database made in the setUp method,
+        asserting the length of it is equal to 1.
+
+        Passes the object from the database via ID to the delete_product view
+        storing it in the response variable.  Uses Django's in-built HTTP
+        client to assert the status code on the response variable
+        is equal to 302, a successful HTTP redirect.
+        Then asserts this redirect url is the all products page.
+
+        Then collects the Product database, asserting the length is now equal
+        to 0, meaning the product with an ID of 1 was deleted.
+        """
+
+        self.admin_login()
+
+        products = Product.objects.all()
+        self.assertEqual(len(products), 1)
+
+        response = self.client.get('/products/delete/1/')
+
+        self.assertEqual(response.status_code, 302)
+        self.assertRedirects(response, '/products/')
+
+        products = Product.objects.all()
+        self.assertEqual(len(products), 0)
