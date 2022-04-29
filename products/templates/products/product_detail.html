@@ -88,9 +88,27 @@
                     {% if request.user.is_superuser %}
                         <div class="row">
                             <div class="col d-flex justify-content-end">
-                                <a class="text-success me-1" href="#">Edit</a>
+                                <a class="text-green me-1" href="{% url 'edit_product' product.id %}">Edit</a>
                                 <span> | </span>
-                                <a class="text-danger ms-1" href="#">Delete</a>
+                                <a class="text-red btt-link ms-1" data-bs-toggle='modal' data-bs-target='#delete'>Delete</a>
+                            </div>
+                        </div>
+                        <!-- Delete Product Modal -->
+                        <div class="modal fade" id="delete" tabindex="-1" aria-labelledby="delete product modal" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <p class="modal-title text-uppercase" id="delete">Are you sure you want to delete this product?</p>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body text-center">
+                                        <p><strong>{{ product.name }}</strong></p>
+                                    </div>
+                                    <div class="modal-footer d-flex justify-content-evenly">
+                                        <button type="button" class="cancel-btn text-center text-decoration-none" data-bs-dismiss="modal" aria-label="Close">Close</button>
+                                        <a class="danger-btn text-center text-decoration-none" href="{% url 'delete_product' product.id %}">Delete</a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     {% endif %}
@@ -118,7 +136,7 @@
                                     Weight:
                                 </p>
                                 <p class="add-weight-group">
-                                    200g
+                                    {{ product.weight_in_grams }}g
                                 </p>
                             </div>
                             <!-- Quantity Section -->

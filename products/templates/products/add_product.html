@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block page_header %}
+    <div class="container header-container">
+        <div class="row">
+            <div class="col">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                      <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+                      <li class="breadcrumb-item active" aria-current="page">Product Management</li>
+                    </ol>
+                  </nav>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="text-center mb-4">
+        <span class="h4 text-uppercase">Add a Product</span>
+    </div>
+    <div class="container mb-4">
+        <div class="row d-flex justify-content-center">
+            <div class="col-lg-10 col-md-12">
+                <form method="POST" action="{% url 'add_product' %}" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ form | crispy }}
+                    <div class="row mt-3">
+                        <div class="col d-flex justify-content-end">
+                            <a class="me-1 cancel-btn text-decoration-none text-center" href="{% url 'products' %}">Cancel</a>
+                            <a><button class="update-btn text-decoration-none text-center" type="submit">Add Product</button></a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block postloadjs %}
+    {{ block.super }}
+    <!-- handle notifying the user of what the image will be changed to.
+    listen to the change event on the new image input,
+    and whenever it changes get the file that was added to it.
+    Then set the file name paragraph in the widget template to the files name. -->
+    <script type="text/javascript">
+        $('#new-image').change(function() {
+            var file = $('#new-image')[0].files[0];
+            $('#filename').text(`Image will be set to: ${file.name}`);
+        });
+    </script>
+{% endblock %}

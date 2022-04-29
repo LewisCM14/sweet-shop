@@ -75,6 +75,20 @@ body {
     color: #000080;
 } /* Text color class  */
 
+.text-red {
+    color: #B30012;
+    } 
+    .text-red:hover {
+    color: #B30012;
+    } /* Used in place of the bootstrap 'danger' color class */
+
+.text-green {
+    color: #12633C;
+    }
+    .text-green:hover {
+        color: #12633C;
+    } /* Used in place of the bootstrap 'success' color class */
+    
 .fw-900 {
     font-weight: 900;
 } /* Taken from the Chivo docs on google fonts */
@@ -116,6 +130,67 @@ body {
     background: #333333;
     border: 2px solid #333333;
     color: #FFFFFF
+  } /* Taken from https://markodenic.com/tools/buttons-generator/ */
+
+.danger-btn {
+    min-width: 130px;
+    height: 40px;
+    color: #fff;
+    padding: 5px 10px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    display: inline-block;
+    outline: none;
+    border-radius: 20px;
+    border: 2px solid #B30012;
+    background: #B30012;
+  }
+  .danger-btn:hover {
+    background: #fff;
+    color: #B30012
+  } /* Taken from https://markodenic.com/tools/buttons-generator/ */
+
+.cancel-btn {
+    min-width: 130px;
+    height: 40px;
+    color: #fff;
+    padding: 5px 10px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    display: inline-block;
+    outline: none;
+    border-radius: 20px;
+    border: 2px solid #333333;
+    background: #333333;
+  }
+  .cancel-btn:hover {
+    background: #fff;
+    color: #333333
+  } /* Taken from https://markodenic.com/tools/buttons-generator/ */
+
+.update-btn {
+    text-decoration: none;
+    min-width: 130px;
+    height: 40px;
+    color: #fff;
+    padding: 5px 10px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    display: inline-block;
+    outline: none;
+    border-radius: 20px;
+    border: 2px solid #12633C;
+    background: #12633C;
+  }
+  .update-btn:hover {
+    background: #fff;
+    color: #12633C
   } /* Taken from https://markodenic.com/tools/buttons-generator/ */
 
 
@@ -306,7 +381,7 @@ Taken from - https://stackoverflow.com/questions/66231936/change-accordion-butto
     }
     .add-weight-group {
         width: 20%;
-    } /* Used to ensure weight and quantity ares display evenly */
+    } /* Used to ensure weight and quantity areas display evenly */
 }
 
 @media screen and (max-width: 768px) {
@@ -362,3 +437,53 @@ Taken from - https://stackoverflow.com/questions/66231936/change-accordion-butto
         width: 60%;
     }
 }
+
+
+/* ------------------------------------------- PRODUCT MANAGEMENT STYLES */
+
+.btn-file {
+    position: relative;
+    overflow: hidden;
+} /* set the overflow of the span wrapped around our file input to hidden */
+
+.btn-file input[type="file"] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    opacity: 0;
+    cursor: pointer;
+} /* make sure that the entire input inside the span looks like a button. */
+
+.custom-checkbox .custom-control-label::before {
+    border-radius: 0;
+    border-color: #B30012;
+}
+
+.custom-checkbox .custom-control-input:checked~.custom-control-label::before {
+    background-color: #B30012;
+    border-color: #B30012;
+    border-radius: 0;
+}
+
+.image-btn {
+    margin-top: 10px;
+    min-width: 130px;
+    height: 40px;
+    color: #fff;
+    padding: 5px 10px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    display: inline-block;
+    outline: none;
+    border-radius: 20px;
+    border: 2px solid #000040;
+    background: #000040;
+  }
+  .image-btn:hover {
+    background: #fff;
+    color: #000040
+  } /* Taken from https://markodenic.com/tools/buttons-generator/ */

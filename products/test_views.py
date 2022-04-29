@@ -1,14 +1,19 @@
 """ This module tests the product app views """
 
+from decimal import Decimal
 from django.test import TestCase
+from django.urls import reverse
+from django.contrib.auth.models import User
 from django.contrib.messages import get_messages
 from .models import Type, Product
+from .product_form import ProductForm
 
 
 # pylint: disable=no-member
-class TestView(TestCase):
+class TestProductViews(TestCase):
     """
     Contains the tests for the views located in the product app in views.py.
+    Focusing on the views which render all and specific products.
     """
 
     def setUp(self):
@@ -197,3 +202,280 @@ class TestView(TestCase):
 
         response = self.client.get('/products/?sort=price&direction=desc')
         self.assertEqual(response.status_code, 200)
+
+
+# pylint: disable=no-member
+class TestProductManagement(TestCase):
+    """
+    Contains the tests for the views located in the product app in views.py.
+    Focusing on the views which allow store owners to manage products.
+    """
+
+    def setUp(self):
+        """
+        Initiates the Type & Product database;s with a single object.
+        Creates a test user with admin privileges.
+        """
+
+        sour = Type.objects.create(
+            name='sour',
+            friendly_name='Sour',
+        )
+
+        Product.objects.create(
+            type=sour,
+            name='Toxic Waste',
+            description='A sour Sweet',
+            popular_in_80s=True,
+            popular_in_90s=True,
+            popular_in_00s=True,
+            weight_in_grams='42',
+            price='4.99',
+        )
+
+        User.objects.create_superuser(
+            username='JohnDoe',
+            password='Password',
+            email='johndoe@email.com',
+        )
+
+    def admin_login(self):
+        """
+        A helper method. Used to sign into a registered site owner.
+        """
+
+        self.client.login(
+            email='johndoe@email.com',
+            password='Password',
+        )
+
+    def test_add_product_page_renders(self):
+        """
+        Tests the add_product page renders.
+
+        Uses the admin_login method to pass superuser credentials.
+
+        Uses Django's in-built HTTP client to get the add product page URL.
+        Asserts equal to status code 200, a successful HTTP response.
+        """
+
+        self.admin_login()
+        response = self.client.get('/products/add/')
+        self.assertEqual(response.status_code, 200)
+
+    def test_unregistered_users_cannot_access_add_product_page(self):
+        """
+        Tests an unregistered site user cannot access the add products page.
+
+        With no user signed in, attempts to access the add products url,
+        stored in the response variable.
+
+        Uses Django's in-built HTTP client to assert the status code on
+        the response variable is equal to 302, a successful HTTP redirect.
+        Then asserts this redirect url is the login page.
+        """
+
+        response = self.client.get('/products/add/')
+
+        self.assertEqual(response.status_code, 302)
+        self.assertRedirects(response, '/accounts/login/?next=/products/add/')
+
+    def test_add_product_view_stores_object_in_database(self):
+        """
+        Tests a product can be added to the database through add_product view.
+
+        Uses the admin_login method to pass superuser credentials.
+
+        Collects the Product database made in the setUp method, asserting the
+        total length of it is 1, the product added in the method.
+
+        Instantiates an instance of the ProductForm, asserting the intended
+        dict to be passed is a valid instance of the form.
+
+        Passes the same instance as a POST request to the reverse
+        of the add_product view, storing it in the response variable.
+        Uses Django's in-built HTTP client to assert the status code on
+        the response variable is equal to 302, a successful HTTP redirect.
+        Then asserts this redirect url is the product_detail page of the
+        Product object just created.
+
+        Then collects the Product database again, asserting the
+        total length of it is 2, meaning the view added the product passed
+        in the form.
+        """
+
+        self.admin_login()
+
+        products = Product.objects.all()
+        self.assertEqual(len(products), 1)
+
+        form = ProductForm(data={
+            'name': 'Drumstick',
+            'description': 'A chewy lollypop',
+            'weight_in_grams': 10,
+            'price': 1.99,
+        })
+        self.assertTrue(form.is_valid())
+
+        response = self.client.post(reverse("add_product"), {
+            'name': 'Drumstick',
+            'description': 'A chewy lollypop',
+            'weight_in_grams': 10,
+            'price': 1.99,
+        })
+
+        self.assertEqual(response.status_code, 302)
+        self.assertRedirects(response, '/products/2/')
+        products = Product.objects.all()
+        self.assertEqual(len(products), 2)
+
+    def test_edit_product_page_renders(self):
+        """
+        Tests the edit_product page renders.
+
+        Uses the admin_login method to pass superuser credentials.
+
+        Uses Django's in-built HTTP client to get the edit product page URL
+        for the product created in the setUp method.
+        Asserts equal to status code 200, a successful HTTP response.
+        """
+
+        self.admin_login()
+        response = self.client.get('/products/edit/1/')
+        self.assertEqual(response.status_code, 200)
+
+    def test_unregistered_users_cannot_access_edit_product_page(self):
+        """
+        Tests an unregistered site user cannot access the edit products page.
+
+        With no user signed in attempts to access the edit products url for the
+        product created in the setUp method, stored in the response variable.
+
+        Uses Django's in-built HTTP client to assert the status code on
+        the response variable is equal to 302, a successful HTTP redirect.
+        Then asserts this redirect url is the login page.
+        """
+
+        response = self.client.get('/products/edit/1/')
+
+        self.assertEqual(response.status_code, 302)
+        self.assertRedirects(response, '/accounts/login/?next=/products/edit/1/')  # noqa
+
+    def test_edit_product_view_updates_object_in_database(self):
+        """
+        Tests a product can be updated through edit_product view.
+
+        Uses the admin_login method to pass superuser credentials.
+
+        Collects the Product object made in the setUp method via ID,
+        asserting all the fields bar the image fields
+        are equal to the values set in the method.
+
+        Instantiates an instance of the ProductForm, asserting the intended
+        dict to be passed is a valid instance of the form.
+
+        Passes the same instance as a POST request to the reverse
+        of the edit_product view with the product ID, storing it in the
+        response variable. Uses Django's in-built HTTP client to assert the
+        status code on the response variable is equal to 302,
+        a successful HTTP redirect. Then asserts this redirect url is the
+        product_detail page of the Product object just updated.
+
+        Then collects the Product object from the database again, asserting the
+        values for all the fields, bar the image fields, are now equal to the
+        values passed through the edit_product url.
+        """
+
+        self.admin_login()
+
+        product = Product.objects.get(id=1)
+        self.assertEqual(product.name, 'Toxic Waste')
+        self.assertEqual(product.description, 'A sour Sweet')
+        self.assertEqual(product.popular_in_80s, True)
+        self.assertEqual(product.popular_in_90s, True)
+        self.assertEqual(product.popular_in_00s, True)
+        self.assertEqual(product.weight_in_grams, 42)
+        self.assertEqual(product.price, Decimal('4.99'))
+
+        form = ProductForm(data={
+            'name': 'Toxic Waste Sweets',
+            'description': 'A Really Sour Sweet',
+            "popular_in_80s": False,
+            "popular_in_90s": False,
+            "popular_in_00s": False,
+            'weight_in_grams': 100,
+            'price': 10.99,
+        })
+        self.assertTrue(form.is_valid())
+
+        response = self.client.post(reverse("edit_product", args=[1]), {
+            'name': 'Toxic Waste Sweets',
+            'description': 'A Really Sour Sweet',
+            "popular_in_80s": False,
+            "popular_in_90s": False,
+            "popular_in_00s": False,
+            'weight_in_grams': 100,
+            'price': 10.99,
+        })
+
+        self.assertEqual(response.status_code, 302)
+        self.assertRedirects(response, '/products/1/')
+
+        product = Product.objects.get(id=1)
+        self.assertEqual(product.name, 'Toxic Waste Sweets')
+        self.assertEqual(product.description, 'A Really Sour Sweet')
+        self.assertEqual(product.popular_in_80s, False)
+        self.assertEqual(product.popular_in_90s, False)
+        self.assertEqual(product.popular_in_00s, False)
+        self.assertEqual(product.weight_in_grams, 100)
+        self.assertEqual(product.price, Decimal('10.99'))
+
+    def test_unregistered_users_cannot_access_delete_product_view(self):
+        """
+        Tests an unregistered site user cannot access the delete products view.
+
+        With no user signed in attempts to access the delete products url
+        for the product created in the setUp method,
+        stored in the response variable.
+
+        Uses Django's in-built HTTP client to assert the status code on
+        the response variable is equal to 302, a successful HTTP redirect.
+        Then asserts this redirect url is the login page.
+        """
+
+        response = self.client.get('/products/delete/1/')
+
+        self.assertEqual(response.status_code, 302)
+        self.assertRedirects(response, '/accounts/login/?next=/products/delete/1/')  # noqa
+
+    def test_delete_product_view_removes_object_from_database(self):
+        """
+        Tests a product can be deleted through delete_product view.
+
+        Uses the admin_login method to pass superuser credentials.
+
+        Collects the Product database made in the setUp method,
+        asserting the length of it is equal to 1.
+
+        Passes the object from the database via ID to the delete_product view
+        storing it in the response variable.  Uses Django's in-built HTTP
+        client to assert the status code on the response variable
+        is equal to 302, a successful HTTP redirect.
+        Then asserts this redirect url is the all products page.
+
+        Then collects the Product database, asserting the length is now equal
+        to 0, meaning the product with an ID of 1 was deleted.
+        """
+
+        self.admin_login()
+
+        products = Product.objects.all()
+        self.assertEqual(len(products), 1)
+
+        response = self.client.get('/products/delete/1/')
+
+        self.assertEqual(response.status_code, 302)
+        self.assertRedirects(response, '/products/')
+
+        products = Product.objects.all()
+        self.assertEqual(len(products), 0)
