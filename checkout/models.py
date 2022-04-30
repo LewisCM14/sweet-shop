@@ -65,6 +65,22 @@ class Order (models.Model):
         """
         return uuid.uuid4().hex.upper()
 
+    def save(self, *args, **kwargs):
+        """
+        Override the original save method to set the order number
+        if it hasn't been set already.
+        """
+        if not self.order_number:
+            self.order_number = self._generate_order_number()
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+        """
+        Returns the order number as a string.
+        """
+        return self.order_number
+
+
 # pylint: disable=no-member
 class OrderLineItem(models.Model):
     """
