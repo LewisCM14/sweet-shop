@@ -651,7 +651,9 @@ ___
 
     * I used this [post](https://stackoverflow.com/questions/2897609/how-can-i-unit-test-django-messages/14909727) on stackoverflow in order to develop my knowledge on how to test the Django message framework behaved as i intended.
 
-    * I used this [guide](https://developer.mozilla.org/en-US/docs/Web/CSS/filter-function/blur) for learning how to use the blur function in CSS. 
+    * I used this [guide](https://developer.mozilla.org/en-US/docs/Web/CSS/filter-function/blur) for learning how to use the blur function in CSS.
+
+    * I used this [post](https://stackoverflow.com/questions/30849862/django-max-length-for-integerfield) on stackoverflow to help me decide on a method for implementing validation on my ProductForm.
 
 - **Media** <a name='media'></a>
 
