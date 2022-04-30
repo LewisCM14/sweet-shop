@@ -1,5 +1,7 @@
 """ This module contains the models for the checkout app """
 
+import uuid
+
 from django.db import models
 from django_countries.fields import CountryField
 
@@ -57,6 +59,11 @@ class Order (models.Model):
         max_digits=10, decimal_places=2, null=False, default=0
     )
 
+    def _generate_order_number(self):
+        """
+        Generate a random, unique 32 length order number using UUID
+        """
+        return uuid.uuid4().hex.upper()
 
 # pylint: disable=no-member
 class OrderLineItem(models.Model):
