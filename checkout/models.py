@@ -144,9 +144,11 @@ class OrderLineItem(models.Model):
 
     def save(self, *args, **kwargs):
         """
-        Override the original save method to set the lineitem_total.
-        This allows for the order total field within the Order model to
-        also be updated.
+        Override the original save method to set the lineitem_total and
+        the lineitem_weight.
+
+        This allows for the order_total and order_weight fields within the
+        Order model to also be updated.
         """
         self.lineitem_total = self.product.price * self.quantity
         self.lineitem_weight = self.product.weight_in_grams * self.quantity
