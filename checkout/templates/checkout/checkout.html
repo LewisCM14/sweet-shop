@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
+{% load cart_tools %}
 
 {% block page_header %}
 <div class="container header-container">
@@ -22,54 +23,76 @@
 <div class="container mb-4">
     <div class="row d-flex flex-row-reverse">
         <!-- Order Summary Container -->
-        <div class="pl-md-3 pr-md-3 col-lg-3 mb-4 text-center">
-            <div class="order-summary border-charcoal bg-white p-2">
-                <div class="row">
+        <div class="col-lg-4 pl-md-3 pr-md-3 mb-4">
+            <div class="order-summary border-charcoal bg-white p-3">
+                <div class="row container-fluid">
                     <div class="col">
                         <p class="fw-700">Order Summary</p>
                     </div>
                 </div>
+                <div class="text-center">
+                    <hr class="mb-4 mt-0 d-inline-block mx-auto"
+                    style="width: 90%; background-color: #000080; height: 2px" />
+                </div>
+                {% for item in cart_items %}
+                    <div class="row container-fluid">
+                        <div class="col-10">
+                            <p>
+                                {{ item.quantity }}x {{ item.product.name }}
+                            </p>
+                        </div>
+                        <div class="col-2">
+                            <p>
+                                £{{ item.product.price | calc_subtotal:item.quantity }}
+                            </p>
+                        </div>
+                    </div>
+                {% endfor %}
+                <div class="text-center">
+                    <hr class="mb-4 mt-0 d-inline-block mx-auto"
+                    style="width: 90%; background-color: #000080; height: 2px" />
+                </div>
                 <!-- Cart Subtotal -->
-                <div class="row">
-                    <div class="col-6">
+                <div class="row container-fluid">
+                    <div class="col-10">
                         <p>
                             Cart Subtotal
                         </p>
                     </div>
-                    <div class="col-6">
+                    <div class="col-2">
                         <p>
                             £{{ total|floatformat:2 }}
                         </p>
                     </div>
                 </div>
                 <!-- Delivery Cost -->
-                <div class="row">
-                    <div class="col-6">
+                <div class="row container">
+                    <div class="col-10">
                         <p>
                             Delivery
                         </p>
                     </div>
-                    <div class="col-6">
+                    <div class="col-2">
                         <p>
                             £{{ delivery|floatformat:2 }}
                         </p>
                     </div>
                 </div>
                 <!-- Grand Total -->
-                <div class="row">
-                    <div class="col-6">
+                <div class="row container-fluid">
+                    <div class="col-10">
                         <p>
                             Grand Total
                         </p>
                     </div>
-                    <div class="col-6">
+                    <div class="col-2">
                         <p>
                             £{{ grand_total|floatformat:2 }}
                         </p>
                     </div>
                 </div>
                 <!-- Return to Cart Button -->
-                <div class="row">
+                <div class="row container-fluid text-center">
                     <div class="col">
                         <a href="{% url 'view_cart' %}" class="charcoal-blue-btn text-decoration-none">
                             Adjust Cart
@@ -79,7 +102,7 @@
             </div>
         </div>
         <!-- Order Form Container -->
-        <div class="col-lg-9">
+        <div class="col-lg-8">
             <!-- Order Form -->
             <form action="{% url 'checkout' %}" method="POST" id="payment-form">
                 {% csrf_token %}
