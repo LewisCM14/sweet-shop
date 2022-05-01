@@ -10,49 +10,49 @@ class OrderForm(forms.ModelForm):
     """
 
     full_name = forms.CharField(
-        label='Full Name:',
+        label='Full Name',
         required=True,
         widget=forms.TextInput(attrs={'placeholder': 'Full Name'}),
     )
 
     email = forms.EmailField(
-        label='Email Address:',
+        label='Email Address',
         required=True,
         widget=forms.TextInput(attrs={'placeholder': 'Email Address'}),
     )
 
     phone_number = forms.CharField(
-        label='Mobile Number:',
+        label='Phone Number',
         required=True,
         widget=forms.TextInput(attrs={'placeholder': 'Preferred Contact Number'}),  # noqa: E501
     )
 
     street_address1 = forms.CharField(
-        label='First Street Address:',
+        label='First Street Address',
         required=True,
         widget=forms.TextInput(attrs={'placeholder': 'Street Address'}),
     )
 
     street_address2 = forms.CharField(
-        label='Second Street Address:',
+        label='Second Street Address',
         required=False,
         widget=forms.TextInput(attrs={'placeholder': 'Street Address'}),
     )
 
     town_or_city = forms.CharField(
-        label='Town or City:',
+        label='Town or City',
         required=True,
         widget=forms.TextInput(attrs={'placeholder': 'Town or City'}),
     )
 
     county = forms.CharField(
-        label='County:',
+        label='County',
         required=True,
         widget=forms.TextInput(attrs={'placeholder': 'County'}),
     )
 
     postcode = forms.CharField(
-        label='Postal Code:',
+        label='Postal Code',
         required=True,
         widget=forms.TextInput(attrs={'placeholder': 'Post Code'}),
     )

@@ -132,6 +132,27 @@ body {
     color: #FFFFFF
   } /* Taken from https://markodenic.com/tools/buttons-generator/ */
 
+.charcoal-blue-btn {
+    min-width: 130px;
+    height: 40px;
+    color: #FFFFFF;
+    padding: 5px 10px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    display: inline-block;
+    outline: none;
+    border-radius: 5px;
+    border: 2px solid #333333;
+    background: #333333;
+  }
+  .charcoal-blue-btn:hover {
+    background: #000080;
+    border: 2px solid #000080;
+    color: #FFFFFF
+  } /* Taken from https://markodenic.com/tools/buttons-generator/ */
+
 .danger-btn {
     min-width: 130px;
     height: 40px;
@@ -480,10 +501,10 @@ Taken from - https://stackoverflow.com/questions/66231936/change-accordion-butto
     display: inline-block;
     outline: none;
     border-radius: 20px;
-    border: 2px solid #000040;
-    background: #000040;
+    border: 2px solid #000080;
+    background: #000080;
   }
   .image-btn:hover {
     background: #fff;
-    color: #000040
+    color: #000080
   } /* Taken from https://markodenic.com/tools/buttons-generator/ */

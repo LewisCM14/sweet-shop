@@ -23,15 +23,131 @@
     <div class="row">
         <!-- Order Form Container -->
         <div class="col-9">
-            <form action="">
-                {{ order_form|crispy }}
+            <!-- Order Form -->
+            <form action="{% url 'checkout' %}" method="POST" id="payment-form">
+                {% csrf_token %}
+                <!-- Delivery Details -->
+                <div class="accordion" id="checkout-accordion">
+                    <div class="accordion-item mb-4">
+                        <p class="h2 accordion-header" id="headingOne">
+                            <button class="accordion-button text-uppercase" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                Delivery Details
+                            </button>
+                        </p>
+                        <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
+                            data-bs-parent="#checkout-accordion">
+                            <div class="accordion-body">
+                                <fieldset>
+                                    <legend class="h6 fw-700">Contact Information</legend>
+                                    <div class="row">
+                                        <div class="col">
+                                            {{ order_form.full_name | as_crispy_field }}
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-6">
+                                            {{ order_form.email | as_crispy_field }}
+                                        </div>
+                                        <div class="col-6">
+                                            {{ order_form.phone_number | as_crispy_field }}
+                                        </div>
+                                    </div>
+                                </fieldset>
+                                <fieldset class="mt-3">
+                                    <legend class="h6 fw-700">Delivery Address</legend>
+                                    <div class="row">
+                                        <div class="col">
+                                            {{ order_form.street_address1 | as_crispy_field }}
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            {{ order_form.street_address2 | as_crispy_field }}
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-6">
+                                            {{ order_form.town_or_city | as_crispy_field }}
+                                        </div>
+                                        <div class="col-6">
+                                            {{ order_form.county | as_crispy_field }}
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-6">
+                                            {{ order_form.postcode | as_crispy_field }}
+                                        </div>
+                                        <div class="col-6">
+                                            {{ order_form.country | as_crispy_field }}
+                                        </div>
+                                    </div>
+                                    <!-- Checkbox for saving Delivery Detail information -->
+                                    <div class="row mt-3 form-check form-check-inline mr-0">
+                                        {% if user.is_authenticated %}
+                                        <div class="col">
+                                            <label class="form-check-label" for="id-save-info">Save this delivery information to my profile</label>
+                                            <input class="form-check-input ml-2 mr-0" type="checkbox" id="id-save-info" name="save-info" checked>
+                                        </div>
+                                        {% else %}
+                                        <div class="col">
+                                            <label class="form-check-label" for="id-save-info">
+                                                <a class="navy-charcoal fw-700" href="{% url 'account_signup' %}">Create an Account</a> or 
+                                                <a class="navy-charcoal fw-700" href="{% url 'account_login' %}">login</a> to save this information.
+                                            </label>
+                                        </div>
+                                        {% endif %}
+                                    </div>
+                                </fieldset>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Payment Details -->
+                    <div class="accordion-item mb-4">
+                        <p class="h2 accordion-header" id="headingTwo">
+                            <button class="accordion-button collapsed text-uppercase" type="button"
+                                data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false"
+                                aria-controls="collapseTwo">
+                                Payment Details
+                            </button>
+                        </p>
+                        <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
+                            data-bs-parent="#faq-accordion">
+                            <div class="accordion-body">
+                                <fieldset>
+                                    <legend class="h6 fw-700">Payment Information</legend>
+                                    <!-- Card Detail Input -->
+                                    <div class="row">
+                                        <div class="col" id="card-element"></div>
+                                    </div>
+                                    <!-- Container for Form Errors -->
+                                    <div class="row">
+                                        <div class="col text-red" id="card-errors" role="alert"></div>
+                                    </div>
+                                </fieldset>
+                                <!-- The Button to Submit the Order Form -->
+                                <div class="submit-button mt-4">                 
+                                    <button id="submit-button" class="">
+                                        Complete Order
+                                    </button>
+                                    <p class="small text-red">
+                                        <span class="icon">
+                                            <i class="fas fa-exclamation-circle"></i>
+                                        </span>
+                                        <span>Your card will be charged <strong>${{ grand_total|floatformat:2 }}</strong></span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </form>
         </div>
         <!-- Order Summary Container -->
         <div class="col-3 text-center">
             <div class="row">
                 <div class="col">
-                    <p>Order Summary</p>
+                    <p class="fw-700">Order Summary</p>
                 </div>
             </div>
             <!-- Cart Subtotal -->
@@ -71,6 +187,14 @@
                     <p>
                         £{{ grand_total|floatformat:2 }}
                     </p>
+                </div>
+            </div>
+            <!-- Return to Cart Button -->
+            <div class="row">
+                <div class="col">
+                    <a href="{% url 'view_cart' %}" class="">
+                        <span class="font-weight-bold">Adjust Cart</span>
+                    </a>
                 </div>
             </div>
         </div>
