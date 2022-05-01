@@ -1,0 +1,7 @@
+"""
+This module tells Django about the custom ready method in apps.py,
+allowing the signals.py module to preform as intended.
+"""
+
+# pylint: disable=invalid-name
+default_app_config = 'checkout.apps.CheckoutConfig'
