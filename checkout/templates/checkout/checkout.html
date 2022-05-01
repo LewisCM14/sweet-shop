@@ -20,9 +20,66 @@
 
 {% block content %}
 <div class="container mb-4">
-    <div class="row">
+    <div class="row d-flex flex-row-reverse">
+        <!-- Order Summary Container -->
+        <div class="pl-md-3 pr-md-3 col-lg-3 mb-4 text-center">
+            <div class="order-summary border-charcoal bg-white p-2">
+                <div class="row">
+                    <div class="col">
+                        <p class="fw-700">Order Summary</p>
+                    </div>
+                </div>
+                <!-- Cart Subtotal -->
+                <div class="row">
+                    <div class="col-6">
+                        <p>
+                            Cart Subtotal
+                        </p>
+                    </div>
+                    <div class="col-6">
+                        <p>
+                            £{{ total|floatformat:2 }}
+                        </p>
+                    </div>
+                </div>
+                <!-- Delivery Cost -->
+                <div class="row">
+                    <div class="col-6">
+                        <p>
+                            Delivery
+                        </p>
+                    </div>
+                    <div class="col-6">
+                        <p>
+                            £{{ delivery|floatformat:2 }}
+                        </p>
+                    </div>
+                </div>
+                <!-- Grand Total -->
+                <div class="row">
+                    <div class="col-6">
+                        <p>
+                            Grand Total
+                        </p>
+                    </div>
+                    <div class="col-6">
+                        <p>
+                            £{{ grand_total|floatformat:2 }}
+                        </p>
+                    </div>
+                </div>
+                <!-- Return to Cart Button -->
+                <div class="row">
+                    <div class="col">
+                        <a href="{% url 'view_cart' %}" class="charcoal-blue-btn text-decoration-none">
+                            Adjust Cart
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
         <!-- Order Form Container -->
-        <div class="col-9">
+        <div class="col-lg-9">
             <!-- Order Form -->
             <form action="{% url 'checkout' %}" method="POST" id="payment-form">
                 {% csrf_token %}
@@ -46,10 +103,10 @@
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-6">
+                                        <div class="col-md-6">
                                             {{ order_form.email | as_crispy_field }}
                                         </div>
-                                        <div class="col-6">
+                                        <div class="col-md-6">
                                             {{ order_form.phone_number | as_crispy_field }}
                                         </div>
                                     </div>
@@ -67,18 +124,18 @@
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-6">
+                                        <div class="col-md-6">
                                             {{ order_form.town_or_city | as_crispy_field }}
                                         </div>
-                                        <div class="col-6">
+                                        <div class="col-md-6">
                                             {{ order_form.county | as_crispy_field }}
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-6">
+                                        <div class="col-md-6">
                                             {{ order_form.postcode | as_crispy_field }}
                                         </div>
-                                        <div class="col-6">
+                                        <div class="col-md-6">
                                             {{ order_form.country | as_crispy_field }}
                                         </div>
                                     </div>
@@ -126,77 +183,30 @@
                                     </div>
                                 </fieldset>
                                 <!-- The Button to Submit the Order Form -->
-                                <div class="submit-button mt-4">                 
-                                    <button id="submit-button" class="">
-                                        Complete Order
-                                    </button>
-                                    <p class="small text-red">
-                                        <span class="icon">
-                                            <i class="fas fa-exclamation-circle"></i>
-                                        </span>
-                                        <span>Your card will be charged <strong>${{ grand_total|floatformat:2 }}</strong></span>
-                                    </p>
+                                <div class="submit-button mt-4">
+                                    <div class="row">
+                                        <div class="col d-flex justify-content-end">
+                                            <button id="submit-button" class="blue-charcoal-btn">
+                                                Complete Order
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col d-flex justify-content-end">
+                                            <p class="small text-red">
+                                                <span class="icon">
+                                                    <i class="fas fa-exclamation-circle"></i>
+                                                </span>
+                                                <span>Your card will be charged <strong>${{ grand_total|floatformat:2 }}</strong></span>
+                                            </p>
+                                        </div>
+                                    </div>   
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </form>
-        </div>
-        <!-- Order Summary Container -->
-        <div class="col-3 text-center">
-            <div class="row">
-                <div class="col">
-                    <p class="fw-700">Order Summary</p>
-                </div>
-            </div>
-            <!-- Cart Subtotal -->
-            <div class="row">
-                <div class="col-6">
-                    <p>
-                        Cart Subtotal
-                    </p>
-                </div>
-                <div class="col-6">
-                    <p>
-                        £{{ total|floatformat:2 }}
-                    </p>
-                </div>
-            </div>
-            <!-- Delivery Cost -->
-            <div class="row">
-                <div class="col-6">
-                    <p>
-                        Delivery
-                    </p>
-                </div>
-                <div class="col-6">
-                    <p>
-                        £{{ delivery|floatformat:2 }}
-                    </p>
-                </div>
-            </div>
-            <!-- Grand Total -->
-            <div class="row">
-                <div class="col-6">
-                    <p>
-                        Grand Total
-                    </p>
-                </div>
-                <div class="col-6">
-                    <p>
-                        £{{ grand_total|floatformat:2 }}
-                    </p>
-                </div>
-            </div>
-            <!-- Return to Cart Button -->
-            <div class="row">
-                <div class="col">
-                    <a href="{% url 'view_cart' %}" class="">
-                        <span class="font-weight-bold">Adjust Cart</span>
-                    </a>
-                </div>
-            </div>
         </div>
     </div>
 </div>

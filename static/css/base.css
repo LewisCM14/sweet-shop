@@ -508,3 +508,10 @@ Taken from - https://stackoverflow.com/questions/66231936/change-accordion-butto
     background: #fff;
     color: #000080
   } /* Taken from https://markodenic.com/tools/buttons-generator/ */
+
+
+/* ------------------------------------------- CHECKOUT STYLES */
+
+.order-summary {
+    height: fit-content;
+}
