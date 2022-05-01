@@ -23,13 +23,13 @@ class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     default_forname = models.CharField(max_length=20, null=True, blank=True)
     default_surname = models.CharField(max_length=20, null=True, blank=True)
-    default_phone_number = models.CharField(max_length=20, null=True, blank=True)  # noqa
-    default_street_address1 = models.CharField(max_length=80, null=True, blank=True)  # noqa
-    default_street_address2 = models.CharField(max_length=80, null=True, blank=True)  # noqa
-    default_town_or_city = models.CharField(max_length=40, null=True, blank=True)  # noqa
+    default_phone_number = models.CharField(max_length=20, null=True, blank=True)  # noqa: E501
+    default_street_address1 = models.CharField(max_length=80, null=True, blank=True)  # noqa: E501
+    default_street_address2 = models.CharField(max_length=80, null=True, blank=True)  # noqa: E501
+    default_town_or_city = models.CharField(max_length=40, null=True, blank=True)  # noqa: E501
     default_county = models.CharField(max_length=80, null=True, blank=True)
     default_postcode = models.CharField(max_length=20, null=True, blank=True)
-    default_country = CountryField(blank_label='Country', null=True, blank=True)  # noqa
+    default_country = CountryField(blank_label='Country', null=True, blank=True)  # noqa: E501
 
     # pylint: disable=no-member
     def __str__(self):

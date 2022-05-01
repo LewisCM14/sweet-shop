@@ -29,7 +29,7 @@ class ProductForm(forms.ModelForm):
         widget=forms.TextInput(attrs={'placeholder': 'Minimum Value £0.01'}),
     )
 
-    image = forms.ImageField(label='Image', required=False, widget=CustomClearableFileInput)  # noqa
+    image = forms.ImageField(label='Image', required=False, widget=CustomClearableFileInput)  # noqa: E501
 
     class Meta:
         """

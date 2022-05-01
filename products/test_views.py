@@ -359,7 +359,7 @@ class TestProductManagement(TestCase):
         response = self.client.get('/products/edit/1/')
 
         self.assertEqual(response.status_code, 302)
-        self.assertRedirects(response, '/accounts/login/?next=/products/edit/1/')  # noqa
+        self.assertRedirects(response, '/accounts/login/?next=/products/edit/1/')  # noqa: E501
 
     def test_edit_product_view_updates_object_in_database(self):
         """
@@ -446,7 +446,7 @@ class TestProductManagement(TestCase):
         response = self.client.get('/products/delete/1/')
 
         self.assertEqual(response.status_code, 302)
-        self.assertRedirects(response, '/accounts/login/?next=/products/delete/1/')  # noqa
+        self.assertRedirects(response, '/accounts/login/?next=/products/delete/1/')  # noqa: E501
 
     def test_delete_product_view_removes_object_from_database(self):
         """
