@@ -353,6 +353,10 @@ Taken from - https://stackoverflow.com/questions/66231936/change-accordion-butto
 
 /* ------------------------------------------- PRODUCTS STYLES */
 
+.category-container {
+    height: fit-content;
+}
+
 .border-blur {
     border-width: 1px;
     border-style: ridge;
