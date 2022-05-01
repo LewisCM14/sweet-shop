@@ -3,12 +3,15 @@
 import uuid
 
 from django.db import models
+from django.db.models import Sum
+from django.conf import settings
 from django_countries.fields import CountryField
 
 from products.models import Product
 from profiles.models import UserProfile
 
 
+# pylint: disable=no-member
 class Order (models.Model):
     """
     The Order model, handles all orders across the store.
@@ -29,8 +32,8 @@ class Order (models.Model):
 
     The date field is auto added at the time of the order being submitted.
 
-    Delivery cost, order total and grand total are all calculated using a
-    model method.
+    Delivery cost, order total, order weight and grand total are all
+    calculated using the update_total model method.
     """
     order_number = models.CharField(max_length=32, null=False, editable=False)
     user_profile = models.ForeignKey(UserProfile, on_delete=models.SET_NULL, null=True, blank=True, related_name='orders')  # noqa
@@ -49,15 +52,53 @@ class Order (models.Model):
     date = models.DateTimeField(auto_now_add=True)
 
     # Calculated using model methods.
-    delivery_cost = models.DecimalField(
-        max_digits=4, decimal_places=2, null=False, default=0
-    )
     order_total = models.DecimalField(
         max_digits=10, decimal_places=2, null=False, default=0
     )
+
+    order_weight = models.IntegerField(null=False, default=0)
+
+    delivery_cost = models.DecimalField(
+        max_digits=4, decimal_places=2, null=False, default=0
+    )
+
     grand_total = models.DecimalField(
         max_digits=10, decimal_places=2, null=False, default=0
     )
+
+    def update_total(self):
+        """
+        A model method used to calculate the delivery_cost and grand_total.
+
+        Using Sum aggregates the total sum of each line items total and weight.
+        This is done by referencing each individual item created in
+        the OrderLineItem model through its realted name 'lineitems' and
+        storing the sum of these values in order_total and order_weight.
+
+        From here comapres if the order_total is less than the
+        FREE_DELIVERY_THRESHOLD located in the applications settings.
+
+        If so delivery_cost is calculated based on order_weight. If not
+        delivery_cost is set to 0 (free).
+
+        Once delivery_cost has been calculated it is then used in
+        conjunction with order_total to get the grand_total for the order.
+        """
+        self.order_total = self.lineitems.aggregate(
+            Sum('lineitem_total'))['lineitem_total__sum'] or 0
+        self.order_weight = self.lineitems.aggregate(
+            Sum('lineitem_weight'))['lineitem_wight__sum'] or 0
+
+        if self.order_total < settings.FREE_DELIVERY_THRESHOLD:
+            if self.order_weight + 100 < 1000:
+                self.delivery_cost = 2.49
+            elif self.order_weight + 100 > 1000:
+                self.delivery_cost = 3.49
+        else:
+            self.delivery_cost = 0
+
+        self.grand_total = self.order_total + self.delivery_cost
+        self.save()
 
     def _generate_order_number(self):
         """
@@ -93,11 +134,13 @@ class OrderLineItem(models.Model):
     The quantity field is taken from wht amount submitted from within the
     cart when an order instance is created.
     lineitem_total is non editable and calculated within the save method.
+    lineitem_weight is non editable and calculated within the save method.
     """
     order = models.ForeignKey(Order, null=False, blank=False, on_delete=models.CASCADE, related_name='lineitems')  # noqa
     product = models.ForeignKey(Product, null=False, blank=False, on_delete=models.CASCADE)  # noqa
     quantity = models.IntegerField(null=False, blank=False, default=0)
     lineitem_total = models.DecimalField(max_digits=6, decimal_places=2, null=False, blank=False, editable=False)  # noqa
+    lineitem_weight = models.IntegerField(null=False, blank=False, editable=False)  # noqa
 
     def save(self, *args, **kwargs):
         """
@@ -106,6 +149,7 @@ class OrderLineItem(models.Model):
         also be updated.
         """
         self.lineitem_total = self.product.price * self.quantity
+        self.lineitem_weight = self.product.weight_in_grams * self.quantity
         super().save(*args, **kwargs)
 
     def __str__(self):
