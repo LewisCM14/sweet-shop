@@ -4,6 +4,7 @@ import uuid
 from decimal import Decimal
 
 from django.db import models
+from django.core.validators import RegexValidator
 from django.db.models import Sum
 from django.conf import settings
 from django_countries.fields import CountryField
@@ -36,27 +37,31 @@ class Order (models.Model):
     Delivery cost, order total, order weight and grand total are all
     calculated using the update_total model method.
     """
+    # Order Number
     order_number = models.CharField(max_length=32, null=False, editable=False)
+    # Foreign Key to the User Model
     user_profile = models.ForeignKey(UserProfile, on_delete=models.SET_NULL, null=True, blank=True, related_name='orders')  # noqa: E501
-
+    # User Contact Details
     full_name = models.CharField(max_length=50, null=False, blank=False)
     email = models.EmailField(max_length=254, null=False, blank=False)
-    phone_number = models.CharField(max_length=20, null=False, blank=False)
-
+    # User Phone Number & Validators
+    phoneNumberRegex = RegexValidator(regex=r'^\+?1?\d{9,15}$')
+    phone_number = models.CharField(
+        validators=[phoneNumberRegex], max_length=16, null=False, blank=False
+        )
+    # User Address
     street_address1 = models.CharField(max_length=80, null=False, blank=False)
     street_address2 = models.CharField(max_length=80, null=True, blank=True)
     town_or_city = models.CharField(max_length=40, null=False, blank=False)
     county = models.CharField(max_length=80, null=False, blank=False)
     postcode = models.CharField(max_length=20, null=False, blank=False)
     country = CountryField(blank_label="Country *", null=False, blank=False)
-
+    # Date of order
     date = models.DateTimeField(auto_now_add=True)
-
     # Calculated using model methods.
     order_total = models.DecimalField(
         max_digits=10, decimal_places=2, null=False, default=0
     )
-
     order_weight = models.IntegerField(null=False, default=0)
 
     delivery_cost = models.DecimalField(

@@ -2,6 +2,7 @@
 
 from django.db import models
 from django.contrib.auth.models import User
+from django.core.validators import RegexValidator
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
@@ -20,10 +21,17 @@ class UserProfile(models.Model):
     The user is able to provide defaults for these.
     all these fields are optional.
     """
+    # Foreign Key from the User model
     user = models.OneToOneField(User, on_delete=models.CASCADE)
+    # User Name
     default_forname = models.CharField(max_length=20, null=True, blank=True)
     default_surname = models.CharField(max_length=20, null=True, blank=True)
-    default_phone_number = models.CharField(max_length=20, null=True, blank=True)  # noqa: E501
+    # User Phone Number and Validator
+    phoneNumberRegex = RegexValidator(regex=r'^\+?1?\d{9,15}$')
+    default_phone_number = models.CharField(
+        validators=[phoneNumberRegex], max_length=16, null=True, blank=True
+        )
+    # User Address
     default_street_address1 = models.CharField(max_length=80, null=True, blank=True)  # noqa: E501
     default_street_address2 = models.CharField(max_length=80, null=True, blank=True)  # noqa: E501
     default_town_or_city = models.CharField(max_length=40, null=True, blank=True)  # noqa: E501
