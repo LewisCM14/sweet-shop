@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block page_header %}
+<div class="container header-container">
+    <div class="row">
+        <div class="col">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+                    <li class="breadcrumb-item"><a href="{% url 'products' %}">Products</a></li>
+                    <li class="breadcrumb-item"><a href="{% url 'view_cart' %}">Shopping Cart</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Checkout</li> 
+                </ol>
+            </nav>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="container mb-4">
+    <div class="row">
+        <!-- Order Form Container -->
+        <div class="col-9">
+            <form action="">
+                {{ order_form|crispy }}
+            </form>
+        </div>
+        <!-- Order Summary Container -->
+        <div class="col-3 text-center">
+            <div class="row">
+                <div class="col">
+                    <p>Order Summary</p>
+                </div>
+            </div>
+            <!-- Cart Subtotal -->
+            <div class="row">
+                <div class="col-6">
+                    <p>
+                        Cart Subtotal
+                    </p>
+                </div>
+                <div class="col-6">
+                    <p>
+                        £{{ total|floatformat:2 }}
+                    </p>
+                </div>
+            </div>
+            <!-- Delivery Cost -->
+            <div class="row">
+                <div class="col-6">
+                    <p>
+                        Delivery
+                    </p>
+                </div>
+                <div class="col-6">
+                    <p>
+                        £{{ delivery|floatformat:2 }}
+                    </p>
+                </div>
+            </div>
+            <!-- Grand Total -->
+            <div class="row">
+                <div class="col-6">
+                    <p>
+                        Grand Total
+                    </p>
+                </div>
+                <div class="col-6">
+                    <p>
+                        £{{ grand_total|floatformat:2 }}
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
