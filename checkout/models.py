@@ -1,6 +1,7 @@
 """ This module contains the models for the checkout app """
 
 import uuid
+from decimal import Decimal
 
 from django.db import models
 from django.db.models import Sum
@@ -87,13 +88,13 @@ class Order (models.Model):
         self.order_total = self.lineitems.aggregate(
             Sum('lineitem_total'))['lineitem_total__sum'] or 0
         self.order_weight = self.lineitems.aggregate(
-            Sum('lineitem_weight'))['lineitem_wight__sum'] or 0
+            Sum('lineitem_weight'))['lineitem_weight__sum'] or 0
 
         if self.order_total < settings.FREE_DELIVERY_THRESHOLD:
             if self.order_weight + 100 < 1000:
-                self.delivery_cost = 2.49
+                self.delivery_cost = Decimal(2.49)
             elif self.order_weight + 100 > 1000:
-                self.delivery_cost = 3.49
+                self.delivery_cost = Decimal(3.49)
         else:
             self.delivery_cost = 0
 
