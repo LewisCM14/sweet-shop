@@ -255,10 +255,9 @@ else:
     DEFAULT_FROM_EMAIL = os.environ.get('EMAIL_HOST_USER')
 
 
-# Delivery Variables
+# Stripe & Delivery Variables
 
 FREE_DELIVERY_THRESHOLD = 50
-
-# Stripe
-
-STRIPE_PUBLIC_KEY = os.environ.get('STRIPE_PUBLIC_KEY')
+STRIPE_PUBLIC_KEY = os.environ.get('STRIPE_PUBLIC_KEY', '')
+STRIPE_SECRET_KEY = os.environ.get('STRIPE_SECRET_KEY', '')
+STRIPE_CURRENCY = 'gbp'
