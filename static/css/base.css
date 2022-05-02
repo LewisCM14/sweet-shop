@@ -344,6 +344,14 @@ body {
     height: 2px;
 } /* Top border for toasts */
 
+.bg-green {
+    background-color: #12633C;
+} /* green background for success toast */
+
+.bg-red {
+    background-color: #B30012;
+} /* red background for error toast */
+
 
 /* ------------------------------------------- FAQ ACCORDION STYLES */
 
