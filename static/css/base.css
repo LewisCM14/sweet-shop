@@ -22,6 +22,14 @@ body {
     height: 100%;
 } /* Ensures site content is above footer */
 
+.breadcrumb-item > a {
+    color: #000080 !important;
+    text-decoration: none;
+    }
+    .breadcrumb-item > a:hover {
+        text-decoration: underline;
+    } /* Sets the color of the breadcrumb navigation items to navy and underlines on hover */
+
 
 /* ------------------------------------------- TEXT & ICON STYLES */
 
