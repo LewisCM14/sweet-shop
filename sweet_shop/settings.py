@@ -258,3 +258,7 @@ else:
 # Delivery Variables
 
 FREE_DELIVERY_THRESHOLD = 50
+
+# Stripe
+
+STRIPE_PUBLIC_KEY = os.environ.get('STRIPE_PUBLIC_KEY')

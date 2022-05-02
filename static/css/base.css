@@ -516,11 +516,63 @@ Taken from - https://stackoverflow.com/questions/66231936/change-accordion-butto
 
 /* ------------------------------------------- CHECKOUT STYLES */
 
+.border-charcoal-round {
+    border: 1px solid #333333;
+    border-radius: 4px;
+} /* Search bar input border */
+
 .order-summary {
     height: fit-content;
-}
+} /* ensures the order summary container background doesn't extend past needed space */
+
+#id_country {
+    padding: 0px 12px !important;
+} /* ensures the placeholder text remains in the input box on the country field */
 
 select:invalid,
 select option[value=''] {
-  color: #747d84 !important
+  color: #747d84 !important;
 } /* sets the color equal to the other fields for the country field on the order form  */
+
+.StripeElement,
+.stripe-style-input {
+  box-sizing: border-box;
+  height: 40px;
+  padding: 10px 12px;
+  border: 1px solid #333333;
+  border-radius: 4px;
+  background-color: #ffffff;
+  box-shadow: 0 1px 3px 0 #F8F9FA;
+  -webkit-transition: box-shadow 150ms ease;
+  transition: box-shadow 150ms ease;
+} /* Styles all input fields on order form */
+
+.StripeElement--focus,
+.stripe-style-input:focus,
+.stripe-style-input:active {
+  box-shadow: 0 1px 3px 0 #000080;
+} /* styles the box shadow on click for all input fields on order form */
+
+.StripeElement--webkit-autofill {
+  background-color: #ffffff !important;
+}
+
+.stripe-style-input::placeholder {
+    color: #747d84;
+}
+
+.fieldset-label {
+    position: relative;
+    right: .5rem;
+}
+
+#payment-form .form-control,
+#card-element {
+    color: #333333;
+    border: 1px solid #333333;
+}
+
+select,
+select option {
+  color: #333333;
+}

@@ -73,6 +73,11 @@ class OrderForm(forms.ModelForm):
         Over ride the default save method.
 
         Add the autofocus class to the 'full_name' field.
+
+        Then iterate through all the fields in the order form and
+        add the stripe-style-input class to ensure can style form.
         """
         super().__init__(*args, **kwargs)
         self.fields['full_name'].widget.attrs['autofocus'] = True
+        for field in self.fields:
+            self.fields[field].widget.attrs['class'] = 'stripe-style-input'

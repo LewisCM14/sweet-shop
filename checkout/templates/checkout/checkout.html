@@ -29,7 +29,7 @@
     <div class="row d-flex flex-row-reverse">
         <!-- Order Summary Container -->
         <div class="col-lg-4 pl-md-3 pr-md-3 mb-4">
-            <div class="order-summary border-charcoal bg-white p-3">
+            <div class="order-summary border-charcoal-round bg-white p-3">
                 <div class="row container-fluid">
                     <div class="col">
                         <p class="fw-700">Order Summary</p>
@@ -201,13 +201,15 @@
                             <div class="accordion-body">
                                 <fieldset>
                                     <legend class="h6 fw-700">Payment Information</legend>
-                                    <!-- Card Detail Input -->
-                                    <div class="row">
-                                        <div class="col" id="card-element"></div>
-                                    </div>
-                                    <!-- Container for Form Errors -->
-                                    <div class="row">
-                                        <div class="col text-red" id="card-errors" role="alert"></div>
+                                    <div class="container">
+                                        <!-- Card Detail Input -->
+                                        <div class="row">
+                                            <div class="col" id="card-element"></div>
+                                        </div>
+                                        <!-- Container for Form Errors -->
+                                        <div class="row">
+                                            <div class="col text-red" id="card-errors" role="alert"></div>
+                                        </div>
                                     </div>
                                 </fieldset>
                                 <!-- The Button to Submit the Order Form -->
@@ -242,4 +244,7 @@
 
 {% block postloadjs %}
     {{ block.super }}
+    {{ stripe_public_key|json_script:"id_stripe_public_key" }}
+    {{ client_secret|json_script:"id_client_secret" }}
+    <script src="{% static 'checkout/js/stripe_elements.js' %}"></script>
 {% endblock %}
