@@ -22,6 +22,10 @@ body {
     height: 100%;
 } /* Ensures site content is above footer */
 
+.breadcrumb-item {
+    color: #333333 !important;
+} /* Sets color of active breadcrumb item to charcoal, important to over ride bootstrap active class */
+
 .breadcrumb-item > a {
     color: #000080 !important;
     text-decoration: none;
