@@ -519,3 +519,8 @@ Taken from - https://stackoverflow.com/questions/66231936/change-accordion-butto
 .order-summary {
     height: fit-content;
 }
+
+select:invalid,
+select option[value=''] {
+  color: #747d84 !important
+} /* sets the color equal to the other fields for the country field on the order form  */
