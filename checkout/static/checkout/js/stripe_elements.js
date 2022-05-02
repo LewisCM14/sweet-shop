@@ -53,7 +53,7 @@ card.addEventListener('change', function (event) {
 // Handle form submit
 // Collects the form element from the template and places an event listener on the submit button.
 // Once triggered disables the submit button and stripe card element, preventing multiple submissions.
-// Then calls the stripe ConfirmCardPayment method with the clientSecret. Passing it the payment_method.
+// Then triggers the loading spinner before calling the stripe ConfirmCardPayment method with the clientSecret. Passing it the payment_method.
 // Then on the result of this function either displays the error message and re-enables the submit button and element,
 // or sets the paymentIntent status of the order to 'succeeded' and submits the form.
 
@@ -63,6 +63,8 @@ form.addEventListener('submit', function(ev) {
     ev.preventDefault();
     card.update({ 'disabled': true});
     $('#submit-button').attr('disabled', true);
+    $('#payment-form').fadeToggle(100);
+    $('#loading-overlay').fadeToggle(100);
     stripe.confirmCardPayment(clientSecret, {
         payment_method: {
             card: card,
@@ -76,6 +78,8 @@ form.addEventListener('submit', function(ev) {
                 </span>
                 <span>${result.error.message}</span>`;
             $(errorDiv).html(html);
+            $('#payment-form').fadeToggle(100);
+            $('#loading-overlay').fadeToggle(100);
             card.update({ 'disabled': false});
             $('#submit-button').attr('disabled', false);
         } else {
