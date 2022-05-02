@@ -604,7 +604,7 @@ select option {
     left: 0;
     width: 100%;
     height: 100%;
-    background: #000080;
+    background: #000080CC;
     z-index: 9999;
 } /* Sets the background color and positioning of the loading screen */
 
