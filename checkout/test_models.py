@@ -60,9 +60,32 @@ class TestModel(TestCase):
 
         Collects the Order object created in the setUp method
         via its ID, storing it in the order variable.
+        Then asserts the len of the order_number field on this variable is
+        equal to 32, as is supposed to be returned from the
+        generate_order_number model method.
         Then asserts the str method return on this variable is
         equal to it's order_number.
         """
 
         order = Order.objects.get(id=1)
+        self.assertEqual(len(order.order_number), 32)
         self.assertEqual(str(order), order.order_number)
+
+    def test_update_total_populates_fields(self):
+        """
+        Tests the update_total method updates the Order model
+        fields as intended.
+
+        Collects the Order object created in the setUp method
+        via its ID, storing it in the order variable.
+        Then assers the values for order_total, order_weight,
+        delivery_cost and grand_total are the correct values
+        based of the values given to the object created within
+        the Product database.
+        """
+
+        order = Order.objects.get(id=1)
+        self.assertEqual((order.order_total), Decimal('1.99'))
+        self.assertEqual((order.order_weight), 200)
+        self.assertEqual((order.delivery_cost), Decimal('2.49'))
+        self.assertEqual((order.grand_total), Decimal('4.48'))
