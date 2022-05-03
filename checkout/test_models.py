@@ -17,7 +17,7 @@ class TestModel(TestCase):
         """
         Initiates the Product database with an object to pass
         to the OrderLineItem model.
-        Creates two Order instances for use in testing.
+        Creates three Order instances for use in testing.
         """
         chewy = Type.objects.create(
             name='chewy_sweets',
@@ -74,6 +74,26 @@ class TestModel(TestCase):
             quantity=5,
         )
 
+        test_order3 = Order.objects.create(
+            order_number='Order Number Test String',
+            user_profile=None,
+            full_name='John Doe',
+            email='johndoe@email.com',
+            phone_number='11111111111',
+            street_address1='4 privet drive',
+            street_address2='',
+            town_or_city='little whinging',
+            county='surrey',
+            postcode='CR2 5ER',
+            country='GB',
+        )
+
+        OrderLineItem.objects.create(
+            order=test_order3,
+            product=Product.objects.get(id=1),
+            quantity=26,
+        )
+
     def test_order_string_method_returns_order_number(self):
         """
         Tests the string method return on the Order model.
@@ -117,6 +137,12 @@ class TestModel(TestCase):
         Then asserts the value for the order_weight is 1000, before
         asserting the delivery_total is 3.49, the correct value based
         of that orders weight.
+
+        Collects the third Order object created in the setUp method
+        via its ID, storing it in the order3 variable.
+        Then asserts the value for the order_total is 51.74, before
+        asserting the delivery_total is 0, the correct value based
+        of that orders total.
         """
 
         order1 = Order.objects.get(id=1)
@@ -128,6 +154,10 @@ class TestModel(TestCase):
         order2 = Order.objects.get(id=2)
         self.assertEqual((order2.order_weight), 1000)
         self.assertEqual((order2.delivery_cost), Decimal('3.49'))
+
+        order3 = Order.objects.get(id=3)
+        self.assertEqual((order3.order_total), Decimal('51.74'))
+        self.assertEqual((order3.delivery_cost), Decimal('0'))
 
     def test_orderlineitem_str_method_returns_product_and_order_number(self):
         """
