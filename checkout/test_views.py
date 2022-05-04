@@ -160,3 +160,44 @@ class TestViews(TestCase):
         self.assertEqual((line_item.lineitem_weight), 200)
 
         self.assertRedirects(response, reverse("checkout_success", args=[order.order_number]))  # noqa: E501
+
+    def test_checkout_success_page_deletes_the_cart(self):
+        """
+        Tests the checkout success page deletes the cart from the session.
+
+        Initiates a cart instance in the session with the initiate_cart
+        helper method.
+
+        Posts a valid OrderForm instance to the checkout URL, storing it
+        in the response variable, then uses Django's inbuilt HTTP client to
+        assert its status code is equal to a 302 redirect response, then
+        asserts the user is redirected to the checkout_success page for this
+        specific order, along with receiving a feedback message.
+
+        Then collects the session and asserts the 'cart' key is no longer
+        in it.
+        """
+
+        self.initiate_cart()
+
+        response = self.client.post(
+            reverse("checkout"), {
+                'full_name': 'John Doe',
+                'email': 'johndoe@email.com',
+                'phone_number': '11111111111',
+                'street_address1': '4 privet drive',
+                'street_address2': '',
+                'town_or_city': 'little whinging',
+                'county': 'surrey',
+                'postcode': 'CR2 5ER',
+                'country': 'GB',
+            })
+
+        order = Order.objects.get(id=1)
+        messages = list(get_messages(response.wsgi_request))
+
+        self.assertEqual(len(messages), 1)
+        self.assertRedirects(response, reverse("checkout_success", args=[order.order_number]))  # noqa: E501
+
+        session = self.client.session
+        self.assertNotIn('cart', session)
