@@ -5,6 +5,7 @@ from django.test import TestCase
 from django.urls import reverse
 from django.contrib.messages import get_messages
 from products.models import Type, Product
+from .models import Order, OrderLineItem
 
 
 # pylint: disable=no-member
@@ -100,3 +101,62 @@ class TestViews(TestCase):
         self.initiate_cart()
         response = self.client.get('/checkout/')
         self.assertEqual(response.status_code, 200)
+
+    def test_order_posts_to_the_database(self):
+        """
+        Test the checkout view posts valid OrderForms to the database.
+
+        Initiates a cart instance in the session with the initiate_cart
+        helper method and collects the product object created in the setUp
+        method for use in making assersions.
+
+        Posts a valid OrderForm instance to the checkout URL, storing it
+        in the response variable, then uses Django's inbuilt HTTP client to
+        assert its status code is equal to a 302 redirect response.
+
+        Then collects the created Order and OrderLineItem objects via ID.
+        Asserting the value for each field in the Order object is equal to the
+        passed values in the POST response. Before asserting the ForeignKey
+        'order' field on the OrderLineItem model is the corresponding order,
+        the 'product' field is equal to the product created in the setUp method
+        and then passed to the cart instance and the quantity, total and price
+        fields have the correct values.
+
+        Then asserts the user is directed to the corrrect checkout success URL.
+        """
+        self.initiate_cart()
+        product = Product.objects.get(id=1)
+
+        response = self.client.post(
+            reverse("checkout"), {
+                'full_name': 'John Doe',
+                'email': 'johndoe@email.com',
+                'phone_number': '11111111111',
+                'street_address1': '4 privet drive',
+                'street_address2': '',
+                'town_or_city': 'little whinging',
+                'county': 'surrey',
+                'postcode': 'CR2 5ER',
+                'country': 'GB',
+            })
+        self.assertEqual(response.status_code, 302)
+
+        order = Order.objects.get(id=1)
+        self.assertEqual((order.full_name), 'John Doe')
+        self.assertEqual((order.email), 'johndoe@email.com')
+        self.assertEqual((order.phone_number), '11111111111')
+        self.assertEqual((order.street_address1), '4 privet drive')
+        self.assertEqual((order.street_address2), '')
+        self.assertEqual((order.town_or_city), 'little whinging')
+        self.assertEqual((order.county), 'surrey')
+        self.assertEqual((order.postcode), 'CR2 5ER')
+        self.assertEqual((order.country), 'GB')
+
+        line_item = OrderLineItem.objects.get(id=1)
+        self.assertEqual((line_item.order), order)
+        self.assertEqual((line_item.product), product)
+        self.assertEqual((line_item.quantity), 1)
+        self.assertEqual((line_item.lineitem_total), Decimal('1.99'))
+        self.assertEqual((line_item.lineitem_weight), 200)
+
+        self.assertRedirects(response, reverse("checkout_success", args=[order.order_number]))  # noqa: E501
