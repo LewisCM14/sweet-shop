@@ -111,7 +111,7 @@ class TestProductViews(TestCase):
 
         messages = list(get_messages(response.wsgi_request))
         self.assertEqual(len(messages), 1)
-        self.assertEqual(str(messages[0]), "You didn't enter any search criteria!")  # noqa
+        self.assertEqual(str(messages[0]), "You didn't enter any search criteria!")  # noqa: E501
 
         self.assertRedirects(response, '/products/')
 
