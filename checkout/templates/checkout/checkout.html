@@ -1,0 +1,258 @@
+{% extends "base.html" %}
+{% load static %}
+{% load cart_tools %}
+
+{% block page_header %}
+<div class="container header-container">
+    <div class="row">
+        <div class="col">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+                    <li class="breadcrumb-item"><a href="{% url 'products' %}">Products</a></li>
+                    <li class="breadcrumb-item"><a href="{% url 'view_cart' %}">Shopping Cart</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Checkout</li> 
+                </ol>
+            </nav>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="container mb-4">
+    <div class="row mb-2">
+        <div class="col">
+            <span class="h4 text-uppercase">Checkout</span>
+        </div>
+    </div>
+    <div class="row d-flex flex-row-reverse">
+        <!-- Order Summary Container -->
+        <div class="col-lg-4 pl-md-3 pr-md-3 mb-4">
+            <div class="order-summary border-charcoal-round bg-white p-3">
+                <div class="row container-fluid">
+                    <div class="col">
+                        <p class="fw-700">Order Summary</p>
+                    </div>
+                </div>
+                <div class="text-center">
+                    <hr class="mb-4 mt-0 d-inline-block mx-auto"
+                    style="width: 90%; background-color: #000080; height: 2px" />
+                </div>
+                {% for item in cart_items %}
+                    <div class="row container-fluid">
+                        <div class="col-10">
+                            <p>
+                                {{ item.quantity }}x {{ item.product.name }}
+                            </p>
+                        </div>
+                        <div class="col-2">
+                            <p>
+                                £{{ item.product.price | calc_subtotal:item.quantity }}
+                            </p>
+                        </div>
+                    </div>
+                {% endfor %}
+                <div class="text-center">
+                    <hr class="mb-4 mt-0 d-inline-block mx-auto"
+                    style="width: 90%; background-color: #000080; height: 2px" />
+                </div>
+                <!-- Cart Subtotal -->
+                <div class="row container-fluid">
+                    <div class="col-10">
+                        <p>
+                            Cart Subtotal
+                        </p>
+                    </div>
+                    <div class="col-2">
+                        <p>
+                            £{{ total|floatformat:2 }}
+                        </p>
+                    </div>
+                </div>
+                <!-- Delivery Cost -->
+                <div class="row container">
+                    <div class="col-10">
+                        <p>
+                            Delivery
+                        </p>
+                    </div>
+                    <div class="col-2">
+                        <p>
+                            £{{ delivery|floatformat:2 }}
+                        </p>
+                    </div>
+                </div>
+                <!-- Grand Total -->
+                <div class="row container-fluid">
+                    <div class="col-10">
+                        <p>
+                            Grand Total
+                        </p>
+                    </div>
+                    <div class="col-2">
+                        <p>
+                            £{{ grand_total|floatformat:2 }}
+                        </p>
+                    </div>
+                </div>
+                <!-- Return to Cart Button -->
+                <div class="row container-fluid text-center">
+                    <div class="col">
+                        <a href="{% url 'view_cart' %}" class="charcoal-blue-btn text-decoration-none">
+                            Adjust Cart
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Order Form Container -->
+        <div class="col-lg-8">
+            <!-- Order Form -->
+            <form action="{% url 'checkout' %}" method="POST" id="payment-form">
+                {% csrf_token %}
+                <!-- Delivery Details -->
+                <div class="accordion" id="checkout-accordion">
+                    <div class="accordion-item mb-4">
+                        <p class="h2 accordion-header" id="headingOne">
+                            <button class="accordion-button text-uppercase" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                Delivery Details
+                            </button>
+                        </p>
+                        <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
+                            data-bs-parent="#checkout-accordion">
+                            <div class="accordion-body">
+                                <fieldset>
+                                    <legend class="h6 fw-700">Contact Information</legend>
+                                    <div class="row">
+                                        <div class="col">
+                                            {{ order_form.full_name | as_crispy_field }}
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            {{ order_form.email | as_crispy_field }}
+                                        </div>
+                                        <div class="col-md-6">
+                                            {{ order_form.phone_number | as_crispy_field }}
+                                        </div>
+                                    </div>
+                                </fieldset>
+                                <fieldset class="mt-3">
+                                    <legend class="h6 fw-700">Delivery Address</legend>
+                                    <div class="row">
+                                        <div class="col">
+                                            {{ order_form.street_address1 | as_crispy_field }}
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            {{ order_form.street_address2 | as_crispy_field }}
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            {{ order_form.town_or_city | as_crispy_field }}
+                                        </div>
+                                        <div class="col-md-6">
+                                            {{ order_form.county | as_crispy_field }}
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            {{ order_form.postcode | as_crispy_field }}
+                                        </div>
+                                        <div class="col-md-6">
+                                            {{ order_form.country | as_crispy_field }}
+                                        </div>
+                                    </div>
+                                    <!-- Checkbox for saving Delivery Detail information -->
+                                    <div class="row mt-3 form-check form-check-inline mr-0">
+                                        {% if user.is_authenticated %}
+                                        <div class="col">
+                                            <label class="form-check-label" for="id-save-info">Save this delivery information to my profile</label>
+                                            <input class="form-check-input ml-2 mr-0" type="checkbox" id="id-save-info" name="save-info" checked>
+                                        </div>
+                                        {% else %}
+                                        <div class="col">
+                                            <label class="form-check-label" for="id-save-info">
+                                                <a class="navy-charcoal fw-700" href="{% url 'account_signup' %}">Create an Account</a> or 
+                                                <a class="navy-charcoal fw-700" href="{% url 'account_login' %}">login</a> to save this information.
+                                            </label>
+                                        </div>
+                                        {% endif %}
+                                    </div>
+                                </fieldset>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Payment Details -->
+                    <div class="accordion-item mb-4">
+                        <p class="h2 accordion-header" id="headingTwo">
+                            <button class="accordion-button collapsed text-uppercase" type="button"
+                                data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false"
+                                aria-controls="collapseTwo">
+                                Payment Details
+                            </button>
+                        </p>
+                        <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
+                            data-bs-parent="#faq-accordion">
+                            <div class="accordion-body">
+                                <fieldset>
+                                    <legend class="h6 fw-700">Payment Information</legend>
+                                    <div class="container">
+                                        <!-- Card Detail Input -->
+                                        <div class="row">
+                                            <div class="col" id="card-element"></div>
+                                        </div>
+                                        <!-- Container for Form Errors -->
+                                        <div class="row">
+                                            <div class="col text-red" id="card-errors" role="alert"></div>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                                <!-- The Button to Submit the Order Form -->
+                                <div class="submit-button mt-4">
+                                    <div class="row">
+                                        <div class="col d-flex justify-content-end">
+                                            <button id="submit-button" class="blue-charcoal-btn">
+                                                Complete Order
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col d-flex justify-content-end">
+                                            <p class="small text-red">
+                                                <span class="icon">
+                                                    <i class="fas fa-exclamation-circle"></i>
+                                                </span>
+                                                <span>Your card will be charged <strong>£{{ grand_total|floatformat:2 }}</strong></span>
+                                            </p>
+                                        </div>
+                                    </div>   
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- Loading Spinner, Displayed on Order Form Submission -->
+<div id="loading-overlay">
+    <h1 class="text-light logo-font loading-spinner">
+        <span class="icon">
+            <i class="fas fa-3x fa-sync-alt fa-spin"></i>
+        </span>
+    </h1>
+</div>
+{% endblock %}
+
+{% block postloadjs %}
+    {{ block.super }}
+    {{ stripe_public_key|json_script:"id_stripe_public_key" }}
+    {{ client_secret|json_script:"id_client_secret" }}
+    <script src="{% static 'checkout/js/stripe_elements.js' %}"></script>
+{% endblock %}

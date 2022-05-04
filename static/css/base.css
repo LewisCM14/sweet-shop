@@ -22,6 +22,18 @@ body {
     height: 100%;
 } /* Ensures site content is above footer */
 
+.breadcrumb-item {
+    color: #333333 !important;
+} /* Sets color of active breadcrumb item to charcoal, important to over ride bootstrap active class */
+
+.breadcrumb-item > a {
+    color: #000080 !important;
+    text-decoration: none;
+    }
+    .breadcrumb-item > a:hover {
+        text-decoration: underline;
+    } /* Sets the color of the breadcrumb navigation items to navy and underlines on hover */
+
 
 /* ------------------------------------------- TEXT & ICON STYLES */
 
@@ -129,6 +141,27 @@ body {
   .blue-charcoal-btn:hover {
     background: #333333;
     border: 2px solid #333333;
+    color: #FFFFFF
+  } /* Taken from https://markodenic.com/tools/buttons-generator/ */
+
+.charcoal-blue-btn {
+    min-width: 130px;
+    height: 40px;
+    color: #FFFFFF;
+    padding: 5px 10px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    display: inline-block;
+    outline: none;
+    border-radius: 5px;
+    border: 2px solid #333333;
+    background: #333333;
+  }
+  .charcoal-blue-btn:hover {
+    background: #000080;
+    border: 2px solid #000080;
     color: #FFFFFF
   } /* Taken from https://markodenic.com/tools/buttons-generator/ */
 
@@ -315,6 +348,14 @@ body {
     height: 2px;
 } /* Top border for toasts */
 
+.bg-green {
+    background-color: #12633C;
+} /* green background for success toast */
+
+.bg-red {
+    background-color: #B30012;
+} /* red background for error toast */
+
 
 /* ------------------------------------------- FAQ ACCORDION STYLES */
 
@@ -331,6 +372,10 @@ Taken from - https://stackoverflow.com/questions/66231936/change-accordion-butto
 
 
 /* ------------------------------------------- PRODUCTS STYLES */
+
+.category-container {
+    height: fit-content;
+}
 
 .border-blur {
     border-width: 1px;
@@ -480,10 +525,93 @@ Taken from - https://stackoverflow.com/questions/66231936/change-accordion-butto
     display: inline-block;
     outline: none;
     border-radius: 20px;
-    border: 2px solid #000040;
-    background: #000040;
+    border: 2px solid #000080;
+    background: #000080;
   }
   .image-btn:hover {
     background: #fff;
-    color: #000040
+    color: #000080
   } /* Taken from https://markodenic.com/tools/buttons-generator/ */
+
+
+/* ------------------------------------------- CHECKOUT STYLES */
+
+.border-charcoal-round {
+    border: 1px solid #333333;
+    border-radius: 4px;
+} /* Search bar input border */
+
+.order-summary {
+    height: fit-content;
+} /* ensures the order summary container background doesn't extend past needed space */
+
+#id_country {
+    padding: 0px 12px !important;
+} /* ensures the placeholder text remains in the input box on the country field */
+
+select:invalid,
+select option[value=''] {
+  color: #747d84 !important;
+} /* sets the color equal to the other fields for the country field on the order form  */
+
+.StripeElement,
+.stripe-style-input {
+  box-sizing: border-box;
+  height: 40px;
+  padding: 10px 12px;
+  border: 1px solid #333333;
+  border-radius: 4px;
+  background-color: #ffffff;
+  box-shadow: 0 1px 3px 0 #F8F9FA;
+  -webkit-transition: box-shadow 150ms ease;
+  transition: box-shadow 150ms ease;
+} /* Styles all input fields on order form */
+
+.StripeElement--focus,
+.stripe-style-input:focus,
+.stripe-style-input:active {
+  box-shadow: 0 1px 3px 0 #000080;
+} /* styles the box shadow on click for all input fields on order form */
+
+.StripeElement--webkit-autofill {
+  background-color: #ffffff !important;
+}
+
+.stripe-style-input::placeholder {
+    color: #747d84;
+}
+
+.fieldset-label {
+    position: relative;
+    right: .5rem;
+}
+
+#payment-form .form-control,
+#card-element {
+    color: #333333;
+    border: 1px solid #333333;
+}
+
+select,
+select option {
+  color: #333333;
+}
+
+#loading-overlay {
+	display: none;
+	position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #000080CC;
+    z-index: 9999;
+} /* Sets the background color and positioning of the loading screen */
+
+.loading-spinner {
+	display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    height: 100%;
+} /* Sets the background color and positioning of the loading screen spinner */

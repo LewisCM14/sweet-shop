@@ -21,6 +21,11 @@
 {% block content %}
 
 <div class="container">
+    <div class="row mb-2">
+        <div class="col">
+            <span class="h4 text-uppercase">Shopping Cart</span>
+        </div>
+    </div>
     {% if cart_items %}
         <!-- Shopping Cart Headings -->
         <div class="row d-none d-md-block d-lg-block d-xl-block d-xxl-block">
@@ -128,7 +133,7 @@
                         </div>
                         <!-- Remove Item -->
                         <div class="text-center col-md-2">
-                            <a class="remove-item text-decoration-none text-danger" id="remove_{{ item.item_id }}"><i class="fa-solid fa-trash-can fa-lg"></i></a>
+                            <a class="remove-item text-decoration-none text-red" id="remove_{{ item.item_id }}"><i class="fa-solid fa-trash-can fa-lg"></i></a>
                         </div>
                     </div>
                 </div>
@@ -181,7 +186,7 @@
                 <!-- Action Buttons -->
                 <div class="row mb-1">
                     <div class="col-12">
-                        <a class="shopping-button blue-charcoal-btn text-decoration-none mt-1" href="#">
+                        <a class="shopping-button blue-charcoal-btn text-decoration-none mt-1" href="{% url 'checkout' %}">
                             Checkout
                         </a>
                     </div>

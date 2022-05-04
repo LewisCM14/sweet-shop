@@ -63,7 +63,7 @@ class TestView(TestCase):
         form = UserProfileForm(data={
             'default_forname': 'john',
             'default_surname': 'doe',
-            'default_phone_number': '01509',
+            'default_phone_number': '1111111111111111',
             'default_street_address1': '4 privet drive',
             'default_street_address2': '',
             'default_town_or_city': 'little whinging',

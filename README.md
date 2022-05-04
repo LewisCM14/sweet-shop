@@ -655,6 +655,8 @@ ___
 
     * I used this [post](https://stackoverflow.com/questions/30849862/django-max-length-for-integerfield) on stackoverflow to help me decide on a method for implementing validation on my ProductForm.
 
+    * I used this [post](https://stackoverflow.com/questions/7015302/css-hexadecimal-rgba) on stackoverflow to help me add opacity to hexadecimal color values.
+
 - **Media** <a name='media'></a>
 
 [Return to Table of Contents](#contents)

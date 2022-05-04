@@ -32,7 +32,7 @@ def profile(request):
             form.save()
             messages.success(request, 'Profile updated successfully')
         else:
-            messages.error(request, 'Update failed. Please ensure the form is valid.')  # noqa
+            messages.error(request, 'Update failed. Please ensure the form is valid.')  # noqa: E501
     else:  # return the form data back to the view if form not valid
         form = UserProfileForm(instance=profile)
 
