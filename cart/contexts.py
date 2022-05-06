@@ -24,7 +24,9 @@ def cart_contents(request):
 
     Calculates the delivery cost based upon the total & combined weight
     of the products within the cart. Utilizes the FREE_DELIVERY_THRESHOLD
-    variable located in settings.py
+    variable located in settings.py. This is wrapped in an if/else statement
+    to prevent the cart contents base html being displayed in success toast
+    if there is no items stored in the session.
     """
     cart_items = []
     total = 0
@@ -43,18 +45,23 @@ def cart_contents(request):
             'product': product,
         })
 
-    if total < settings.FREE_DELIVERY_THRESHOLD:
-        if combined_weight + 100 < 1000:
-            delivery = Decimal(2.49)
-            free_delivery_delta = Decimal(settings.FREE_DELIVERY_THRESHOLD - total)  # noqa: E501
-        elif combined_weight + 100 > 1000:
-            delivery = Decimal(3.49)
-            free_delivery_delta = Decimal(settings.FREE_DELIVERY_THRESHOLD - total)  # noqa: E501
-    else:
-        delivery = 0
-        free_delivery_delta = 0
+    if len(cart_items) > 0:
+        if total < settings.FREE_DELIVERY_THRESHOLD:
+            if combined_weight + 100 < 1000:
+                delivery = Decimal(2.49)
+                free_delivery_delta = Decimal(settings.FREE_DELIVERY_THRESHOLD - total)  # noqa: E501
+            elif combined_weight + 100 > 1000:
+                delivery = Decimal(3.49)
+                free_delivery_delta = Decimal(settings.FREE_DELIVERY_THRESHOLD - total)  # noqa: E501
+        else:
+            delivery = 0
+            free_delivery_delta = 0
 
-    grand_total = delivery + total
+        grand_total = delivery + total
+    else:
+        free_delivery_delta = None
+        delivery = None
+        grand_total = None
 
     context = {
         'cart_items': cart_items,
