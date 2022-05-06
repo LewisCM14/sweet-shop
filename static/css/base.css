@@ -87,6 +87,10 @@ body {
     color: #000080;
 } /* Text color class  */
 
+.text-yellow {
+    color: #F5E532;
+} /* Text color class  */
+
 .text-red {
     color: #B30012;
     } 
@@ -327,9 +331,9 @@ body {
 
 .message-container {
     position: fixed;
-    width: 250px;
-    top: 125px;
-    right: 115px;
+    width: 280px;
+    top: 60px;
+    right: 10px;
     z-index: 99999999999;
 } /* Container positioning */
 
@@ -356,6 +360,9 @@ body {
     background-color: #B30012;
 } /* red background for error toast */
 
+.checkout-btn {
+    width: 100%;
+}
 
 /* ------------------------------------------- FAQ ACCORDION STYLES */
 
@@ -471,7 +478,7 @@ Taken from - https://stackoverflow.com/questions/66231936/change-accordion-butto
     width: 80%;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 767px) {
     .item-qty-form-cart {
         width: 40%;
     }
