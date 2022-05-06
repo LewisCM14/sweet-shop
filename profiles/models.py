@@ -21,7 +21,7 @@ class UserProfile(models.Model):
     The user is able to provide defaults for these.
     all these fields are optional.
     """
-    # Foreign Key from the User model
+    # One to One field from the User model
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     # User Name
     default_first_name = models.CharField(max_length=20, null=True, blank=True)
