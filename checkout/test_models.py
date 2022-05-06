@@ -37,7 +37,8 @@ class TestModel(TestCase):
 
         test_order1 = Order.objects.create(
             user_profile=None,
-            full_name='John Doe',
+            first_name='John',
+            last_name='Doe',
             email='johndoe@email.com',
             phone_number='11111111111',
             street_address1='4 privet drive',
@@ -57,7 +58,8 @@ class TestModel(TestCase):
         test_order2 = Order.objects.create(
             order_number='Order Number Test String',
             user_profile=None,
-            full_name='John Doe',
+            first_name='John',
+            last_name='Doe',
             email='johndoe@email.com',
             phone_number='11111111111',
             street_address1='4 privet drive',
@@ -77,7 +79,8 @@ class TestModel(TestCase):
         test_order3 = Order.objects.create(
             order_number='Order Number Test String',
             user_profile=None,
-            full_name='John Doe',
+            first_name='John',
+            last_name='Doe',
             email='johndoe@email.com',
             phone_number='11111111111',
             street_address1='4 privet drive',
