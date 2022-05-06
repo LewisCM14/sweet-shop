@@ -9,16 +9,16 @@ class UserProfileForm(forms.ModelForm):
     The form for saving default details, rendered on profile.html.
     """
 
-    default_forname = forms.CharField(
-        label='Forname:',
+    default_first_name = forms.CharField(
+        label='First Name:',
         required=False,
-        widget=forms.TextInput(attrs={'placeholder': 'First Name'}),
+        widget=forms.TextInput(attrs={'placeholder': 'Forname'}),
     )
 
-    default_surname = forms.CharField(
-        label='Surname:',
+    default_last_name = forms.CharField(
+        label='Last Name:',
         required=False,
-        widget=forms.TextInput(attrs={'placeholder': 'Last Name'}),
+        widget=forms.TextInput(attrs={'placeholder': 'Surname'}),
     )
 
     default_phone_number = forms.CharField(
@@ -73,5 +73,5 @@ class UserProfileForm(forms.ModelForm):
         """
         super().__init__(*args, **kwargs)
 
-        self.fields['default_forname'].widget.attrs['autofocus'] = True
+        self.fields['default_first_name'].widget.attrs['autofocus'] = True
         self.fields['default_country'].label = 'Country:'

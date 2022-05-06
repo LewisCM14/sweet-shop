@@ -24,8 +24,8 @@ class UserProfile(models.Model):
     # Foreign Key from the User model
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     # User Name
-    default_forname = models.CharField(max_length=20, null=True, blank=True)
-    default_surname = models.CharField(max_length=20, null=True, blank=True)
+    default_first_name = models.CharField(max_length=20, null=True, blank=True)
+    default_last_name = models.CharField(max_length=20, null=True, blank=True)
     # User Phone Number and Validator
     phoneNumberRegex = RegexValidator(regex=r'^\+?1?\d{9,15}$')
     default_phone_number = models.CharField(
@@ -44,7 +44,7 @@ class UserProfile(models.Model):
         """
         Returns the username of the user instance as a string
         """
-        return self.user.username
+        return self.user.first_name
 
 
 # pylint: disable=no-member
