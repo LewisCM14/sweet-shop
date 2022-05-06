@@ -657,6 +657,8 @@ ___
 
     * I used this [post](https://stackoverflow.com/questions/7015302/css-hexadecimal-rgba) on stackoverflow to help me add opacity to hexadecimal color values.
 
+    * I used this [post](https://stackoverflow.com/questions/350799/how-does-django-know-the-order-to-render-form-fields) on stackoverflow to help me set the order of the fields on my user sign up form.
+
 - **Media** <a name='media'></a>
 
 [Return to Table of Contents](#contents)

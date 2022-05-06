@@ -5,8 +5,77 @@
           <strong class="me-auto">Success!</strong>
           <button type="button" class="btn-close text-dark" data-bs-dismiss="toast" aria-label="Close"></button>
       </div>
-      <div class="toast-body">
-          {{ message }}
+      <div class="toast-body bg-white">
+          <div class="row">
+              <div class="col">
+                  {{ message }}
+              </div>
+          </div>
+          <!-- Checks if items are stored within the cart -->
+        {% if grand_total and not hide_cart %}
+            <div class="text-center">
+                <hr class="d-inline-block" style="width: 90%; background-color: #000080; height: 2px" />
+            </div>
+            <p>Your Cart ({{ product_count }})</p>
+            <!-- Iterates over each item in the cart to display them to the user -->
+            <div class="cart-notification-wrapper">
+                {% for item in cart_items %}
+                    <div class="row">
+                        <!-- Product Image -->
+                        <div class="col-3">
+                            {% if item.product.image %}
+                                <img class="w-100" src="{{ item.product.image.url }}" alt="{{ item.product.name }}">
+                            {% else %}
+                                <img class="w-100" src="{{ MEDIA_URL }}noimage.png" alt="{{ item.product.name }}">
+                            {% endif %}
+                        </div>
+                        <!-- Product Info -->
+                        <div class="col-9">
+                            <p><strong>{{ item.product.name }}</strong></p>
+                            <p class="mt-neg-15">Weight: {{ item.product.weight_in_grams }}g | Qty: {{ item.quantity }}</p>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <!-- Cart Total -->
+            <div class="row">
+                <div class="col d-flex justify-content-end">
+                    <strong>
+                        <p>
+                            Total{% if free_delivery_delta > 0 %} (Exc. delivery){% endif %}:
+                            <span>£{{ total|floatformat:2 }}</span>
+                        </p>
+                    </strong>
+                </div>
+            </div>
+            <div class="text-center">
+                <hr class="d-inline-block" style="width: 90%; background-color: #000080; height: 2px" />
+            </div>
+            <!-- Free Delivery Delta -->
+            <div class="row">
+                <div class="free-delivery-wrapper">
+                    <div class="col text-center">
+                        {% if free_delivery_delta > 0 %}
+                            <p>
+                                Spend <strong>£{{ free_delivery_delta }}</strong> more for free delivery!
+                            </p>
+                        {% else %}
+                        <p>
+                            Congratulations, <strong>free delivery!</strong> 
+                        </p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            <!-- Checkout Button -->
+            <div class="row">
+                <div class="col text-center">
+                    <a href="{% url 'view_cart' %}">
+                        <span class="checkout-btn blue-charcoal-btn text-uppercase">Go To Secure Checkout</span>
+                    </a>
+                </div>
+            </div>
+        {% endif %}
       </div>
   </div>
 </div>

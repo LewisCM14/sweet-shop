@@ -234,9 +234,11 @@ class TestProductManagement(TestCase):
         )
 
         User.objects.create_superuser(
-            username='JohnDoe',
-            password='Password',
+            username='johndoe',
+            first_name='John',
+            last_name='Doe',
             email='johndoe@email.com',
+            password='password',
         )
 
     def admin_login(self):
@@ -246,7 +248,7 @@ class TestProductManagement(TestCase):
 
         self.client.login(
             email='johndoe@email.com',
-            password='Password',
+            password='password',
         )
 
     def test_add_product_page_renders(self):

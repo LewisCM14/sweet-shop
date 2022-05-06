@@ -69,7 +69,7 @@
                     <ul class="nav-item dropdown nav navbar-nav">
                         <a class="me-auto dropdown-toggle white-yellow" href="#" id="productManagementDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             {% if user.is_authenticated %}
-                                Hello {{ user }}
+                                Hello {{ user.first_name }}
                             {% else %}
                                 Hello
                             {% endif %}

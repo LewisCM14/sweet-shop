@@ -129,7 +129,8 @@ class TestViews(TestCase):
 
         response = self.client.post(
             reverse("checkout"), {
-                'full_name': 'John Doe',
+                'first_name': 'John',
+                'last_name': 'Doe',
                 'email': 'johndoe@email.com',
                 'phone_number': '11111111111',
                 'street_address1': '4 privet drive',
@@ -142,7 +143,8 @@ class TestViews(TestCase):
         self.assertEqual(response.status_code, 302)
 
         order = Order.objects.get(id=1)
-        self.assertEqual((order.full_name), 'John Doe')
+        self.assertEqual((order.first_name), 'John')
+        self.assertEqual((order.last_name), 'Doe')
         self.assertEqual((order.email), 'johndoe@email.com')
         self.assertEqual((order.phone_number), '11111111111')
         self.assertEqual((order.street_address1), '4 privet drive')
@@ -182,7 +184,8 @@ class TestViews(TestCase):
 
         response = self.client.post(
             reverse("checkout"), {
-                'full_name': 'John Doe',
+                'first_name': 'John',
+                'last_name': 'Doe',
                 'email': 'johndoe@email.com',
                 'phone_number': '11111111111',
                 'street_address1': '4 privet drive',

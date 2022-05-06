@@ -83,6 +83,15 @@ def adjust_cart(request, item_id):
 def remove_from_cart(request, item_id):
     """
     A function to handle removing the items within the cart.
+
+    Within a try/except collects the item to be removed and the
+    cart from the session. Then 'pops' the item out of the cart
+    via its ID. As it is posted to from a JavaScript function.
+    Return an actual 200 HTTP response. Implying that the item
+    was successfully removed.
+
+    If the item cannot be removed, returns a 500 HTTP response
+    and a message as user feedback
     """
 
     try:
