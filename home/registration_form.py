@@ -18,9 +18,9 @@ class CustomSignupForm(SignupForm):
         the required fields, allowing for the field_order method to be set
         """
         model = User
-        fields = ('forname', 'surname', 'email1', 'email2', 'password1', 'password2',)  # noqa: E501
+        fields = ('forname', 'surname', 'email', 'email2', 'password1', 'password2',)  # noqa: E501
 
-    field_order = ['forname', 'surname', 'email1', 'email2', 'password1', 'password2', ]  # noqa: E501
+    field_order = ['forname', 'surname', 'email', 'email2', 'password1', 'password2', ]  # noqa: E501
 
     forname = forms.CharField(
         label='Forname',
