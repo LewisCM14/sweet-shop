@@ -11,11 +11,11 @@
                   {{ message }}
               </div>
           </div>
-          <div class="text-center">
-              <hr class="d-inline-block" style="width: 90%; background-color: #000080; height: 2px" />
-          </div>
           <!-- Checks if items are stored within the cart -->
-        {% if grand_total %}
+        {% if grand_total and not hide_cart %}
+            <div class="text-center">
+                <hr class="d-inline-block" style="width: 90%; background-color: #000080; height: 2px" />
+            </div>
             <p>Your Cart ({{ product_count }})</p>
             <!-- Iterates over each item in the cart to display them to the user -->
             <div class="cart-notification-wrapper">

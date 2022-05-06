@@ -21,8 +21,6 @@ def profile(request):
 
     Upon a POST request, checks the form is valid and if so,
     updates it.
-
-    NEED TO ADD TOASTS FOR MESSAGES AND ADD ON PROFILE PAGE = TRUE TO CONTEXT - remember to come back to this
     """
     profile = get_object_or_404(UserProfile, user=request.user)
 
@@ -39,6 +37,7 @@ def profile(request):
     template = 'profiles/profile.html'
     context = {
         'form': form,
+        'hide_cart': True,
     }
 
     return render(request, template, context)
