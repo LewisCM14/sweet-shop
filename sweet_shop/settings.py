@@ -122,9 +122,9 @@ SITE_ID = 1
 
 # allauth settings
 
-# ACCOUNT_FORMS = {
-#     'signup': '',
-# }
+ACCOUNT_FORMS = {
+    'signup': 'home.registration_form.CustomSignupForm',
+}
 
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
 ACCOUNT_EMAIL_REQUIRED = True

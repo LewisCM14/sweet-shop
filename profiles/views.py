@@ -29,9 +29,9 @@ def profile(request):
         if form.is_valid():
             form.save()
             messages.success(request, 'Profile updated successfully')
-        else:
+        else:  # return the form data back to the view if form not valid
             messages.error(request, 'Update failed. Please ensure the form is valid.')  # noqa: E501
-    else:  # return the form data back to the view if form not valid
+    else:
         form = UserProfileForm(instance=profile)
 
     template = 'profiles/profile.html'
