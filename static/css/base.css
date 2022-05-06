@@ -360,9 +360,16 @@ body {
     background-color: #B30012;
 } /* red background for error toast */
 
+
+.cart-notification-wrapper {
+    height: 300px;
+    overflow-x: hidden;
+    overflow-y: auto;
+} /* Makes the cart contents scrollable past 300px */
+
 .checkout-btn {
     width: 100%;
-}
+} /* Sets the width of the checkout button */
 
 /* ------------------------------------------- FAQ ACCORDION STYLES */
 
