@@ -23,13 +23,15 @@ class TestModel(TestCase):
         """
         User.objects.create_user(
             username='johndoe',
+            first_name='John',
+            last_name='Doe',
             email='johndoe@email.com',
             password='password',
         )
 
         # pylint: disable=no-member
         john = UserProfile.objects.get(id=1)
-        self.assertEqual(str(john), 'johndoe')
+        self.assertEqual(str(john), 'John')
 
     def test_user_profile_object_is_created(self):
         """
@@ -42,6 +44,8 @@ class TestModel(TestCase):
         """
         User.objects.create_user(
             username='johndoe',
+            first_name='John',
+            last_name='Doe',
             email='johndoe@email.com',
             password='password',
         )

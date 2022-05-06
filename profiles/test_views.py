@@ -17,7 +17,9 @@ class TestView(TestCase):
         """
         User.objects.create_user(
             username='johndoe',
-            email="johndoe@email.com",
+            first_name='John',
+            last_name='Doe',
+            email='johndoe@email.com',
             password='password',
         )
 
@@ -29,7 +31,6 @@ class TestView(TestCase):
         Called in the below tests to pass user authentication conditions.
         """
         self.client.login(
-            username='johndoe',
             email="johndoe@email.com",
             password='password',
         )
