@@ -362,7 +362,7 @@ body {
 
 
 .cart-notification-wrapper {
-    height: 300px;
+    max-height: 300px;
     overflow-x: hidden;
     overflow-y: auto;
 } /* Makes the cart contents scrollable past 300px */
