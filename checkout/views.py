@@ -181,6 +181,19 @@ def checkout_success(request, order_number):
     """
     # save_info = request.session.get('save_info')
     order = get_object_or_404(Order, order_number=order_number)
+    print(order.order_number, 'order creation')
+    print(order.full_name, 'order creation')
+    print(order.email, 'order creation')
+    print(order.phone_number, 'order creation')
+    print(order.street_address1, 'order creation')
+    print(order.street_address2, 'order creation 2ND ADDRESS LINE')
+    print(order.town_or_city, 'order creation')
+    print(order.county, 'order creation')
+    print(order.postcode, 'order creation')
+    print(order.country, 'order creation')
+    print(order.grand_total, 'order creation')
+    print(order.original_cart, 'order creation')
+    print(order.stripe_pid, 'order creation')
 
     messages.success(request, f'Order successfully processed! \
         Your order number is {order_number}. A confirmation \
