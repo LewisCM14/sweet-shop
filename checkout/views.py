@@ -1,7 +1,10 @@
 """ This module contains the views for the checkout app """
 
-from django.shortcuts import render, redirect, reverse, get_object_or_404  # noqa: E501
+import json
+
+from django.shortcuts import render, redirect, reverse, get_object_or_404, HttpResponse  # noqa: E501
 from django.contrib import messages
+from django.views.decorators.http import require_POST
 from django.conf import settings
 
 import stripe
@@ -10,6 +13,46 @@ from cart.contexts import cart_contents
 from products.models import Product
 from .order_form import OrderForm
 from .models import OrderLineItem, Order
+
+
+# pylint: disable=unused-variable
+# pylint: disable=broad-except
+# pylint: disable=invalid-name
+@require_POST
+def cache_checkout_data(request):
+    """
+    A view to handle caching the data if the user checked the
+    save info box.
+
+    Before the confirmCardPayment method in the
+    stripe JavaScrip is called. A POST request is made to this view,
+    with the client secret from the payment intent.
+    That is then split at the word 'secret',
+    in order to collect the payment intent ID (pid).
+
+    Stripe is then setup with the secret key,
+    so that the payment intent can be modified, with the method
+    stripe.PaymentIntent.modify, once passed the pid,
+    the metadata which required editing it set:
+    Add the user who's placing the order.
+    Add whether or not they wanted to save their information.
+    Add a JSON dump of their shopping cart.
+
+    If this process fails an error message is returned to the user.
+    """
+    try:
+        pid = request.POST.get('client_secret').split('_secret')[0]
+        stripe.api_key = settings.STRIPE_SECRET_KEY
+        stripe.PaymentIntent.modify(pid, metadata={
+            'cart': json.dumps(request.session.get('cart', {})),
+            'save_info': request.POST.get('save_info'),
+            'username': request.user,
+        })
+        return HttpResponse(status=200)
+    except Exception as e:  # noqa: F841
+        messages.error(request, 'Sorry, your payment cannot be \
+            processed right now. Please try again later.')
+        return HttpResponse(content=e, status=400)
 
 
 # pylint: disable=no-member
