@@ -42,7 +42,7 @@ class Order (models.Model):
     # Foreign Key to the User Model
     user_profile = models.ForeignKey(UserProfile, on_delete=models.SET_NULL, null=True, blank=True, related_name='orders')  # noqa: E501
     # User Contact Details
-    full_name = models.CharField(max_length=20, null=True, blank=True)
+    full_name = models.CharField(max_length=50, null=True, blank=True)
     email = models.EmailField(max_length=254, null=False, blank=False)
     # User Phone Number & Validators
     phoneNumberRegex = RegexValidator(regex=r'^\+?1?\d{9,15}$')
@@ -71,6 +71,12 @@ class Order (models.Model):
     grand_total = models.DecimalField(
         max_digits=10, decimal_places=2, null=False, default=0
     )
+    # # Webhook Fields
+    # original_bag = models.TextField(null=False, blank=False, default='')
+    # stripe_pid = models.CharField(
+    #     max_length=254, null=False, blank=False, default=''
+    # )
+
 
     def update_total(self):
         """
