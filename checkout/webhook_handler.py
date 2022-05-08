@@ -60,9 +60,13 @@ class StripeWH_Handler:
 
         If the Order can not be found or created from within the webhook a
         HttpResponse 500 is returned along with the error message.
+
+        To ensure each Order instance is unique the original_cart and
+        stripe_pid fields are used, the stripe_pid value will always
+        be unique.
         """
         intent = event.data.object
-        # pid = intent.id
+        pid = intent.id
         cart = intent.metadata.cart
         # save_info = intent.metadata.save_info
 
@@ -90,12 +94,14 @@ class StripeWH_Handler:
                     street_address2__iexact=shipping_details.address.line2,
                     county__iexact=shipping_details.address.state,
                     grand_total=grand_total,
+                    original_cart=cart,
+                    stripe_pid=pid,
                 )
                 order_exists = True
                 break
-            except order.DoesNotExist:
+            except Order.DoesNotExist:
                 attempt += 1
-                time.sleep(1)
+                time.sleep(9)
         if order_exists:
             return HttpResponse(
                     content=f'Webhook received: {event["type"]} | SUCCESS: Verified order already in database',  # noqa
@@ -113,6 +119,8 @@ class StripeWH_Handler:
                     street_address1=shipping_details.address.line1,
                     street_address2=shipping_details.address.line2,
                     county=shipping_details.address.state,
+                    original_cart=cart,
+                    stripe_pid=pid,
                 )
                 for item_id, quantity in json.loads(cart).items():
                     product = Product.objects.get(id=item_id)

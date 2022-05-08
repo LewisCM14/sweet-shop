@@ -79,7 +79,13 @@ def checkout(request):
     If invalid returns an error message to the user and returns them to
     the checkout page.
 
-    If valid iterates over each item in the cart within a try/except
+    If valid, saves the order without committing, collects
+    the client_secret from the input on the form storing it in
+    the stripe_pid object and then collects the shopping cart
+    dumping it into the original_cart object as a JSON string.
+    Then finally commits the form.
+
+    Then iterates over each item in the cart within a try/except
     to create an OrderLineItem instance for each one. Returns the user
     to the shopping cart if the OrderLineItem creation fails.
     Once the order creation has been complete checks if the user wanted
@@ -104,7 +110,11 @@ def checkout(request):
         }
         order_form = OrderForm(form_data)
         if order_form.is_valid():
-            order = order_form.save()
+            order = order_form.save(commit=False)
+            pid = request.POST.get('client_secret').split('_secret')[0]
+            order.stripe_pid = pid
+            order.original_cart = json.dumps(cart)
+            order.save()
             for item_id, quantity in cart.items():
                 try:
                     product = Product.objects.get(id=item_id)
@@ -169,7 +179,7 @@ def checkout_success(request, order_number):
     template context before presenting a success message to the user
     and deleting the 'cart' key from the session.
     """
-    save_info = request.session.get('save_info')
+    # save_info = request.session.get('save_info')
     order = get_object_or_404(Order, order_number=order_number)
 
     messages.success(request, f'Order successfully processed! \

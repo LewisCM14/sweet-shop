@@ -36,6 +36,10 @@ class Order (models.Model):
 
     Delivery cost, order total, order weight and grand total are all
     calculated using the update_total model method.
+
+    The original cart and stripe pid fields are used to store data used
+    when making comparissons to ensure each Order instance is unique from
+    within the webhook.
     """
     # Order Number
     order_number = models.CharField(max_length=32, null=False, editable=False)
@@ -71,12 +75,11 @@ class Order (models.Model):
     grand_total = models.DecimalField(
         max_digits=10, decimal_places=2, null=False, default=0
     )
-    # # Webhook Fields
-    # original_bag = models.TextField(null=False, blank=False, default='')
-    # stripe_pid = models.CharField(
-    #     max_length=254, null=False, blank=False, default=''
-    # )
-
+    # Webhook Fields
+    original_cart = models.TextField(null=False, blank=False, default='')
+    stripe_pid = models.CharField(
+        max_length=254, null=False, blank=False, default=''
+    )
 
     def update_total(self):
         """
