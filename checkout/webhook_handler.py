@@ -74,20 +74,10 @@ class StripeWH_Handler:
         shipping_details = intent.shipping
         grand_total = round(intent.charges.data[0].amount / 100, 2)
 
-        print(shipping_details, 'the dirty webhook shipping details')
-
-        # # Clean data in the shipping details
-        # for field, value in shipping_details.address.items():
-        #     if value == "":
-        #         shipping_details.address[field] = None
-        #         print(shipping_details, 'the cleaned webhook shipping details')
-
         order_exists = False
         attempt = 1
         while attempt <= 5:
             try:
-                print('webhook checking for order')
-                print(pid, 'the pid within the webhook')
                 order = Order.objects.get(
                     full_name__iexact=shipping_details.name,
                     email__iexact=billing_details.email,
@@ -106,14 +96,12 @@ class StripeWH_Handler:
                 break
             except Order.DoesNotExist:
                 attempt += 1
-                print('webhook made attempt')
                 time.sleep(1)
         if order_exists:
             return HttpResponse(
                     content=f'Webhook received: {event["type"]} | SUCCESS: Verified order already in database',  # noqa
                     status=200)
         else:
-            print('webhook didnt find order')
             order = None
             try:
                 order = Order.objects.create(
@@ -143,17 +131,6 @@ class StripeWH_Handler:
                 return HttpResponse(
                     content=f'Webhook received: {event["type"]} | ERROR: {e}',
                     status=500)
-        print(order.full_name, 'webhook order')
-        print(order.email, 'webhook order')
-        print(order.phone_number, 'webhook order')
-        print(order.country, 'webhook order')
-        print(order.postcode, 'webhook order')
-        print(order.town_or_city, 'webhook order')
-        print(order.street_address1, 'webhook order')
-        print(order.street_address2, 'webhook order')
-        print(order.county, 'webhook order')
-        print(order.original_cart, 'webhook order')
-        print(order.stripe_pid, 'webhook order')
         return HttpResponse(
             content=f'Webhook received: {event["type"]} | SUCCESS: Created order in webhook',  # noqa: E501
             status=200)
