@@ -48,8 +48,7 @@ class TestSignals(TestCase):
 
         test_order = Order.objects.create(
             user_profile=None,
-            first_name='John',
-            last_name='Doe',
+            full_name='John Doe',
             email='johndoe@email.com',
             phone_number='11111111111',
             street_address1='4 privet drive',

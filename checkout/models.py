@@ -42,8 +42,7 @@ class Order (models.Model):
     # Foreign Key to the User Model
     user_profile = models.ForeignKey(UserProfile, on_delete=models.SET_NULL, null=True, blank=True, related_name='orders')  # noqa: E501
     # User Contact Details
-    first_name = models.CharField(max_length=20, null=True, blank=True)
-    last_name = models.CharField(max_length=20, null=True, blank=True)
+    full_name = models.CharField(max_length=20, null=True, blank=True)
     email = models.EmailField(max_length=254, null=False, blank=False)
     # User Phone Number & Validators
     phoneNumberRegex = RegexValidator(regex=r'^\+?1?\d{9,15}$')
