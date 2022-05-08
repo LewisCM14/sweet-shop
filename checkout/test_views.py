@@ -138,6 +138,7 @@ class TestViews(TestCase):
                 'county': 'surrey',
                 'postcode': 'CR2 5ER',
                 'country': 'GB',
+                'client_secret': 'client secret test string',
             })
         self.assertEqual(response.status_code, 302)
 
@@ -191,6 +192,7 @@ class TestViews(TestCase):
                 'county': 'surrey',
                 'postcode': 'CR2 5ER',
                 'country': 'GB',
+                'client_secret': 'client secret test string',
             })
 
         order = Order.objects.get(id=1)

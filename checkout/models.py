@@ -14,7 +14,7 @@ from profiles.models import UserProfile
 
 
 # pylint: disable=no-member
-class Order (models.Model):
+class Order(models.Model):
     """
     The Order model, handles all orders across the store.
 
