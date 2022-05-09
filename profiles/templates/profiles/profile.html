@@ -31,7 +31,9 @@
                 <form class="mt-3" action="{% url 'profile' %}" method="POST" id="profile-update-form">
                     {% csrf_token %}
                     {{ form|crispy }}
-                    <button class="mt-2 mb-2 blue-charcoal-btn">Update Information</button>
+                    <div class="d-flex justify-content-end">
+                        <button class="mt-2 mb-2 blue-charcoal-btn">Update Information</button>
+                    </div>
                 </form>
             </div>
             <!-- renders the order history -->
