@@ -9,6 +9,7 @@ from django.dispatch import receiver
 from django_countries.fields import CountryField
 
 
+# pylint: disable=no-member
 class UserProfile(models.Model):
     """
     A user profile model for maintaining default
@@ -39,12 +40,11 @@ class UserProfile(models.Model):
     default_postcode = models.CharField(max_length=20, null=True, blank=True)
     default_country = CountryField(blank_label='Country', null=True, blank=True)  # noqa: E501
 
-    # pylint: disable=no-member
     def __str__(self):
         """
         Returns the username of the user instance as a string
         """
-        return self.user.first_name
+        return self.user.get_full_name()
 
 
 # pylint: disable=no-member

@@ -45,8 +45,6 @@ class StripeWH_Handler:
 
         The billing, shipping and grand_total are also then collected,
         The total being calculated to match the stores price format.
-        The shipping details object then has any fields saved as
-        empty strings set to Null to match the Order model format.
 
         The order_exists boolean is then set to false and the attempt
         counter set to 5. Then within a while loop the webhook checks
