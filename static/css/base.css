@@ -629,3 +629,14 @@ select option {
     margin: 0;
     height: 100%;
 } /* Sets the background color and positioning of the loading screen spinner */
+
+/* ------------------------------------------- PROFILE STYLING */
+
+.navy-underline {
+    color: #000080;
+    text-decoration: none;
+    }
+    .navy-underline:hover {
+        color: #000080;
+        text-decoration: underline;
+    } /* Used to highlight the password and email set navigation links */
