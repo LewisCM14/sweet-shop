@@ -9,50 +9,50 @@ class UserProfileForm(forms.ModelForm):
     The form for saving default details, rendered on profile.html.
     """
 
-    default_first_name = forms.CharField(
-        label='First Name:',
-        required=False,
+    first_name = forms.CharField(
+        label='First Name',
+        required=True,
         widget=forms.TextInput(attrs={'placeholder': 'Forname'}),
     )
 
-    default_last_name = forms.CharField(
-        label='Last Name:',
-        required=False,
+    last_name = forms.CharField(
+        label='Last Name',
+        required=True,
         widget=forms.TextInput(attrs={'placeholder': 'Surname'}),
     )
 
     default_phone_number = forms.CharField(
-        label='Preferred Contact Number:',
+        label='Preferred Contact Number',
         required=False,
         widget=forms.TextInput(attrs={'placeholder': 'Contact Number'}),
     )
 
     default_street_address1 = forms.CharField(
-        label='First Street Address:',
+        label='First Street Address',
         required=False,
         widget=forms.TextInput(attrs={'placeholder': 'Street Address'}),
     )
 
     default_street_address2 = forms.CharField(
-        label='Second Street Address:',
+        label='Second Street Address',
         required=False,
         widget=forms.TextInput(attrs={'placeholder': 'Street Address'}),
     )
 
     default_town_or_city = forms.CharField(
-        label='Town or City:',
+        label='Town or City',
         required=False,
         widget=forms.TextInput(attrs={'placeholder': 'Town or City'}),
     )
 
     default_county = forms.CharField(
-        label='County:',
+        label='County',
         required=False,
         widget=forms.TextInput(attrs={'placeholder': 'County'}),
     )
 
     default_postcode = forms.CharField(
-        label='Postal Code:',
+        label='Postal Code',
         required=False,
         widget=forms.TextInput(attrs={'placeholder': 'Post Code'}),
     )
@@ -73,5 +73,5 @@ class UserProfileForm(forms.ModelForm):
         """
         super().__init__(*args, **kwargs)
 
-        self.fields['default_first_name'].widget.attrs['autofocus'] = True
+        self.fields['first_name'].widget.attrs['autofocus'] = True
         self.fields['default_country'].label = 'Country:'

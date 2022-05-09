@@ -4,6 +4,8 @@ from django.shortcuts import render, get_object_or_404
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 
+# from checkout.models import Order
+
 from .models import UserProfile
 from .profile_form import UserProfileForm
 
@@ -35,8 +37,8 @@ def profile(request):
     if request.method == 'POST':
         form = UserProfileForm(request.POST, instance=profile)
         if form.is_valid():
-            user.first_name = request.POST['default_first_name']
-            user.last_name = request.POST['default_last_name']
+            user.first_name = request.POST['first_name']
+            user.last_name = request.POST['last_name']
             user.save()
             form.save()
             messages.success(request, 'Profile updated successfully')
@@ -45,9 +47,11 @@ def profile(request):
     else:  # return the form data back to the view if form not valid
         form = UserProfileForm(instance=profile)
 
+    orders = profile.orders.all()
+
     form_data = {
-        'default_first_name': user.first_name,
-        'default_last_name': user.last_name,
+        'first_name': user.first_name,
+        'last_name': user.last_name,
         'default_phone_number': profile.default_phone_number,
         'default_street_address1': profile.default_street_address1,
         'default_street_address2': profile.default_street_address2,
@@ -60,6 +64,7 @@ def profile(request):
     template = 'profiles/profile.html'
     context = {
         'form': UserProfileForm(form_data),
+        'orders': orders,
         'hide_cart': True,
     }
 
