@@ -640,3 +640,7 @@ select option {
         color: #000080;
         text-decoration: underline;
     } /* Used to highlight the password and email set navigation links */
+
+#profile-update-form input::placeholder {
+    color: #333333;
+}

@@ -74,4 +74,4 @@ class UserProfileForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
 
         self.fields['first_name'].widget.attrs['autofocus'] = True
-        self.fields['default_country'].label = 'Country:'
+        self.fields['default_country'].label = 'Country'
