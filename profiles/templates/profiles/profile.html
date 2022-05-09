@@ -42,7 +42,37 @@
             <!-- renders the order history -->
             <div class="col-12 col-lg-6">
                 <p class="fw-700">Order History</p>
-                {{ orders }}
+                    <div class="order-history table-responsive">
+                        <table class="table table-sm table-borderless">
+                            <thead>
+                                <tr>
+                                    <th>Order</th>
+                                    <th>Date</th>
+                                    <th>Items</th>
+                                    <th class="d-flex justify-content-end">Total</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for order in orders %}
+                                    <tr>
+                                        <td>
+                                            <a href="#"
+                                                title="{{ order.order_number }}">{{ order.order_number|truncatechars:6 }}</a>
+                                        </td>
+                                        <td>{{ order.date }}</td>
+                                        <td>
+                                            <ul class="list-unstyled">
+                                                {% for item in order.lineitems.all %}
+                                                    <li class="small">{{ item.product.weight_in_grams }}g {{ item.product.name }} x{{ item.quantity }}</li>
+                                                {% endfor %}
+                                            </ul>
+                                        </td>
+                                        <td class="d-flex justify-content-end">£{{ order.grand_total }}</td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
             </div>
         </div>
     </div>

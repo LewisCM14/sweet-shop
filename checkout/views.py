@@ -11,6 +11,7 @@ import stripe
 
 from cart.contexts import cart_contents
 from products.models import Product
+from profiles.models import UserProfile
 from .order_form import OrderForm
 from .models import OrderLineItem, Order
 
@@ -174,6 +175,10 @@ def checkout_success(request, order_number):
     is stored within it, saving this information in the save_info
     object if so.
 
+    Then checks if the user is authenticated and if so collects
+    their UserProfile in order to save the order to it via the
+    user_profile FK on the Order model.
+
     Then collects the order created in the checkout view via it's
     order_number, storing it in order object and passing it to the
     template context before presenting a success message to the user
@@ -181,6 +186,12 @@ def checkout_success(request, order_number):
     """
     # save_info = request.session.get('save_info')
     order = get_object_or_404(Order, order_number=order_number)
+
+    if request.user.is_authenticated:
+        profile = UserProfile.objects.get(user=request.user)
+        # Attach the user's profile to the order
+        order.user_profile = profile
+        order.save()
 
     messages.success(request, f'Order successfully processed! \
         Your order number is {order_number}. A confirmation \
