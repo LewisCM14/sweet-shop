@@ -72,7 +72,10 @@ def checkout(request):
     Sets the secret_key on the stripe API and creates the payment intent
     using the stripe_total and STRIPE_CURRENCY from settings.py
 
-    Returns the OrderForm to the checkout template.
+    Then checks if the user is authenticated, if so, provided they
+    have default delivery information saved on their UserProfile
+    returns the OrderForm prefilled to the checkout template,
+    if not authenticated or no default info a blank form is returned.
 
     On the POST request:
     Collects the cart from the session.
@@ -152,6 +155,26 @@ def checkout(request):
                 currency=settings.STRIPE_CURRENCY,
             )
         order_form = OrderForm()
+
+        # Prefills the OrderForm with the users saved delivery info if stored.
+        if request.user.is_authenticated:
+            try:
+                profile = UserProfile.objects.get(user=request.user)
+                order_form = OrderForm(initial={
+                    'full_name': profile.user.get_full_name(),
+                    'email': profile.user.email,
+                    'phone_number': profile.default_phone_number,
+                    'street_address1': profile.default_street_address1,
+                    'street_address2': profile.default_street_address2,
+                    'town_or_city': profile.default_town_or_city,
+                    'county': profile.default_county,
+                    'postcode': profile.default_postcode,
+                    'country': profile.default_country,
+                })
+            except UserProfile.DoesNotExist:
+                order_form = OrderForm()
+        else:
+            order_form = OrderForm()
 
     # Returns a message to the user if no key set
     if not stripe_public_key:
