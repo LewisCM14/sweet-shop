@@ -31,7 +31,7 @@ class TestModel(TestCase):
 
         # pylint: disable=no-member
         john = UserProfile.objects.get(id=1)
-        self.assertEqual(str(john), 'John Doe')
+        self.assertEqual(str(john), 'johndoe')
 
     def test_user_profile_object_is_created(self):
         """

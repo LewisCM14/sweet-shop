@@ -44,7 +44,7 @@ class UserProfile(models.Model):
         """
         Returns the full name of the user instance as a string.
         """
-        return self.user.get_full_name()
+        return self.user.username
 
 
 # pylint: disable=no-member

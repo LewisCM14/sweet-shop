@@ -1,10 +1,14 @@
 """ This module tests the checkout app views """
 
 from decimal import Decimal
+
 from django.test import TestCase
 from django.urls import reverse
+from django.contrib.auth.models import User
 from django.contrib.messages import get_messages
+
 from products.models import Type, Product
+from profiles.models import UserProfile
 from .models import Order, OrderLineItem
 
 
@@ -13,10 +17,20 @@ class TestViews(TestCase):
     """
     Contains the tests for the views located in the checkout app in views.py.
     """
+
     def setUp(self):
         """
-        Initiates the Product database with an object for testing.
+        Creates a User test case before
+        initiating the Product database with an object for testing.
         """
+        User.objects.create_user(
+            username='Test User',
+            first_name='John',
+            last_name='Doe',
+            email='johndoe@email.com',
+            password='password',
+        )
+
         chewy = Type.objects.create(
             name='chewy_sweets',
             friendly_name='Chewy Sweets',
@@ -31,6 +45,18 @@ class TestViews(TestCase):
             popular_in_00s=True,
             weight_in_grams=200,
             price=Decimal(1.99),
+        )
+
+    def login(self):
+        """
+        Helper Method
+
+        Logs into the User created in the setUp method.
+        Called in the below tests to pass user authentication conditions.
+        """
+        self.client.login(
+            email="johndoe@email.com",
+            password='password',
         )
 
     def initiate_cart(self):
@@ -203,3 +229,34 @@ class TestViews(TestCase):
 
         session = self.client.session
         self.assertNotIn('cart', session)
+
+    # def test_order_saves_to_user_profile(self):
+    #     """
+    #     A test to Orders are saved against the users profile
+    #     login
+    #     make cart
+    #     make order
+    #     check
+    #     user_profile value on order is
+    #     equal to the user logged in/made the order
+    #     """
+    #     self.login()
+    #     self.initiate_cart()
+
+    #     self.client.post(
+    #         reverse("checkout"), {
+    #             'full_name': 'John Doe',
+    #             'email': 'johndoe@email.com',
+    #             'phone_number': '11111111111',
+    #             'street_address1': '4 privet drive',
+    #             'street_address2': '',
+    #             'town_or_city': 'little whinging',
+    #             'county': 'surrey',
+    #             'postcode': 'CR2 5ER',
+    #             'country': 'GB',
+    #             'client_secret': 'client secret test string',
+    #         })
+
+    #     order = Order.objects.get(id=1)
+    #     user = UserProfile.objects.get(id=1)
+    #     self.assertEqual(order.user_profile, user)
