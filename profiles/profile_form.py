@@ -24,7 +24,6 @@ class UserProfileForm(forms.ModelForm):
     default_street_address2 = forms.CharField(
         label='Second Street Address',
         required=False,
-        widget=forms.TextInput(attrs={'placeholder': 'Street Address'}),
     )
 
     default_town_or_city = forms.CharField(
