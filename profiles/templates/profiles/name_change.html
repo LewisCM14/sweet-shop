@@ -19,11 +19,22 @@
 {% endblock %}
 
 {% block content %}
-    <div class="text-center mb-4">
-        <span class="h4 text-uppercase">Change Name</span>
-    </div>
-    <div class="container mb-4">
-        <div class="row">
+    <!-- The Name Change form -->
+    <div class="container-fluid mb-4">
+        <div class="text-center">
+            <span class="h4 text-uppercase">Change Name</span>
+            <p>Navigate to <a href="{% url 'profile' %}" class="navy-underline fw-900">account.</a></p>
+        </div>
+        <div class="row d-flex justify-content-center">
+            <div class="col-lg-4">
+                <form action="">
+                    {% csrf_token %}
+                    {{ form|crispy }}
+                    <div class="container-fluid d-flex justify-content-center">
+                        <button class="mt-2 mb-2 blue-charcoal-btn">Update Information</button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 {% endblock %}

@@ -5,11 +5,8 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 
 from checkout.models import Order
-
-# from checkout.models import Order
-
 from .models import UserProfile
-from .profile_form import UserProfileForm
+from .profile_form import UserProfileForm, NameChange
 
 
 # pylint: disable=redefined-outer-name
@@ -60,7 +57,14 @@ def profile(request):
 @login_required
 def change_name(request):
     """ a view to handle users changing their name """
-    return render(request, 'profiles/name_change.html')
+
+    form = NameChange()
+    template = 'profiles/name_change.html'
+    context = {
+        'form': form,
+    }
+
+    return render(request, template, context)
 
 
 def order_history(request, order_number):

@@ -1,7 +1,41 @@
-""" This module contains the user profile template form """
+""" This module contains the user profile forms """
 
 from django import forms
+from django.contrib.auth.models import User
+
 from .models import UserProfile
+
+
+class NameChange(forms.ModelForm):
+    """
+    The form for updating the users name, rendered on name_change.html.
+    """
+    first_name = forms.CharField(
+        label='First Name',
+        required=True,
+        widget=forms.TextInput(attrs={'placeholder': 'Forname'}),
+    )
+
+    last_name = forms.CharField(
+        label='Last Name',
+        required=True,
+        widget=forms.TextInput(attrs={'placeholder': 'Surname'}),
+    )
+
+    class Meta:
+        """
+        Sets the model and fields.
+        """
+        model = User
+        fields = ('first_name', 'last_name',)
+
+    def __init__(self, *args, **kwargs):
+        """
+        Set autofocus on first_name.
+        """
+        super().__init__(*args, **kwargs)
+
+        self.fields['first_name'].widget.attrs['autofocus'] = True
 
 
 class UserProfileForm(forms.ModelForm):
