@@ -71,8 +71,6 @@ class TestView(TestCase):
         self.login()
         user_profile = UserProfile.objects.get(id=1)
 
-        self.assertEqual(user_profile.first_name, None)
-        self.assertEqual(user_profile.last_name, None)
         self.assertEqual(user_profile.default_phone_number, None)
         self.assertEqual(user_profile.default_street_address1, None)
         self.assertEqual(user_profile.default_street_address2, None)
@@ -83,8 +81,6 @@ class TestView(TestCase):
 
         response = self.client.post(
             reverse("profile"), {
-                'first_name': 'John',
-                'last_name': 'Doe',
                 'default_phone_number': '11111111111',
                 'default_street_address1': '4 privet drive',
                 'default_street_address2': '',
@@ -97,8 +93,6 @@ class TestView(TestCase):
 
         user_profile = UserProfile.objects.get(id=1)
 
-        self.assertEqual(user_profile.first_name, 'John')
-        self.assertEqual(user_profile.last_name, 'Doe')
         self.assertEqual(user_profile.default_phone_number, '11111111111')
         self.assertEqual(user_profile.default_street_address1, '4 privet drive')  # noqa: E501
         self.assertEqual(user_profile.default_street_address2, '')

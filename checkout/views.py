@@ -190,7 +190,6 @@ def checkout_success(request, order_number):
     and deleting the 'cart' key from the session.
     """
     save_info = request.session.get('save_info')
-    print(save_info)
     order = get_object_or_404(Order, order_number=order_number)
 
     if request.user.is_authenticated:
@@ -211,10 +210,7 @@ def checkout_success(request, order_number):
             }
             user_profile_form = UserProfileForm(profile_data, instance=profile)
             if user_profile_form.is_valid():
-                print('form valid')
                 user_profile_form.save()
-            else:
-                print('not valid')
 
     messages.success(request, f'Order successfully processed! \
         Your order number is {order_number}. A confirmation \
