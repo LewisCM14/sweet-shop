@@ -33,15 +33,11 @@ def profile(request):
     model to the updated values and then updates the UserProfile
     with the passed in form inputs.
     """
-    user = request.user
     profile = get_object_or_404(UserProfile, user=request.user)
 
     if request.method == 'POST':
         form = UserProfileForm(request.POST, instance=profile)
         if form.is_valid():
-            user.first_name = request.POST['first_name']
-            user.last_name = request.POST['last_name']
-            user.save()
             form.save()
             messages.success(request, 'Profile updated successfully')
         else:
@@ -51,21 +47,9 @@ def profile(request):
 
     orders = profile.orders.all()
 
-    form_data = {
-        'first_name': user.first_name,
-        'last_name': user.last_name,
-        'default_phone_number': profile.default_phone_number,
-        'default_street_address1': profile.default_street_address1,
-        'default_street_address2': profile.default_street_address2,
-        'default_town_or_city': profile.default_town_or_city,
-        'default_county': profile.default_county,
-        'default_postcode': profile.default_postcode,
-        'default_country': profile.default_country,
-    }
-
     template = 'profiles/profile.html'
     context = {
-        'form': UserProfileForm(form_data),
+        'form': form,
         'orders': orders,
         'hide_cart': True,
     }

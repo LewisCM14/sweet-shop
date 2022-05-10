@@ -9,18 +9,6 @@ class UserProfileForm(forms.ModelForm):
     The form for saving default details, rendered on profile.html.
     """
 
-    first_name = forms.CharField(
-        label='First Name',
-        required=True,
-        widget=forms.TextInput(attrs={'placeholder': 'Forname'}),
-    )
-
-    last_name = forms.CharField(
-        label='Last Name',
-        required=True,
-        widget=forms.TextInput(attrs={'placeholder': 'Surname'}),
-    )
-
     default_phone_number = forms.CharField(
         label='Preferred Contact Number',
         required=False,
@@ -69,9 +57,9 @@ class UserProfileForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         """
-        Set autofocus on first field and labels the country field.
+        Set autofocus on phone number field and labels the country field.
         """
         super().__init__(*args, **kwargs)
 
-        self.fields['first_name'].widget.attrs['autofocus'] = True
+        self.fields['default_phone_number'].widget.attrs['autofocus'] = True
         self.fields['default_country'].label = 'Country'

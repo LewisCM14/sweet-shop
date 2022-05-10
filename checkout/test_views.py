@@ -8,7 +8,7 @@ from django.contrib.auth.models import User
 from django.contrib.messages import get_messages
 
 from products.models import Type, Product
-from profiles.models import UserProfile
+# from profiles.models import UserProfile
 from .models import Order, OrderLineItem
 
 
@@ -243,7 +243,7 @@ class TestViews(TestCase):
     #     self.login()
     #     self.initiate_cart()
 
-    #     self.client.post(
+    #     response = self.client.post(
     #         reverse("checkout"), {
     #             'full_name': 'John Doe',
     #             'email': 'johndoe@email.com',
@@ -258,5 +258,11 @@ class TestViews(TestCase):
     #         })
 
     #     order = Order.objects.get(id=1)
+    #     request = self.client.post(
+    #         reverse("checkout_success", args=[order.order_number]))  # noqa: E501
+
+    #     print(order.user_profile)
+    #     print(request)
+
     #     user = UserProfile.objects.get(id=1)
-    #     self.assertEqual(order.user_profile, user)
+    #     print(user)

@@ -24,9 +24,6 @@ class UserProfile(models.Model):
     """
     # One to One field from the User model
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    # User Name
-    first_name = models.CharField(max_length=20, null=True, blank=True)
-    last_name = models.CharField(max_length=20, null=True, blank=True)
     # User Phone Number and Validator
     phoneNumberRegex = RegexValidator(regex=r'^\+?1?\d{9,15}$')
     default_phone_number = models.CharField(
