@@ -75,6 +75,7 @@ def change_name(request):
             user.first_name = request.POST['first_name']
             user.last_name = request.POST['last_name']
             messages.success(request, 'Name updated successfully')
+            user.save()
         else:
             messages.error(request, 'Update failed. Please ensure the form is valid.')  # noqa: E501
     else:  # return the form data back to the view if form not valid
