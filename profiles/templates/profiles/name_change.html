@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block page_header %}
+    <div class="container header-container">
+        <div class="row">
+            <div class="col">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                      <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+                      <li class="breadcrumb-item"><a href="{% url 'profile' %}">Account</a></li>
+                      <li class="breadcrumb-item active" aria-current="page">Change Name</li>
+                    </ol>
+                  </nav>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="text-center mb-4">
+        <span class="h4 text-uppercase">Change Name</span>
+    </div>
+    <div class="container mb-4">
+        <div class="row">
+        </div>
+    </div>
+{% endblock %}

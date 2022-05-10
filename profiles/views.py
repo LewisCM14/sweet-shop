@@ -57,6 +57,12 @@ def profile(request):
     return render(request, template, context)
 
 
+@login_required
+def change_name(request):
+    """ a view to handle users changing their name """
+    return render(request, 'profiles/name_change.html')
+
+
 def order_history(request, order_number):
     """
     A view to handle displaying a users order history.
