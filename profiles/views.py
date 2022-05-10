@@ -4,6 +4,8 @@ from django.shortcuts import render, get_object_or_404
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 
+from checkout.models import Order
+
 # from checkout.models import Order
 
 from .models import UserProfile
@@ -66,6 +68,36 @@ def profile(request):
         'form': UserProfileForm(form_data),
         'orders': orders,
         'hide_cart': True,
+    }
+
+    return render(request, template, context)
+
+
+def order_history(request, order_number):
+    """
+    A view to handle displaying a users order history.
+
+    Collects the Order instance via its order_number,
+    from the profile view, before adding a message letting
+    the user know they're looking at a past order confirmation.
+    Then using the checkout_success template, renders the
+    order confirmation.
+
+    The from_profile variable within the context us used
+    to implement navigation back to the profile page if that is
+    the original location the user arrived from.
+    """
+    order = get_object_or_404(Order, order_number=order_number)
+
+    messages.info(request, (
+        f'This is a past confirmation for order number {order_number}. '
+        'A confirmation email was sent on the order date.'
+    ))
+
+    template = 'checkout/checkout_success.html'
+    context = {
+        'order': order,
+        'from_profile': True,
     }
 
     return render(request, template, context)
