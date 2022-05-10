@@ -56,12 +56,39 @@ def profile(request):
 
 @login_required
 def change_name(request):
-    """ a view to handle users changing their name """
+    """
+    A view to handle users changing their name
 
-    form = NameChange()
+    Provided user authentication is passed, collects the user via
+    the request and renders the NameChange form on the template
+    with the current name values.
+
+    On the POST request, provided the form is valid, updates the
+    first_name & last_name fields on the User model to the passed
+    in values. If the form is not valid a error message is returned.
+    """
+    user = request.user
+
+    if request.method == 'POST':
+        form = NameChange(request.POST)
+        if form.is_valid():
+            user.first_name = request.POST['first_name']
+            user.last_name = request.POST['last_name']
+            messages.success(request, 'Name updated successfully')
+        else:
+            messages.error(request, 'Update failed. Please ensure the form is valid.')  # noqa: E501
+    else:  # return the form data back to the view if form not valid
+        form = NameChange()
+
+    form_data = {
+        'first_name': user.first_name,
+        'last_name': user.last_name,
+    }
+
     template = 'profiles/name_change.html'
     context = {
-        'form': form,
+        'form': NameChange(form_data),
+        'hide_cart': True,
     }
 
     return render(request, template, context)

@@ -13,12 +13,14 @@ class NameChange(forms.ModelForm):
     first_name = forms.CharField(
         label='First Name',
         required=True,
+        max_length=30,
         widget=forms.TextInput(attrs={'placeholder': 'Forname'}),
     )
 
     last_name = forms.CharField(
         label='Last Name',
         required=True,
+        max_length=30,
         widget=forms.TextInput(attrs={'placeholder': 'Surname'}),
     )
 
