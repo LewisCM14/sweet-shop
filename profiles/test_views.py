@@ -5,6 +5,7 @@ from decimal import Decimal
 from django.test import TestCase
 from django.urls import reverse
 from django.contrib.auth.models import User
+from django.contrib.messages import get_messages
 
 from products.models import Type, Product
 from checkout.models import Order
@@ -219,10 +220,44 @@ class TestView(TestCase):
 
         response = self.client.post(reverse("change_name"), {
             'first_name': 'John',
-            'last_name': 'Doe'
+            'last_name': 'Doe',
         })
         self.assertEqual(response.status_code, 200)
 
         user = User.objects.get(id=1)
         self.assertEqual(user.first_name, 'John')
         self.assertEqual(user.last_name, 'Doe')
+
+    def test_invalid_name_changes_dont_save(self):
+        """
+        A test to confirm invalid name changes don't update the name fields.
+
+        Uses the login helper method to pass user authentication
+        before collecting the user via their ID and confirming the
+        values for their first & last name.
+
+        A POST request is then made to the change_name URL,
+        stored in the response variable, with invalid values for
+        the first_name and last_name fields. Django's get_messages
+        method is then used to confirm an error was returned,
+        with the desired string. Before the user is collected again
+        and it is asserted the name fields haven't been altered.
+        """
+        self.login()
+
+        user = User.objects.get(id=1)
+        self.assertEqual(user.first_name, 'john')
+        self.assertEqual(user.last_name, 'doe')
+
+        response = self.client.post(reverse("change_name"), {
+            'first_name': '',
+            'last_name': '',
+        })
+
+        messages = list(get_messages(response.wsgi_request))
+        self.assertEqual(len(messages), 1)
+        self.assertEqual(str(messages[0]), "Update failed. Please ensure the form is valid.")  # noqa: E501
+
+        user = User.objects.get(id=1)
+        self.assertEqual(user.first_name, 'john')
+        self.assertEqual(user.last_name, 'doe')
