@@ -39,7 +39,7 @@ class UserProfile(models.Model):
 
     def __str__(self):
         """
-        Returns the full name of the user instance as a string.
+        Returns the username of the user instance as a string.
         """
         return self.user.username
 

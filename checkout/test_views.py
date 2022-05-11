@@ -8,7 +8,7 @@ from django.contrib.auth.models import User
 from django.contrib.messages import get_messages
 
 from products.models import Type, Product
-# from profiles.models import UserProfile
+from profiles.models import UserProfile
 from .models import Order, OrderLineItem
 
 
@@ -230,39 +230,46 @@ class TestViews(TestCase):
         session = self.client.session
         self.assertNotIn('cart', session)
 
-    # def test_order_saves_to_user_profile(self):
-    #     """
-    #     A test to Orders are saved against the users profile
-    #     login
-    #     make cart
-    #     make order
-    #     check
-    #     user_profile value on order is
-    #     equal to the user logged in/made the order
-    #     """
-    #     self.login()
-    #     self.initiate_cart()
+    def test_order_saves_to_user_profile(self):
+        """
+        A test to ensure successful Orders are saved against the users profile
 
-    #     response = self.client.post(
-    #         reverse("checkout"), {
-    #             'full_name': 'John Doe',
-    #             'email': 'johndoe@email.com',
-    #             'phone_number': '11111111111',
-    #             'street_address1': '4 privet drive',
-    #             'street_address2': '',
-    #             'town_or_city': 'little whinging',
-    #             'county': 'surrey',
-    #             'postcode': 'CR2 5ER',
-    #             'country': 'GB',
-    #             'client_secret': 'client secret test string',
-    #         })
+        Uses the login helper method to pass user authentication,
+        Then confirms the user created in the setUp method has a
+        UserProfile via the ID field on the profile variable.
 
-    #     order = Order.objects.get(id=1)
-    #     request = self.client.post(
-    #         reverse("checkout_success", args=[order.order_number]))  # noqa: E501
+        The initiate_cart helper method is then called and a order
+        instance passed to the checkout view. This order is then collected
+        and asserted there is currently no UserProfile attached.
+        This same order instance is then passed to the checkout_success URL
+        before having the user_profile field checked again to assert it now
+        has profile of the signed in user created within the setUp method
+        attached to it.
+        """
+        self.login()
 
-    #     print(order.user_profile)
-    #     print(request)
+        profile = UserProfile.objects.get(id=1)
+        self.assertEqual(profile.user.username, 'Test User')
 
-    #     user = UserProfile.objects.get(id=1)
-    #     print(user)
+        self.initiate_cart()
+        self.client.post(
+            reverse("checkout"), {
+                'full_name': 'John Doe',
+                'email': 'johndoe@email.com',
+                'phone_number': '11111111111',
+                'street_address1': '4 privet drive',
+                'street_address2': '',
+                'town_or_city': 'little whinging',
+                'county': 'surrey',
+                'postcode': 'CR2 5ER',
+                'country': 'GB',
+                'client_secret': 'client secret test string',
+            })
+
+        order = Order.objects.get(id=1)
+        self.assertEqual(order.user_profile, None)
+
+        self.client.post(reverse("checkout_success", args=[order.order_number]))  # noqa: E501
+
+        order = Order.objects.get(id=1)
+        self.assertEqual(order.user_profile, profile)
