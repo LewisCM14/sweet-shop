@@ -9,6 +9,7 @@ from django.dispatch import receiver
 from django_countries.fields import CountryField
 
 
+# pylint: disable=no-member
 class UserProfile(models.Model):
     """
     A user profile model for maintaining default
@@ -23,9 +24,6 @@ class UserProfile(models.Model):
     """
     # One to One field from the User model
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    # User Name
-    default_first_name = models.CharField(max_length=20, null=True, blank=True)
-    default_last_name = models.CharField(max_length=20, null=True, blank=True)
     # User Phone Number and Validator
     phoneNumberRegex = RegexValidator(regex=r'^\+?1?\d{9,15}$')
     default_phone_number = models.CharField(
@@ -39,12 +37,11 @@ class UserProfile(models.Model):
     default_postcode = models.CharField(max_length=20, null=True, blank=True)
     default_country = CountryField(blank_label='Country', null=True, blank=True)  # noqa: E501
 
-    # pylint: disable=no-member
     def __str__(self):
         """
-        Returns the username of the user instance as a string
+        Returns the username of the user instance as a string.
         """
-        return self.user.first_name
+        return self.user.username
 
 
 # pylint: disable=no-member

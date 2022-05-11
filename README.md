@@ -659,6 +659,8 @@ ___
 
     * I used this [post](https://stackoverflow.com/questions/350799/how-does-django-know-the-order-to-render-form-fields) on stackoverflow to help me set the order of the fields on my user sign up form.
 
+    * I used the answer to this [question](https://github.com/pennersr/django-allauth/issues/131) on the allauth repo to set the ACCOUNT_USER_DISPLAY setting within my settings.py file.
+
 - **Media** <a name='media'></a>
 
 [Return to Table of Contents](#contents)

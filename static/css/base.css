@@ -362,7 +362,7 @@ body {
 
 
 .cart-notification-wrapper {
-    height: 300px;
+    max-height: 300px;
     overflow-x: hidden;
     overflow-y: auto;
 } /* Makes the cart contents scrollable past 300px */
@@ -629,3 +629,18 @@ select option {
     margin: 0;
     height: 100%;
 } /* Sets the background color and positioning of the loading screen spinner */
+
+/* ------------------------------------------- PROFILE STYLING */
+
+.navy-underline {
+    color: #000080;
+    text-decoration: none;
+    }
+    .navy-underline:hover {
+        color: #000080;
+        text-decoration: underline;
+    } /* Used to highlight the password and email set navigation links */
+
+#profile-update-form input::placeholder {
+    color: #333333;
+}

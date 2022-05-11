@@ -77,10 +77,20 @@
                         <ul class="dropdown-menu dropdown-menu-right white-yellow" aria-labelledby="productManagementDropdown">
                             {% if user.is_authenticated %}
                                 <li>
-                                    <a class="dropdown-item" href="#">Favorites</a>
+                                    <a class="dropdown-item" href="#">My Favorites</a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="#">Reviews</a>
+                                    <a class="dropdown-item" href="#">My Reviews</a>
+                                </li>
+                                <li><hr style="width: 100%; background-color: #000080; height: 2px" class="dropdown-divider"></li>
+                                <li>
+                                    <a class="dropdown-item" href="{% url 'change_name' %}">Change Name</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="{% url 'account_email' %}">Change Email</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="{% url 'account_change_password' %}">Change Password</a>
                                 </li>
                                 {% if request.user.is_superuser %}
                                     <li>

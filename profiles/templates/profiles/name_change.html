@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block page_header %}
+    <div class="container header-container">
+        <div class="row">
+            <div class="col">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                      <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+                      <li class="breadcrumb-item"><a href="{% url 'profile' %}">Account</a></li>
+                      <li class="breadcrumb-item active" aria-current="page">Change Name</li>
+                    </ol>
+                  </nav>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <!-- The Name Change form -->
+    <div class="container-fluid mb-4">
+        <div class="text-center">
+            <span class="h4 text-uppercase">Change Name</span>
+            <p>Navigate to <a href="{% url 'profile' %}" class="navy-underline fw-900">account.</a></p>
+        </div>
+        <div class="row d-flex justify-content-center">
+            <div class="col-lg-4">
+                <form action="{% url 'change_name' %}" method="POST">
+                    {% csrf_token %}
+                    {{ form|crispy }}
+                    <div class="container-fluid d-flex justify-content-center">
+                        <button class="mt-2 mb-2 blue-charcoal-btn">Update Name</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

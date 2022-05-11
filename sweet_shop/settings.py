@@ -15,8 +15,9 @@ from pathlib import Path
 import os
 import dj_database_url
 
+# pylint: disable=unused-import
 if os.path.isfile('env.py'):
-    import env
+    import env  # noqa: F401
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -134,7 +135,7 @@ ACCOUNT_UNIQUE_EMAIL = True
 ACCOUNT_SIGNUP_EMAIL_ENTER_TWICE = True
 ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
 ACCOUNT_USERNAME_REQUIRED = False
-# ACCOUNT_USER_DISPLAY
+ACCOUNT_USER_DISPLAY = lambda user: user.get_full_name()  # noqa: E731
 LOGIN_URL = '/accounts/login/'
 LOGIN_REDIRECT_URL = '/'
 
@@ -263,4 +264,5 @@ else:
 FREE_DELIVERY_THRESHOLD = 50
 STRIPE_PUBLIC_KEY = os.environ.get('STRIPE_PUBLIC_KEY', '')
 STRIPE_SECRET_KEY = os.environ.get('STRIPE_SECRET_KEY', '')
+STRIPE_WH_SECRET = os.environ.get('STRIPE_WH_SECRET', '')
 STRIPE_CURRENCY = 'gbp'

@@ -1,10 +1,14 @@
 """ This module tests the checkout app views """
 
 from decimal import Decimal
+
 from django.test import TestCase
 from django.urls import reverse
+from django.contrib.auth.models import User
 from django.contrib.messages import get_messages
+
 from products.models import Type, Product
+from profiles.models import UserProfile
 from .models import Order, OrderLineItem
 
 
@@ -13,10 +17,20 @@ class TestViews(TestCase):
     """
     Contains the tests for the views located in the checkout app in views.py.
     """
+
     def setUp(self):
         """
-        Initiates the Product database with an object for testing.
+        Creates a User test case before
+        initiating the Product database with an object for testing.
         """
+        User.objects.create_user(
+            username='Test User',
+            first_name='John',
+            last_name='Doe',
+            email='johndoe@email.com',
+            password='password',
+        )
+
         chewy = Type.objects.create(
             name='chewy_sweets',
             friendly_name='Chewy Sweets',
@@ -31,6 +45,18 @@ class TestViews(TestCase):
             popular_in_00s=True,
             weight_in_grams=200,
             price=Decimal(1.99),
+        )
+
+    def login(self):
+        """
+        Helper Method
+
+        Logs into the User created in the setUp method.
+        Called in the below tests to pass user authentication conditions.
+        """
+        self.client.login(
+            email="johndoe@email.com",
+            password='password',
         )
 
     def initiate_cart(self):
@@ -129,8 +155,7 @@ class TestViews(TestCase):
 
         response = self.client.post(
             reverse("checkout"), {
-                'first_name': 'John',
-                'last_name': 'Doe',
+                'full_name': 'John Doe',
                 'email': 'johndoe@email.com',
                 'phone_number': '11111111111',
                 'street_address1': '4 privet drive',
@@ -139,12 +164,12 @@ class TestViews(TestCase):
                 'county': 'surrey',
                 'postcode': 'CR2 5ER',
                 'country': 'GB',
+                'client_secret': 'client secret test string',
             })
         self.assertEqual(response.status_code, 302)
 
         order = Order.objects.get(id=1)
-        self.assertEqual((order.first_name), 'John')
-        self.assertEqual((order.last_name), 'Doe')
+        self.assertEqual((order.full_name), 'John Doe')
         self.assertEqual((order.email), 'johndoe@email.com')
         self.assertEqual((order.phone_number), '11111111111')
         self.assertEqual((order.street_address1), '4 privet drive')
@@ -184,8 +209,7 @@ class TestViews(TestCase):
 
         response = self.client.post(
             reverse("checkout"), {
-                'first_name': 'John',
-                'last_name': 'Doe',
+                'full_name': 'John Doe',
                 'email': 'johndoe@email.com',
                 'phone_number': '11111111111',
                 'street_address1': '4 privet drive',
@@ -194,6 +218,7 @@ class TestViews(TestCase):
                 'county': 'surrey',
                 'postcode': 'CR2 5ER',
                 'country': 'GB',
+                'client_secret': 'client secret test string',
             })
 
         order = Order.objects.get(id=1)
@@ -204,3 +229,47 @@ class TestViews(TestCase):
 
         session = self.client.session
         self.assertNotIn('cart', session)
+
+    def test_order_saves_to_user_profile(self):
+        """
+        A test to ensure successful Orders are saved against the users profile
+
+        Uses the login helper method to pass user authentication,
+        Then confirms the user created in the setUp method has a
+        UserProfile via the ID field on the profile variable.
+
+        The initiate_cart helper method is then called and a order
+        instance passed to the checkout view. This order is then collected
+        and asserted there is currently no UserProfile attached.
+        This same order instance is then passed to the checkout_success URL
+        before having the user_profile field checked again to assert it now
+        has profile of the signed in user created within the setUp method
+        attached to it.
+        """
+        self.login()
+
+        profile = UserProfile.objects.get(id=1)
+        self.assertEqual(profile.user.username, 'Test User')
+
+        self.initiate_cart()
+        self.client.post(
+            reverse("checkout"), {
+                'full_name': 'John Doe',
+                'email': 'johndoe@email.com',
+                'phone_number': '11111111111',
+                'street_address1': '4 privet drive',
+                'street_address2': '',
+                'town_or_city': 'little whinging',
+                'county': 'surrey',
+                'postcode': 'CR2 5ER',
+                'country': 'GB',
+                'client_secret': 'client secret test string',
+            })
+
+        order = Order.objects.get(id=1)
+        self.assertEqual(order.user_profile, None)
+
+        self.client.post(reverse("checkout_success", args=[order.order_number]))  # noqa: E501
+
+        order = Order.objects.get(id=1)
+        self.assertEqual(order.user_profile, profile)

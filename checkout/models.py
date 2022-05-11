@@ -14,7 +14,7 @@ from profiles.models import UserProfile
 
 
 # pylint: disable=no-member
-class Order (models.Model):
+class Order(models.Model):
     """
     The Order model, handles all orders across the store.
 
@@ -36,14 +36,17 @@ class Order (models.Model):
 
     Delivery cost, order total, order weight and grand total are all
     calculated using the update_total model method.
+
+    The original cart and stripe pid fields are used to store data used
+    when making comparissons to ensure each Order instance is unique from
+    within the webhook.
     """
     # Order Number
     order_number = models.CharField(max_length=32, null=False, editable=False)
     # Foreign Key to the User Model
     user_profile = models.ForeignKey(UserProfile, on_delete=models.SET_NULL, null=True, blank=True, related_name='orders')  # noqa: E501
     # User Contact Details
-    first_name = models.CharField(max_length=20, null=True, blank=True)
-    last_name = models.CharField(max_length=20, null=True, blank=True)
+    full_name = models.CharField(max_length=50, null=True, blank=True)
     email = models.EmailField(max_length=254, null=False, blank=False)
     # User Phone Number & Validators
     phoneNumberRegex = RegexValidator(regex=r'^\+?1?\d{9,15}$')
@@ -71,6 +74,11 @@ class Order (models.Model):
 
     grand_total = models.DecimalField(
         max_digits=10, decimal_places=2, null=False, default=0
+    )
+    # Webhook Fields
+    original_cart = models.TextField(null=False, blank=False, default='')
+    stripe_pid = models.CharField(
+        max_length=254, null=False, blank=False, default=''
     )
 
     def update_total(self):
