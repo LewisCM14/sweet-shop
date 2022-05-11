@@ -1,0 +1,34 @@
+Hello {{ order.full_name }}!
+
+This is a confirmation of your order from Classic Confectionery. Your order information is below:
+
+Order Number: {{ order.order_number }}
+Order Date: {{ order.date }}
+
+Cart:
+{% for item in order.lineitems.all %}
+{{ item.product.weight_in_grams }}g {{ item.product.name }} 
+    £{{ item.product.price }} each | Qty: {{ item.quantity }}
+        TOTAL: £{{ item.lineitem_total }}
+{% endfor %}
+Order Total: ${{ order.order_total }}
+Delivery: ${{ order.delivery_cost }}
+Grand Total: ${{ order.grand_total }}
+
+Delivery Address:
+
+{{ order.street_address1 }} {{ order.street_address2 }}
+{{ order.town_or_city }}
+{{ order.county }}
+{{ order.postcode }}
+{{ order.country }}
+
+We've got your preferred contact number on file as {{ order.phone_number }}.
+
+If you have any questions, feel free to contact us at {{ contact_email }}.
+
+Thank you for your order!
+
+Sincerely,
+
+Classic Confectionery.

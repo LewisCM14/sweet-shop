@@ -4,6 +4,9 @@ import json
 import time
 
 from django.http import HttpResponse
+from django.core.mail import send_mail
+from django.template.loader import render_to_string
+from django.conf import settings
 
 from products.models import Product
 from profiles.models import UserProfile
@@ -24,6 +27,32 @@ class StripeWH_Handler:
         attributes of the request coming from stripe.
         """
         self.request = request
+
+    def _send_confirmation_email(self, order):
+        """
+        A private method to handle sending order confirmation emails.
+
+        Collects the customers email from the passed in order.
+        Then render_to_string the files located within the checkout templates
+        confirmation_emails folder, passing in the order as context.
+
+        The Django send_mail function is then called with the email subject,
+        body, delivery email and the recipients email.
+        """
+        customer_email = order.email
+        subject = render_to_string(
+            'checkout/confirmation_emails/confirmation_email_subject.txt',
+            {'order': order})
+        body = render_to_string(
+            'checkout/confirmation_emails/confirmation_email_body.txt',
+            {'order': order, 'contact_email': settings.DEFAULT_FROM_EMAIL})
+
+        send_mail(
+            subject,
+            body,
+            settings.DEFAULT_FROM_EMAIL,
+            [customer_email]
+        )
 
     def handle_event(self, event):
         """
@@ -56,12 +85,13 @@ class StripeWH_Handler:
         The order_exists boolean is then set to false and the attempt
         counter set to 5. Then within a while loop the webhook checks
         if the Order instance already exists within the database.
-        If so breaks out of the loop and returns a HttpResponse 200.
+        If so breaks out of the loop sends the order confrimation
+        email and returns a HttpResponse 200.
 
-        Once the counter reaches 0 'order_exists' is set to False and the
+        Once the counter reaches 0, 'order_exists' is set to False and the
         Order instance is created from within the webhook using
         the data collected in the shipping_details variable, before
-        returning a HttpResponse 200.
+        sending a confrimation email and returning a HttpResponse 200.
 
         If the Order can not be found or created from within the webhook a
         HttpResponse 500 is returned along with the error message.
@@ -118,6 +148,7 @@ class StripeWH_Handler:
                 attempt += 1
                 time.sleep(1)
         if order_exists:
+            self._send_confirmation_email(order)
             return HttpResponse(
                     content=f'Webhook received: {event["type"]} | SUCCESS: Verified order already in database',  # noqa
                     status=200)
@@ -152,6 +183,7 @@ class StripeWH_Handler:
                 return HttpResponse(
                     content=f'Webhook received: {event["type"]} | ERROR: {e}',
                     status=500)
+        self._send_confirmation_email(order)
         return HttpResponse(
             content=f'Webhook received: {event["type"]} | SUCCESS: Created order in webhook',  # noqa: E501
             status=200)
