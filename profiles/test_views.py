@@ -20,7 +20,7 @@ class TestView(TestCase):
 
     def setUp(self):
         """
-        Creates a User test case.
+        Creates a User test case and an instance of the Product database.
         """
         User.objects.create_user(
             username='Test User',
@@ -157,7 +157,7 @@ class TestView(TestCase):
 
     def test_order_history_is_collected(self):
         """
-        A view to test a users order history is collected in the view.
+        A test to confirm a users order history is collected in the view.
 
         Using the class helper methods, logs into the test user and
         initiates a cart, posting this cart instance to the checkout
@@ -169,7 +169,7 @@ class TestView(TestCase):
         used to collect any orders saved to their profile, this variables
         is asserted to equal 1, before the order_number is used to post
         to the order_history URL and Django's inbuilt HTTP client is used
-        to confirm a status code 200 is received. 
+        to confirm a status code 200 is received.
         """
         self.login()
         self.initiate_cart()
@@ -195,3 +195,34 @@ class TestView(TestCase):
 
         response = self.client.get(reverse('order_history', args=[order.order_number]))  # noqa: E501
         self.assertEqual(response.status_code, 200)
+
+    def test_users_can_change_name(self):
+        """
+        A test to confirm users can change their first & last name.
+
+        Uses the login helper method to pass user authentication
+        before collecting the user via their ID and confirming the
+        values for their first & last name.
+
+        A POST request is then made to the change_name URL,
+        stored in the response variable, with updated values for
+        the first_name and last_name fields. Django's HTTP client
+        is then used to confirm a status code 200 was returned.
+        before the user is collected again and it is asserted the name
+        fields have been updated to the values given to the change_name view.
+        """
+        self.login()
+
+        user = User.objects.get(id=1)
+        self.assertEqual(user.first_name, 'john')
+        self.assertEqual(user.last_name, 'doe')
+
+        response = self.client.post(reverse("change_name"), {
+            'first_name': 'John',
+            'last_name': 'Doe'
+        })
+        self.assertEqual(response.status_code, 200)
+
+        user = User.objects.get(id=1)
+        self.assertEqual(user.first_name, 'John')
+        self.assertEqual(user.last_name, 'Doe')
