@@ -40,6 +40,9 @@ class Order(models.Model):
     The original cart and stripe pid fields are used to store data used
     when making comparissons to ensure each Order instance is unique from
     within the webhook.
+
+    The status field uses the STATUS tuple and allows site administrators
+    to mark an orders delivery status, defaults to processing.
     """
     # Order Number
     order_number = models.CharField(max_length=32, null=False, editable=False)
@@ -80,6 +83,9 @@ class Order(models.Model):
     stripe_pid = models.CharField(
         max_length=254, null=False, blank=False, default=''
     )
+    # Order Status
+    STATUS = ((0, "processing"), (1, "packaged"), (2, "posted"))
+    status = models.IntegerField(choices=STATUS, default=0)
 
     def update_total(self):
         """

@@ -38,9 +38,9 @@ class OrderAdmin(admin.ModelAdmin):
               'street_address2', 'town_or_city',  'county',
               'postcode', 'country', 'date', 'order_total',
               'order_weight', 'delivery_cost', 'grand_total',
-              'original_cart', 'stripe_pid',)
+              'original_cart', 'stripe_pid', 'status',)
 
-    list_display = ('order_number', 'date', 'full_name',
+    list_display = ('status', 'order_number', 'date', 'full_name',
                     'order_total', 'delivery_cost',
                     'grand_total',)
 
