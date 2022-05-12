@@ -78,6 +78,18 @@ class TestAdmin(TestCase):
         order = Order.objects.get(id=1)
         self.client.post(reverse("checkout_success", args=[order.order_number]))  # noqa: E501
 
+    def test_status_tuple_values_correct(self):
+        """
+        A test to ensure the STATUS tuple values correspond to the correct
+        status value.
+
+        Asserts the Order model STATUS tuple has the correct integer
+        and string value for each index.
+        """
+        self.assertEqual(Order.STATUS[1], (1, 'packaged'))
+        self.assertEqual(Order.STATUS[2], (2, 'posted'))
+        self.assertEqual(Order.STATUS[0], (0, 'processing'))
+
     def test_post_order_updates_status_field(self):
         """
         A test to ensure the post_order method updates an orders status.
