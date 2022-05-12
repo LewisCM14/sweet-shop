@@ -95,3 +95,21 @@ class TestAdmin(TestCase):
 
         OrderAdmin.post_order(self, 'POST', [order])
         self.assertEqual(order.status, 2)
+
+    def test_package_order_updates_status_field(self):
+        """
+        A test to ensure the package_order method updates an orders status.
+
+        Calls the place_order helper method to ensure there is an order for
+        testing. Collects this order and asserts the status field has
+        defaulted to processing. Then calls the package_order method
+        from within the OrderAdmin on it before then asserting the
+        status field has been updated to the 1, or 'packaged'.
+        """
+        self.place_order()
+
+        order = Order.objects.get(id=1)
+        self.assertEqual(order.status, 0)
+
+        OrderAdmin.package_order(self, 'POST', [order])
+        self.assertEqual(order.status, 1)
