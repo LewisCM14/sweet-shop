@@ -82,6 +82,11 @@
                                 <li>
                                     <a class="dropdown-item" href="#">My Reviews</a>
                                 </li>
+                                {% if request.user.is_superuser %}
+                                    <li>
+                                        <a class="dropdown-item" href="{% url 'add_product' %}">Manage Products</a>
+                                    </li>
+                                {% endif %}
                                 <li><hr style="width: 100%; background-color: #000080; height: 2px" class="dropdown-divider"></li>
                                 <li>
                                     <a class="dropdown-item" href="{% url 'change_name' %}">Change Name</a>
@@ -92,11 +97,6 @@
                                 <li>
                                     <a class="dropdown-item" href="{% url 'account_change_password' %}">Change Password</a>
                                 </li>
-                                {% if request.user.is_superuser %}
-                                    <li>
-                                        <a class="dropdown-item" href="{% url 'add_product' %}">Manage Products</a>
-                                    </li>
-                                {% endif %}
                             {% else %}
                                 <li>
                                     <a class="dropdown-item" href="{% url 'account_login' %}">Login</a>
