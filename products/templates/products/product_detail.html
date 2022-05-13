@@ -122,7 +122,10 @@
                         </div>
                         <!-- Favorite Button -->
                         <div class="col-md-6 col-sm-12">
-                            <button class="mt-1">Favorites</button>
+                            <form method='GET' action="{% url 'favorite' product.id %}">
+                                {% csrf_token %}
+                                <button class="mt-1">Favorites</button>
+                            </form>
                         </div>
                     </div>
                     <!-- Add to Cart Form -->
