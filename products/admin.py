@@ -1,4 +1,4 @@
-""" This module contains the admin logic for the models products app """
+""" This module contains the admin logic for the product app """
 
 from django.contrib import admin
 from .models import Product, Type
