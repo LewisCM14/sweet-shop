@@ -1,6 +1,6 @@
 """ This module handles the views for the favorites app """
 
-from django.shortcuts import reverse, get_object_or_404
+from django.shortcuts import render, reverse, get_object_or_404
 from django.contrib import messages
 from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
@@ -44,3 +44,9 @@ def check_favorite(request, product_id):
             messages.info(request, f'Added {product.name} to your favorites!')  # noqa: E501
 
         return HttpResponseRedirect(reverse('product_detail', args=[product.id]))  # noqa: E501
+
+
+@login_required
+def view_favorite(request):
+    """ Renders the view_favorites.html template in the browser """
+    return render(request, 'favorites/view_favorites.html')

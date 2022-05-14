@@ -77,7 +77,7 @@
                         <ul class="dropdown-menu dropdown-menu-right white-yellow" aria-labelledby="productManagementDropdown">
                             {% if user.is_authenticated %}
                                 <li>
-                                    <a class="dropdown-item" href="#">My Favorites</a>
+                                    <a class="dropdown-item" href="{% url 'my_favorites' %}">My Favorites</a>
                                 </li>
                                 <li>
                                     <a class="dropdown-item" href="#">My Reviews</a>
