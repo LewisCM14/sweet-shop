@@ -43,13 +43,13 @@
                         </p>
                     </div>
                     <!-- Remove from Favorites -->
-                    <div class="text-center col-md-3">
+                    <div class="text-center col-md-2">
                         <p>
                             Remove
                         </p>
                     </div>
                     <!-- Quantity Selector -->
-                    <div class="text-center col-md-2">
+                    <div class="text-center col-md-3">
                         <p>
                             Quantity
                         </p>
@@ -65,46 +65,44 @@
         </div>
         <!-- Users Favorites -->
         {% for item in favorites %}
-            <div class="row p-1 d-flex justify-content-center">
+            <div class="row p-1">
                 <!-- Container -->
-                <div class="border p-1 col-md-12 col-sm-8">
+                <div class="border p-1 col-md-12 col-sm-8 bg-white">
                     <!-- Item Row -->
-                    <div class="row d-flex align-items-center">
-                        <!-- Image -->
-                        {% if item.product.image %}
-                            <div class="col-md-1">
+                    <form method="POST" action="{% url 'add_to_cart' item.product.id %}">
+                        {% csrf_token %}
+                        <div class="row">
+                            <!-- Image -->
+                            {% if item.product.image %}
+                                <div class="col-md-1">
+                                    <p>
+                                        <img class="img-fluid rounded" src="{{ item.product.image.url }}" alt="{{ item.product.name }}">
+                                    </p>
+                                </div>
+                            {% else %}
+                                <div class="col-md-1">
+                                    <p>
+                                        <img class="img-fluid rounded" src="{{ MEDIA_URL }}noimage.png" alt="{{ item.product.name }}">
+                                    </p>
+                                </div>
+                            {% endif %}
+                            <!-- Product Name, Weight & Price -->
+                            <div class="col-md-4 fw-700">
                                 <p>
-                                    <img class="img-fluid rounded" src="{{ item.product.image.url }}" alt="{{ item.product.name }}">
+                                    {{ item.product.name }}
+                                    <br>
+                                    <small>
+                                        £{{ item.product.price }} per {{ item.product.weight_in_grams }}g
+                                    </small>
                                 </p>
                             </div>
-                        {% else %}
-                            <div class="col-md-1">
-                                <p>
-                                    <img class="img-fluid rounded" src="{{ MEDIA_URL }}noimage.png" alt="{{ item.product.name }}">
-                                </p>
+                            <!-- Remove Item from Favorites -->
+                            <div class="col-md-2 d-flex justify-content-center align-items-center">
+                                <a href="#"><i class="fa-solid fa-star"></i></a>
                             </div>
-                        {% endif %}
-                        <!-- Product Name, Weight & Price -->
-                        <div class="col-md-4 fw-700">
-                            <p>
-                                {{ item.product.name }}
-                                <br>
-                                <small>
-                                    £{{ item.product.price }} per {{ item.product.weight_in_grams }}g
-                                </small>
-                            </p>
-                        </div>
-                        <!-- Remove Item from Favorites -->
-                        <div class="text-center col-md-2">
-                            <a class="remove-item text-decoration-none text-red" id="remove_{{ item.item_id }}"><i
-                                    class="fa-solid fa-trash-can fa-lg"></i></a>
-                        </div>
-                        <!-- Item Quantity -->
-                        <div class="flex-column d-flex align-items-center justify-content-center col-md-3">
-                            <form class="update-form item-qty-form-cart text-center" method="POST"
-                                action="{% url 'adjust_cart' item.item_id %}">
-                                {% csrf_token %}
-                                <div class="input-group">
+                            <!-- Item Quantity -->
+                            <div class="col-md-3 d-flex justify-content-center align-items-center">
+                                <div class="input-group item-qty-form-cart">
                                     <!-- Minus Button -->
                                     <div class="input-group-prepend">
                                         <button class="decrement-qty qty-buttons" data-item_id="{{ item.item_.id }}"
@@ -116,7 +114,7 @@
                                     </div>
                                     <!-- Quantity Input -->
                                     <input class="form-control qty_input edit-qty-input" type="number" name="quantity"
-                                        value="{{ item.quantity }}" min="1" max="99" data-item_id="{{ item.item_.id }}"
+                                        value="1" min="1" max="99" data-item_id="{{ item.item_.id }}"
                                         id="id_qty_{{ item.item_.id }}">
                                     <!-- Plus Button -->
                                     <div class="input-group-append">
@@ -128,14 +126,14 @@
                                         </button>
                                     </div>
                                 </div>
-                            </form>
+                            </div>
+                            <!-- Add Item to Cart -->
+                            <div class="col-md-2 d-flex justify-content-center align-items-center">
+                                <input type="hidden" name="redirect_url" value="{{ request.path }}">
+                                <button type="submit" value="Add to Cart"><i class="fa-solid fa-cart-plus"></i></button>
+                            </div>
                         </div>
-                        <!-- Add Item to Cart -->
-                        <div class="text-center col-md-2">
-                            <a class="remove-item text-decoration-none text-red" id="remove_{{ item.item_id }}"><i
-                                    class="fa-solid fa-trash-can fa-lg"></i></a>
-                        </div>
-                    </div>
+                    </form>
                 </div>
             </div>
         {% endfor %}

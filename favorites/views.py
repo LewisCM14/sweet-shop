@@ -49,4 +49,11 @@ def check_favorite(request, product_id):
 @login_required
 def view_favorite(request):
     """ Renders the view_favorites.html template in the browser """
-    return render(request, 'favorites/view_favorites.html')
+    favorites = Favorites.objects.filter(user=request.user)
+
+    template = 'favorites/view_favorites.html'
+    context = {
+        'favorites': favorites,
+    }
+
+    return render(request, template, context)
