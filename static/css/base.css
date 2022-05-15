@@ -230,6 +230,11 @@ body {
     color: #12633C
   } /* Taken from https://markodenic.com/tools/buttons-generator/ */
 
+.blank-btn {
+    border: none;
+    background: none;
+}
+
 
 /* ------------------------------------------- MARGIN STYLINGS */
 
@@ -346,7 +351,10 @@ body {
 
 .custom-toast {
     overflow: visible;
-} /* Top border for toasts */
+    max-height: 400px;
+    overflow-x: hidden;
+    overflow-y: auto;
+} /* Top border for toasts & makes the cart contents scrollable past 400px */
 
 .toast-capper {
     height: 2px;
@@ -360,16 +368,10 @@ body {
     background-color: #B30012;
 } /* red background for error toast */
 
-
-.cart-notification-wrapper {
-    max-height: 300px;
-    overflow-x: hidden;
-    overflow-y: auto;
-} /* Makes the cart contents scrollable past 300px */
-
 .checkout-btn {
     width: 100%;
 } /* Sets the width of the checkout button */
+
 
 /* ------------------------------------------- FAQ ACCORDION STYLES */
 
@@ -643,4 +645,11 @@ select option {
 
 #profile-update-form input::placeholder {
     color: #333333;
+}
+
+
+/* ------------------------------------------- FAVORITES STYLING */
+
+.add-btn {
+    width: 100px;
 }

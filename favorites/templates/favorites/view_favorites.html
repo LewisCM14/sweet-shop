@@ -1,0 +1,152 @@
+{% extends "base.html" %}
+{% load static %}
+{% load cart_tools %}
+
+{% block page_header %}
+    <div class="container header-container">
+        <div class="row">
+            <div class="col">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+                        <li class="breadcrumb-item"><a href="{% url 'products' %}">Products</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Favorites</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+
+    <div class="container mb-4">
+        <div class="row mb-2">
+            <div class="col">
+                <span class="h4 text-uppercase">My Favorites</span>
+            </div>
+        </div>
+        <!-- Favorite Section Headings -->
+        <div class="row d-none d-md-block d-lg-block d-xl-block d-xxl-block">
+            <!-- Container -->
+            <div class="fw-700 col">
+                <!-- Heading Row -->
+                <div class="row">
+                    <!-- Image -->
+                    <div class="col-md-1">
+                        Image
+                    </div>
+                    <!-- Product -->
+                    <div class="col-md-4">
+                        <p>
+                            Product
+                        </p>
+                    </div>
+                    <!-- Remove from Favorites -->
+                    <div class="text-center col-md-2">
+                        <p>
+                            Remove
+                        </p>
+                    </div>
+                    <!-- Quantity Selector -->
+                    <div class="text-center col-md-3">
+                        <p>
+                            Quantity
+                        </p>
+                    </div>
+                    <!-- Add to Cart Button -->
+                    <div class="text-center col-md-2">
+                        <p>
+                            Add to Cart
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Users Favorites -->
+        {% for item in favorites %}
+            <div class="row p-1 d-flex justify-content-center">
+                <!-- Container -->
+                <div class="border p-1 col-md-12 col-sm-8 bg-white">
+                    <!-- Item Row -->
+                    <form method="POST" action="{% url 'add_to_cart' item.product.id %}">
+                        {% csrf_token %}
+                        <div class="row d-flex align-items-center">
+                            <!-- Image -->
+                            {% if item.product.image %}
+                                <div class="col-md-1">
+                                    <p>
+                                        <img class="img-fluid rounded" src="{{ item.product.image.url }}" alt="{{ item.product.name }}">
+                                    </p>
+                                </div>
+                            {% else %}
+                                <div class="col-md-1">
+                                    <p>
+                                        <img class="img-fluid rounded" src="{{ MEDIA_URL }}noimage.png" alt="{{ item.product.name }}">
+                                    </p>
+                                </div>
+                            {% endif %}
+                            <!-- Product Name, Weight & Price -->
+                            <div class="col-md-4 fw-700">
+                                <p>
+                                    {{ item.product.name }}
+                                    <br>
+                                    <small>
+                                        £{{ item.product.price }} per {{ item.product.weight_in_grams }}g
+                                    </small>
+                                </p>
+                            </div>
+                            <!-- Remove Item from Favorites -->
+                            <div class="col-md-2 mb-2 mb-md-2 d-flex justify-content-center align-items-center">
+                                <a class="text-center text-decoration-none text-red" href="{% url 'remove_favorite' item.product.id %}">
+                                    <span class="text-uppercase flex-column">
+                                        <i class="fa-solid fa-2xl fa-star"></i>
+                                        <p class="mb-0">Favorite</p>
+                                    </span>
+                                </a>
+                            </div>
+                            <!-- Item Quantity -->
+                            <div class="col-md-3 d-flex justify-content-center align-items-center">
+                                <div class="input-group item-qty-form-cart">
+                                    <!-- Minus Button -->
+                                    <div class="input-group-prepend">
+                                        <button class="decrement-qty qty-buttons" data-item_id="{{ item.item_.id }}"
+                                            id="decrement-qty_{{ item.item_.id }}">
+                                            <span class="icon">
+                                                <i class="fa-solid fa-minus"></i>
+                                            </span>
+                                        </button>
+                                    </div>
+                                    <!-- Quantity Input -->
+                                    <input class="form-control qty_input edit-qty-input" type="number" name="quantity"
+                                        value="1" min="1" max="99" data-item_id="{{ item.item_.id }}"
+                                        id="id_qty_{{ item.item_.id }}">
+                                    <!-- Plus Button -->
+                                    <div class="input-group-append">
+                                        <button class="increment-qty qty-buttons" data-item_id="{{ item.item_.id }}"
+                                            id="increment-qty_{{ item.item_.id }}">
+                                            <span class="icon">
+                                                <i class="fa-solid fa-plus"></i>
+                                            </span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Add Item to Cart -->
+                            <div class="col-md-2 mt-md-0 mt-2 d-flex justify-content-center align-items-center">
+                                <input type="hidden" name="redirect_url" value="{{ request.path }}">
+                                <input class="blue-charcoal-btn mt-1 add-btn" type="submit" value="Add to Cart">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+{% endblock %}
+
+{% block postloadjs %}
+    {{ block.super }}
+    {% include 'products/includes/quantity_input_script.html' %}
+{% endblock %}

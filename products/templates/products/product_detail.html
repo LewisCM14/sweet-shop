@@ -22,7 +22,7 @@
         <div class="row bg-white">
             <!-- Product Image -->
             <div class="col-lg-6 col-md-12">
-                <div class="image-container border-blur">
+                <div class="image-container">
                     {% if product.image %}
                         <a href="{{ product.image.url }}" target="_blank">
                             <img class="card-img-top img-fluid" src="{{ product.image.url }}" alt="{{ product.name }}">
@@ -38,7 +38,7 @@
             <div class="col-lg-6 col-md-12">
                 <div class="container mb-4">
                     <!-- Product Name -->
-                    <div class="row">
+                    <div class="row mt-2">
                         <div class="col">
                             <p class="h3 fw-700">{{ product.name }}</p>
                             <hr class="mt-0 d-inline-block mx-auto"
@@ -111,22 +111,33 @@
                                 </div>
                             </div>
                         </div>
+                    {% else %}
+                    <div class="row">
+                        <div class="col d-flex justify-content-end">
+                            <!-- Review Button -->
+                            <a class="text-green" href="#">Review</a>
+                        </div>
+                    </div>
                     {% endif %}
                 </div>
-                <!-- Action Buttons & Add to Cart Functionality -->
-                <div class="container mb-4 text-center">
-                    <div class="row mb-4">
-                        <!-- Review Button -->
-                        <div class="col-md-6 col-sm-12">
-                            <button class="mt-1">Review</button>
-                        </div>
+                <!-- Favorite Buttons & Add to Cart Functionality -->
+                <div class="container mb-5 text-center">
+                    <div class="row mb-5 d-flex justify-content-center">
                         <!-- Favorite Button -->
                         <div class="col-md-6 col-sm-12">
-                            <button class="mt-1">Favorites</button>
+                            <form method='GET' action="{% url 'favorite' product.id %}">
+                                {% csrf_token %}
+                                <button class="navy-charcoal blank-btn">
+                                    <span class="text-uppercase flex-column">
+                                        <i class="fa-solid fa-2xl fa-star"></i>
+                                        <p class="mb-0">Favorite</p>
+                                    </span>
+                                </button>
+                            </form>
                         </div>
                     </div>
                     <!-- Add to Cart Form -->
-                    <form class="border-blur p-2" action="{% url 'add_to_cart' product.id %}" method="POST">
+                    <form class="p-2" action="{% url 'add_to_cart' product.id %}" method="POST">
                         {% csrf_token %}
                         <!-- Weight & Quantity -->
                         <div class="row fw-bold d-flex align-items-center">
