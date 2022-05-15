@@ -22,7 +22,7 @@
         <div class="row bg-white">
             <!-- Product Image -->
             <div class="col-lg-6 col-md-12">
-                <div class="image-container border-blur">
+                <div class="image-container">
                     {% if product.image %}
                         <a href="{{ product.image.url }}" target="_blank">
                             <img class="card-img-top img-fluid" src="{{ product.image.url }}" alt="{{ product.name }}">
@@ -38,7 +38,7 @@
             <div class="col-lg-6 col-md-12">
                 <div class="container mb-4">
                     <!-- Product Name -->
-                    <div class="row">
+                    <div class="row mt-2">
                         <div class="col">
                             <p class="h3 fw-700">{{ product.name }}</p>
                             <hr class="mt-0 d-inline-block mx-auto"
@@ -137,7 +137,7 @@
                         </div>
                     </div>
                     <!-- Add to Cart Form -->
-                    <form class="border-blur p-2" action="{% url 'add_to_cart' product.id %}" method="POST">
+                    <form class="p-2" action="{% url 'add_to_cart' product.id %}" method="POST">
                         {% csrf_token %}
                         <!-- Weight & Quantity -->
                         <div class="row fw-bold d-flex align-items-center">
