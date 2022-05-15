@@ -90,3 +90,31 @@ class TestViews(TestCase):
         favorites = Favorites.objects.filter(user=user)
         self.assertEqual(len(favorites), 1)
         self.assertEqual(str(favorites[0]), 'Raspberry Bon Bons')
+
+    def test_check_favorite_view_redirects_to_product(self):
+        """
+        A view to test when a user favorites a product they are
+        redirected back to that product.
+
+        Uses the login helper method to pass user authentication,
+        before collecting the user instance and product object
+        made in the setUp method.
+
+        Then passes the product and user to the reverse of the favorite url.
+        Stored in the response variable. Then uses Django's inbuilt
+        HTTP client to assert a 302 redirect code is returned and the
+        reverse URL for this redirect is the prodcut_detail URL
+        with the id value of the product passed to the favorute URL.
+        """
+        self.login()
+
+        user = User.objects.get(id=1)
+        product = Product.objects.get(id=1)
+
+        response = self.client.get(
+            reverse("favorite", args=[product.id]), {
+                'product': product,
+                'user': user,
+            })
+        self.assertEqual(response.status_code, 302)
+        self.assertRedirects(response, reverse("product_detail", args=[product.id]))  # noqa: E501
