@@ -71,7 +71,7 @@
                     <!-- Item Row -->
                     <form method="POST" action="{% url 'add_to_cart' item.product.id %}">
                         {% csrf_token %}
-                        <div class="row">
+                        <div class="row d-flex align-items-center">
                             <!-- Image -->
                             {% if item.product.image %}
                                 <div class="col-md-1">
