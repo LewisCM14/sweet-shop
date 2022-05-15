@@ -5,6 +5,9 @@ from django.contrib import messages
 from django.db.models.functions import Lower
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
+
+from review.review_form import PostReviewForm
+
 from .models import Product, Type
 from .product_form import ProductForm
 
@@ -110,12 +113,19 @@ def all_products(request):
 
 
 def product_detail(request, product_id):
-    """ A view to show individual product details """
+    """
+    A view to show individual product details.
+    
+    Collects the prodcut from the database to return as context.
+    Also collects the PostReviewForm to return as context.
+    """
 
     product = get_object_or_404(Product, pk=product_id)
+    review_form = PostReviewForm()
 
     context = {
         'product': product,
+        'review_form': review_form,
     }
 
     return render(request, 'products/product_detail.html', context)

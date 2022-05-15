@@ -31,7 +31,7 @@ class Reviews(models.Model):
     rating = models.IntegerField(choices=RATING, default=4)
     # Review
     review = models.TextField(max_length=200)
-
+    # Date Added
     added_on = models.DateField(auto_now_add=True)
 
     class Meta:
