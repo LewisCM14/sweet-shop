@@ -27,7 +27,7 @@ class Reviews(models.Model):
     # Product
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     # Rating
-    RATING = ((0, "1"), (1, "2"), (2, "3"), (3, "4"), (4, "5"))
+    RATING = ((1, "1"), (2, "2"), (3, "3"), (4, "4"), (5, "5"))
     rating = models.IntegerField(choices=RATING, default=4)
     # Review
     review = models.TextField(max_length=200)

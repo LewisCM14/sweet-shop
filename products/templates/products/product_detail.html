@@ -85,8 +85,9 @@
                             <p class="mt-3">{{ product.description }}</p>
                         </div>
                     </div>
-                    <!-- Edit & Delete -->
+                    <!-- Edit, Delete or Review -->
                     {% if request.user.is_superuser %}
+                        <!-- Edit & Delete -->
                         <div class="row">
                             <div class="col d-flex justify-content-end">
                                 <a class="text-green me-1" href="{% url 'edit_product' product.id %}">Edit</a>
@@ -114,31 +115,32 @@
                                 </div>
                             </div>
                         </div>
-                    {% else %}
-                    <div class="row">
-                        <div class="col d-flex justify-content-end">
-                            <!-- Review Button -->
-                            <a class="text-green btt-link ms-1" data-bs-toggle='modal' href="#review" role="button">Write a Review</a>
+                    {% elif user.is_authenticated  %}
+                        <!-- Review -->
+                        <div class="row">
+                            <div class="col d-flex justify-content-end">
+                                <!-- Review Button -->
+                                <a class="text-green btt-link ms-1" data-bs-toggle='modal' href="#review" role="button">Write a Review</a>
+                            </div>
                         </div>
-                    </div>
-                    <!-- Review Modal -->
-                    <div class="modal fade" id="review" aria-hidden="true" aria-labelledby="reviewProductModal" tabindex="-1">
-                        <form action="POST" href="#">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <p class="modal-title text-uppercase" id="review">Leave a Review</p>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <div class="row">
-                                            <div class="col text-center">
-                                                <p>You are reviewing <strong>{{ product.name }}</strong></p> 
-                                            </div>
+                        <!-- Review Modal -->
+                        <div class="modal fade" id="review" aria-hidden="true" aria-labelledby="reviewProductModal" tabindex="-1">
+                            <form method="POST" action="{% url 'post_review' product.id %}">
+                                {% csrf_token %}
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <p class="modal-title text-uppercase" id="review">Leave a Review</p>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
-                                        <div class="row">
-                                            <div class="col">
-                                                    {% csrf_token %}
+                                        <div class="modal-body">
+                                            <div class="row">
+                                                <div class="col text-center">
+                                                    <p>You are reviewing <strong>{{ product.name }}</strong></p> 
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col">
                                                     <div class="row">
                                                         <div class="col">
                                                             {{ review_form.rating | as_crispy_field }}
@@ -149,18 +151,18 @@
                                                             {{ review_form.review | as_crispy_field }}
                                                         </div>
                                                     </div>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="modal-footer d-flex justify-content-evenly">
-                                        <button type="button" class="cancel-btn text-center text-decoration-none" data-bs-target="#review"
-                                            data-bs-toggle="modal" aria-label="Close">Close</button>
-                                        <button type="submit" class="review-btn text-center text-decoration-none">Submit</button>
+                                        <div class="modal-footer d-flex justify-content-evenly">
+                                            <button type="button" class="cancel-btn text-center text-decoration-none" data-bs-target="#review"
+                                                data-bs-toggle="modal" aria-label="Close">Close</button>
+                                            <button type="submit" class="review-btn text-center text-decoration-none">Submit</button>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </form>
-                    </div>
+                            </form>
+                        </div>
                     {% endif %}
                 </div>
                 <!-- Favorite Buttons & Add to Cart Functionality -->
