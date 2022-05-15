@@ -98,7 +98,12 @@
                             </div>
                             <!-- Remove Item from Favorites -->
                             <div class="col-md-2 d-flex justify-content-center align-items-center">
-                                <a class="text-red" href="{% url 'remove_favorite' item.product.id %}"><i class="fa-solid fa-2xl fa-star"></i></a>
+                                <a class="text-center text-decoration-none text-red" href="{% url 'remove_favorite' item.product.id %}">
+                                    <span class="text-uppercase flex-column">
+                                        <i class="fa-solid fa-2xl fa-star"></i>
+                                        <p>Favorite</p>
+                                    </span>
+                                </a>
                             </div>
                             <!-- Item Quantity -->
                             <div class="col-md-3 d-flex justify-content-center align-items-center">
