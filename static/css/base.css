@@ -644,3 +644,10 @@ select option {
 #profile-update-form input::placeholder {
     color: #333333;
 }
+
+
+/* ------------------------------------------- FAVORITES STYLING */
+
+.add-btn {
+    width: 100px;
+}
