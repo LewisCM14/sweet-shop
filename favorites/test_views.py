@@ -156,7 +156,7 @@ class TestViews(TestCase):
 
         This response variable then has it's redirected status, url and
         user feedback message asserted before the Favorites database
-        is filtered via the user again and the length asserted to 0.
+        is filtered via the user and the length asserted to 0.
         Meaning the existing product has been deleted.
         """
         self.add_favorite()
@@ -204,3 +204,42 @@ class TestViews(TestCase):
         favorites = response.context['favorites']
         self.assertEqual(len(favorites), 1)
         self.assertEqual(str(favorites[0]), 'Raspberry Bon Bons')
+
+    def test_remove_favorite_deletes_object(self):
+        """
+        A test to check the remove_favorite view
+        deletes the passed object from the Favorites database.
+
+        Calls the add_favorite helper method to create an instance
+        in the Favorites database before collecting the user and
+        product created in the setUp method.
+
+        The login helper method is then called and the user and product
+        passed to the reverse of the remove_favorite url,
+        stored is the response.
+
+        This response variable then has it's redirected status, url and
+        user feedback message asserted before the Favorites database
+        is filtered via the user and the length asserted to 0.
+        Meaning the existing product has been deleted.
+        """
+        self.add_favorite()
+
+        user = User.objects.get(id=1)
+        product = Product.objects.get(id=1)
+
+        self.login()
+        response = self.client.get(
+            reverse("remove_favorite", args=[product.id]), {
+                'product': product,
+                'user': user,
+            })
+        self.assertEqual(response.status_code, 302)
+        self.assertRedirects(response, reverse("my_favorites"))  # noqa: E501
+
+        messages = list(get_messages(response.wsgi_request))
+        self.assertEqual(len(messages), 1)
+        self.assertEqual(str(messages[0]), f'Removed {product.name} from your favorites!')  # noqa: E501
+
+        favorites = Favorites.objects.filter(user=user)
+        self.assertEqual(len(favorites), 0)
