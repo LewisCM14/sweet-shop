@@ -230,6 +230,11 @@ body {
     color: #12633C
   } /* Taken from https://markodenic.com/tools/buttons-generator/ */
 
+.blank-btn {
+    border: none;
+    background: none;
+}
+
 
 /* ------------------------------------------- MARGIN STYLINGS */
 

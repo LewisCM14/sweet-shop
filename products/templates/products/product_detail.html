@@ -111,20 +111,28 @@
                                 </div>
                             </div>
                         </div>
+                    {% else %}
+                    <div class="row">
+                        <div class="col d-flex justify-content-end">
+                            <!-- Review Button -->
+                            <a class="text-green" href="#">Review</a>
+                        </div>
+                    </div>
                     {% endif %}
                 </div>
-                <!-- Action Buttons & Add to Cart Functionality -->
-                <div class="container mb-4 text-center">
-                    <div class="row mb-4">
-                        <!-- Review Button -->
-                        <div class="col-md-6 col-sm-12">
-                            <button class="mt-1">Review</button>
-                        </div>
+                <!-- Favorite Buttons & Add to Cart Functionality -->
+                <div class="container mb-5 text-center">
+                    <div class="row mb-5 d-flex justify-content-center">
                         <!-- Favorite Button -->
                         <div class="col-md-6 col-sm-12">
                             <form method='GET' action="{% url 'favorite' product.id %}">
                                 {% csrf_token %}
-                                <button class="mt-1">Favorites</button>
+                                <button class="navy-charcoal blank-btn">
+                                    <span class="text-uppercase flex-column">
+                                        <i class="fa-solid fa-2xl fa-star"></i>
+                                        <p class="mb-0">Favorite</p>
+                                    </span>
+                                </button>
                             </form>
                         </div>
                     </div>
