@@ -58,6 +58,29 @@ class TestViews(TestCase):
             password='password',
         )
 
+    def add_favorite(self):
+        """
+        Helper Method
+
+        Collects the user and product created in the setUp method and
+        uses them to create an object in the Favorites database, The
+        database is then filtered via this user and it is asserted the
+        length of the result is 1 and the product is 'Raspberry Bon Bons'.
+
+        As these assersions are imperative for the below testing
+        """
+        user = User.objects.get(id=1)
+        product = Product.objects.get(id=1)
+
+        Favorites.objects.create(
+            product=product,
+            user=user,
+        )
+
+        favorites = Favorites.objects.filter(user=user)
+        self.assertEqual(len(favorites), 1)
+        self.assertEqual(str(favorites[0]), 'Raspberry Bon Bons')
+
     def test_favorite_products_post_to_the_database(self):
         """
         Test a user can add products to their favorites.
@@ -124,32 +147,25 @@ class TestViews(TestCase):
         Test that when a user un-checks the favorites tab,
         an existing product is deleted.
 
-        Collects the user and product created in the setUp method and
-        uses them to create an object in the Favorites database, The
-        database is then filtered via this user and it is asserted the
-        length of the result is 1 and the product is 'Raspberry Bon Bons'.
+        Calls the add_favorite helper method to create an instance
+        in the Favorites database before collecting the user and
+        product created in the setUp method.
 
         The login helper method is then called and the user and product
         passed to the reverse of the favorites url, stored is the response.
 
         This response variable then has it's redirected status, url and
         user feedback message asserted before the Favorites database
-        is filtered via the user again and the length now asserted to 0.
+        is filtered via the user again and the length asserted to 0.
         Meaning the existing product has been deleted.
         """
+        self.add_favorite()
+
         user = User.objects.get(id=1)
         product = Product.objects.get(id=1)
 
-        Favorites.objects.create(
-            product=product,
-            user=user,
-        )
-
-        favorites = Favorites.objects.filter(user=user)
-        self.assertEqual(len(favorites), 1)
-        self.assertEqual(str(favorites[0]), 'Raspberry Bon Bons')
-
         self.login()
+
         response = self.client.get(
             reverse("favorite", args=[product.id]), {
                 'product': product,
@@ -164,3 +180,27 @@ class TestViews(TestCase):
 
         favorites = Favorites.objects.filter(user=user)
         self.assertEqual(len(favorites), 0)
+
+    def test_view_favorites_renders(self):
+        """
+        A test to check the view_favorites page renders correctly.
+
+        Calls the add_favorite helper method to create an instance
+        in the Favorites database, before calling the login method
+        to pass user authentication.
+
+        Uses Django's in-built HTTP client to get the favorites page URL.
+        Asserts equal to status code 200, a successful HTTP response, then
+        asserts the correct template is used before collection the
+        'favorites' key from the context, asserting the Favorites DB
+        instance created in the add_favorite method is returned in the context.
+        """
+        self.add_favorite()
+        self.login()
+
+        response = self.client.get('/favorite/my_favorites/')
+        self.assertTemplateUsed(response, 'favorites/view_favorites.html', 'base.html')  # noqa: E501
+
+        favorites = response.context['favorites']
+        self.assertEqual(len(favorites), 1)
+        self.assertEqual(str(favorites[0]), 'Raspberry Bon Bons')
