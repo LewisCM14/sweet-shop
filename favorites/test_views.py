@@ -60,7 +60,7 @@ class TestViews(TestCase):
 
     def test_favorite_products_post_to_the_database(self):
         """
-        A view to test a user can add products to their favorites.
+        Test a user can add products to their favorites.
 
         Uses the login helper method to pass user authentication,
         before collecting the user instance and product object
@@ -93,7 +93,7 @@ class TestViews(TestCase):
 
     def test_check_favorite_view_redirects_to_product(self):
         """
-        A view to test when a user favorites a product they are
+        Test when a user favorites a product they are
         redirected back to that product.
 
         Uses the login helper method to pass user authentication,
@@ -118,3 +118,49 @@ class TestViews(TestCase):
             })
         self.assertEqual(response.status_code, 302)
         self.assertRedirects(response, reverse("product_detail", args=[product.id]))  # noqa: E501
+
+    def test_check_favorite_deletes_existing_product(self):
+        """
+        Test that when a user un-checks the favorites tab,
+        an existing product is deleted.
+
+        Collects the user and product created in the setUp method and
+        uses them to create an object in the Favorites database, The
+        database is then filtered via this user and it is asserted the
+        length of the result is 1 and the product is 'Raspberry Bon Bons'.
+
+        The login helper method is then called and the user and product
+        passed to the reverse of the favorites url, stored is the response.
+
+        This response variable then has it's redirected status, url and
+        user feedback message asserted before the Favorites database
+        is filtered via the user again and the length now asserted to 0.
+        Meaning the existing product has been deleted.
+        """
+        user = User.objects.get(id=1)
+        product = Product.objects.get(id=1)
+
+        Favorites.objects.create(
+            product=product,
+            user=user,
+        )
+
+        favorites = Favorites.objects.filter(user=user)
+        self.assertEqual(len(favorites), 1)
+        self.assertEqual(str(favorites[0]), 'Raspberry Bon Bons')
+
+        self.login()
+        response = self.client.get(
+            reverse("favorite", args=[product.id]), {
+                'product': product,
+                'user': user,
+            })
+        self.assertEqual(response.status_code, 302)
+        self.assertRedirects(response, reverse("product_detail", args=[product.id]))  # noqa: E501
+
+        messages = list(get_messages(response.wsgi_request))
+        self.assertEqual(len(messages), 1)
+        self.assertEqual(str(messages[0]), f'Removed {product.name} from your favorites!')  # noqa: E501
+
+        favorites = Favorites.objects.filter(user=user)
+        self.assertEqual(len(favorites), 0)
