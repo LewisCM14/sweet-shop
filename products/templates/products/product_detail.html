@@ -123,34 +123,43 @@
                     </div>
                     <!-- Review Modal -->
                     <div class="modal fade" id="review" aria-hidden="true" aria-labelledby="reviewProductModal" tabindex="-1">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <p class="modal-title text-uppercase" id="review">Leave a Review</p>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-                                    <div class="row">
-                                        <div class="col text-center">
-                                            <p>You are reviewing <strong>{{ product.name }}</strong></p> 
+                        <form action="POST" href="#">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <p class="modal-title text-uppercase" id="review">Leave a Review</p>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="row">
+                                            <div class="col text-center">
+                                                <p>You are reviewing <strong>{{ product.name }}</strong></p> 
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col">
+                                                    {% csrf_token %}
+                                                    <div class="row">
+                                                        <div class="col">
+                                                            {{ review_form.rating | as_crispy_field }}
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col">
+                                                            {{ review_form.review | as_crispy_field }}
+                                                        </div>
+                                                    </div>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="row">
-                                        <div class="col">
-                                            <form>
-                                                {% csrf_token %}
-                                                {{ review_form|crispy }}
-                                            </form>
-                                        </div>
+                                    <div class="modal-footer d-flex justify-content-evenly">
+                                        <button type="button" class="cancel-btn text-center text-decoration-none" data-bs-target="#review"
+                                            data-bs-toggle="modal" aria-label="Close">Close</button>
+                                        <button type="submit" class="review-btn text-center text-decoration-none">Submit</button>
                                     </div>
-                                </div>
-                                <div class="modal-footer d-flex justify-content-evenly">
-                                    <button type="button" class="cancel-btn text-center text-decoration-none" data-bs-target="#review"
-                                        data-bs-toggle="modal" aria-label="Close">Close</button>
-                                    <a>SUBMIT</a>
                                 </div>
                             </div>
-                        </div>
+                        </form>
                     </div>
                     {% endif %}
                 </div>

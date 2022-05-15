@@ -235,6 +235,27 @@ body {
     background: none;
 }
 
+.review-btn {
+    text-decoration: none;
+    min-width: 130px;
+    height: 40px;
+    color: #fff;
+    padding: 5px 10px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    display: inline-block;
+    outline: none;
+    border-radius: 20px;
+    border: 2px solid #000080;
+    background: #000080;
+  }
+  .review-btn:hover {
+    background: #fff;
+    color: #000080
+  } /* Taken from https://markodenic.com/tools/buttons-generator/ */
+
 
 /* ------------------------------------------- MARGIN STYLINGS */
 

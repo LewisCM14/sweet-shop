@@ -115,7 +115,7 @@ def all_products(request):
 def product_detail(request, product_id):
     """
     A view to show individual product details.
-    
+
     Collects the prodcut from the database to return as context.
     Also collects the PostReviewForm to return as context.
     """

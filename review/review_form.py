@@ -9,9 +9,13 @@ class PostReviewForm(forms.ModelForm):
     The form to handle posting product reviews.
     """
 
-    rating = forms.IntegerField(
+    RATING = ((4, "5 Star"), (3, "4 Star"), (2, "3 Star"), (1, "2 Star"), (0, "1 Star"))  # noqa: E501
+
+    rating = forms.ChoiceField(
         label='Rating',
         required=True,
+        choices=RATING,
+        widget=forms.Select,
     )
 
     review = forms.CharField(
@@ -30,12 +34,3 @@ class PostReviewForm(forms.ModelForm):
         """
         model = Reviews
         fields = ('rating', 'review',)
-
-    def __init__(self, *args, **kwargs):
-        """
-        Over ride the default save method.
-
-        Add the autofocus class to the 'rating' field.
-        """
-        super().__init__(*args, **kwargs)
-        self.fields['rating'].widget.attrs['autofocus'] = True
