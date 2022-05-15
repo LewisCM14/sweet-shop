@@ -48,7 +48,13 @@ def check_favorite(request, product_id):
 
 @login_required
 def view_favorite(request):
-    """ Renders the view_favorites.html template in the browser """
+    """
+    Renders the view_favorites.html template in the browser
+
+    Collects all the objects in the Favorites database that match
+    the user who made the request, returning them to the template
+    as context.
+    """
     favorites = Favorites.objects.filter(user=request.user)
 
     template = 'favorites/view_favorites.html'
@@ -57,3 +63,28 @@ def view_favorite(request):
     }
 
     return render(request, template, context)
+
+
+@login_required
+def remove_favorite(request, product_id):
+    """
+    A view to handle users removing products from their favorites list.
+
+    On the request, uses the passed in product_id value
+    to collect the product object from the database and collects the user
+    from the session. Then collects the object that matches these
+    two values from the Favorites database and deletes it,
+    returning a user feedback message before reloading the page.
+    """
+    product = get_object_or_404(Product, pk=product_id)
+    user = request.user
+
+    favorites = Favorites.objects.get(
+        product=product,
+        user=user
+    )
+
+    favorites.delete()
+    messages.warning(request, f'Removed {product.name} from your favorites!')  # noqa: E501
+
+    return HttpResponseRedirect(reverse('my_favorites'))

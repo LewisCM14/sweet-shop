@@ -98,7 +98,7 @@
                             </div>
                             <!-- Remove Item from Favorites -->
                             <div class="col-md-2 d-flex justify-content-center align-items-center">
-                                <a href="#"><i class="fa-solid fa-star"></i></a>
+                                <a class="text-red" href="{% url 'remove_favorite' item.product.id %}"><i class="fa-solid fa-2xl fa-star"></i></a>
                             </div>
                             <!-- Item Quantity -->
                             <div class="col-md-3 d-flex justify-content-center align-items-center">
@@ -128,9 +128,9 @@
                                 </div>
                             </div>
                             <!-- Add Item to Cart -->
-                            <div class="col-md-2 d-flex justify-content-center align-items-center">
+                            <div class="col-md-2 mt-md-0 mt-2 d-flex justify-content-center align-items-center">
                                 <input type="hidden" name="redirect_url" value="{{ request.path }}">
-                                <button type="submit" value="Add to Cart"><i class="fa-solid fa-cart-plus"></i></button>
+                                <button class="text-green" type="submit" value="Add to Cart"><i class="fa-solid fa-2xl fa-cart-plus"></i></button>
                             </div>
                         </div>
                     </form>
