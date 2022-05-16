@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block page_header %}
+    <div class="container header-container">
+        <div class="row">
+            <div class="col">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+                        <li class="breadcrumb-item"><a href="{% url 'profile' %}">Account</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">My Reviews</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+
+    <div class="container mb-4">
+        <div class="row mb-2">
+            <div class="col">
+                <span class="h4 text-uppercase">My Reviews</span>
+            </div>
+        </div>
+    {% if reviews %}
+            <!-- Users Reviews -->
+            {% for review in reviews %}
+            {% endfor %}
+        </div>
+    {% else %}
+        <!-- Display if no Reviews -->
+        <div class="row text-center mb-4">
+            <div class="col d-flex flex-column align-items-center">
+                <span class="h4 text-uppercase">You haven't reviewed anything yet!</span>
+                <button class="shopping-button blue-charcoal-btn">
+                    <a class="text-white text-decoration-none" href="{% url 'products' %}">
+                        See Our Products!
+                    </a>
+                </button>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+{% endblock %}

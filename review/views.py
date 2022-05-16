@@ -1,6 +1,6 @@
 """ This module handles the views for the review app """
 
-from django.shortcuts import reverse, get_object_or_404
+from django.shortcuts import render, reverse, get_object_or_404
 from django.contrib import messages
 from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
@@ -52,3 +52,11 @@ def post_review(request, product_id):
                 form = PostReviewForm()
 
         return HttpResponseRedirect(reverse('product_detail', args=[product.id]))  # noqa: E501
+
+
+@login_required
+def my_reviews(request):
+    """
+    Renders a users reviews in the browser
+    """
+    return render(request, 'reviews/my_reviews.html')
