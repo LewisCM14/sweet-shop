@@ -6,6 +6,7 @@ from django.db.models.functions import Lower
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 
+from review.models import Reviews
 from review.review_form import PostReviewForm
 
 from .models import Product, Type
@@ -112,20 +113,26 @@ def all_products(request):
     return render(request, 'products/products.html', context)
 
 
+# pylint: disable=no-member
 def product_detail(request, product_id):
     """
     A view to show individual product details.
 
     Collects the prodcut from the database to return as context.
     Also collects the PostReviewForm to return as context.
+
+    Uses the collected product to filter the Review database by
+    and return all reviews for it back as context
     """
 
     product = get_object_or_404(Product, pk=product_id)
     review_form = PostReviewForm()
+    reviews = Reviews.objects.filter(product=product)
 
     context = {
         'product': product,
         'review_form': review_form,
+        'reviews': reviews,
     }
 
     return render(request, 'products/product_detail.html', context)

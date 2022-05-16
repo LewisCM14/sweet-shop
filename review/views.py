@@ -15,6 +15,21 @@ from .review_form import PostReviewForm
 def post_review(request, product_id):
     """
     A view to allow users to post a product review.
+
+    Collects the product object from the Product database
+    via the id of the passed in 'product_id' and collects the user
+    from the request.
+
+    On the POST request filters the Review database via the user and product,
+    if they have already posted a review for that product an error
+    message is returned.
+
+    If the check returns no results an instance of the PostReviewForm is
+    created and if valid, the user and product are applied and it is saved
+    to the database before user feedback is provided and the product_detail
+    page is reloaded for the passed in product ID.
+
+    If invalid the form post fails and user feedback is provided.
     """
 
     product = get_object_or_404(Product, pk=product_id)

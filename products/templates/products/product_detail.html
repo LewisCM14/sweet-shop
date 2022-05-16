@@ -252,10 +252,38 @@
                 <!-- Reviews -->
                 <div class="row">
                     <div class="col">
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente, fugiat asperiores culpa
-                            suscipit tenetur quae rem tempore? Reprehenderit consequuntur aperiam eos veritatis nulla
-                            doloribus voluptatum ducimus? Quos rerum ipsam voluptas impedit, tenetur, velit praesentium
-                            possimus debitis vitae soluta non eligendi.</p>
+                        {% if reviews %}
+                            {% for review in reviews %}
+                                <div class="row bg-white border-blur p-1">
+                                    <div class="col-lg-5 col-md-12">
+                                        <p class="small mb-0">
+                                            {{ review.added_on }}
+                                        </p>
+                                        <p class="mt-0 mb-0 fw-700">
+                                            {{ review.user.first_name }} {{ review.user.last_name }}
+                                        </p>
+                                        <p class="mt-0 mb-0 text-center text-uppercase fw-900 text-navy">
+                                            {{ review.rating }} stars
+                                        </p>
+                                    </div>
+                                    <div class="col-lg-7 col-md-12">
+                                        <div class="row">
+                                            <div class="col">
+                                                <p class="mt-0 mb-0">
+                                                    {{ review.review }}
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        {% else %}
+                            <div class="row">
+                                <div class="col">
+                                    <a class="text-green btt-link ms-1" data-bs-toggle='modal' href="#review" role="button">Be the first to review!</a>
+                                </div>
+                            </div>
+                        {% endif %}
                     </div>
                 </div>
             </div>
@@ -267,3 +295,4 @@
     {{ block.super }}
     {% include 'products/includes/quantity_input_script.html' %}
 {% endblock %}
+
