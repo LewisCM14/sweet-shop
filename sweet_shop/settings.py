@@ -60,6 +60,7 @@ INSTALLED_APPS = [
     'cart',
     'checkout',
     'favorites',
+    'review',
     # Other
     'storages',
     'fontawesomefree',

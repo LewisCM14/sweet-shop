@@ -80,7 +80,7 @@
                                     <a class="dropdown-item" href="{% url 'my_favorites' %}">My Favorites</a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="#">My Reviews</a>
+                                    <a class="dropdown-item" href="{% url 'my_reviews' %}">My Reviews</a>
                                 </li>
                                 {% if request.user.is_superuser %}
                                     <li>

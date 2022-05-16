@@ -18,7 +18,8 @@
 {% endblock %}
 
 {% block content %}
-    <section class="container mb-4">
+<!-- Product Details -->
+    <section class="container">
         <div class="row bg-white">
             <!-- Product Image -->
             <div class="col-lg-6 col-md-12">
@@ -84,40 +85,84 @@
                             <p class="mt-3">{{ product.description }}</p>
                         </div>
                     </div>
-                    <!-- Edit & Delete -->
+                    <!-- Edit, Delete or Review -->
                     {% if request.user.is_superuser %}
+                        <!-- Edit & Delete -->
                         <div class="row">
                             <div class="col d-flex justify-content-end">
                                 <a class="text-green me-1" href="{% url 'edit_product' product.id %}">Edit</a>
                                 <span> | </span>
-                                <a class="text-red btt-link ms-1" data-bs-toggle='modal' data-bs-target='#delete'>Delete</a>
+                                <a class="text-red btt-link ms-1" data-bs-toggle='modal' href="#delete" role="button">Delete</a>
                             </div>
                         </div>
                         <!-- Delete Product Modal -->
-                        <div class="modal fade" id="delete" tabindex="-1" aria-labelledby="delete product modal" aria-hidden="true">
+                        <div class="modal fade" id="delete" aria-hidden="true" aria-labelledby="deleteProductModal" tabindex="-1">
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <p class="modal-title text-uppercase" id="delete">Are you sure you want to delete this product?</p>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body text-center">
                                         <p><strong>{{ product.name }}</strong></p>
                                     </div>
                                     <div class="modal-footer d-flex justify-content-evenly">
-                                        <button type="button" class="cancel-btn text-center text-decoration-none" data-bs-dismiss="modal" aria-label="Close">Close</button>
-                                        <a class="danger-btn text-center text-decoration-none" href="{% url 'delete_product' product.id %}">Delete</a>
+                                        <button type="button" class="cancel-btn text-center text-decoration-none" data-bs-target="#delete"
+                                            data-bs-toggle="modal" aria-label="Close">Close</button>
+                                        <a class="danger-btn text-center text-decoration-none"
+                                            href="{% url 'delete_product' product.id %}">Delete</a>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    {% else %}
-                    <div class="row">
-                        <div class="col d-flex justify-content-end">
-                            <!-- Review Button -->
-                            <a class="text-green" href="#">Review</a>
+                    {% elif user.is_authenticated  %}
+                        <!-- Review -->
+                        <div class="row">
+                            <div class="col d-flex justify-content-end">
+                                <!-- Review Button -->
+                                <a class="text-green btt-link ms-1" data-bs-toggle='modal' href="#review" role="button">Write a Review</a>
+                            </div>
                         </div>
-                    </div>
+                        <!-- Review Modal -->
+                        <div class="modal fade" id="review" aria-hidden="true" aria-labelledby="reviewProductModal" tabindex="-1">
+                            <form method="POST" action="{% url 'post_review' product.id %}">
+                                {% csrf_token %}
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <p class="modal-title text-uppercase" id="review">Leave a Review</p>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="row">
+                                                <div class="col text-center">
+                                                    <p>You are reviewing <strong>{{ product.name }}</strong></p> 
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col">
+                                                    <div class="row">
+                                                        <div class="col">
+                                                            {{ review_form.rating | as_crispy_field }}
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col">
+                                                            {{ review_form.review | as_crispy_field }}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer d-flex justify-content-evenly">
+                                            <button type="button" class="cancel-btn text-center text-decoration-none" data-bs-target="#review"
+                                                data-bs-toggle="modal" aria-label="Close">Close</button>
+                                            <button type="submit" class="review-btn text-center text-decoration-none">Submit</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
                     {% endif %}
                 </div>
                 <!-- Favorite Buttons & Add to Cart Functionality -->
@@ -129,7 +174,7 @@
                                 {% csrf_token %}
                                 <button class="navy-charcoal blank-btn">
                                     <span class="text-uppercase flex-column">
-                                        <i class="fa-solid fa-2xl fa-star"></i>
+                                        <i class="fa-solid fa-2xl fa-candy-cane"></i>
                                         <p class="mb-0">Favorite</p>
                                     </span>
                                 </button>
@@ -196,9 +241,88 @@
             </div>
         </div>
     </section>
+    <!-- Reviews Section -->
+    <section class="container mb-4">
+        <div class="row d-flex justify-content-center">
+            <div class="col-lg-10 col-md-12">
+                <!-- Heading -->
+                <div class="row mt-4">
+                    <span class="h4 text-uppercase">Latest Reviews</span>
+                </div>
+                <!-- Reviews -->
+                <div class="row">
+                    <div class="col">
+                        {% if reviews %}
+                            {% for review in reviews %}
+                                <div class="row bg-white light-border p-1 mb-3">
+                                    <div class="col-lg-5 col-md-12">
+                                        <p class="small mb-0">
+                                            {{ review.added_on }}
+                                        </p>
+                                        <p class="mt-0 mb-0 fw-700">
+                                            {{ review.user.first_name }} {{ review.user.last_name }}
+                                        </p>
+                                        <p class="mt-0 mb-0 text-center text-navy">
+                                            {% if review.rating == 5 %}
+                                                <i class="fa-solid fa-xl fa-star"></i>
+                                                <i class="fa-solid fa-xl fa-star"></i>
+                                                <i class="fa-solid fa-xl fa-star"></i>
+                                                <i class="fa-solid fa-xl fa-star"></i>
+                                                <i class="fa-solid fa-xl fa-star"></i>
+                                                {% elif review.rating == 4 %}
+                                                <i class="fa-solid fa-xl fa-star"></i>
+                                                <i class="fa-solid fa-xl fa-star"></i>
+                                                <i class="fa-solid fa-xl fa-star"></i>
+                                                <i class="fa-solid fa-xl fa-star"></i>
+                                                <i class="fa-regular fa-xl fa-star"></i>
+                                                {% elif review.rating == 3 %}
+                                                <i class="fa-solid fa-xl fa-star"></i>
+                                                <i class="fa-solid fa-xl fa-star"></i>
+                                                <i class="fa-solid fa-xl fa-star"></i>
+                                                <i class="fa-regular fa-xl fa-star"></i>
+                                                <i class="fa-regular fa-xl fa-star"></i>
+                                                {% elif review.rating == 2 %}
+                                                <i class="fa-solid fa-xl fa-star"></i>
+                                                <i class="fa-solid fa-xl fa-star"></i>
+                                                <i class="fa-regular fa-xl fa-star"></i>
+                                                <i class="fa-regular fa-xl fa-star"></i>
+                                                <i class="fa-regular fa-xl fa-star"></i>
+                                                {% elif review.rating == 1 %}
+                                                <i class="fa-solid fa-xl fa-star"></i>
+                                                <i class="fa-regular fa-xl fa-star"></i>
+                                                <i class="fa-regular fa-xl fa-star"></i>
+                                                <i class="fa-regular fa-xl fa-star"></i>
+                                                <i class="fa-regular fa-xl fa-star"></i>
+                                            {% endif %}
+                                        </p>
+                                    </div>
+                                    <div class="col-lg-7 col-md-12">
+                                        <div class="row">
+                                            <div class="col">
+                                                <p class="mt-0 mb-0">
+                                                    {{ review.review }}
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        {% else %}
+                            <div class="row">
+                                <div class="col">
+                                    <a class="text-green btt-link ms-1" data-bs-toggle='modal' href="#review" role="button">Be the first to review!</a>
+                                </div>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 {% endblock %}
 
 {% block postloadjs %}
     {{ block.super }}
     {% include 'products/includes/quantity_input_script.html' %}
 {% endblock %}
+

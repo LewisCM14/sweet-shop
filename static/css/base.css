@@ -233,7 +233,28 @@ body {
 .blank-btn {
     border: none;
     background: none;
-}
+}  /* Used to remove core button styling on elements */
+
+.review-btn {
+    text-decoration: none;
+    min-width: 130px;
+    height: 40px;
+    color: #fff;
+    padding: 5px 10px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    display: inline-block;
+    outline: none;
+    border-radius: 20px;
+    border: 2px solid #000080;
+    background: #000080;
+  }
+  .review-btn:hover {
+    background: #fff;
+    color: #000080
+  } /* Taken from https://markodenic.com/tools/buttons-generator/ */
 
 
 /* ------------------------------------------- MARGIN STYLINGS */
@@ -261,11 +282,30 @@ body {
 }
 
 
-/* ------------------------------------------- HEADER STYLING */
+/* ------------------------------------------- BORDER STYLING */
 
 .border-charcoal {
     border: 1px solid #333333;
 } /* Search bar input border */
+
+.border-blur {
+    border-width: 1px;
+    border-style: ridge;
+    border-color: #333333
+    blur(5px)
+}
+
+.border-charcoal-round {
+    border: 1px solid #333333;
+    border-radius: 4px;
+} /* checkout success ticket border */
+
+.light-border {
+    box-shadow: 0px 0px 15px -10px #333333;
+}
+
+
+/* ------------------------------------------- HEADER STYLING */
 
 .header-container {
     margin-top: 15px;
@@ -391,14 +431,7 @@ Taken from - https://stackoverflow.com/questions/66231936/change-accordion-butto
 
 .category-container {
     height: fit-content;
-}
-
-.border-blur {
-    border-width: 1px;
-    border-style: ridge;
-    border-color: #333333
-    blur(5px)
-}
+} /* Ensures background for categories doesn't extend entire page (products.html) */
 
 .type-link {
     text-decoration: none;
@@ -505,7 +538,7 @@ Taken from - https://stackoverflow.com/questions/66231936/change-accordion-butto
 .btn-file {
     position: relative;
     overflow: hidden;
-} /* set the overflow of the span wrapped around our file input to hidden */
+} /* set the overflow of the span wrapped around  file input to hidden */
 
 .btn-file input[type="file"] {
     position: absolute;
@@ -551,11 +584,6 @@ Taken from - https://stackoverflow.com/questions/66231936/change-accordion-butto
 
 
 /* ------------------------------------------- CHECKOUT STYLES */
-
-.border-charcoal-round {
-    border: 1px solid #333333;
-    border-radius: 4px;
-} /* Search bar input border */
 
 .order-summary {
     height: fit-content;
@@ -653,3 +681,6 @@ select option {
 .add-btn {
     width: 100px;
 }
+
+
+/* ------------------------------------------- REVIEWS STYLING */
