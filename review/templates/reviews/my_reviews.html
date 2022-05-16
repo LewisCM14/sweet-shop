@@ -27,8 +27,92 @@
         </div>
     {% if reviews %}
             <!-- Users Reviews -->
-            {% for review in reviews %}
-            {% endfor %}
+            <section class="row d-flex justify-content-center">
+                {% for review in reviews %}
+                    <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+                        <div class="h-100 light-border bg-white">
+                            <!-- Review Date & Product Name -->
+                            <div class="card-header bg-white border-0">
+                                <div class="row">
+                                    <div class="col">
+                                        <p class="small mt-0 mb-0">
+                                            {{ review.added_on }}
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col text-center">
+                                        <h4 class="lead fw-900 mt-0 mb-0">
+                                            {{ review.product.name }}
+                                        </h4>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Product Image -->
+                            <div class="row">
+                                <div class="col">
+                                    {% if review.product.image %}
+                                        <a href="{% url 'product_detail' review.product.id %}">
+                                            <img class="card-img-top img-fluid" src="{{ review.product.image.url }}" alt="{{ review.product.name }}">
+                                        </a>
+                                    {% else %}
+                                        <a href="{% url 'product_detail' review.product.id %}">
+                                            <img class="card-img-top img-fluid" src="{{ MEDIA_URL }}noimage.png" alt="{{ review.product.name }}">
+                                        </a>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <!-- Rating & Review -->
+                            <div class="card-body">
+                                <p class="mt-0 mb-2 text-center text-navy">
+                                    {% if review.rating == 5 %}
+                                        <i class="fa-solid fa-xl fa-star"></i>
+                                        <i class="fa-solid fa-xl fa-star"></i>
+                                        <i class="fa-solid fa-xl fa-star"></i>
+                                        <i class="fa-solid fa-xl fa-star"></i>
+                                        <i class="fa-solid fa-xl fa-star"></i>
+                                        {% elif review.rating == 4 %}
+                                        <i class="fa-solid fa-xl fa-star"></i>
+                                        <i class="fa-solid fa-xl fa-star"></i>
+                                        <i class="fa-solid fa-xl fa-star"></i>
+                                        <i class="fa-solid fa-xl fa-star"></i>
+                                        <i class="fa-regular fa-xl fa-star"></i>
+                                        {% elif review.rating == 3 %}
+                                        <i class="fa-solid fa-xl fa-star"></i>
+                                        <i class="fa-solid fa-xl fa-star"></i>
+                                        <i class="fa-solid fa-xl fa-star"></i>
+                                        <i class="fa-regular fa-xl fa-star"></i>
+                                        <i class="fa-regular fa-xl fa-star"></i>
+                                        {% elif review.rating == 2 %}
+                                        <i class="fa-solid fa-xl fa-star"></i>
+                                        <i class="fa-solid fa-xl fa-star"></i>
+                                        <i class="fa-regular fa-xl fa-star"></i>
+                                        <i class="fa-regular fa-xl fa-star"></i>
+                                        <i class="fa-regular fa-xl fa-star"></i>
+                                        {% elif review.rating == 1 %}
+                                        <i class="fa-solid fa-xl fa-star"></i>
+                                        <i class="fa-regular fa-xl fa-star"></i>
+                                        <i class="fa-regular fa-xl fa-star"></i>
+                                        <i class="fa-regular fa-xl fa-star"></i>
+                                        <i class="fa-regular fa-xl fa-star"></i>
+                                    {% endif %}
+                                </p>
+                                <p class="mb-0">
+                                    {{ review.review }} 
+                                </p>
+                            </div>
+                            <!-- Delete Review -->
+                            <div class="card-footer bg-white border-0">
+                                <div class="row">
+                                    <div class="col text-center">
+                                        <a class="text-decoration-none text-red"><i class="fa-solid fa-trash-can fa-2xl"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </section>
         </div>
     {% else %}
         <!-- Display if no Reviews -->

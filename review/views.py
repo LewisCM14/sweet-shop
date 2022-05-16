@@ -57,6 +57,16 @@ def post_review(request, product_id):
 @login_required
 def my_reviews(request):
     """
-    Renders a users reviews in the browser
+    Renders a users reviews in the browser.
+
+    Filters the Reviews database via the user from the request,
+    returning them as context to the template for display.
     """
-    return render(request, 'reviews/my_reviews.html')
+    reviews = Reviews.objects.filter(user=request.user)
+
+    template = 'reviews/my_reviews.html'
+    context = {
+        'reviews': reviews,
+    }
+
+    return render(request, template, context)
