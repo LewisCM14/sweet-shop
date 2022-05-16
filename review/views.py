@@ -70,3 +70,28 @@ def my_reviews(request):
     }
 
     return render(request, template, context)
+
+
+@login_required
+def delete_review(request, product_id):
+    """
+    A view to handle users deleting their reviews.
+
+    Collects the product via the product_id passed in
+    and the user from the session, before collecting the review
+    from the Review database that matches these two fields and
+    then calling the delete method on it before reloading the
+    'my_reviews' page and retuning a user message.
+    """
+    product = get_object_or_404(Product, pk=product_id)
+    user = request.user
+
+    review = Reviews.objects.get(
+        product=product,
+        user=user
+    )
+
+    review.delete()
+    messages.warning(request, f'Deleted your review of {product.name}!')  # noqa: E501
+
+    return HttpResponseRedirect(reverse('my_reviews'))
