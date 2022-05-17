@@ -235,6 +235,10 @@ body {
     background: none;
 }  /* Used to remove core button styling on elements */
 
+.btn-fix-width {
+    width: 200px;
+} /* Fixes the width off buttons to ensure uniform display */
+
 .review-btn {
     text-decoration: none;
     min-width: 130px;
