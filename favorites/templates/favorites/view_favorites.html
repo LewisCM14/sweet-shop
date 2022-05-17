@@ -88,7 +88,7 @@
                                 {% endif %}
                                 <!-- Product Name, Weight & Price -->
                                 <div class="col-md-4 fw-700">
-                                    <p>
+                                    <p class="fw-900">
                                         {{ item.product.name }}
                                         <br>
                                         <small>
@@ -135,7 +135,7 @@
                                 <!-- Add Item to Cart -->
                                 <div class="col-md-2 mt-md-0 mt-2 d-flex justify-content-center align-items-center">
                                     <input type="hidden" name="redirect_url" value="{{ request.path }}">
-                                    <input class="blue-charcoal-btn mt-1 add-btn" type="submit" value="Add to Cart">
+                                    <input class="blue-charcoal-btn mt-1 add-btn mb-2" type="submit" value="Add to Cart">
                                 </div>
                             </div>
                         </form>

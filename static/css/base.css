@@ -499,6 +499,7 @@ Taken from - https://stackoverflow.com/questions/66231936/change-accordion-butto
 .qty-buttons {
         background-color: #333333;
         color: #FFFFFF;
+        height: 100%;
     }
     .qty-buttons:hover {
         background-color: #000080;
@@ -522,7 +523,7 @@ Taken from - https://stackoverflow.com/questions/66231936/change-accordion-butto
 
 @media screen and (max-width: 767px) {
     .item-qty-form-cart {
-        width: 40%;
+        width: 50%;
     }
 }
 
