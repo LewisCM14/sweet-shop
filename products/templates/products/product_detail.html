@@ -147,7 +147,7 @@
                         <!-- Weight & Quantity -->
                         <div class="row fw-bold d-flex align-items-center">
                             <!-- Weight Section -->
-                            <div class="col-lg-6 col-md-12 d-flex justify-content-evenly flex-xl-row flex-lg-column flex-md-row">
+                            <div class="col-lg-6 col-md-12 d-flex justify-content-evenly align-items-center flex-xl-row flex-lg-column flex-md-row">
                                 <p>
                                     Weight:
                                 </p>
@@ -156,7 +156,7 @@
                                 </p>
                             </div>
                             <!-- Quantity Section -->
-                            <div class="col-lg-6 col-md-12 d-flex justify-content-evenly flex-xl-row flex-lg-column flex-md-row">
+                            <div class="col-lg-6 col-md-12 d-flex justify-content-evenly align-items-center flex-xl-row flex-lg-column flex-md-row">
                                 <p>
                                     Quantity:
                                 </p>
@@ -184,14 +184,14 @@
                             </div>
                         </div>
                         <!-- Keep Shopping & Add to Bag -->
-                        <div class="row">
+                        <div class="row d-flex flex-lg-row flex-column-reverse">
                             <div class="col-lg-6 col-md-12">
-                                <a class="blue-charcoal-btn text-decoration-none mt-1 shopping-button" href="{% url 'products' %}">
+                                <a class="blue-charcoal-btn text-decoration-none mt-2 shopping-button" href="{% url 'products' %}">
                                     Keep Shopping
                                 </a>
                             </div>
                             <div class="col-lg-6 col-md-12">
-                                <input class="blue-charcoal-btn mt-1 shopping-button" type="submit" value="Add to Cart">
+                                <input class="blue-charcoal-btn mt-2 shopping-button" type="submit" value="Add to Cart">
                             </div>
                         </div>
                         <!-- User Redirect upon Item Added -->
@@ -206,7 +206,7 @@
         <div class="row d-flex justify-content-center">
             <div class="col-lg-10 col-md-12">
                 <!-- Heading -->
-                <div class="row mt-4">
+                <div class="row mt-4 mb-4">
                     <span class="h4 text-uppercase">Latest Reviews</span>
                 </div>
                 <!-- Reviews -->
@@ -222,7 +222,7 @@
                                         <p class="mt-0 mb-0 fw-700">
                                             {{ review.user.first_name }} {{ review.user.last_name }}
                                         </p>
-                                        <p class="mt-0 mb-0 text-center text-navy">
+                                        <p class="mt-0 mb-2 text-center text-navy">
                                             {% if review.rating == 5 %}
                                                 <i class="fa-solid fa-xl fa-star"></i>
                                                 <i class="fa-solid fa-xl fa-star"></i>
@@ -325,4 +325,3 @@
     {{ block.super }}
     {% include 'products/includes/quantity_input_script.html' %}
 {% endblock %}
-

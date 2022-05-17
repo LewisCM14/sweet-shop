@@ -235,6 +235,10 @@ body {
     background: none;
 }  /* Used to remove core button styling on elements */
 
+.btn-fix-width {
+    width: 200px;
+} /* Fixes the width off buttons to ensure uniform display */
+
 .review-btn {
     text-decoration: none;
     min-width: 130px;
@@ -455,7 +459,7 @@ Taken from - https://stackoverflow.com/questions/66231936/change-accordion-butto
 } /* makes the cursor into a pointer. for return to top JS function on products.html */
 
 .add-qty-input { 
-    height: 80%;
+    height: 100%;
 } /* Sets the height of the input box itself */
 
 .add-qty-group {
@@ -469,12 +473,21 @@ Taken from - https://stackoverflow.com/questions/66231936/change-accordion-butto
     }
 }
 
-@media screen and (max-width: 992px) {
+ @media screen and (max-width: 992px) {
     .add-qty-group {
-        width: 20%;
+        width: 80%;
     }
     .add-weight-group {
-        width: 20%;
+        width: 80%;
+    } /* Used to ensure weight and quantity areas display evenly */
+}
+
+@media screen and (max-width: 991px) and (min-width: 769px) {
+    .add-qty-group {
+        width: 50%;
+    }
+    .add-weight-group {
+        width: 50%;
     } /* Used to ensure weight and quantity areas display evenly */
 }
 
@@ -499,6 +512,7 @@ Taken from - https://stackoverflow.com/questions/66231936/change-accordion-butto
 .qty-buttons {
         background-color: #333333;
         color: #FFFFFF;
+        height: 100%;
     }
     .qty-buttons:hover {
         background-color: #000080;
@@ -522,7 +536,7 @@ Taken from - https://stackoverflow.com/questions/66231936/change-accordion-butto
 
 @media screen and (max-width: 767px) {
     .item-qty-form-cart {
-        width: 40%;
+        width: 50%;
     }
 }
 

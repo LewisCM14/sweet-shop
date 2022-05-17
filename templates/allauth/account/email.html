@@ -32,7 +32,7 @@
   <fieldset class="blockLabels">
 
     {% for emailaddress in user.emailaddress_set.all %}
-  <div class="ctrlHolder">
+  <div class="ctrlHolder mb-3">
         <label for="email_radio_{{forloop.counter}}" class="{% if emailaddress.primary %}primary_email{%endif%}">
 
         <input id="email_radio_{{forloop.counter}}" type="radio" name="email" {% if emailaddress.primary or user.emailaddress_set.count == 1 %}checked="checked"{%endif %} value="{{emailaddress.email}}"/>
@@ -50,9 +50,9 @@
 
   <div class="container-fluid d-flex justify-content-center">
     <div class="buttonHolder text-center">
-      <button class="secondaryAction blue-charcoal-btn mt-1 mb-1" type="submit" name="action_primary" >{% trans 'Make Primary' %}</button>
-      <button class="secondaryAction blue-charcoal-btn mt-1 mb-1" type="submit" name="action_send" >{% trans 'Re-send Verification' %}</button>
-      <button class="primaryAction blue-charcoal-btn mt-1 mb-1" type="submit" name="action_remove" >{% trans 'Remove' %}</button>
+      <button class="secondaryAction blue-charcoal-btn mt-1 mb-1 btn-fix-width" type="submit" name="action_primary" >{% trans 'Make Primary' %}</button>
+      <button class="secondaryAction blue-charcoal-btn mt-1 mb-1 btn-fix-width" type="submit" name="action_send" >{% trans 'Re-send Verification' %}</button>
+      <button class="primaryAction blue-charcoal-btn mt-1 mb-1 btn-fix-width" type="submit" name="action_remove" >{% trans 'Remove' %}</button>
     </div>
   </div>
 
@@ -63,15 +63,17 @@
   <p><strong>{% trans 'Warning:'%}</strong> {% trans "You currently do not have any e-mail address set up. You should really add an e-mail address so you can receive notifications, reset your password, etc." %}</p>
 
   {% endif %}
-      <div class="text-center mt-5">
+      <div class="mt-5">
         <span class="h4 text-uppercase">{% trans "Add E-mail Address" %}</span>
       </div>
 
       <form method="post" action="{% url 'account_email' %}" class="add_email mt-1">
           {% csrf_token %}
           {{ form|crispy }}
-          <div class="container-fluid d-flex justify-content-center">
-            <button name="action_add" class="mt-1 blue-charcoal-btn" type="submit">{% trans "Add E-mail" %}</button>
+          <div class="row">
+            <div class="col d-flex justify-content-end">
+              <button name="action_add" class="mt-1 blue-charcoal-btn" type="submit">{% trans "Add E-mail" %}</button>
+            </div>
           </div>
       </form>
 
