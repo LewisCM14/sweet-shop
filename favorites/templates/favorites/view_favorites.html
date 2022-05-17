@@ -75,15 +75,15 @@
                                 <!-- Image -->
                                 {% if item.product.image %}
                                     <div class="col-md-1">
-                                        <p>
+                                        <a href="{% url 'product_detail' item.product.id %}">
                                             <img class="img-fluid rounded" src="{{ item.product.image.url }}" alt="{{ item.product.name }}">
-                                        </p>
+                                        </a>
                                     </div>
                                 {% else %}
                                     <div class="col-md-1">
-                                        <p>
+                                        <a>
                                             <img class="img-fluid rounded" src="{{ MEDIA_URL }}noimage.png" alt="{{ item.product.name }}">
-                                        </p>
+                                        </a>
                                     </div>
                                 {% endif %}
                                 <!-- Product Name, Weight & Price -->
