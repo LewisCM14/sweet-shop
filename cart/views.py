@@ -37,7 +37,7 @@ def add_to_cart(request, item_id):
     cart = request.session.get('cart', {})
 
     if item_id in list(cart.keys()):
-        if (cart[item_id] + quantity) >= 25:
+        if (cart[item_id] + quantity) > 25:
             messages.error(request, f'The total weight of {product.name} would now exceed 5kg, Please contact us directly to arrange purchase of items exceeding 5kg.')  # noqa: E501
             request.session['cart'] = cart
             return redirect(redirect_url)
@@ -77,7 +77,7 @@ def adjust_cart(request, item_id):
     print(cart)
 
     if quantity > 0:
-        if quantity >= 25:
+        if quantity > 25:
             messages.error(request, f'The total weight of {product.name} would now exceed 5kg, Please contact us directly to arrange purchase of items exceeding 5kg.')  # noqa: E501
             request.session['cart'] = cart
             return redirect(reverse('view_cart'))
