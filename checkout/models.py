@@ -30,7 +30,7 @@ class Order(models.Model):
     field has null & blank True so that users who don't have an account
     can still make purchases. Has a related name of orders.
 
-    Name, email, phone number all reqired. As is a full delivery address.
+    Name, email, phone number all required. As is a full delivery address.
 
     The date field is auto added at the time of the order being submitted.
 
@@ -38,7 +38,7 @@ class Order(models.Model):
     calculated using the update_total model method.
 
     The original cart and stripe pid fields are used to store data used
-    when making comparissons to ensure each Order instance is unique from
+    when making comparison to ensure each Order instance is unique from
     within the webhook.
 
     The status field uses the STATUS tuple and allows site administrators
@@ -93,10 +93,10 @@ class Order(models.Model):
 
         Using Sum aggregates the total sum of each line items total and weight.
         This is done by referencing each individual item created in
-        the OrderLineItem model through its realted name 'lineitems' and
+        the OrderLineItem model through its related name 'lineitems' and
         storing the sum of these values in order_total and order_weight.
 
-        From here comapres if the order_total is less than the
+        From here compare if the order_total is less than the
         FREE_DELIVERY_THRESHOLD located in the applications settings.
 
         If so delivery_cost is calculated based on order_weight. If not

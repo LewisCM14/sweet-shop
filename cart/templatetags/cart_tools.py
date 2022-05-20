@@ -1,4 +1,4 @@
-""" This module containts a function used to calculate the cart subtotal """
+""" This module contains a function used to calculate the cart subtotal """
 
 from django import template
 
