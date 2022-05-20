@@ -38,10 +38,16 @@
             <!-- Product Info -->
             <div class="col-lg-6 col-md-12">
                 <div class="container mb-4">
-                    <!-- Product Name -->
+                    <!-- Product Name & Favorites Button -->
                     <div class="row mt-2">
-                        <div class="col">
-                            <p class="h3 fw-700">{{ product.name }}</p>
+                        <div class="col ">
+                            <form method='GET' action="{% url 'favorite' product.id %}" class="d-flex flex-row align-items-center">
+                                {% csrf_token %}
+                                <h3 class="fw-700">{{ product.name }}</h3>
+                                <button class="navy-charcoal blank-btn ms-2">
+                                        <i class="fa-solid fa-2xl fa-heart"></i>
+                                </button>
+                            </form>
                             <hr class="mt-0 d-inline-block mx-auto"
                             style="width: 100px; background-color: #000080; height: 2px" />
                         </div>
@@ -172,10 +178,7 @@
                             <form method='GET' action="{% url 'favorite' product.id %}">
                                 {% csrf_token %}
                                 <button class="navy-charcoal blank-btn">
-                                    <span class="text-uppercase flex-column">
-                                        <i class="fa-solid fa-2xl fa-candy-cane"></i>
-                                        <p class="mb-0">Favorite</p>
-                                    </span>
+                                        <i class="fa-solid fa-2xl fa-heart"></i>
                                 </button>
                             </form>
                         </div>

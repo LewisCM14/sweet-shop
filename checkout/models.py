@@ -143,7 +143,6 @@ class Order(models.Model):
         return self.order_number
 
 
-# pylint: disable=no-member
 class OrderLineItem(models.Model):
     """
     The OrderLineItem model, takes in each individual product from the cart

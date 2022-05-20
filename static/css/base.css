@@ -433,6 +433,11 @@ Taken from - https://stackoverflow.com/questions/66231936/change-accordion-butto
 
 /* ------------------------------------------- PRODUCTS STYLES */
 
+
+.name-container {
+    width: 100%;
+}
+
 .category-container {
     height: fit-content;
 } /* Ensures background for categories doesn't extend entire page (products.html) */
