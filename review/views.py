@@ -1,6 +1,6 @@
 """ This module handles the views for the review app """
 
-from django.shortcuts import render, reverse, get_object_or_404
+from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.contrib import messages
 from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
@@ -99,15 +99,43 @@ def delete_review(request, product_id):
 
 @login_required
 def edit_review(request, review_id):
-    """ Renders the edit review template in the browser """
+    """
+    A view to handle rendering and updating a specific products review.
+
+    Collects the review object via the passed in review_id,
+    asserts the user attached to the review is the same as the
+    user making the request, redirecting if not.
+
+    If they match the review is rendered in the PostReviewForm
+    on the template and upon a post request, provided the form is
+    valid, the review is updated and the user is redirected to their
+    reviews. If invalid the form is reloaded to display the errors,
+    user feedback messages are provided for either result.
+    """
 
     review = get_object_or_404(Reviews, pk=review_id)
-    form = PostReviewForm(instance=review)
 
-    template = 'reviews/edit_review.html'
-    context = {
-        'review': review,
-        'form': form,
-    }
+    if review.user != request.user:
+        messages.error(request, 'You cannot alter this review!')  # noqa: E501
+        return redirect(reverse('my_reviews'))
+    else:
+        form = PostReviewForm(instance=review)
+        if request.method == 'POST':
+            form = PostReviewForm(request.POST, instance=review)
+            if form.is_valid():
+                form.save()
+                messages.success(request, 'Review updated successfully!')
+                return redirect(reverse('my_reviews'))
+            else:
+                messages.error(request, 'Failed to update the review. Please ensure the form is valid.')  # noqa: E501
+        else:
+            form = PostReviewForm(instance=review)
+            messages.info(request, f'You are editing your review of {review.product.name}')  # noqa: E501
 
-    return render(request, template, context)
+        template = 'reviews/edit_review.html'
+        context = {
+            'review': review,
+            'form': form,
+        }
+
+        return render(request, template, context)

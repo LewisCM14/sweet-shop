@@ -25,7 +25,7 @@
     <div class="container mb-4">
         <div class="row d-flex justify-content-center">
             <div class="col-lg-10 col-md-12">
-                <form method="POST" action="#">
+                <form method="POST" action="{% url 'edit_review' review.id %}">
                     {% csrf_token %}
                     {{ form | crispy }}
                     <div class="row mt-3">

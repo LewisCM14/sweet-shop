@@ -22,7 +22,7 @@ class PostReviewForm(forms.ModelForm):
         label='Review',
         required=True,
         widget=forms.Textarea(attrs={
-            'placeholder': 'What did you think of the prodcut?'
+            'placeholder': 'What did you think of the product?'
         }),
         max_length=200,
     )
