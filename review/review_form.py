@@ -9,7 +9,7 @@ class PostReviewForm(forms.ModelForm):
     The form to handle posting product reviews.
     """
 
-    RATING = ((5, "5 Stars"), (4, "4 Stars"), (3, "3 Stars"), (2, "2 Stars"), (1, "1 Star"))
+    RATING = ((5, "5 Stars"), (4, "4 Stars"), (3, "3 Stars"), (2, "2 Stars"), (1, "1 Star"))  # noqa: E501
 
     rating = forms.ChoiceField(
         label='Rating',
