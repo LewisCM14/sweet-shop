@@ -10,7 +10,7 @@ class Reviews(models.Model):
     """
     A model to store the product reviews.
 
-    Collects the user from the User model and the prodcut they
+    Collects the user from the User model and the product they
     have chosen to review from the Product model,
     if either the User or the product is deleted,
     the database entry is removed.
@@ -28,7 +28,7 @@ class Reviews(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     # Rating
     RATING = ((1, "1"), (2, "2"), (3, "3"), (4, "4"), (5, "5"))
-    rating = models.IntegerField(choices=RATING, default=4)
+    rating = models.IntegerField(choices=RATING, default=5)
     # Review
     review = models.TextField(max_length=200)
     # Date Added
