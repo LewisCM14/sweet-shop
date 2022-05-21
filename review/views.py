@@ -95,3 +95,19 @@ def delete_review(request, product_id):
     messages.warning(request, f'Deleted your review of {product.name}!')  # noqa: E501
 
     return HttpResponseRedirect(reverse('my_reviews'))
+
+
+@login_required
+def edit_review(request, review_id):
+    """ Renders the edit review template in the browser """
+
+    review = get_object_or_404(Reviews, pk=review_id)
+    form = PostReviewForm(instance=review)
+
+    template = 'reviews/edit_review.html'
+    context = {
+        'review': review,
+        'form': form,
+    }
+
+    return render(request, template, context)

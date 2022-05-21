@@ -183,7 +183,7 @@ def edit_product(request, product_id):
     """
     A view to allow superusers to edit products in the store.
 
-    Superuser credentails must first be verified.
+    Superuser credentials must first be verified.
 
     Take in the request and the product ID the user is going to edit.
     Pre-fill the form by getting the product using get_object_or_404
@@ -228,7 +228,7 @@ def delete_product(request, product_id):
     """
     A view to allow superusers to edit products in the store.
 
-    Superuser credentails must first be verified.
+    Superuser credentials must first be verified.
 
     Takes in the request and the product id to be deleted.
     First collect the product with get_object_or_404,
