@@ -355,3 +355,50 @@ class TestViews(TestCase):
         review = Reviews.objects.get(id=2)
         self.assertEqual(review.rating, 5)
         self.assertEqual(review.review, 'A good review.')
+
+    def test_users_can_only_edit_their_reviews(self):
+        """
+        A test to ensure users can only edit their own reviews.
+
+        Collects the 2nd objects in the Reviews database, asserting the
+        values of the rating & review fields for use in making comparisons.
+
+        Then signs into the 'johndoe' user created in the setUp method,
+        passing user authentication, before collecting the response of
+        the 'edit_review' view when passed with the review ID and
+        a valid rating & review field.
+
+        Then uses Django's inbuilt HTTP client to ensure a status code 302,
+        a redirect response, is returned and the redirect url is the
+        reverse of the 'my_reviews' view.
+
+        Then uses Django's get_messages to ensure the the response
+        returns the correct error message before collecting the 2nd Reviews
+        object again and asserting the rating & review fields have
+        not been updated to the values passed in the 'edit_review' URL,
+        as 'johndoe' is not the user related to this review.
+        """
+        review = Reviews.objects.get(id=2)
+        self.assertEqual(review.rating, 1)
+        self.assertEqual(review.review, 'A bad review.')
+
+        self.client.login(
+            email="johndoe@email.com",
+            password='password',
+        )
+
+        response = self.client.post(reverse('edit_review', args=[review.id]), {  # noqa: E501
+            'rating': 5,
+            'review': 'A good review.'
+        })
+
+        self.assertEqual(response.status_code, 302)
+        self.assertRedirects(response, (reverse('my_reviews')))  # noqa: E501
+
+        messages = list(get_messages(response.wsgi_request))
+        self.assertEqual(len(messages), 1)
+        self.assertEqual(str(messages[0]), 'You cannot alter this review!')  # noqa: E501
+
+        review = Reviews.objects.get(id=2)
+        self.assertEqual(review.rating, 1)
+        self.assertEqual(review.review, 'A bad review.')
