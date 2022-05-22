@@ -11,9 +11,9 @@ Cart:
     £{{ item.product.price }} each | Qty: {{ item.quantity }}
         TOTAL: £{{ item.lineitem_total }}
 {% endfor %}
-Order Total: ${{ order.order_total }}
-Delivery: ${{ order.delivery_cost }}
-Grand Total: ${{ order.grand_total }}
+Order Total: £{{ order.order_total }}
+Delivery: £{{ order.delivery_cost }}
+Grand Total: £{{ order.grand_total }}
 
 Delivery Address:
 
