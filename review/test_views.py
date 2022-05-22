@@ -44,11 +44,27 @@ class TestViews(TestCase):
             friendly_name='Chewy Sweets',
         )
 
+        sherbet = Type.objects.create(
+            name='sherbet_sweets',
+            friendly_name='Sherbet Sweets',
+        )
+
         bon_bons = Product.objects.create(
             type=chewy,
             name='Raspberry Bon Bons',
             description='A Chewy Sweet',
             popular_in_80s=False,
+            popular_in_90s=True,
+            popular_in_00s=True,
+            weight_in_grams=200,
+            price=Decimal(1.99),
+        )
+
+        Product.objects.create(
+            type=sherbet,
+            name='Flying Saucers',
+            description='A Sweet filled with Sherbet',
+            popular_in_80s=True,
             popular_in_90s=True,
             popular_in_00s=True,
             weight_in_grams=200,
@@ -110,7 +126,7 @@ class TestViews(TestCase):
 
         Collects all the objects in the Reviews database, asserting the total
         length is 2, this is for use in making comparisons later. Then
-        collects the Product created in the setUp method.
+        collects the 1st Product created in the setUp method.
 
         Then signs into the 'johndoe' user created in the setUp method,
         passing user authentication, before collecting the response of
@@ -144,3 +160,45 @@ class TestViews(TestCase):
 
         reviews = Reviews.objects.all()
         self.assertEqual(len(reviews), 1)
+
+    def test_valid_product_review_posts_to_database(self):
+        """
+        A test to ensure a valid product review posts to the database.
+
+        Collects all the objects in the Reviews database, asserting the total
+        length is 2, this is for use in making comparisons later. Then
+        collects the 2nd Product created in the setUp method.
+
+        Then signs into the 'johndoe' user created in the setUp method,
+        passing user authentication, before collecting the response of
+        the 'post_review' view when passed with the product ID and
+        a valid rating & review field.
+
+        Uses Django's inbuilt HTTP client to ensure a status code 302,
+        a redirect response, is returned and the redirect url is the
+        reverse of the 'product_details'. view.
+
+        Before collecting all the objects in the Reviews database again,
+        asserting the total length is now 3 and the str value for the
+        review at index 2 is the value of the review just passed in the
+        response. Meaning the review has been added to the database.
+        """
+        reviews = Reviews.objects.all()
+        self.assertEqual(len(reviews), 2)
+
+        product = Product.objects.get(id=2)
+        self.client.login(
+            email="johndoe@email.com",
+            password='password',
+        )
+
+        response = self.client.post(reverse('post_review', args=[product.id]), {  # noqa: E501
+            'rating': 5,
+            'review': 'A nice review.'
+        })
+        self.assertEqual(response.status_code, 302)
+        self.assertRedirects(response, (reverse('product_detail', args=[product.id])))  # noqa: E501
+
+        reviews = Reviews.objects.all()
+        self.assertEqual(len(reviews), 3)
+        self.assertEqual(str(reviews[2]), 'Flying Saucers rated 5 stars')
