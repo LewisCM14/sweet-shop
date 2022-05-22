@@ -1,11 +1,36 @@
 """ This module handles the views for the home app """
 
 from django.shortcuts import render
+from products.models import Type, Product
 
 
 def index(request):
-    """ Renders the index.html template in the browser """
-    return render(request, 'home/index.html')
+    """
+    A view to renders the index.html template in the browser.
+
+    Filters the Product database via the type field,
+    returning the results to to context for use in display
+    """
+
+    sour = Product.objects.filter(type=1)
+    fizzy = Product.objects.filter(type=2)
+    chocolate = Product.objects.filter(type=3)
+    chewy = Product.objects.filter(type=4)
+    sherbet = Product.objects.filter(type=5)
+    jellies_gums = Product.objects.filter(type=6)
+
+    template = 'home/index.html'
+
+    context = {
+        'chewy': chewy,
+        'fizzy': fizzy,
+        'chocolate': chocolate,
+        'sour': sour,
+        'sherbet': sherbet,
+        'jellies_gums': jellies_gums,
+    }
+
+    return render(request, template, context)
 
 
 def faq(request):

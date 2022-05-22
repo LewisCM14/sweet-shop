@@ -6,7 +6,7 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 
 class Type(models.Model):
     """
-    A Model to give the prodcuts a type.
+    A Model to give the products a type.
     """
     name = models.CharField(max_length=254)
     friendly_name = models.CharField(max_length=254, null=True, blank=True)
