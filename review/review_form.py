@@ -9,7 +9,7 @@ class PostReviewForm(forms.ModelForm):
     The form to handle posting product reviews.
     """
 
-    RATING = ((5, "5"), (4, "4"), (3, "3"), (2, "2"), (1, "1"))
+    RATING = ((5, "5 Stars"), (4, "4 Stars"), (3, "3 Stars"), (2, "2 Stars"), (1, "1 Star"))  # noqa: E501
 
     rating = forms.ChoiceField(
         label='Rating',
@@ -22,7 +22,7 @@ class PostReviewForm(forms.ModelForm):
         label='Review',
         required=True,
         widget=forms.Textarea(attrs={
-            'placeholder': 'What did you think of the prodcut?'
+            'placeholder': 'What did you think of the product?'
         }),
         max_length=200,
     )

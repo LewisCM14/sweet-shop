@@ -31,7 +31,6 @@ class Favorites(models.Model):
         verbose_name_plural = "Favorites"
         unique_together = [['user', 'product']]
 
-    # pylint: disable=invalid-str-returned
     def __str__(self):
         """
         Returns the string value for the products name.

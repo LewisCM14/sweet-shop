@@ -24,7 +24,8 @@ def add_to_cart(request, item_id):
     collects the cart instance from the session or creates one.
 
     Checks if the passed item_id is in the cart dictionary,
-    incrementing by the provided quantity if so, or adding if not.
+    incrementing by the provided quantity if so, providing
+    the total quantity doesn't exceed 25. Or adding if not.
     The updated cart variable is then placed into the session.
     User feedback messages are returned at either point.
     The user is then redirected to the provided url (the product_detail page).
@@ -36,8 +37,13 @@ def add_to_cart(request, item_id):
     cart = request.session.get('cart', {})
 
     if item_id in list(cart.keys()):
-        cart[item_id] += quantity
-        messages.success(request, f'Updated {product.name} quantity to {cart[item_id]}')  # noqa: E501
+        if (cart[item_id] + quantity) > 25:
+            messages.error(request, f'The total weight of {product.name} would now exceed 5kg, Please contact us directly to arrange purchase of individual items exceeding 5kg.')  # noqa: E501
+            request.session['cart'] = cart
+            return redirect(redirect_url)
+        else:
+            cart[item_id] += quantity
+            messages.success(request, f'Updated {product.name} quantity to {cart[item_id]}')  # noqa: E501
     else:
         cart[item_id] = quantity
         messages.success(request, f'Added {product.name} to your cart')
@@ -57,7 +63,7 @@ def adjust_cart(request, item_id):
     Collects the quantity from the form converting it to a integer
     collects the cart instance from the session or creates one.
 
-    Checks if the passed quantity is greater than 0,
+    Checks if the passed quantity is greater than 0 and less than 25,
     updating the quantity of the item_id by the provided integer if so.
     If the passed quantity is not greater than 0,
     the item_id within the cart is passed to the pop method, removing it.
@@ -70,8 +76,13 @@ def adjust_cart(request, item_id):
     cart = request.session.get('cart', {})
 
     if quantity > 0:
-        cart[item_id] = quantity
-        messages.success(request, f'Updated {product.name} quantity to {cart[item_id]}')  # noqa: E501
+        if quantity > 25:
+            messages.error(request, f'The total weight of {product.name} would now exceed 5kg, Please contact us directly to arrange purchase of individual items exceeding 5kg.')  # noqa: E501
+            request.session['cart'] = cart
+            return redirect(reverse('view_cart'))
+        else:
+            cart[item_id] = quantity
+            messages.success(request, f'Updated {product.name} quantity to {cart[item_id]}')  # noqa: E501
     else:
         cart.pop(item_id)
         messages.success(request, f'Removed {product.name} from your cart')

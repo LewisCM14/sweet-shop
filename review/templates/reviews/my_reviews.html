@@ -97,15 +97,70 @@
                                         <i class="fa-regular fa-xl fa-star"></i>
                                     {% endif %}
                                 </p>
-                                <p class="mb-0">
+                                <p class="mb-0 text-break">
                                     {{ review.review }} 
                                 </p>
                             </div>
-                            <!-- Delete Review -->
+                            <!-- Delete or Edit Review -->
                             <div class="card-footer bg-white border-0">
                                 <div class="row">
-                                    <div class="col text-center mb-2">
-                                        <a class="text-decoration-none text-red" href="{% url 'delete_review' review.product.id %}"><i class="fa-solid fa-trash-can fa-2xl"></i></a>
+                                    <div class="col mb-2 d-flex justify-content-evenly">
+                                        <a class="text-decoration-none text-green" href="{% url 'edit_review' review.id %}"><i class="fa-solid fa-pencil fa-2xl"></i></a>
+                                        <a class="text-red text-decoration-none" data-bs-toggle='modal' href="#delete{{ review.id }}" role="button"><i class="fa-solid fa-trash-can fa-2xl"></i></a>
+                                        <!-- Delete Review Modal -->
+                                        <div class="modal fade" id="delete{{ review.id }}" aria-hidden="true" aria-labelledby="deleteReviewModal" tabindex="-1">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <p class="modal-title text-uppercase" id="delete{{ review.id }}">Are you sure you want to delete this review?</p>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body text-center">
+                                                        <p><strong>{{ review.product.name }}</strong></p>
+                                                        <p> 
+                                                            {% if review.rating == 5 %}
+                                                                <i class="fa-solid fa-xl fa-star"></i>
+                                                                <i class="fa-solid fa-xl fa-star"></i>
+                                                                <i class="fa-solid fa-xl fa-star"></i>
+                                                                <i class="fa-solid fa-xl fa-star"></i>
+                                                                <i class="fa-solid fa-xl fa-star"></i>
+                                                                {% elif review.rating == 4 %}
+                                                                <i class="fa-solid fa-xl fa-star"></i>
+                                                                <i class="fa-solid fa-xl fa-star"></i>
+                                                                <i class="fa-solid fa-xl fa-star"></i>
+                                                                <i class="fa-solid fa-xl fa-star"></i>
+                                                                <i class="fa-regular fa-xl fa-star"></i>
+                                                                {% elif review.rating == 3 %}
+                                                                <i class="fa-solid fa-xl fa-star"></i>
+                                                                <i class="fa-solid fa-xl fa-star"></i>
+                                                                <i class="fa-solid fa-xl fa-star"></i>
+                                                                <i class="fa-regular fa-xl fa-star"></i>
+                                                                <i class="fa-regular fa-xl fa-star"></i>
+                                                                {% elif review.rating == 2 %}
+                                                                <i class="fa-solid fa-xl fa-star"></i>
+                                                                <i class="fa-solid fa-xl fa-star"></i>
+                                                                <i class="fa-regular fa-xl fa-star"></i>
+                                                                <i class="fa-regular fa-xl fa-star"></i>
+                                                                <i class="fa-regular fa-xl fa-star"></i>
+                                                                {% elif review.rating == 1 %}
+                                                                <i class="fa-solid fa-xl fa-star"></i>
+                                                                <i class="fa-regular fa-xl fa-star"></i>
+                                                                <i class="fa-regular fa-xl fa-star"></i>
+                                                                <i class="fa-regular fa-xl fa-star"></i>
+                                                                <i class="fa-regular fa-xl fa-star"></i>
+                                                            {% endif %}
+                                                        </p>
+                                                        <p>{{ review.review }}</p>
+                                                    </div>
+                                                    <div class="modal-footer d-flex justify-content-evenly">
+                                                        <button type="button" class="cancel-btn text-center text-decoration-none" data-bs-target="#delete{{ review.id }}"
+                                                            data-bs-toggle="modal" aria-label="Close">Close</button>
+                                                        <a class="danger-btn text-center text-decoration-none"
+                                                            href="{% url 'delete_review' review.product.id %}">Delete</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -118,7 +173,7 @@
         <!-- Display if no Reviews -->
         <div class="row text-center mb-4">
             <div class="col d-flex flex-column align-items-center">
-                <span class="h4 text-uppercase">You haven't reviewed anything yet!</span>
+                <span class="h5 mt-4 text-uppercase">You haven't reviewed anything yet!</span>
                 <button class="shopping-button blue-charcoal-btn">
                     <a class="text-white text-decoration-none" href="{% url 'products' %}">
                         See Our Products!

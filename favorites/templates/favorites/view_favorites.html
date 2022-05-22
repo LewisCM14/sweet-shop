@@ -26,43 +26,6 @@
             </div>
         </div>
         {% if favorites %}
-            <!-- Favorite Section Headings -->
-            <div class="row d-none d-md-block d-lg-block d-xl-block d-xxl-block">
-                <!-- Container -->
-                <div class="fw-700 col">
-                    <!-- Heading Row -->
-                    <div class="row">
-                        <!-- Image -->
-                        <div class="col-md-1">
-                            Image
-                        </div>
-                        <!-- Product -->
-                        <div class="col-md-4">
-                            <p>
-                                Product
-                            </p>
-                        </div>
-                        <!-- Remove from Favorites -->
-                        <div class="text-center col-md-2">
-                            <p>
-                                Remove
-                            </p>
-                        </div>
-                        <!-- Quantity Selector -->
-                        <div class="text-center col-md-3">
-                            <p>
-                                Quantity
-                            </p>
-                        </div>
-                        <!-- Add to Cart Button -->
-                        <div class="text-center col-md-2">
-                            <p>
-                                Add to Cart
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
             <!-- Users Favorites -->
             {% for item in favorites %}
                 <div class="row p-1 d-flex justify-content-center">
@@ -75,20 +38,20 @@
                                 <!-- Image -->
                                 {% if item.product.image %}
                                     <div class="col-md-1">
-                                        <p>
+                                        <a href="{% url 'product_detail' item.product.id %}">
                                             <img class="img-fluid rounded" src="{{ item.product.image.url }}" alt="{{ item.product.name }}">
-                                        </p>
+                                        </a>
                                     </div>
                                 {% else %}
                                     <div class="col-md-1">
-                                        <p>
+                                        <a>
                                             <img class="img-fluid rounded" src="{{ MEDIA_URL }}noimage.png" alt="{{ item.product.name }}">
-                                        </p>
+                                        </a>
                                     </div>
                                 {% endif %}
                                 <!-- Product Name, Weight & Price -->
                                 <div class="col-md-4 fw-700">
-                                    <p class="fw-900">
+                                    <p class="fw-900 text-md-start text-center">
                                         {{ item.product.name }}
                                         <br>
                                         <small>
@@ -100,8 +63,7 @@
                                 <div class="col-md-2 mb-2 mb-md-2 d-flex justify-content-center align-items-center">
                                     <a class="text-center text-decoration-none text-red" href="{% url 'remove_favorite' item.product.id %}">
                                         <span class="text-uppercase flex-column">
-                                            <i class="fa-solid fa-2xl fa-candy-cane"></i>
-                                            <p class="mb-0">Favorite</p>
+                                            <i class="fa-solid fa-trash-can fa-2xl"></i>
                                         </span>
                                     </a>
                                 </div>
@@ -119,7 +81,7 @@
                                         </div>
                                         <!-- Quantity Input -->
                                         <input class="form-control qty_input edit-qty-input" type="number" name="quantity"
-                                            value="1" min="1" max="99" data-item_id="{{ item.item_.id }}"
+                                            value="1" min="1" max="25" data-item_id="{{ item.item_.id }}"
                                             id="id_qty_{{ item.item_.id }}">
                                         <!-- Plus Button -->
                                         <div class="input-group-append">
@@ -148,7 +110,7 @@
         <!-- Display if no Favoritess -->
         <div class="row text-center mb-4">
             <div class="col d-flex flex-column align-items-center">
-                <span class="h4 text-uppercase">You have no favorites!</span>
+                <span class="h5 mt-4 text-uppercase">You have no favorites yet!</span>
                 <button class="shopping-button blue-charcoal-btn">
                     <a class="text-white text-decoration-none" href="{% url 'products' %}">
                         See Our Products!

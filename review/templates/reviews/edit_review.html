@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block page_header %}
+<div class="container header-container">
+    <div class="row">
+        <div class="col">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+                    <li class="breadcrumb-item"><a href="{% url 'profile' %}">Account</a></li>
+                    <li class="breadcrumb-item"><a href="{% url 'my_reviews' %}">My Reviews</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Edit Review</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block content %}
+    <div class="text-center mb-4">
+        <span class="h4 text-uppercase">Edit <strong>{{ review.product.name }}</strong> Review</span>
+    </div>
+    <div class="container mb-4">
+        <div class="row d-flex justify-content-center">
+            <div class="col-lg-10 col-md-12">
+                <form method="POST" action="{% url 'edit_review' review.id %}">
+                    {% csrf_token %}
+                    {{ form | crispy }}
+                    <div class="row mt-3">
+                        <div class="col d-flex justify-content-end">
+                            <a class="me-1 cancel-btn text-decoration-none text-center" href="{% url 'my_reviews' %}">Cancel</a>
+                            <a><button class="update-btn text-decoration-none text-center" type="submit">Update Review</button></a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

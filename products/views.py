@@ -118,7 +118,7 @@ def product_detail(request, product_id):
     """
     A view to show individual product details.
 
-    Collects the prodcut from the database to return as context.
+    Collects the product from the database to return as context.
     Also collects the PostReviewForm to return as context.
 
     Uses the collected product to filter the Review database by
@@ -143,7 +143,7 @@ def add_product(request):
     """
     A view to allow superusers to add products to the store.
 
-    Superuser credentails must first be verified.
+    Superuser credentials must first be verified.
 
     If the request method is POST, instantiate a new instance
     of the product form with the passed data and image files.
@@ -183,7 +183,7 @@ def edit_product(request, product_id):
     """
     A view to allow superusers to edit products in the store.
 
-    Superuser credentails must first be verified.
+    Superuser credentials must first be verified.
 
     Take in the request and the product ID the user is going to edit.
     Pre-fill the form by getting the product using get_object_or_404
@@ -228,7 +228,7 @@ def delete_product(request, product_id):
     """
     A view to allow superusers to edit products in the store.
 
-    Superuser credentails must first be verified.
+    Superuser credentials must first be verified.
 
     Takes in the request and the product id to be deleted.
     First collect the product with get_object_or_404,
