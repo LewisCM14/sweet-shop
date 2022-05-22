@@ -4,6 +4,7 @@ from decimal import Decimal
 
 from django.test import TestCase
 from django.urls import reverse
+from django.contrib.messages import get_messages
 from django.contrib.auth.models import User
 
 from products.models import Type, Product
@@ -76,10 +77,11 @@ class TestViews(TestCase):
         Collects all the objects in the Reviews database, asserting the total
         length is 2, this is for use in making comparisons later.
 
-        Then signs into the 'johndoe' user created in the setUp method, before
-        collecting the response of the get 'my_reviews' view. Uses Django's
-        inbuilt HTTP client to ensure a status code 200 is returned and the
-        template used is the correct one.
+        Then signs into the 'johndoe' user created in the setUp method,
+        passing user authentication, before collecting the response of
+        the get 'my_reviews' view. Uses Django's inbuilt HTTP client to
+        ensure a status code 200 is returned and the template used is
+        the correct one.
 
         The 'reviews' key is then collected from the context and asserted to
         having a length of 1 and the str value being that of the specified
@@ -100,3 +102,45 @@ class TestViews(TestCase):
         reviews = response.context['reviews']
         self.assertEqual(len(reviews), 1)
         self.assertEqual(str(reviews[0]), 'Raspberry Bon Bons rated 5 stars')
+
+    def test_delete_review_removes_specified_object(self):
+        """
+        A test to ensure the delete_review view removes the review
+        that is passed to it.
+
+        Collects all the objects in the Reviews database, asserting the total
+        length is 2, this is for use in making comparisons later. Then
+        collects the Product created in the setUp method.
+
+        Then signs into the 'johndoe' user created in the setUp method,
+        passing user authentication, before collecting the response of
+        the 'delete_review' view when passed with the product ID.
+        Uses Django's inbuilt HTTP client to ensure a status code 302,
+        a redirect response, is returned and the redirect url is the
+        reverse of the 'my_reviews'. view.
+
+        Then uses Django's get_messages to ensure the the response
+        returns the correct error message before collecting all
+        the objects in the Reviews database again, asserting the total
+        length is now 1. Meaning the review relating the the user
+        'johndoe' for 'Raspberry Bon Bons' has been deleted.
+        """
+        reviews = Reviews.objects.all()
+        self.assertEqual(len(reviews), 2)
+
+        product = Product.objects.get(id=1)
+
+        self.client.login(
+            email="johndoe@email.com",
+            password='password',
+        )
+        response = self.client.post(reverse('delete_review', args=[product.id]))  # noqa: E501
+
+        self.assertEqual(response.status_code, 302)
+        self.assertRedirects(response, (reverse('my_reviews')))
+        messages = list(get_messages(response.wsgi_request))
+        self.assertEqual(len(messages), 1)
+        self.assertEqual(str(messages[0]), f'Deleted your review of {product.name}!')  # noqa: E501
+
+        reviews = Reviews.objects.all()
+        self.assertEqual(len(reviews), 1)
