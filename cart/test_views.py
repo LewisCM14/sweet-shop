@@ -2,6 +2,7 @@
 
 from django.test import TestCase
 from django.urls import reverse
+from django.contrib.messages import get_messages
 from products.models import Type, Product
 
 
@@ -33,12 +34,12 @@ class TestView(TestCase):
     def initiate_cart(self):
         """
         A helper method to initiate an instance of the cart object.
-        Then stored within the session, used to then prefrom tests on.
+        Then stored within the session, used to then perform tests on.
 
         Then collects the created session,
         storing it in the 'session' variable. From this variable
         asserts the 'cart' key has a length of 1.
-        Meaing a cart object has been created and a key:value pair passed.
+        Meaning a cart object has been created and a key:value pair passed.
 
         From the session variable then collects the cart dict itself,
         storing it in the cart variable. From here asserts that the
@@ -109,7 +110,7 @@ class TestView(TestCase):
         Then collects the created session,
         storing it in the 'session' variable. From this variable
         asserts the 'cart' key has a length of 1.
-        Meaing a cart object has been created and a key:value pair passed.
+        Meaning a cart object has been created and a key:value pair passed.
 
         From the session variable then collects the cart dict itself,
         storing it in the cart variable. From here asserts that the
@@ -253,3 +254,49 @@ class TestView(TestCase):
         cart = session['cart']
         self.assertFalse(cart.get('1'), 1)
         self.assertEqual(cart.get('1'), None)
+
+    def test_add_item_limit_in_cart_is_25(self):
+        """
+        A test to ensure the add_to_cart view cannot add more than 25 of
+        a specific item.
+
+        Collects the product created in the setUp method and sets the quantity
+        to 25, passing these two values to the reverse of the add_to_cart view,
+        before collecting the cart from the session and ensuring
+        it has a len of 1 and the value of this key is 25.
+
+        Another post is made to the add_to_cart view again, this time stored
+        in the response, with a specific quantity of 1, it is then asserted
+        that this response redirects correctly and the two user feedback
+        messages stored within the session have the correct str value, before
+        the cart is collected again and it is asserted the quantity
+        remains at 1. Meaning it has a limit of 25.
+        """
+        product = Product.objects.get(id=1)
+        quantity = 25
+
+        self.client.post(reverse("add_to_cart", args=[product.id]), {
+            'quantity': quantity,
+            'redirect_url': '/products/1/',
+        })
+
+        session = self.client.session
+        self.assertEqual(len(session['cart']), 1)
+
+        cart = session['cart']
+        self.assertEqual(cart.get('1'), quantity)
+
+        response = self.client.post(reverse(
+            "add_to_cart", args=[product.id]), {
+                'quantity': 1,
+                'redirect_url': '/products/1/',
+            })
+
+        self.assertRedirects(response, '/products/1/')
+        messages = list(get_messages(response.wsgi_request))
+        self.assertEqual(len(messages), 2)
+        self.assertEqual(str(messages[0]), f'Added {product.name} to your cart')  # noqa: E501
+        self.assertEqual(str(messages[1]), f'The total weight of {product.name} would now exceed 5kg, Please contact us directly to arrange purchase of individual items exceeding 5kg.')  # noqa: E501
+
+        cart = session['cart']
+        self.assertEqual(cart.get('1'), 25)

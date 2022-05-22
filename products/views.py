@@ -143,7 +143,7 @@ def add_product(request):
     """
     A view to allow superusers to add products to the store.
 
-    Superuser credentails must first be verified.
+    Superuser credentials must first be verified.
 
     If the request method is POST, instantiate a new instance
     of the product form with the passed data and image files.
