@@ -134,7 +134,7 @@ class TestViews(TestCase):
 
         Initiates a cart instance in the session with the initiate_cart
         helper method and collects the product object created in the setUp
-        method for use in making assersions.
+        method for use in making assertions.
 
         Posts a valid OrderForm instance to the checkout URL, storing it
         in the response variable, then uses Django's inbuilt HTTP client to
@@ -148,7 +148,7 @@ class TestViews(TestCase):
         and then passed to the cart instance and the quantity, total and price
         fields have the correct values.
 
-        Then asserts the user is directed to the corrrect checkout success URL.
+        Then asserts the user is directed to the correct checkout success URL.
         """
         self.initiate_cart()
         product = Product.objects.get(id=1)

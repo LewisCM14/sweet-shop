@@ -62,12 +62,12 @@ class TestView(TestCase):
     def initiate_cart(self):
         """
         A helper method to initiate an instance of the cart object.
-        Then stored within the session, used to then prefrom tests on.
+        Then stored within the session, used to then perform tests on.
 
         Then collects the created session,
         storing it in the 'session' variable. From this variable
         asserts the 'cart' key has a length of 1.
-        Meaing a cart object has been created and a key:value pair passed.
+        Meaning a cart object has been created and a key:value pair passed.
 
         From the session variable then collects the cart dict itself,
         storing it in the cart variable. From here asserts that the
