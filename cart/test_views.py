@@ -270,7 +270,7 @@ class TestView(TestCase):
         that this response redirects correctly and the two user feedback
         messages stored within the session have the correct str value, before
         the cart is collected again and it is asserted the quantity
-        remains at 1. Meaning it has a limit of 25.
+        remains at 25. Meaning it has a limit of 25 because the 1 wasn't added.
         """
         product = Product.objects.get(id=1)
         quantity = 25
@@ -298,5 +298,55 @@ class TestView(TestCase):
         self.assertEqual(str(messages[0]), f'Added {product.name} to your cart')  # noqa: E501
         self.assertEqual(str(messages[1]), f'The total weight of {product.name} would now exceed 5kg, Please contact us directly to arrange purchase of individual items exceeding 5kg.')  # noqa: E501
 
+        cart = session['cart']
+        self.assertEqual(cart.get('1'), 25)
+
+    def test_update_item_limit_in_cart_is_25(self):
+        """
+        A test to ensure the adjust_cart view cannot add more than 25 of
+        a specific item.
+
+        Calls the initiate_cart helper method before collecting the product
+        created in the setUp method passes this with a quantity of 26,
+        to the reverse of the adjust_cart view, storing it in the response
+        variable. It is then asserted that this response redirects
+        correctly and the error message stored within the session
+        has the correct str value, before the cart is collected again
+        and it is asserted the quantity remains at 1.
+
+        The product with a quantity of 25 is then passed to the reverse of the
+        adjust_cart view. storing it in the response variable.
+        It is then asserted that this response redirects correctly before
+        the cart is collected again and it is asserted the quantity
+        is now 25, meaning it has a limit of 25.
+        """
+        self.initiate_cart()
+
+        product = Product.objects.get(id=1)
+
+        response = self.client.post(reverse(
+            "adjust_cart", args=[product.id]), {
+                'quantity': 26,
+                'redirect_url': '/products/1/',
+            })
+        self.assertRedirects(response, (reverse('view_cart')))
+        messages = list(get_messages(response.wsgi_request))
+        self.assertEqual(len(messages), 2)
+        self.assertEqual(str(messages[1]), f'The total weight of {product.name} would now exceed 5kg, Please contact us directly to arrange purchase of individual items exceeding 5kg.')  # noqa: E501
+
+        session = self.client.session
+        self.assertEqual(len(session['cart']), 1)
+        cart = session['cart']
+        self.assertEqual(cart.get('1'), 1)
+
+        response = self.client.post(reverse(
+            "adjust_cart", args=[product.id]), {
+                'quantity': 25,
+                'redirect_url': '/products/1/',
+            })
+        self.assertRedirects(response, (reverse('view_cart')))
+
+        session = self.client.session
+        self.assertEqual(len(session['cart']), 1)
         cart = session['cart']
         self.assertEqual(cart.get('1'), 25)
