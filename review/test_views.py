@@ -346,7 +346,7 @@ class TestViews(TestCase):
         })
 
         self.assertEqual(response.status_code, 302)
-        self.assertRedirects(response, (reverse('my_reviews')))  # noqa: E501
+        self.assertRedirects(response, (reverse('my_reviews')))
 
         messages = list(get_messages(response.wsgi_request))
         self.assertEqual(len(messages), 1)
@@ -393,11 +393,51 @@ class TestViews(TestCase):
         })
 
         self.assertEqual(response.status_code, 302)
-        self.assertRedirects(response, (reverse('my_reviews')))  # noqa: E501
+        self.assertRedirects(response, (reverse('my_reviews')))
 
         messages = list(get_messages(response.wsgi_request))
         self.assertEqual(len(messages), 1)
         self.assertEqual(str(messages[0]), 'You cannot alter this review!')  # noqa: E501
+
+        review = Reviews.objects.get(id=2)
+        self.assertEqual(review.rating, 1)
+        self.assertEqual(review.review, 'A bad review.')
+
+    def test_edit_review_doesnt_post_invalid_reviews(self):
+        """
+        A test to ensure the edit_review view does not post
+        invalid reviews to the database.
+
+        Collects the 2nd objects in the Reviews database, asserting the
+        values of the rating & review fields for use in making comparisons.
+
+        Then signs into the 'janedoe' user created in the setUp method,
+        passing user authentication, before collecting the response of
+        the 'edit_review' view when passed with the review ID and
+        an invalid rating field and a review field.
+
+        Then uses Django's get_messages to ensure the the response
+        returns the correct error message before collecting the 2nd Reviews
+        object again and asserting the rating & review fields have
+        not been updated to the values passed in the 'edit_review' URL.
+        """
+        review = Reviews.objects.get(id=2)
+        self.assertEqual(review.rating, 1)
+        self.assertEqual(review.review, 'A bad review.')
+
+        self.client.login(
+            email="janedoe@email.com",
+            password='password',
+        )
+
+        response = self.client.post(reverse('edit_review', args=[review.id]), {  # noqa: E501
+            'rating': 6,
+            'review': 'An invalid review.'
+        })
+
+        messages = list(get_messages(response.wsgi_request))
+        self.assertEqual(len(messages), 1)
+        self.assertEqual(str(messages[0]), 'Failed to update the review. Please ensure the form is valid.')  # noqa: E501
 
         review = Reviews.objects.get(id=2)
         self.assertEqual(review.rating, 1)
