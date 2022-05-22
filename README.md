@@ -661,6 +661,8 @@ ___
 
     * I used the answer to this [question](https://github.com/pennersr/django-allauth/issues/131) on the allauth repo to set the ACCOUNT_USER_DISPLAY setting within my settings.py file.
 
+    * I used this [post](https://stackoverflow.com/questions/14977392/bootstrap-carousel-remove-auto-slide) & this [post](https://stackoverflow.com/questions/42905647/get-the-first-element-in-the-for-loops-in-the-django-template?rq=1) to help me setup the home page carousels.
+
 - **Media** <a name='media'></a>
 
 [Return to Table of Contents](#contents)
