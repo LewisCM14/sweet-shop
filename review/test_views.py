@@ -176,7 +176,7 @@ class TestViews(TestCase):
 
         Uses Django's inbuilt HTTP client to ensure a status code 302,
         a redirect response, is returned and the redirect url is the
-        reverse of the 'product_details'. view.
+        reverse of the 'product_details' view.
 
         Before collecting all the objects in the Reviews database again,
         asserting the total length is now 3 and the str value for the
@@ -202,3 +202,50 @@ class TestViews(TestCase):
         reviews = Reviews.objects.all()
         self.assertEqual(len(reviews), 3)
         self.assertEqual(str(reviews[2]), 'Flying Saucers rated 5 stars')
+
+    def test_a_user_cannot_post_multiple_reviews_for_a_product(self):
+        """
+        A test to ensure a user cannot post multiple reviews for the
+        same product.
+
+        Collects all the objects in the Reviews database, asserting the total
+        length is 2, this is for use in making comparisons later. Then
+        collects the 1st Product created in the setUp method.
+
+        Then signs into the 'johndoe' user created in the setUp method,
+        passing user authentication, before collecting the response of
+        the 'post_review' view when passed with the product ID and
+        a rating & review field.
+
+        Uses Django's inbuilt HTTP client to ensure a status code 302,
+        a redirect response, is returned and the redirect url is the
+        reverse of the 'product_details' view.
+
+        Then uses Django's get_messages to ensure the the response
+        returns the correct error message before collecting all
+        the objects in the Reviews database again, asserting the total
+        length is still 2. Meaning the review wasn't posted to the
+        database.
+        """
+        reviews = Reviews.objects.all()
+        self.assertEqual(len(reviews), 2)
+
+        product = Product.objects.get(id=1)
+        self.client.login(
+            email="johndoe@email.com",
+            password='password',
+        )
+
+        response = self.client.post(reverse('post_review', args=[product.id]), {  # noqa: E501
+            'rating': 3,
+            'review': 'An okay review.'
+        })
+
+        self.assertEqual(response.status_code, 302)
+        self.assertRedirects(response, (reverse('product_detail', args=[product.id])))  # noqa: E501
+        messages = list(get_messages(response.wsgi_request))
+        self.assertEqual(len(messages), 1)
+        self.assertEqual(str(messages[0]), f'You have already reviewed {product.name}!')  # noqa: E501
+
+        reviews = Reviews.objects.all()
+        self.assertEqual(len(reviews), 2)
