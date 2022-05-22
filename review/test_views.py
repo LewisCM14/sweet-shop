@@ -288,3 +288,49 @@ class TestViews(TestCase):
 
         reviews = Reviews.objects.all()
         self.assertEqual(len(reviews), 2)
+
+    def test_the_edit_review_view_updates_object(self):
+        """
+        A test to ensure the edit_review view updates the specified object.
+
+        Collects the 2nd objects in the Reviews database, asserting the
+        values of the rating & review fields for use in making comparisons.
+
+        Then signs into the 'janedoe' user created in the setUp method,
+        passing user authentication, before collecting the response of
+        the 'edit_review' view when passed with the review ID and
+        a valid rating & review field.
+
+        Then uses Django's inbuilt HTTP client to ensure a status code 302,
+        a redirect response, is returned and the redirect url is the
+        reverse of the 'my_reviews' view.
+
+        Then uses Django's get_messages to ensure the the response
+        returns the correct message before collecting the 2nd Reviews
+        object again and asserting the rating & review fields have
+        been updated to the values passed in the 'edit_review' URL.
+        """
+        review = Reviews.objects.get(id=2)
+        self.assertEqual(review.rating, 1)
+        self.assertEqual(review.review, 'A bad review.')
+
+        self.client.login(
+            email="janedoe@email.com",
+            password='password',
+        )
+
+        response = self.client.post(reverse('edit_review', args=[review.id]), {  # noqa: E501
+            'rating': 5,
+            'review': 'A good review.'
+        })
+
+        self.assertEqual(response.status_code, 302)
+        self.assertRedirects(response, (reverse('my_reviews')))  # noqa: E501
+
+        messages = list(get_messages(response.wsgi_request))
+        self.assertEqual(len(messages), 1)
+        self.assertEqual(str(messages[0]), 'Review updated successfully!')  # noqa: E501
+
+        review = Reviews.objects.get(id=2)
+        self.assertEqual(review.rating, 5)
+        self.assertEqual(review.review, 'A good review.')
