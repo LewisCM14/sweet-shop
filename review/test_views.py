@@ -249,3 +249,42 @@ class TestViews(TestCase):
 
         reviews = Reviews.objects.all()
         self.assertEqual(len(reviews), 2)
+
+    def test_invalid_reviews_dont_post_to_the_database(self):
+        """
+        A test to ensure an invalid review doesn't post to the database.
+
+        Collects all the objects in the Reviews database, asserting the total
+        length is 2, this is for use in making comparisons later. Then
+        collects the 2nd Product created in the setUp method.
+
+        Then signs into the 'johndoe' user created in the setUp method,
+        passing user authentication, before collecting the response of
+        the 'post_review' view when passed with the product ID and
+        an invalid rating field plus a review field.
+
+        Then uses Django's get_messages to ensure the the response
+        returns the correct error message before collecting all
+        the objects in the Reviews database again, asserting the total
+        length is still 2. Meaning the review wasn't posted to the
+        database.
+        """
+        reviews = Reviews.objects.all()
+        self.assertEqual(len(reviews), 2)
+
+        product = Product.objects.get(id=2)
+        self.client.login(
+            email="johndoe@email.com",
+            password='password',
+        )
+
+        response = self.client.post(reverse('post_review', args=[product.id]), {  # noqa: E501
+            'rating': 6,
+            'review': 'An invalid review.'
+        })
+        messages = list(get_messages(response.wsgi_request))
+        self.assertEqual(len(messages), 1)
+        self.assertEqual(str(messages[0]), 'Review failed. Please ensure the form is valid.')  # noqa: E501
+
+        reviews = Reviews.objects.all()
+        self.assertEqual(len(reviews), 2)
