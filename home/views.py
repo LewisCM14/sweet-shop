@@ -1,7 +1,7 @@
 """ This module handles the views for the home app """
 
 from django.shortcuts import render
-from products.models import Type, Product
+from products.models import Product
 
 
 def index(request):
@@ -11,7 +11,7 @@ def index(request):
     Filters the Product database via the type field,
     returning the results to to context for use in display
     """
-
+    products = Product.objects.all()
     sour = Product.objects.filter(type=1)
     fizzy = Product.objects.filter(type=2)
     chocolate = Product.objects.filter(type=3)
@@ -22,6 +22,7 @@ def index(request):
     template = 'home/index.html'
 
     context = {
+        'products': products,
         'chewy': chewy,
         'fizzy': fizzy,
         'chocolate': chocolate,
