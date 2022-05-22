@@ -289,6 +289,27 @@ class TestViews(TestCase):
         reviews = Reviews.objects.all()
         self.assertEqual(len(reviews), 2)
 
+    def test_the_edit_review_view_template(self):
+        """
+        A test to ensure the edit_review view uses the correct template.
+
+        Collects the 2nd object in the Reviews database before signing into
+        the 'janedoe' user created in the setUp method, passing
+        user authentication. Then stores the response of the get
+        request for the reverse of the 'edit_review' URL when passed
+        the reviews ID. Asserting the template used for the response is
+        edit_review.html, the desired template.
+        """
+        review = Reviews.objects.get(id=2)
+
+        self.client.login(
+            email="janedoe@email.com",
+            password='password',
+        )
+
+        response = self.client.get(reverse('edit_review', args=[review.id]))
+        self.assertTemplateUsed(response, ('reviews/edit_review.html'))
+
     def test_the_edit_review_view_updates_object(self):
         """
         A test to ensure the edit_review view updates the specified object.
