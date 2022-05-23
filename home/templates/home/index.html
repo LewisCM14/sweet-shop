@@ -17,11 +17,68 @@
 
 {% block content %}
 
-<div class="container mb-4">
+<!-- Product Carousels -->
+<div class="container mb-5 bg-white">
     <div class="row">
         <div class="col-lg-8 col-md-12">
-            <section>
-                <p>banner image</p>
+            <section class="p-lg-5 p-md-3 p-sm-0">
+                <div id="products" class="carousel slide carousel-fade" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                        {% for product in products %}
+                            {% if forloop.first %}
+                                {% if product.image %}
+                                    <div class="carousel-item active">
+                                        <a href="{% url 'product_detail' product.id %}">
+                                            <img class="d-block w-100" src="{{ product.image.url }}" alt="{{ product.name }}">
+                                        </a>
+                                        <div class="carousel-caption d-flex justify-content-end">
+                                            <a href="{% url 'products' %}" type='button' class="text-decoration-none type-go-btn">Shop All Products</a>
+                                        </div>
+                                    </div>
+                                {% else %}
+                                    <div class="carousel-item active">
+                                        <a>
+                                            <img class="d-block w-100" src="{{ MEDIA_URL }}noimage.png" alt="{{ product.name }}">
+                                        </a>
+                                        <div class="carousel-caption d-flex justify-content-end">
+                                            <a href="{% url 'products' %}" type='button' class="text-decoration-none type-go-btn">Shop All Products</a>
+                                        </div>
+                                    </div>
+                                {% endif %}
+                            {% else %}
+                                {% if product.image %}
+                                    <div class="carousel-item">
+                                        <a href="{% url 'product_detail' product.id %}">
+                                            <img class="d-block w-100" src="{{ product.image.url }}" alt="{{ product.name }}">
+                                        </a>
+                                        <div class="carousel-caption d-flex justify-content-end">
+                                            <a href="{% url 'products' %}" type='button' class="text-decoration-none type-go-btn">Shop All Products</a>
+                                        </div>
+                                    </div>
+                                {% else %}
+                                    <div class="carousel-item">
+                                        <a>
+                                            <img class="d-block w-100" src="{{ MEDIA_URL }}noimage.png" alt="{{ product.name }}">
+                                        </a>
+                                        <div class="carousel-caption d-flex justify-content-end">
+                                            <a href="{% url 'products' %}" type='button' class="text-decoration-none type-go-btn">Shop All Products</a>
+                                        </div>
+                                    </div>
+                                {% endif %}
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#products"
+                        data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#products"
+                        data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
             </section>
         </div>
         <div class="col-lg-4 col-md-12 d-flex flex-lg-column flex-md-row flex-column">
