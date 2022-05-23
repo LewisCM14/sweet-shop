@@ -738,3 +738,46 @@ select option {
     .carousel-control-next-icon:hover {
         background: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%200080'%3e%3cpath d='M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
     }
+
+
+/* ------------------------------------------- 404 & 505 STYLING */
+
+.user-lost {
+    background: url('/media/hero.avif') no-repeat center center;
+    background-size: cover;
+    height: 50vh;
+}
+
+.user-lost-text {
+    position: absolute;
+    top: 65%;
+    bottom: 25%;
+}
+
+@media screen and (max-width: 400px) {
+    .user-lost-text {
+        position: absolute;
+        top: 60%;
+        bottom: 25%;
+    }
+}
+
+.user-lost-btn {
+    text-decoration: none;
+    min-width: 130px;
+    height: 40px;
+    color: #fff;
+    padding: 5px 10px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    display: inline-block;
+    outline: none;
+    border: 2px solid #333333;
+    background: #333333;
+  }
+  .user-lost-btn:hover {
+    background: #fff;
+    color: #333333
+  } /* Taken from https://markodenic.com/tools/buttons-generator/ */
