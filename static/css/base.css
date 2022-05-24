@@ -739,6 +739,13 @@ select option {
         background: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%200080'%3e%3cpath d='M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
     }
 
+.banner-img {
+    background-image: linear-gradient(rgba(255,255,255,0.7), rgba(255,255,255,0.7)), url('/media/hero.avif');
+    overflow: hidden;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
 
 /* ------------------------------------------- 404 & 505 STYLING */
 
