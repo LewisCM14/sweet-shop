@@ -9,7 +9,9 @@
                                 <img class="d-block w-100" src="{{ product.image.url }}" alt="{{ product.name }}">
                             </a>
                             <div class="carousel-caption d-flex justify-content-end">
-                                <a href="{% url 'products' %}?type_query=sour" type='button' class="text-decoration-none type-go-btn">Sour Sweets</a>
+                                <button class="blank-btn">
+                                    <a href="{% url 'products' %}?type_query=sour" class="text-decoration-none cancel-btn">Sour Sweets</a>
+                                </button>
                             </div>
                         </div>
                     {% else %}
@@ -18,7 +20,9 @@
                                 <img class="d-block w-100" src="{{ MEDIA_URL }}noimage.png" alt="{{ product.name }}">
                             </a>
                             <div class="carousel-caption d-flex justify-content-end">
-                                <a href="{% url 'products' %}?type_query=sour" type='button' class="text-decoration-none type-go-btn">Sour Sweets</a>
+                                <button class="blank-btn">
+                                    <a href="{% url 'products' %}?type_query=sour" class="text-decoration-none cancel-btn">Sour Sweets</a>
+                                </button>
                             </div>
                         </div>
                     {% endif %}
@@ -29,7 +33,9 @@
                                 <img class="d-block w-100" src="{{ product.image.url }}" alt="{{ product.name }}">
                             </a>
                             <div class="carousel-caption d-flex justify-content-end">
-                                <a href="{% url 'products' %}?type_query=sour" type='button' class="text-decoration-none type-go-btn">Sour Sweets</a>
+                                <button class="blank-btn">
+                                    <a href="{% url 'products' %}?type_query=sour" class="text-decoration-none cancel-btn">Sour Sweets</a>
+                                </button>
                             </div>
                         </div>
                     {% else %}
@@ -38,7 +44,9 @@
                                 <img class="d-block w-100" src="{{ MEDIA_URL }}noimage.png" alt="{{ product.name }}">
                             </a>
                             <div class="carousel-caption d-flex justify-content-end">
-                                <a href="{% url 'products' %}?type_query=sour" type='button' class="text-decoration-none type-go-btn">Sour Sweets</a>
+                                <button class="blank-btn">
+                                    <a href="{% url 'products' %}?type_query=sour" class="text-decoration-none cancel-btn">Sour Sweets</a>
+                                </button>
                             </div>
                         </div>
                     {% endif %}

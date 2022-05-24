@@ -54,7 +54,9 @@
                                             <img class="d-block w-100" src="{{ product.image.url }}" alt="{{ product.name }}">
                                         </a>
                                         <div class="carousel-caption d-flex justify-content-end">
-                                            <a href="{% url 'products' %}" type='button' class="text-decoration-none type-go-btn">Shop All Products</a>
+                                            <button class="blank-btn">
+                                                <a href="{% url 'products' %}" class="text-decoration-none cancel-btn">Shop All Products</a>
+                                            </button>
                                         </div>
                                     </div>
                                 {% else %}
@@ -63,7 +65,9 @@
                                             <img class="d-block w-100" src="{{ MEDIA_URL }}noimage.png" alt="{{ product.name }}">
                                         </a>
                                         <div class="carousel-caption d-flex justify-content-end">
-                                            <a href="{% url 'products' %}" type='button' class="text-decoration-none type-go-btn">Shop All Products</a>
+                                            <button class="blank-btn">
+                                                <a href="{% url 'products' %}" class="text-decoration-none cancel-btn">Shop All Products</a>
+                                            </button>
                                         </div>
                                     </div>
                                 {% endif %}
@@ -74,7 +78,9 @@
                                             <img class="d-block w-100" src="{{ product.image.url }}" alt="{{ product.name }}">
                                         </a>
                                         <div class="carousel-caption d-flex justify-content-end">
-                                            <a href="{% url 'products' %}" type='button' class="text-decoration-none type-go-btn">Shop All Products</a>
+                                            <button class="blank-btn">
+                                                <a href="{% url 'products' %}" class="text-decoration-none cancel-btn">Shop All Products</a>
+                                            </button>
                                         </div>
                                     </div>
                                 {% else %}
@@ -83,7 +89,9 @@
                                             <img class="d-block w-100" src="{{ MEDIA_URL }}noimage.png" alt="{{ product.name }}">
                                         </a>
                                         <div class="carousel-caption d-flex justify-content-end">
-                                            <a href="{% url 'products' %}" type='button' class="text-decoration-none type-go-btn">Shop All Products</a>
+                                            <button class="blank-btn">
+                                                <a href="{% url 'products' %}" class="text-decoration-none cancel-btn">Shop All Products</a>
+                                            </button>
                                         </div>
                                     </div>
                                 {% endif %}
