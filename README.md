@@ -667,5 +667,7 @@ ___
 
 - **Media** <a name='media'></a>
 
+    * The index banner background image, and the hero image used on the 404 & 505 pages was taken by Luis Aguila and can be found [here](https://unsplash.com/photos/xLvIcAYuuMQ).
+
 [Return to Table of Contents](#contents)
 ___
