@@ -662,6 +662,8 @@ ___
     * I used the answer to this [question](https://github.com/pennersr/django-allauth/issues/131) on the allauth repo to set the ACCOUNT_USER_DISPLAY setting within my settings.py file.
 
     * I used this [post](https://stackoverflow.com/questions/14977392/bootstrap-carousel-remove-auto-slide) & this [post](https://stackoverflow.com/questions/42905647/get-the-first-element-in-the-for-loops-in-the-django-template?rq=1) to help me setup the home page carousels.
+    
+    * I used this [post](https://stackoverflow.com/questions/7241341/can-i-set-an-opacity-only-to-the-background-image-of-a-div) in order to make the background image on my index page opaque.
 
 - **Media** <a name='media'></a>
 
