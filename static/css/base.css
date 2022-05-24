@@ -447,6 +447,13 @@ Taken from - https://stackoverflow.com/questions/66231936/change-accordion-butto
     margin-left: 10px;
 }
 
+.fav-btn {
+    color: #B30012;
+    }
+    .fav-btn:hover {
+        color: #A30010;
+    } /* Sets the color and hover effect of the favorite heart */
+
 .btt-button {
     border-radius: 10px;
     height: 42px;

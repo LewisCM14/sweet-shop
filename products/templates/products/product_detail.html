@@ -44,9 +44,16 @@
                             <form method='GET' action="{% url 'favorite' product.id %}" class="d-flex flex-row align-items-center">
                                 {% csrf_token %}
                                 <h3 class="fw-700">{{ product.name }}</h3>
-                                <button class="navy-charcoal blank-btn ms-2">
+                                <!-- favorite button -->
+                                {% if favorite %}
+                                    <button class="fav-btn blank-btn ms-2">
                                         <i class="fa-solid fa-2xl fa-heart"></i>
-                                </button>
+                                    </button>
+                                {% else %}
+                                    <button class="fav-btn blank-btn ms-2">
+                                        <i class="fa-regular fa-2xl fa-heart"></i>
+                                    </button>
+                                {% endif %}
                             </form>
                             <hr class="mt-0 d-inline-block mx-auto"
                             style="width: 100px; background-color: #000080; height: 2px" />
