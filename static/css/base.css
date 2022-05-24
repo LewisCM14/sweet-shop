@@ -113,6 +113,10 @@ body {
     font-weight: 700;
 } /* Taken from the Chivo docs on google fonts */
 
+.fw-600 {
+    font-weight: 600;
+}
+
 
 /* ------------------------------------------- BACKGROUND STYLING */
 
