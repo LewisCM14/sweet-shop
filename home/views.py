@@ -42,3 +42,8 @@ def faq(request):
 def deliver_info(request):
     """ Renders the deliver_info.html template in the browser """
     return render(request, 'home/deliver_info.html')
+
+
+def about_us(request):
+    """ Renders the about_us.html template in the browser """
+    return render(request, 'home/about_us.html')

@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block page_header %}
+    <div class="container header-container">
+        <div class="row">
+            <div class="col">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">About Us</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="text-center mb-4">
+        <span class="h4 text-uppercase">About Us</span>
+    </div>
+    <section class="container">
+    </section>
+{% endblock %}
