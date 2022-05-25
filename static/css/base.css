@@ -799,3 +799,12 @@ select option {
     background: #fff;
     color: #333333
   } /* Taken from https://markodenic.com/tools/buttons-generator/ */
+
+
+/* ------------------------------------------- ABOUT US STYLING */
+
+.about-us-img {
+    background: url('/media/about_us.avif') no-repeat center center;
+    border-radius: 25px;
+    background-size: cover;
+}
