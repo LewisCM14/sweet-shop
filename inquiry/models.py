@@ -21,7 +21,7 @@ class Inquiry(models.Model):
     )
     # Contact Details
     full_name = models.CharField(max_length=50)
-    email = models.EmailField(max_length=254)
+    email = models.EmailField(max_length=100)
     # Inquiry
     subject = models.CharField(max_length=30)
     message = models.TextField(max_length=200)
