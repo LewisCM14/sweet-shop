@@ -74,7 +74,7 @@ def checkout(request):
 
     Then checks if the user is authenticated, if so, provided they
     have default delivery information saved on their UserProfile
-    returns the OrderForm prefilled to the checkout template,
+    returns the OrderForm pre-filled to the checkout template,
     if not authenticated or no default info a blank form is returned.
 
     On the POST request:

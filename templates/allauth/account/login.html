@@ -46,7 +46,7 @@
 
     {% else %}
     <p>{% blocktrans %}If you have not created an account yet, then please
-    <a href="{{ signup_url }}">register</a> first.{% endblocktrans %}</p>
+    <a href="{{ signup_url }}" class="navy-underline fw-900">register</a> first.{% endblocktrans %}</p>
     {% endif %}
   </div>
 
@@ -58,7 +58,7 @@
     {% endif %}
     <div class="row">
       <div class="col flex-row d-flex justify-content-end align-items-center">
-        <a class="button secondaryAction me-2" href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a>
+        <a class="button secondaryAction me-2 navy-underline fw-900" href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a>
         <button class="primaryAction blue-charcoal-btn" type="submit">{% trans "Sign In" %}</button>
       </div>
     </div>

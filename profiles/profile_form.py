@@ -14,7 +14,7 @@ class NameChange(forms.ModelForm):
         label='First Name',
         required=True,
         max_length=30,
-        widget=forms.TextInput(attrs={'placeholder': 'Forname'}),
+        widget=forms.TextInput(attrs={'placeholder': 'Forename'}),
     )
 
     last_name = forms.CharField(
