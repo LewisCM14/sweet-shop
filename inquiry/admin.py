@@ -1,3 +1,19 @@
-from django.contrib import admin
+""" This module contains the admin logic for the inquiry app """
 
-# Register your models here.
+from django.contrib import admin
+from .models import Inquiry
+
+
+@admin.register(Inquiry)
+class InquiryAdmin(admin.ModelAdmin):
+    """
+    The admin class for the Inquiry model.
+    """
+    list_display = (
+        'full_name',
+        'email',
+        'subject',
+        'date',
+    )
+
+    ordering = ('-date',)
