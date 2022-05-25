@@ -669,5 +669,7 @@ ___
 
     * The index banner background image, and the hero image used on the 404 & 505 pages was taken by Luis Aguila and can be found [here](https://unsplash.com/photos/xLvIcAYuuMQ).
 
+    * The image used above the large breakpoint on the about us page is taken by Karsten Winegeart and can be found [here](https://unsplash.com/photos/PL5FZkW0Qkk).
+
 [Return to Table of Contents](#contents)
 ___
