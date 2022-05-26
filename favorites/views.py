@@ -21,7 +21,7 @@ def check_favorite(request, product_id):
 
     If that object exists, it is collected, stored and then deleted,
     if it doesn't exist it is created. User feedback is returned in
-    either instace and a Http redirect response is returned in order
+    either instance and a Http redirect response is returned in order
     to reload the product_detail page.
     """
 
