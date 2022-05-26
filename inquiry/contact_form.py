@@ -25,12 +25,18 @@ class ContactForm(forms.ModelForm):
         }),
     )
 
+    phone_number = forms.CharField(
+        label='Phone Number',
+        required=True,
+        widget=forms.TextInput(attrs={'placeholder': 'Preferred contact number'}),  # noqa: E501
+    )
+
     subject = forms.CharField(
         label='Subject',
         required=True,
         max_length=30,
         widget=forms.TextInput(attrs={
-            'placeholder': 'Please attach order number if applicable'
+            'placeholder': 'Attach order number if applicable'
         }),
     )
 
@@ -49,4 +55,6 @@ class ContactForm(forms.ModelForm):
         display.
         """
         model = Inquiry
-        fields = ('full_name', 'email', 'subject', 'message')
+        fields = (
+            'full_name', 'subject', 'email', 'phone_number', 'message',
+        )

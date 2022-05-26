@@ -2,6 +2,7 @@
 
 from django.db import models
 from django.contrib.auth.models import User
+from django.core.validators import RegexValidator
 
 
 class Inquiry(models.Model):
@@ -11,9 +12,9 @@ class Inquiry(models.Model):
     Collects the User ID if submitted by a authorized user, allowed
     to be blank if not.
 
-    Requires full_name, email, subject and inquiry message from user
-    to allow submission, attaches date sent upon submission for
-    ordering within admin.
+    Requires full_name, email, phone, subject and inquiry message
+    from user to allow submission, attaches date sent
+    upon submission for ordering within admin.
     """
     # User
     user = models.ForeignKey(
@@ -22,6 +23,9 @@ class Inquiry(models.Model):
     # Contact Details
     full_name = models.CharField(max_length=50)
     email = models.EmailField(max_length=100)
+    phoneNumberRegex = RegexValidator(regex=r'^\+?1?\d{9,15}$')
+    phone_number = models.CharField(
+        validators=[phoneNumberRegex], max_length=16,)
     # Inquiry
     subject = models.CharField(max_length=30)
     message = models.TextField(max_length=200)

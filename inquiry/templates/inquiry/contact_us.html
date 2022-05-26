@@ -79,12 +79,32 @@
             </div>
             <div class="col-lg-8 col-md-7 col-sm-12 mt-md-0 mt-3">
                 <!-- Inquiry Form -->
-                <div class="container p-2 bg-white shadow">
+                <div class="container h-100 p-2 bg-white shadow">
                     <div class="row">
                         <div class="col">
                             <form action="{% url 'contact_us' %}" method="POST">
                                 {% csrf_token %}
-                                {{ contact_form|crispy }}
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-12">
+                                        {{ contact_form.full_name | as_crispy_field }}
+                                    </div>
+                                    <div class="col-lg-6 col-md-12">
+                                        {{ contact_form.subject | as_crispy_field }}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-12">
+                                        {{ contact_form.email | as_crispy_field }}
+                                    </div>
+                                    <div class="col-lg-6 col-md-12">
+                                        {{ contact_form.phone_number | as_crispy_field }}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        {{ contact_form.message | as_crispy_field }}
+                                    </div>
+                                </div>
                                 <div class="d-flex justify-content-end">
                                     <button class="mt-2 mb-2 blue-charcoal-btn">Submit Message</button>
                                 </div>
