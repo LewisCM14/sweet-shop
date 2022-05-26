@@ -16,4 +16,8 @@ class InquiryAdmin(admin.ModelAdmin):
         'date',
     )
 
+    readonly_fields = (
+        'user', 'full_name', 'email', 'subject', 'message', 'date',
+    )
+
     ordering = ('-date',)

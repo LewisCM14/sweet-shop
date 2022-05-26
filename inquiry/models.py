@@ -42,4 +42,4 @@ class Inquiry(models.Model):
         """
         Returns the string value of the name & date of the inquiry.
         """
-        return f'{self.full_name} submitted on {self.date}'
+        return f'{self.full_name} opened {self.subject } on {self.date}'
