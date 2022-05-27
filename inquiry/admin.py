@@ -10,6 +10,7 @@ class InquiryAdmin(admin.ModelAdmin):
     The admin class for the Inquiry model.
     """
     list_display = (
+        'id',
         'full_name',
         'email',
         'subject',

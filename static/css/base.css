@@ -808,3 +808,40 @@ select option {
     border-radius: 25px;
     background-size: cover;
 }
+
+
+/* ------------------------------------------- MAIL SUCCESS STYLING */
+
+
+.mail-success {
+    background: url('/media/hero.avif') no-repeat center center;
+    background-size: cover;
+    height: 50vh;
+} /* sets the background image */
+
+.overlay-wrapper {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+} /* allows for positioning of the square over the image */
+
+.square {
+    height: 300px;
+    width: 450px;
+    border-radius: 25px;
+    background-color: rgba(51, 51, 51, 0.90)
+} /* sets the size and color of the square */
+
+@media screen and (max-width: 768px) {
+    .square {
+        width: 400px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .square {
+        height: 45vh;
+    }
+}

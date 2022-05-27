@@ -56,7 +56,7 @@ def contact_us(request):
                 inquiry.save()
             messages.info(request, 'Your inquiry has been sent. \
                 We will be in touch as soon as possible.')
-            return redirect(reverse('home'))
+            return redirect(reverse('mail_success'))
         else:
             messages.error(request, 'There was an error with your form. \
                 Please double check the information you provided.')
@@ -68,3 +68,8 @@ def contact_us(request):
     }
 
     return render(request, template, context)
+
+
+def mail_success(request):
+    """ A view to render the main success template """
+    return render(request, 'inquiry/mail_success.html')
