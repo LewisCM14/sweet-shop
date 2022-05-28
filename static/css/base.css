@@ -813,7 +813,17 @@ select option {
     height: fit-content;
 } /* the image for the 00's sweets section */
 
-.blue-square-wrapper-start {
+.image-90 {
+    background: url('/media/90_sweets.avif') no-repeat center center;
+    background-size: cover;
+    border-radius: 25px;
+    border-top: 7px solid rgba(51, 51, 51, 0.8);
+    border-bottom: 7px solid rgba(51, 51, 51, 0.8);
+    border-left: 7px solid rgba(51, 51, 51, 0.8);
+    height: fit-content;
+} /* the image for the 00's sweets section */
+
+.blue-square-wrapper {
     height: 50%;
     width: 50%;
     display: flex;
@@ -828,7 +838,22 @@ select option {
     background-color: rgba(0, 0, 128, 0.8)
 } /* sets the size and color of the blue square */
 
-.shop-now-btn {
+.charcoal-square-wrapper {
+    height: 50%;
+    width: 50%;
+    display: flex;
+    justify-content: end;
+    align-items: end;
+} /* wrapper for the charcoal square, allows positioning at end of container */
+
+.charcoal-square {
+    height: 300px;
+    width: 450px;
+    border-radius: 20px;
+    background-color: rgba(51, 51, 51, 0.8)
+} /* sets the size and color of the charcoal square */
+
+.shop-now-blue-btn {
     min-width: 130px;
     height: 40px;
     color: #000080;
@@ -842,9 +867,32 @@ select option {
     border-radius: 20px;
     border: 2px solid #ffffff;
     background: #ffffff;
+    text-decoration: none;
   }
-  .shop-now-btn:hover {
+  .shop-now-blue-btn:hover {
     background: #000080;
+    border: 2px solid #ffffff;
+    color: #ffffff
+  } /* Taken from https://markodenic.com/tools/buttons-generator/ */
+
+.shop-now-charcoal-btn {
+    min-width: 130px;
+    height: 40px;
+    color: #333333;
+    padding: 5px 10px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    display: inline-block;
+    outline: none;
+    border-radius: 20px;
+    border: 2px solid #ffffff;
+    background: #ffffff;
+    text-decoration: none;
+  }
+  .shop-now-charcoal-btn:hover {
+    background: #333333;
     border: 2px solid #ffffff;
     color: #ffffff
   } /* Taken from https://markodenic.com/tools/buttons-generator/ */

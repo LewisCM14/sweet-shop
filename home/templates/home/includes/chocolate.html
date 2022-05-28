@@ -1,67 +1,65 @@
-<section>
-    <div id="chocolate" class="carousel slide" data-interval="false">
-        <div class="carousel-inner">
-            {% for product in chocolate %}
-                {% if forloop.first %}
-                    {% if product.image %}
-                        <div class="carousel-item active">
-                            <a href="{% url 'product_detail' product.id %}">
-                                <img class="d-block w-100" src="{{ product.image.url }}" alt="{{ product.name }}">
-                            </a>
-                            <div class="carousel-caption d-flex justify-content-end">
-                                <button class="blank-btn">
-                                    <a href="{% url 'products' %}?type_query=chocolate" class="text-decoration-none cancel-btn">Chocolate</a>
-                                </button>
-                            </div>
+<div id="chocolate" class="carousel slide" data-interval="false">
+    <div class="carousel-inner carousel-border">
+        {% for product in chocolate %}
+            {% if forloop.first %}
+                {% if product.image %}
+                    <div class="carousel-item active product-carousel">
+                        <a href="{% url 'product_detail' product.id %}">
+                            <img class="carousel-img" src="{{ product.image.url }}" alt="{{ product.name }}">
+                        </a>
+                        <div class="carousel-caption d-flex justify-content-center">
+                            <button class="blank-btn">
+                                <a href="{% url 'products' %}?type_query=chocolate" class="text-decoration-none type-btn">Chocolate</a>
+                            </button>
                         </div>
-                    {% else %}
-                        <div class="carousel-item active">
-                            <a>
-                                <img class="d-block w-100" src="{{ MEDIA_URL }}noimage.png" alt="{{ product.name }}">
-                            </a>
-                            <div class="carousel-caption d-flex justify-content-end">
-                                <button class="blank-btn">
-                                    <a href="{% url 'products' %}?type_query=chocolate" class="text-decoration-none cancel-btn">Chocolate</a>
-                                </button>
-                            </div>
-                        </div>
-                    {% endif %}
+                    </div>
                 {% else %}
-                    {% if product.image %}
-                        <div class="carousel-item">
-                            <a href="{% url 'product_detail' product.id %}">
-                                <img class="d-block w-100" src="{{ product.image.url }}" alt="{{ product.name }}">
-                            </a>
-                            <div class="carousel-caption d-flex justify-content-end">
-                                <button class="blank-btn">
-                                    <a href="{% url 'products' %}?type_query=chocolate" class="text-decoration-none cancel-btn">Chocolate</a>
-                                </button>
-                            </div>
+                    <div class="carousel-item active product-carousel">
+                        <a>
+                            <img class="carousel-img" src="{{ MEDIA_URL }}noimage.png" alt="{{ product.name }}">
+                        </a>
+                        <div class="carousel-caption d-flex justify-content-center">
+                            <button class="blank-btn">
+                                <a href="{% url 'products' %}?type_query=chocolate" class="text-decoration-none type-btn">Chocolate</a>
+                            </button>
                         </div>
-                    {% else %}
-                        <div class="carousel-item">
-                            <a>
-                                <img class="d-block w-100" src="{{ MEDIA_URL }}noimage.png" alt="{{ product.name }}">
-                            </a>
-                            <div class="carousel-caption d-flex justify-content-end">
-                                <button class="blank-btn">
-                                    <a href="{% url 'products' %}?type_query=chocolate" class="text-decoration-none cancel-btn">Chocolate</a>
-                                </button>
-                            </div>
-                        </div>
-                    {% endif %}
+                    </div>
                 {% endif %}
-            {% endfor %}
-        </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#chocolate"
-            data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#chocolate"
-            data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-        </button>
+            {% else %}
+                {% if product.image %}
+                    <div class="carousel-item product-carousel">
+                        <a href="{% url 'product_detail' product.id %}">
+                            <img class="carousel-img" src="{{ product.image.url }}" alt="{{ product.name }}">
+                        </a>
+                        <div class="carousel-caption d-flex justify-content-center">
+                            <button class="blank-btn">
+                                <a href="{% url 'products' %}?type_query=chocolate" class="text-decoration-none type-btn">Chocolate</a>
+                            </button>
+                        </div>
+                    </div>
+                {% else %}
+                    <div class="carousel-item product-carousel">
+                        <a>
+                            <img class="carousel-img" src="{{ MEDIA_URL }}noimage.png" alt="{{ product.name }}">
+                        </a>
+                        <div class="carousel-caption d-flex justify-content-center">
+                            <button class="blank-btn">
+                                <a href="{% url 'products' %}?type_query=chocolate" class="text-decoration-none type-btn">Chocolate</a>
+                            </button>
+                        </div>
+                    </div>
+                {% endif %}
+            {% endif %}
+        {% endfor %}
     </div>
-</section>
+    <button class="carousel-control-prev" type="button" data-bs-target="#chocolate"
+        data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#chocolate"
+        data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+</div>

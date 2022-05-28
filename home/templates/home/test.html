@@ -24,7 +24,7 @@
         <!-- 00's sweets (image container) -->
         <section class="col-lg-8 col-12 image-00 p-0">
             <!-- image overlay container -->
-            <div class="blue-square-wrapper-start">
+            <div class="blue-square-wrapper">
                 <!-- overlay -->
                 <div class="blue-square">
                     <!-- text container -->
@@ -42,7 +42,7 @@
                         <!-- navigation button -->
                         <div class="row">
                             <div class="col d-flex justify-content-center">
-                                <button class="blank-btn"><a href="{% url 'products' %}" class="shop-now-btn text-decoration-none">Shop Now</a></button>
+                                <button class="blank-btn"><a href="{% url 'products' %}" class="shop-now-blue-btn">Shop Now</a></button>
                             </div>
                         </div>
                     </div>
@@ -50,71 +50,50 @@
             </div>
         </section>
         <!-- product type carousel -->
-        <section class="col-lg-4 col-12 d-flex justify-content-center mt-lg-0 mt-3">
-            <div id="chewy" class="carousel slide" data-interval="false">
-                <div class="carousel-inner carousel-border">
-                    {% for product in chewy %}
-                        {% if forloop.first %}
-                            {% if product.image %}
-                                <div class="carousel-item active product-carousel">
-                                    <a href="{% url 'product_detail' product.id %}">
-                                        <img class="carousel-img" src="{{ product.image.url }}" alt="{{ product.name }}">
-                                    </a>
-                                    <div class="carousel-caption d-flex justify-content-center">
-                                        <button class="blank-btn">
-                                            <a href="{% url 'products' %}?type_query=chewy" class="text-decoration-none type-btn">Chewy Sweets</a>
-                                        </button>
-                                    </div>
-                                </div>
-                            {% else %}
-                                <div class="carousel-item active product-carousel">
-                                    <a>
-                                        <img class="carousel-img" src="{{ MEDIA_URL }}noimage.png" alt="{{ product.name }}">
-                                    </a>
-                                    <div class="carousel-caption d-flex justify-content-center">
-                                        <button class="blank-btn">
-                                            <a href="{% url 'products' %}?type_query=chewy" class="text-decoration-none type-btn">Chewy Sweets</a>
-                                        </button>
-                                    </div>
-                                </div>
-                            {% endif %}
-                        {% else %}
-                            {% if product.image %}
-                                <div class="carousel-item product-carousel">
-                                    <a href="{% url 'product_detail' product.id %}">
-                                        <img class="carousel-img" src="{{ product.image.url }}" alt="{{ product.name }}">
-                                    </a>
-                                    <div class="carousel-caption d-flex justify-content-center">
-                                        <button class="blank-btn">
-                                            <a href="{% url 'products' %}?type_query=chewy" class="text-decoration-none type-btn">Chewy Sweets</a>
-                                        </button>
-                                    </div>
-                                </div>
-                            {% else %}
-                                <div class="carousel-item product-carousel">
-                                    <a>
-                                        <img class="carousel-img" src="{{ MEDIA_URL }}noimage.png" alt="{{ product.name }}">
-                                    </a>
-                                    <div class="carousel-caption d-flex justify-content-center">
-                                        <button class="blank-btn">
-                                            <a href="{% url 'products' %}?type_query=chewy" class="text-decoration-none type-btn">Chewy Sweets</a>
-                                        </button>
-                                    </div>
-                                </div>
-                            {% endif %}
-                        {% endif %}
-                    {% endfor %}
+        <section class="col-lg-4 col-12 d-flex justify-content-center justify-content-lg-end mt-lg-0 mt-3">
+            <div>
+                {% include 'home/includes/chewy.html' %}
+            </div>
+            <div class="d-none d-sm-none d-md-block d-lg-none d-xl-none d-xxl-none ms-2">
+                {% include 'home/includes/chocolate.html' %}
+            </div>
+        </section>
+    </div>
+
+    <!-- row for 90's sweets & 1 product type carousel -->
+    <div class="row mt-3 d-flex flex-row-reverse p-1">
+        <!-- 00's sweets (image container) -->
+        <section class="col-lg-8 col-12 image-90 p-0 d-flex justify-content-end">
+            <!-- image overlay container -->
+            <div class="charcoal-square-wrapper">
+                <!-- overlay -->
+                <div class="charcoal-square">
+                    <!-- text container -->
+                    <div class="h-100 text-center d-flex justify-content-evenly flex-column ps-2 pe-2">
+                        <!-- text -->
+                        <div class="row">
+                            <div class="col-12 text-white">
+                                <h4 class="logo-font">
+                                    Browse Our Selection of
+                                    <br>
+                                    90's Sweets
+                                </h4>
+                            </div>
+                        </div>
+                        <!-- navigation button -->
+                        <div class="row">
+                            <div class="col d-flex justify-content-center">
+                                <button class="blank-btn"><a href="{% url 'products' %}" class="shop-now-charcoal-btn">Shop Now</a></button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#chewy"
-                    data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#chewy"
-                    data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                </button>
+            </div>
+        </section>
+        <!-- product type carousel -->
+        <section class="col-lg-4 col-12 d-flex justify-content-center justify-content-lg-start mt-lg-0 mt-3">
+            <div class="d-block d-sm-block d-md-none d-lg-block d-xl-block d-xxl-block">
+                {% include 'home/includes/chocolate.html' %}
             </div>
         </section>
     </div>
