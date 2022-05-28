@@ -788,14 +788,6 @@ select option {
     box-sizing: border-box;
 } /* adds a border to the carousel */
 
-.banner-img {
-    background: url('/media/banner_img.jpg') no-repeat center;
-    background-size: cover;
-    height: 300px;
-    border-radius: 50px;
-    overflow: hidden;
-} /* the banner image for the homepage */
-
 .image-00 {
     background: url('/media/00_sweets.avif') no-repeat center center;
     background-size: cover;

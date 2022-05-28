@@ -17,13 +17,23 @@
 
 {% block content %}
 
+<!-- header for devices below md breakpoint -->
+
+<div class="container">
+    <div class="row d-block d-sm-block d-md-block d-lg-none d-xl-none d-xxl-none">
+        <div class="col-12 text-center">
+            <h2 class="logo-font">Classic Confectionery</h2>
+        </div>
+    </div>
+</div>
+
 <!-- banner text -->
 
 <div class="container d-flex justify-content-center">
     <div class="row banner mb-3">
         <div class="col-12 text-white text-center logo-font text-uppercase">
-            <h5 class="p-2 d-none d-sm-none d-md-none d-lg-block d-xl-block d-xxl-block">Free delivery on orders over £50, Tracked delivery on all orders over 1kg!</h5>
-            <h5 class="p-2 d-block d-sm-block d-md-block d-lg-none d-xl-none d-xxl-none">
+            <h5 class="p-2 d-none d-sm-none d-md-none d-lg-block d-xl-block d-xxl-block mt-1">Free delivery on orders over £50, Tracked delivery on all orders over 1kg!</h5>
+            <h5 class="p-2 d-block d-sm-block d-md-block d-lg-none d-xl-none d-xxl-none mt-1">
                 Free delivery on orders over £50!
                 <br>
                 Tracked delivery on all orders over 1kg!
@@ -156,6 +166,14 @@
                 {% include 'home/includes/sherbet.html' %}
             </div>
         </section>
+    </div>
+</div>
+
+<div class="container d-flex justify-content-center">
+    <div class="row banner mb-3">
+        <div class="col-12 text-white text-center logo-font text-uppercase">
+            <a href="{% url 'products' %}" class="h1 white-yellow">Shop All Products</a>
+        </div>
     </div>
 </div>
 
