@@ -2,62 +2,121 @@
 {% load static %}
 
 {% block page_header %}
-<div class="container header-container">
-    <div class="row">
-        <div class="col">
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">500</li>
-                </ol>
-            </nav>
+    <div class="container header-container">
+        <div class="row">
+            <div class="col">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item active" aria-current="home">Home</li>
+                    </ol>
+                </nav>
+            </div>
         </div>
     </div>
-</div>
 {% endblock %}
 
 {% block content %}
 
+<!-- container to set the whole home page -->
 <div class="container mb-4">
-    <span class="h4 text-uppercase">Internal Server Error</span>
-</div>
-
-<div class="container-fluid mb-4">
-    <div class="row">
-        <!-- background image container -->
-        <div class="col hero-img">
-            <!-- text overlay wrapper -->
-            <div class="overlay-wrapper">
-                <!-- sets the square -->
-                <div class="square">
+    <!-- row for 00's sweets & 1 product type carousel -->
+    <div class="row p-1">
+        <!-- 00's sweets (image container) -->
+        <section class="col-lg-8 col-12 image-00 p-0">
+            <!-- image overlay container -->
+            <div class="blue-square-wrapper-start">
+                <!-- overlay -->
+                <div class="blue-square">
                     <!-- text container -->
-                    <div class="h-100 text-center d-flex justify-content-evenly flex-column">
+                    <div class="h-100 text-center d-flex justify-content-evenly flex-column ps-2 pe-2">
                         <!-- text -->
                         <div class="row">
                             <div class="col-12 text-white">
                                 <h4 class="logo-font">
-                                    Internal Server Error
+                                    Browse Our Selection of
+                                    <br>
+                                    00's Sweets
                                 </h4>
-                                <p class="ps-2 pe-2">
-                                    Error 500
-                                    <br>
-                                    An error occurred processing your request, we've been notified and will correct it as soon as possible!
-                                    <br>
-                                    Please try your request again in a moment.
-                                </p>
                             </div>
                         </div>
-                        <!-- navigation buttons -->
+                        <!-- navigation button -->
                         <div class="row">
                             <div class="col d-flex justify-content-center">
-                                <button class="blank-btn"><a href="{% url 'products' %}" class="subscribe-button text-decoration-none">Visit Store</a></button>
-                                <button class="blank-btn"><a href="{% url 'home' %}" class="subscribe-button text-decoration-none">Return Home</a></button>
+                                <button class="blank-btn"><a href="{% url 'products' %}" class="shop-now-btn text-decoration-none">Shop Now</a></button>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </section>
+        <!-- product type carousel -->
+        <section class="col-lg-4 col-12 d-flex justify-content-center mt-lg-0 mt-3">
+            <div id="chewy" class="carousel slide" data-interval="false">
+                <div class="carousel-inner carousel-border">
+                    {% for product in chewy %}
+                        {% if forloop.first %}
+                            {% if product.image %}
+                                <div class="carousel-item active product-carousel">
+                                    <a href="{% url 'product_detail' product.id %}">
+                                        <img class="carousel-img" src="{{ product.image.url }}" alt="{{ product.name }}">
+                                    </a>
+                                    <div class="carousel-caption d-flex justify-content-center">
+                                        <button class="blank-btn">
+                                            <a href="{% url 'products' %}?type_query=chewy" class="text-decoration-none type-btn">Chewy Sweets</a>
+                                        </button>
+                                    </div>
+                                </div>
+                            {% else %}
+                                <div class="carousel-item active product-carousel">
+                                    <a>
+                                        <img class="carousel-img" src="{{ MEDIA_URL }}noimage.png" alt="{{ product.name }}">
+                                    </a>
+                                    <div class="carousel-caption d-flex justify-content-center">
+                                        <button class="blank-btn">
+                                            <a href="{% url 'products' %}?type_query=chewy" class="text-decoration-none type-btn">Chewy Sweets</a>
+                                        </button>
+                                    </div>
+                                </div>
+                            {% endif %}
+                        {% else %}
+                            {% if product.image %}
+                                <div class="carousel-item product-carousel">
+                                    <a href="{% url 'product_detail' product.id %}">
+                                        <img class="carousel-img" src="{{ product.image.url }}" alt="{{ product.name }}">
+                                    </a>
+                                    <div class="carousel-caption d-flex justify-content-center">
+                                        <button class="blank-btn">
+                                            <a href="{% url 'products' %}?type_query=chewy" class="text-decoration-none type-btn">Chewy Sweets</a>
+                                        </button>
+                                    </div>
+                                </div>
+                            {% else %}
+                                <div class="carousel-item product-carousel">
+                                    <a>
+                                        <img class="carousel-img" src="{{ MEDIA_URL }}noimage.png" alt="{{ product.name }}">
+                                    </a>
+                                    <div class="carousel-caption d-flex justify-content-center">
+                                        <button class="blank-btn">
+                                            <a href="{% url 'products' %}?type_query=chewy" class="text-decoration-none type-btn">Chewy Sweets</a>
+                                        </button>
+                                    </div>
+                                </div>
+                            {% endif %}
+                        {% endif %}
+                    {% endfor %}
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#chewy"
+                    data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#chewy"
+                    data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </section>
     </div>
 </div>
 

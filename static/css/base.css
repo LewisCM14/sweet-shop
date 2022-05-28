@@ -713,28 +713,7 @@ select option {
 }
 
 
-/* ------------------------------------------- HOME STYLING */
-
-.type-go-btn {
-    min-width: 130px;
-    height: 40px;
-    color: #333333;
-    padding: 5px 10px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    position: relative;
-    display: inline-block;
-    outline: none;
-    border-radius: 20px;
-    border: 2px solid #333333;
-    background: #ffffff;
-  }
-  .type-go-btn:hover {
-    background: #ffffff;
-    border: 2px solid #000080;
-    color: #000080
-  } /* Taken from https://markodenic.com/tools/buttons-generator/ */
+/* ------------------------------------------- HOME STYLING (old) */
 
 .carousel-control-prev-icon {
     background: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%333333'%3e%3cpath d='M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z'/%3e%3c/svg%3e");
@@ -803,3 +782,89 @@ select option {
         height: 45vh;
     }
 }
+
+
+/* ------------------------------------------- HOME STYLING */
+
+
+.product-carousel {
+    height: 300px;
+    width: 100%;
+} /* sets the size of the carousel to match the type image container */
+
+.carousel-img {
+    max-width: 100%;
+    height: 100%;
+} /* specifies the carousel image to fill its container */
+
+.carousel-border {
+    border: solid 7px rgba(51, 51, 51, 0.7);
+    border-radius: 25px;
+    box-sizing: border-box;
+} /* adds a border to the carousel */
+
+.image-00 {
+    background: url('/media/00_sweets.avif') no-repeat center center;
+    background-size: cover;
+    border-radius: 25px;
+    border-top: 7px solid rgba(0, 0, 128, 0.8);
+    border-bottom: 7px solid rgba(0, 0, 128, 0.8);
+    border-right: 7px solid rgba(0, 0, 128, 0.8);
+    height: fit-content;
+} /* the image for the 00's sweets section */
+
+.blue-square-wrapper-start {
+    height: 50%;
+    width: 50%;
+    display: flex;
+    justify-content: start;
+    align-items: start;
+} /* wrapper for the blue square, allows positioning at start of container */
+
+.blue-square {
+    height: 300px;
+    width: 450px;
+    border-radius: 20px;
+    background-color: rgba(0, 0, 128, 0.8)
+} /* sets the size and color of the blue square */
+
+.shop-now-btn {
+    min-width: 130px;
+    height: 40px;
+    color: #000080;
+    padding: 5px 10px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    display: inline-block;
+    outline: none;
+    border-radius: 20px;
+    border: 2px solid #ffffff;
+    background: #ffffff;
+  }
+  .shop-now-btn:hover {
+    background: #000080;
+    border: 2px solid #ffffff;
+    color: #ffffff
+  } /* Taken from https://markodenic.com/tools/buttons-generator/ */
+
+.type-btn {
+    min-width: 130px;
+    height: 40px;
+    color: #fff;
+    padding: 5px 10px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    display: inline-block;
+    outline: none;
+    border-radius: 20px;
+    border: 2px solid rgba(51, 51, 51, 0.8);
+    background: rgba(51, 51, 51, 0.8);
+  }
+  .type-btn:hover {
+    background: rgba(255, 255, 255, 0.85);
+    color: #333333
+  } /* Taken from https://markodenic.com/tools/buttons-generator/ */
