@@ -758,48 +758,6 @@ select option {
     background-position: center;
 }
 
-/* ------------------------------------------- 404 & 505 STYLING */
-
-.user-lost {
-    background: url('/media/hero.avif') no-repeat center center;
-    background-size: cover;
-    height: 50vh;
-}
-
-.user-lost-text {
-    position: absolute;
-    top: 65%;
-    bottom: 25%;
-}
-
-@media screen and (max-width: 400px) {
-    .user-lost-text {
-        position: absolute;
-        top: 60%;
-        bottom: 25%;
-    }
-}
-
-.user-lost-btn {
-    text-decoration: none;
-    min-width: 130px;
-    height: 40px;
-    color: #fff;
-    padding: 5px 10px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    position: relative;
-    display: inline-block;
-    outline: none;
-    border: 2px solid #333333;
-    background: #333333;
-  }
-  .user-lost-btn:hover {
-    background: #fff;
-    color: #333333
-  } /* Taken from https://markodenic.com/tools/buttons-generator/ */
-
 
 /* ------------------------------------------- ABOUT US STYLING */
 
@@ -810,10 +768,10 @@ select option {
 }
 
 
-/* ------------------------------------------- MAIL SUCCESS STYLING */
+/* ------------------------------------------- MAIL SUCCESS, 404 & 505 STYLING */
 
 
-.mail-success {
+.hero-img {
     background: url('/media/hero.avif') no-repeat center center;
     background-size: cover;
     height: 50vh;
@@ -825,7 +783,7 @@ select option {
     display: flex;
     justify-content: center;
     align-items: center;
-} /* allows for positioning of the square over the image */
+} /* allows for positioning of the square over the hero-img class */
 
 .square {
     height: 300px;
