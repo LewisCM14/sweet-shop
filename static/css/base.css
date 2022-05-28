@@ -786,6 +786,9 @@ select option {
 
 /* ------------------------------------------- HOME STYLING */
 
+.carousel-container {
+    width: 314px;
+} /* ensures carousel width doesn't extend on slide action  */
 
 .product-carousel {
     height: 300px;
@@ -820,6 +823,16 @@ select option {
     border-top: 7px solid rgba(51, 51, 51, 0.8);
     border-bottom: 7px solid rgba(51, 51, 51, 0.8);
     border-left: 7px solid rgba(51, 51, 51, 0.8);
+    height: fit-content;
+} /* the image for the 00's sweets section */
+
+.image-80 {
+    background: url('/media/80_sweets.avif') no-repeat center center;
+    background-size: cover;
+    border-radius: 25px;
+    border-top: 7px solid rgba(0, 0, 128, 0.8);
+    border-bottom: 7px solid rgba(0, 0, 128, 0.8);
+    border-right: 7px solid rgba(0, 0, 128, 0.8);
     height: fit-content;
 } /* the image for the 00's sweets section */
 
