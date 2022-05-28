@@ -42,7 +42,7 @@
                         <!-- navigation button -->
                         <div class="row">
                             <div class="col d-flex justify-content-center">
-                                <button class="blank-btn"><a href="{% url 'products' %}" class="shop-now-blue-btn">Shop Now</a></button>
+                                <button class="blank-btn"><a href="{% url 'products' %}?year=00" class="shop-now-blue-btn">Shop Now</a></button>
                             </div>
                         </div>
                     </div>
@@ -52,7 +52,7 @@
         <!-- product type carousel -->
         <section class="col-lg-4 col-12 d-flex justify-content-center justify-content-lg-end mt-lg-0 mt-3">
             <div class="carousel-container">
-                {% include 'home/includes/chewy.html' %}
+                {% include 'home/includes/jellies_gums.html' %}
             </div>
             <div class="carousel-container d-none d-sm-none d-md-block d-lg-none d-xl-none d-xxl-none ms-2">
                 {% include 'home/includes/chocolate.html' %}
@@ -83,7 +83,7 @@
                         <!-- navigation button -->
                         <div class="row">
                             <div class="col d-flex justify-content-center">
-                                <button class="blank-btn"><a href="{% url 'products' %}" class="shop-now-charcoal-btn">Shop Now</a></button>
+                                <button class="blank-btn"><a href="{% url 'products' %}?year=90" class="shop-now-charcoal-btn">Shop Now</a></button>
                             </div>
                         </div>
                     </div>
@@ -92,11 +92,11 @@
         </section>
         <!-- product type carousel -->
         <section class="container-fluid col-lg-4 col-12 d-flex justify-content-center justify-content-lg-start mt-lg-0 mt-3">
-            <div class="carousel-container d-block d-sm-block d-md-none d-lg-block d-xl-block d-xxl-block">
-                {% include 'home/includes/chocolate.html' %}
-            </div>
-            <div class="carousel-container d-none d-sm-none d-md-block d-lg-none d-xl-none d-xxl-none">
+            <div class="carousel-container">
                 {% include 'home/includes/fizzy.html' %}
+            </div>
+            <div class="carousel-container d-none d-sm-none d-md-block d-lg-none d-xl-none d-xxl-none ms-2">
+                {% include 'home/includes/sour.html' %}
             </div>
         </section>
     </div>
@@ -124,7 +124,7 @@
                         <!-- navigation button -->
                         <div class="row">
                             <div class="col d-flex justify-content-center">
-                                <button class="blank-btn"><a href="{% url 'products' %}" class="shop-now-blue-btn">Shop Now</a></button>
+                                <button class="blank-btn"><a href="{% url 'products' %}?year=80" class="shop-now-blue-btn">Shop Now</a></button>
                             </div>
                         </div>
                     </div>
@@ -133,11 +133,13 @@
         </section>
         <!-- product type carousel -->
         <section class="col-lg-4 col-12 d-flex justify-content-center justify-content-lg-end mt-lg-0 mt-3">
-            <div class="carousel-container d-block d-sm-block d-md-none d-lg-block d-xl-block d-xxl-block">
-                {% include 'home/includes/fizzy.html' %}
+            <div class="carousel-container">
+                {% include 'home/includes/chewy.html' %}
+            </div>
+            <div class="carousel-container d-none d-sm-none d-md-block d-lg-none d-xl-none d-xxl-none ms-2">
+                {% include 'home/includes/sherbet.html' %}
             </div>
         </section>
     </div>
 </div>
-
 {% endblock %}
