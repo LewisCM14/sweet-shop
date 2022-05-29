@@ -61,11 +61,13 @@
                                 </div>
                                 <!-- Remove Item from Favorites -->
                                 <div class="col-md-2 mb-2 mb-md-2 d-flex justify-content-center align-items-center">
-                                    <a class="text-center text-decoration-none text-red" href="{% url 'remove_favorite' item.product.id %}">
+                                    <button class="blank-btn text-center text-decoration-none text-red"
+                                        href="{% url 'remove_favorite' item.product.id %}"
+                                        aria-label="remove {{ item.product.name }} from favorites">
                                         <span class="text-uppercase flex-column">
                                             <i class="fa-solid fa-trash-can fa-2xl"></i>
                                         </span>
-                                    </a>
+                                    </button>
                                 </div>
                                 <!-- Item Quantity -->
                                 <div class="col-md-3 d-flex justify-content-center align-items-center">
@@ -73,6 +75,7 @@
                                         <!-- Minus Button -->
                                         <div class="input-group-prepend">
                                             <button class="decrement-qty qty-buttons" data-item_id="{{ item.item_.id }}"
+                                                aria-label=" decrease {{ item.product.name }} quantity by 1"
                                                 id="decrement-qty_{{ item.item_.id }}">
                                                 <span class="icon">
                                                     <i class="fa-solid fa-minus"></i>
@@ -86,6 +89,7 @@
                                         <!-- Plus Button -->
                                         <div class="input-group-append">
                                             <button class="increment-qty qty-buttons" data-item_id="{{ item.item_.id }}"
+                                                aria-label="increase {{ item.product.name }} quantity by 1"
                                                 id="increment-qty_{{ item.item_.id }}">
                                                 <span class="icon">
                                                     <i class="fa-solid fa-plus"></i>
