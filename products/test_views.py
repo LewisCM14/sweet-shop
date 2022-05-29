@@ -213,8 +213,8 @@ class TestProductManagement(TestCase):
 
     def setUp(self):
         """
-        Initiates the Type & Product database;s with a single object.
-        Creates a test user with admin privileges.
+        Initiates the Type & Product database with a single object.
+        Creates a test user with admin privileges and a standard user.
         """
 
         sour = Type.objects.create(
@@ -528,3 +528,33 @@ class TestProductManagement(TestCase):
 
         products = Product.objects.all()
         self.assertEqual(len(products), 1)
+
+    def test_non_superusers_cant_edit_products(self):
+        """
+        A test to ensure authorized users cannot access the edit products
+        view.
+
+        Logs into the standard user created in the setUp method,
+
+        Then passes the product created in the setUp method to the
+        edit product URL, stored in the response. Asserts the correct user
+        feedback message is returned as well as a 302 status code,
+        which redirects to the home page URL.
+        """
+
+        self.client.login(
+            email='janedoe@email.com',
+            password='password',
+        )
+
+        response = self.client.get('/products/edit/1/')
+
+        messages = list(get_messages(response.wsgi_request))
+        self.assertEqual(len(messages), 1)
+        self.assertEqual(
+            str(messages[0]),
+            'Sorry, only store owners can do that.'
+        )
+
+        self.assertEqual(response.status_code, 302)
+        self.assertRedirects(response, reverse('home'))
