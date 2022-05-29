@@ -7,7 +7,7 @@
             <div class="col">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item active" aria-current="home">Home</li>
+                        <li class="breadcrumb-item active" aria-current="true">Home</li>
                     </ol>
                 </nav>
             </div>
@@ -72,7 +72,10 @@
                         <!-- navigation button -->
                         <div class="row">
                             <div class="col d-flex justify-content-center">
-                                <button class="blank-btn"><a href="{% url 'products' %}?year=00" class="shop-now-blue-btn">Shop Now</a></button>
+                                <a href="{% url 'products' %}?year=00"
+                                    aria-label="navigate to our selection of 00's sweets" class="shop-now-blue-btn">
+                                    Shop Now
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -113,7 +116,10 @@
                         <!-- navigation button -->
                         <div class="row">
                             <div class="col d-flex justify-content-center">
-                                <button class="blank-btn"><a href="{% url 'products' %}?year=90" class="shop-now-charcoal-btn">Shop Now</a></button>
+                                <a href="{% url 'products' %}?year=90"
+                                    aria-label="navigate to our selection of 90's sweets" class="shop-now-charcoal-btn">
+                                    Shop Now
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -154,7 +160,10 @@
                         <!-- navigation button -->
                         <div class="row">
                             <div class="col d-flex justify-content-center">
-                                <button class="blank-btn"><a href="{% url 'products' %}?year=80" class="shop-now-blue-btn">Shop Now</a></button>
+                                <a href="{% url 'products' %}?year=80"
+                                    aria-label="navigate to our selection of 80's sweets" class="shop-now-blue-btn">
+                                    Shop Now
+                                </a>
                             </div>
                         </div>
                     </div>
