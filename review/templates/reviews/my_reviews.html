@@ -105,8 +105,8 @@
                             <div class="card-footer bg-white border-0">
                                 <div class="row">
                                     <div class="col mb-2 d-flex justify-content-evenly">
-                                        <a class="text-decoration-none text-green" href="{% url 'edit_review' review.id %}"><i class="fa-solid fa-pencil fa-2xl"></i></a>
-                                        <a class="text-red text-decoration-none" data-bs-toggle='modal' href="#delete{{ review.id }}" role="button"><i class="fa-solid fa-trash-can fa-2xl"></i></a>
+                                        <a class="text-decoration-none text-green" href="{% url 'edit_review' review.id %}" aria-label="edit review of {{ review.product.name }}"><i class="fa-solid fa-pencil fa-2xl"></i></a>
+                                        <a class="text-red text-decoration-none" data-bs-toggle='modal' href="#delete{{ review.id }}" role="button" aria-label="delete review of {{ review.product.name }}"><i class="fa-solid fa-trash-can fa-2xl"></i></a>
                                         <!-- Delete Review Modal -->
                                         <div class="modal fade" id="delete{{ review.id }}" aria-hidden="true" aria-labelledby="deleteReviewModal" tabindex="-1">
                                             <div class="modal-dialog">
