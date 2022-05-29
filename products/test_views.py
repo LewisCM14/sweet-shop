@@ -241,6 +241,14 @@ class TestProductManagement(TestCase):
             password='password',
         )
 
+        User.objects.create_user(
+            username='janedoe',
+            first_name='Jane',
+            last_name='Doe',
+            email='janedoe@email.com',
+            password='password',
+        )
+
     def admin_login(self):
         """
         A helper method. Used to sign into a registered site owner.
@@ -481,3 +489,42 @@ class TestProductManagement(TestCase):
 
         products = Product.objects.all()
         self.assertEqual(len(products), 0)
+
+    def test_non_superusers_cant_delete_products(self):
+        """
+        A test to ensure authorized users cannot delete product.
+
+        Logs into the standard user created in the setUp method,
+        before collecting the Product database, asserting the length of
+        it is equal to 1.
+
+        Then passes this product to the delete product URL, stored in
+        the response. Asserts the correct user feedback message is returned
+        as well as a 302 status code, which redirects to the home page URL.
+
+        The Product database is then collected again and ensured it still
+        has a length of 1, meaning the product hasn't been deleted
+        """
+
+        self.client.login(
+            email='janedoe@email.com',
+            password='password',
+        )
+
+        products = Product.objects.all()
+        self.assertEqual(len(products), 1)
+
+        response = self.client.get('/products/delete/1/')
+
+        messages = list(get_messages(response.wsgi_request))
+        self.assertEqual(len(messages), 1)
+        self.assertEqual(
+            str(messages[0]),
+            'Sorry, only store owners can do that.'
+        )
+
+        self.assertEqual(response.status_code, 302)
+        self.assertRedirects(response, reverse('home'))
+
+        products = Product.objects.all()
+        self.assertEqual(len(products), 1)
