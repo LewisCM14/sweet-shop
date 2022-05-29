@@ -91,7 +91,8 @@ def contact_us(request):
             else:
                 inquiry.save()
                 send_notification_email(inquiry)
-                messages.info(request, 'Your inquiry has been sent. \
+
+            messages.info(request, 'Your inquiry has been sent. \
                 We will be in touch as soon as possible.')
             return redirect(reverse('mail_success'))
         else:

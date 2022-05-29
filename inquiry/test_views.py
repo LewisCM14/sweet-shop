@@ -1,7 +1,5 @@
 """ This module tests the inquiry app views """
 
-from datetime import datetime
-
 from django.test import TestCase
 from django.contrib.auth.models import User
 from django.urls import reverse
@@ -29,9 +27,6 @@ class TestView(TestCase):
             password='password',
         )
 
-        profile = UserProfile.objects.get(id=1)
-        profile.default_phone_number = 1111111111
-
     def login(self):
         """
         Helper Method
@@ -42,6 +37,25 @@ class TestView(TestCase):
             email="johndoe@email.com",
             password='password',
         )
+
+    def create_profile(self):
+        """
+        Updates the test_users default information on their UserProfile.
+        """
+        response = self.client.post(
+            reverse("profile"), {
+                'default_phone_number': '22222222222',
+                'default_street_address1': '4 privet drive',
+                'default_street_address2': '',
+                'default_town_or_city': 'little whinging',
+                'default_county': 'surrey',
+                'default_postcode': 'CR2 5ER',
+                'default_country': 'GB',
+            })
+        self.assertEqual(response.status_code, 200)
+
+        user_profile = UserProfile.objects.get(id=1)
+        self.assertEqual(user_profile.default_phone_number, '22222222222')
 
     def test_get_mail_success_page(self):
         """
@@ -63,6 +77,9 @@ class TestView(TestCase):
         in the response. Then asserts this response has a status code of 302
         and the redirect URL is the mail_success page.
 
+        Also collects the messages in the request and asserts the string
+        value is correct.
+
         The Inquiry database is then filtered via the ID for the inquiry
         just created and the fields are asserted to be equal to the values
         passed. With the 'user' field asserted to be None, as it was an
@@ -80,10 +97,59 @@ class TestView(TestCase):
         self.assertEqual(response.status_code, 302)
         self.assertRedirects(response, reverse("mail_success"))
 
+        messages = list(get_messages(response.wsgi_request))
+        self.assertEqual(len(messages), 1)
+        self.assertEqual(str(messages[0]), 'Your inquiry has been sent. \
+                We will be in touch as soon as possible.')
+
         inquiry = Inquiry.objects.get(id=1)
         self.assertEqual(inquiry.user, None)
         self.assertEqual(inquiry.full_name, 'Jane Doe')
         self.assertEqual(inquiry.email, 'janedoe@email.com')
         self.assertEqual(inquiry.phone_number, '1111111111')
+        self.assertEqual(inquiry.subject, 'Test')
+        self.assertEqual(inquiry.message, 'A test inquiry')
+
+    def test_authorized_user_can_make_inquiry(self):
+        """
+        Tests an authorized user can make an inquiry.
+
+        Posts a valid inquiry to the reverse of the contact_us URL, stored
+        in the response. Then asserts this response has a status code of 302
+        and the redirect URL is the mail_success page.
+
+        Also collects the messages in the request and asserts the string
+        value is correct.
+
+        The Inquiry database is then filtered via the ID for the inquiry
+        just created and the fields are asserted to be equal to the values
+        passed. With the 'user' field asserted to be the user created in
+        the setUp method.
+        """
+        self.login()
+
+        user = User.objects.get(id=1)
+
+        response = self.client.post(
+            reverse("contact_us"), {
+                'full_name': 'John Doe',
+                'email': 'johndoe@email.com',
+                'phone_number': '22222222222',
+                'subject': 'Test',
+                'message': 'A test inquiry',
+            })
+        self.assertEqual(response.status_code, 302)
+        self.assertRedirects(response, reverse("mail_success"))
+
+        messages = list(get_messages(response.wsgi_request))
+        self.assertEqual(len(messages), 1)
+        self.assertEqual(str(messages[0]), 'Your inquiry has been sent. \
+                We will be in touch as soon as possible.')
+
+        inquiry = Inquiry.objects.get(id=1)
+        self.assertEqual(inquiry.user, user)
+        self.assertEqual(inquiry.full_name, 'John Doe')
+        self.assertEqual(inquiry.email, 'johndoe@email.com')
+        self.assertEqual(inquiry.phone_number, '22222222222')
         self.assertEqual(inquiry.subject, 'Test')
         self.assertEqual(inquiry.message, 'A test inquiry')
