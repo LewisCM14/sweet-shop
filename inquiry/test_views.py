@@ -38,25 +38,6 @@ class TestView(TestCase):
             password='password',
         )
 
-    def create_profile(self):
-        """
-        Updates the test_users default information on their UserProfile.
-        """
-        response = self.client.post(
-            reverse("profile"), {
-                'default_phone_number': '22222222222',
-                'default_street_address1': '4 privet drive',
-                'default_street_address2': '',
-                'default_town_or_city': 'little whinging',
-                'default_county': 'surrey',
-                'default_postcode': 'CR2 5ER',
-                'default_country': 'GB',
-            })
-        self.assertEqual(response.status_code, 200)
-
-        user_profile = UserProfile.objects.get(id=1)
-        self.assertEqual(user_profile.default_phone_number, '22222222222')
-
     def test_get_mail_success_page(self):
         """
         Tests the mail success page renders.
