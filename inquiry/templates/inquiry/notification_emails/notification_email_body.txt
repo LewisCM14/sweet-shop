@@ -1,0 +1,20 @@
+Hello {{ inquiry.full_name }}!
+
+This is a notification email to confirm that on {{ inquiry.date }} you successfully submitted an inquiry to Classic Confectionery.
+
+We aim to reply to all inquiries within 3-5 business days, we thank you for your patience.
+Below you can find the details of the inquiry you have made:
+
+{{ inquiry.subject }}
+
+{{ inquiry.message }}
+
+We've got your preferred contact number on file as {{ inquiry.phone_number }}.
+
+If you do not receive any follow up contact from us within 3-5 business days please feel free to contact us directly at {{ contact_email }}.
+
+Thank you for reaching out to us!
+
+Sincerely,
+
+Classic Confectionery.

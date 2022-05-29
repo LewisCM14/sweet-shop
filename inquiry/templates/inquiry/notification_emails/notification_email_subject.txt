@@ -1,0 +1,1 @@
+Notification of inquiry made to Classic Confectionery - Subject {{ inquiry.subject }}

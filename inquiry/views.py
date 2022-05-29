@@ -2,8 +2,39 @@
 
 from django.shortcuts import render, redirect, reverse
 from django.contrib import messages
+from django.core.mail import send_mail
+from django.template.loader import render_to_string
+from django.conf import settings
+
 from profiles.models import UserProfile
 from .contact_form import ContactForm
+
+
+def send_notification_email(inquiry):
+    """
+    A function to handle sending inquiry confirmation emails.
+
+    Collects the customers email from the passed in inquiry.
+    Then render_to_string the files located within the inquiry templates
+    notification_emails folder, passing in the inquiry as context.
+
+    The Django send_mail function is then called with the email subject,
+    body, delivery email and the recipients email.
+    """
+    customer_email = inquiry.email
+    subject = render_to_string(
+        'inquiry/notification_emails/notification_email_subject.txt',
+        {'inquiry': inquiry})
+    body = render_to_string(
+        'inquiry/notification_emails/notification_email_body.txt',
+        {'inquiry': inquiry, 'contact_email': settings.DEFAULT_FROM_EMAIL})
+
+    send_mail(
+        subject,
+        body,
+        settings.DEFAULT_FROM_EMAIL,
+        [customer_email]
+    )
 
 
 def contact_us(request):
@@ -22,6 +53,10 @@ def contact_us(request):
     users authentication status is checked, if the request was made by an
     authorized user their ID is attached to the inquiry before it is
     posted to the database. If not the form is posted with that field blank.
+
+    Once a valid inquiry has been posted to the database the above
+    send_notification_email function is called in order to send an email
+    detailing the inquiry they have made to the user.
     """
     user = request.user
 
@@ -52,9 +87,11 @@ def contact_us(request):
             if user.is_authenticated:
                 inquiry.user = request.user
                 inquiry.save()
+                send_notification_email(inquiry)
             else:
                 inquiry.save()
-            messages.info(request, 'Your inquiry has been sent. \
+                send_notification_email(inquiry)
+                messages.info(request, 'Your inquiry has been sent. \
                 We will be in touch as soon as possible.')
             return redirect(reverse('mail_success'))
         else:
