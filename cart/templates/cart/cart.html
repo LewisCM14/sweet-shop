@@ -217,11 +217,9 @@
         <div class="row text-center mb-4">
             <div class="col d-flex flex-column align-items-center">
                 <span class="h5 mt-4 text-uppercase">Your cart is empty!</span>
-                <button class="shopping-button blue-charcoal-btn">
-                    <a class="text-white text-decoration-none" href="{% url 'products' %}">
-                        Continue Shopping
-                    </a>
-                </button>
+                <a class="text-white text-decoration-none shopping-button blue-charcoal-btn" href="{% url 'products' %}">
+                    Continue Shopping
+                </a>
             </div>
         </div>
     {% endif %}
