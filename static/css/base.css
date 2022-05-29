@@ -774,7 +774,7 @@ select option {
 
 .product-carousel {
     height: 300px;
-    width: 100%;
+    width: 300px;
 } /* sets the size of the carousel to match the type image container */
 
 .carousel-img {

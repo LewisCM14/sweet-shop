@@ -149,7 +149,7 @@
                                     placeholder="SEARCH OUR SWEETS">
                                 <div class="input-group-append">
                                     <button class="form-control btn btn-black border border-black rounded-0"
-                                        type="submit">
+                                        type="submit" aria-label="preform search">
                                         <span class="icon charcoal-navy">
                                             <i class="fas fa-search fa-lg"></i>
                                         </span>
@@ -162,7 +162,7 @@
                     <div class="col-12 col-lg-4 my-auto py-1 py-lg-0 text-center text-lg-left">
                         <ul class="list-inline list-unstyled text-center text-lg-right my-0">
                             <li class="list-inline-item">
-                                <a class="charcoal-navy nav-link" href="{% url 'view_cart' %}">
+                                <a class="charcoal-navy nav-link" href="{% url 'view_cart' %}" aria-label="navigate to the shopping cart">
                                     <div class="text-center">
                                         <div class="icon"><i class="fa-solid fa-cart-shopping fa-lg"></i></div>
                                     </div>
@@ -174,7 +174,7 @@
                 <div class="row bg-white">
                     <!-- Toggle Buttons for Search and Main Nav, plus include html files -->
                     <nav class="navbar navbar-expand-lg navbar-light w-100">
-                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#main-nav">
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#main-nav" aria-label="collapses the main nav bar">
                             <span class="navbar-toggler-icon"></span>
                         </button>
                         {% include 'includes/mobile-top-header.html' %}
@@ -280,7 +280,7 @@
                             <hr class="mb-4 mt-0 d-inline-block mx-auto"
                                 style="width: 60px; background-color: #F5E532; height: 2px" />
                             <p>
-                                <a href="{% url 'contact_us' %}" class="white-yellow">Contact Us</a>
+                                <a href="{% url 'contact_us' %}" class="white-yellow" aria-label="navigate to our contact page">Contact Us</a>
                             </p>
                             <p class="mb-3">
                                 <span class="fw-600">Address:</span>
@@ -328,24 +328,28 @@
                             <hr class="mb-4 mt-0 d-inline-block mx-auto"
                                 style="width: 60px; background-color: #F5E532; height: 2px" />
                             <p>
-                                <a href="{% url 'about_us' %}" class="white-yellow">About Us</a>
+                                <a href="{% url 'about_us' %}" class="white-yellow"
+                                    aria-label="navigate to our about us page">About Us</a>
                             </p>
                             <p>
-                                <a href="#" class="white-yellow">Privacy Policy</a>
+                                <a href="#" class="white-yellow"
+                                    aria-label="navigate to our privacy policy page">Privacy Policy</a>
                             </p>
                             <p>
-                                <a href="{% url 'faq' %}" class="white-yellow">FAQ</a>
+                                <a href="{% url 'faq' %}" class="white-yellow"
+                                    aria-label="navigate to our faq page">FAQ</a>
                             </p>
                             <p>
-                                <a href="{% url 'deliver_info' %}" class="white-yellow">Delivery Information</a>
+                                <a href="{% url 'deliver_info' %}" class="white-yellow"
+                                    aria-label="navigate to our delivery information page">Delivery Information</a>
                             </p>
                             <p>
                                 <a href="https://www.diabetes.co.uk/" class="white-yellow" target="_blank"
-                                rel="noopener" aria-label="Diabetes UK, a British charity offering support and first hand knowledge.">Diabetes UK</a>
+                                rel="noopener" aria-label="Diabetes UK link, a British charity offering support and first hand knowledge.">Diabetes UK</a>
                             </p>
                             <p>
                                 <a href="https://www.dentalhealth.org/" class="white-yellow" target="_blank"
-                                rel="noopener" aria-label="Oral Health Foundation, a British dental charity.">Oral Health Foundation</a>
+                                rel="noopener" aria-label="Oral Health Foundation Link, a British dental charity.">Oral Health Foundation</a>
                             </p>
                         </div>
                         <!-- End Information Section -->
@@ -355,47 +359,56 @@
                             <hr class="mb-4 mt-0 d-inline-block mx-auto"
                                 style="width: 60px; background-color: #F5E532; height: 2px" />
                                 <p>
-                                    <a href="{% url 'products' %}?type_query=chewy" class="white-yellow">
+                                    <a href="{% url 'products' %}?type_query=chewy" class="white-yellow"
+                                        aria-label="navigate to our selection of chewy sweets">
                                         <h6 class="mt-neg-10">Chewy</h6>
                                     </a>
                                 </p>
                                 <p>
-                                    <a href="{% url 'products' %}?type_query=chocolate" class="white-yellow">
+                                    <a href="{% url 'products' %}?type_query=chocolate" class="white-yellow"
+                                        aria-label="navigate to our selection of chocolate">
                                         <h6 class="mt-neg-10">Chocolate</h6>
                                     </a>
                                 </p>
                                 <p>
-                                    <a href="{% url 'products' %}?type_query=fizzy" class="white-yellow">
+                                    <a href="{% url 'products' %}?type_query=fizzy" class="white-yellow"
+                                        aria-label="navigate to our selection of fizzy sweets">
                                         <h6 class="mt-neg-10">Fizzy</h6>
                                     </a>
                                 </p>
                                 <p>
-                                    <a href="{% url 'products' %}?type_query=jellies_gums" class="white-yellow">
+                                    <a href="{% url 'products' %}?type_query=jellies_gums" class="white-yellow"
+                                            aria-label="navigate to our selection of jellies & gum sweets">
                                         <h6 class="mt-neg-10">Jellies & Gums</h6>
                                     </a>
                                 </p>
                                 <p>
-                                    <a href="{% url 'products' %}?type_query=sherbet" class="white-yellow">
+                                    <a href="{% url 'products' %}?type_query=sherbet" class="white-yellow"
+                                        aria-label="navigate to our selection of sherbet sweets">
                                         <h6 class="mt-neg-10">Sherbet</h6>
                                     </a>
                                 </p>
                                 <p>
-                                    <a href="{% url 'products' %}?type_query=sour" class="white-yellow">
+                                    <a href="{% url 'products' %}?type_query=sour" class="white-yellow"
+                                        aria-label="navigate to our selection of sour sweets">
                                         <h6 class="mt-neg-10">Sour</h6>
                                     </a>
                                 </p>
                                 <p>
-                                    <a href="{% url 'products' %}?year=80" class="white-yellow">
+                                    <a href="{% url 'products' %}?year=80" class="white-yellow"
+                                        aria-label="navigate to our selection of 80's sweets">
                                         <h6 class="mt-neg-10">80's Sweets</h6>
                                     </a>
                                 </p>
                                 <p>
-                                    <a href="{% url 'products' %}?year=90" class="white-yellow">
+                                    <a href="{% url 'products' %}?year=90" class="white-yellow"
+                                        aria-label="navigate to our selection of 90's sweets">
                                         <h6 class="mt-neg-10">90's Sweets</h6>
                                     </a>
                                 </p>
                                 <p>
-                                    <a href="{% url 'products' %}?year=00" class="white-yellow">
+                                    <a href="{% url 'products' %}?year=00" class="white-yellow"
+                                        aria-label="navigate to our selection of 00's sweets">
                                         <h6 class="mt-neg-10">00's Sweets</h6>
                                     </a>
                                 </p>
