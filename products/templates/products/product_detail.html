@@ -26,11 +26,11 @@
                 <div class="image-container">
                     {% if product.image %}
                         <a href="{{ product.image.url }}" target="_blank">
-                            <img class="card-img-top img-fluid" src="{{ product.image.url }}" alt="{{ product.name }}">
+                            <img class="card-img-top img-fluid product-card-img" src="{{ product.image.url }}" alt="{{ product.name }}">
                         </a>
                         {% else %}
-                        <a href="">
-                            <img class="card-img-top img-fluid" src="{{ MEDIA_URL }}noimage.png" alt="{{ product.name }}">
+                        <a>
+                            <img class="card-img-top img-fluid product-card-img" src="{{ MEDIA_URL }}noimage.png" alt="{{ product.name }}">
                         </a>
                     {% endif %}
                 </div>
@@ -46,11 +46,11 @@
                                 <h3 class="fw-700">{{ product.name }}</h3>
                                 <!-- favorite button -->
                                 {% if favorite %}
-                                    <button class="fav-btn blank-btn ms-2">
+                                    <button class="fav-btn blank-btn ms-2" aria-label="remove product from favorites">
                                         <i class="fa-solid fa-2xl fa-heart"></i>
                                     </button>
                                 {% else %}
-                                    <button class="fav-btn blank-btn ms-2">
+                                    <button class="fav-btn blank-btn ms-2" aria-label="add product from favorites">
                                         <i class="fa-regular fa-2xl fa-heart"></i>
                                     </button>
                                 {% endif %}
@@ -236,13 +236,13 @@
                             </div>
                             <!-- Quantity Section -->
                             <div class="col-lg-6 col-md-12 d-flex justify-content-evenly align-items-center flex-xl-row flex-lg-column flex-md-row">
-                                <p>
+                                <label for="id_qty_{{ product.id }}" class="d-flex align-self-center">
                                     Quantity:
-                                </p>
+                                </label>
                                 <div class="input-group add-qty-group">
                                     <!-- Minus Button -->
                                     <div class="input-group-prepend">
-                                        <button class="decrement-qty qty-buttons" data-item_id="{{ product.id }}" id="decrement-qty_{{ product.id }}">
+                                        <button class="decrement-qty qty-buttons" data-item_id="{{ product.id }}" id="decrement-qty_{{ product.id }}" aria-label="decrease quantity by 1">
                                             <span class="icon">
                                                 <i class="fa-solid fa-minus"></i>
                                             </span>
@@ -253,7 +253,7 @@
                                         min="1" max="25" data-item_id="{{ product.id }}" id="id_qty_{{ product.id }}">
                                     <!-- Plus Button -->
                                     <div class="input-group-append">
-                                        <button class="increment-qty qty-buttons" data-item_id="{{ product.id }}" id="increment-qty_{{ product.id }}">
+                                        <button class="increment-qty qty-buttons" data-item_id="{{ product.id }}" id="increment-qty_{{ product.id }}" aria-label="increase quantity by 1">
                                             <span class="icon">
                                                 <i class="fa-solid fa-plus"></i>
                                             </span>
