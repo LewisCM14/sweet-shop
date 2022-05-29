@@ -69,6 +69,18 @@ class TestView(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, ('inquiry/mail_success.html'))
 
+    def test_get_contact_us_page(self):
+        """
+        Tests the contact_us page renders.
+
+        Uses Django's in-built HTTP client to get the mail success page URL.
+        Asserts equal to status code 200, a successful HTTP response.
+        Then asserts the correct template is used.
+        """
+        response = self.client.get('/contact/')
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, ('inquiry/contact_us.html'))
+
     def test_unauthorized_user_can_make_inquiry(self):
         """
         Tests an unauthorized user can make an inquiry.
