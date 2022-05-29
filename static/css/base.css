@@ -437,6 +437,10 @@ Taken from - https://stackoverflow.com/questions/66231936/change-accordion-butto
 
 /* ------------------------------------------- PRODUCTS STYLES */
 
+.product-card-img {
+    height: fit-content;
+    width: fit-content;
+} /* sizes the individual card images */
 
 .name-container {
     width: 100%;
@@ -778,7 +782,7 @@ select option {
 } /* sets the size of the carousel to match the type image container */
 
 .carousel-img {
-    max-width: 100%;
+    width: 100%;
     height: 100%;
 } /* specifies the carousel image to fill its container */
 
