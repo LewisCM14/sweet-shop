@@ -667,9 +667,15 @@ ___
 
 - **Media** <a name='media'></a>
 
-    * The index banner background image, and the hero image used on the 404 & 505 pages was taken by Luis Aguila and can be found [here](https://unsplash.com/photos/xLvIcAYuuMQ).
+    * The hero background image used on the mail success, 404 and 500 pages was taken by Luis Aguila and can be found [here](https://unsplash.com/photos/xLvIcAYuuMQ).
 
     * The image used above the large breakpoint on the about us page is taken by Karsten Winegeart and can be found [here](https://unsplash.com/photos/PL5FZkW0Qkk).
+
+    * The image used on the home page for the section which allows navigation to the shops selection of 00's sweets was taken by Jacqueline Brandwayn and can be found [here](https://unsplash.com/photos/fA_dsZkS87s).
+
+    * The image used on the home page for the section which allows navigation to the shops selection of 90's sweets was taken by Dmitry Mishin and can be found [here](https://unsplash.com/photos/m7m58SOtb6c).
+    
+    * The image used on the home page for the section which allows navigation to the shops selection of 80's sweets was taken by Matt Schwartz and can be found [here](https://unsplash.com/photos/SmZWvAkKRVM).   
 
 [Return to Table of Contents](#contents)
 ___
