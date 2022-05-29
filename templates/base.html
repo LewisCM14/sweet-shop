@@ -62,127 +62,99 @@
     <body class="site">
         <!-- Start Header Section -->
         <header>
-            <!-- Start Topbar -->
-            <nav class="navbar navbar-expand-md justify-content-center bg-charcoal">
-                <div class="container white-yellow">
-                    <!-- Product Management Dropdown Links  -->
-                    <ul class="nav-item dropdown nav navbar-nav">
-                        <a class="me-auto dropdown-toggle white-yellow" href="#" id="productManagementDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <!-- start topbar -->
+            <nav class="navbar navbar-expand bg-charcoal">
+                <div class="container d-flex justify-content-end">
+                    <div class="me-5" id="navbarNavDropdown">
+                        <ul class="navbar-nav">
                             {% if user.is_authenticated %}
-                                Hello {{ user.first_name }}
-                            {% else %}
-                                Hello
-                            {% endif %}
-                        </a>
-                        <ul class="dropdown-menu dropdown-menu-right white-yellow" aria-labelledby="productManagementDropdown">
-                            {% if user.is_authenticated %}
-                                <li>
-                                    <a class="dropdown-item" href="{% url 'my_favorites' %}">My Favorites</a>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item" href="{% url 'my_reviews' %}">My Reviews</a>
-                                </li>
-                                {% if request.user.is_superuser %}
-                                    <li>
-                                        <a class="dropdown-item" href="{% url 'add_product' %}">Manage Products</a>
-                                    </li>
-                                {% endif %}
-                                <li><hr style="width: 100%; background-color: #000080; height: 2px" class="dropdown-divider"></li>
-                                <li>
-                                    <a class="dropdown-item" href="{% url 'change_name' %}">Change Name</a>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item" href="{% url 'account_email' %}">Change Email</a>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item" href="{% url 'account_change_password' %}">Change Password</a>
-                                </li>
-                            {% else %}
-                                <li>
-                                    <a class="dropdown-item" href="{% url 'account_login' %}">Login</a>
-                                </li>
-                            {% endif %}
-                        </ul>
-                    </ul>
-                    <!-- Toggle Button for Account Management -->
-                    <button class="navbar-toggler white-yellow" type="button" data-bs-toggle="collapse" data-bs-target="#collapsingAccountManagement">
-                        <span class="icon"><i class="fas fa-user fa-lg"></i></span>
-                    </button>
-                    <!-- Account Management Links -->
-                    <div class="navbar-collapse collapse w-100" id="collapsingAccountManagement">
-                        <ul class="nav navbar-nav ms-auto w-100 justify-content-end">
-                            {% if user.is_authenticated %}
-                                <li class="nav-item">
-                                    <a class="nav-link white-yellow" href="{% url 'profile' %}">Account</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link white-yellow" href="{% url 'account_logout' %}">Logout</a>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle white-yellow" href="#" id="navbarDropdownMenuLink" role="button"
+                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                        Hello {{ user.first_name }}
+                                    </a>
+                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                        <li><a class="dropdown-item" href="{% url 'profile' %}">Account</a></li>
+                                        <li><hr style="width: 100%; background-color: #000080; height: 2px" class="dropdown-divider"></li>
+                                        <li><a class="dropdown-item" href="{% url 'my_favorites' %}">Favorites</a></li>
+                                        <li><a class="dropdown-item" href="{% url 'my_reviews' %}">Reviews</a></li>
+                                        <li><hr style="width: 100%; background-color: #000080; height: 2px" class="dropdown-divider"></li>
+                                        <li><a class="dropdown-item" href="{% url 'change_name' %}">Change Name</a></li>
+                                        <li><a class="dropdown-item" href="{% url 'account_email' %}">Change Email</a></li>
+                                        <li><a class="dropdown-item" href="{% url 'account_change_password' %}">Change Password</a></li>
+                                        <li><hr style="width: 100%; background-color: #000080; height: 2px" class="dropdown-divider"></li>
+                                        {% if request.user.is_superuser %}
+                                            <li><a class="dropdown-item" href="{% url 'add_product' %}">Manage Products</a></li>
+                                            <li><hr style="width: 100%; background-color: #000080; height: 2px" class="dropdown-divider"></li>
+                                        {% endif %}
+                                        <li><a class="dropdown-item" href="{% url 'account_logout' %}">Logout</a></li>
+                                    </ul>
                                 </li>
                             {% else %}
                                 <li class="nav-item">
-                                    <a class="nav-link white-yellow" href="{% url 'account_login' %}">Login</a>
+                                    <a class="nav-link active white-yellow" href="{% url 'account_signup' %}">Register</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link white-yellow" href="{% url 'account_signup' %}">Register</a>
+                                    <a class="nav-link active white-yellow" href="{% url 'account_login' %}">Login</a>
                                 </li>
                             {% endif %}
                         </ul>
                     </div>
                 </div>
             </nav>
-            <!-- End Topbar -->
-
-            <!-- Start Main Nav -->
-            <section class="container-fluid">
-                <!-- Logo -->
-                <div id="main-header" class="row bg-white pt-lg-2 d-none d-lg-flex">
-                    <div class="col-12 col-lg-4 my-auto py-1 py-lg-0 text-center text-lg-left">
-                        <a href="{% url 'home' %}" class="nav-link main-logo-link">
-                            <h3 class="logo-font text-charcoal my-0">Classic <strong>Confectionery</strong></h3>
+            <!-- end topbar -->
+            <!-- start main nav -->
+            <section class="container-fluid bg-white mt-2 mb-3">
+                <div class="row d-flex align-items-center">
+                    <div class="col d-flex justify-content-center">
+                        <div class="d-none d-sm-none d-md-none d-lg-block d-xl-block d-xxl-block">
+                            <a href="{% url 'home' %}" class="text-decoration-none" aria-label="navigate to the homepage">
+                                <h3 class="logo-font text-center text-charcoal">
+                                    Classic Confectionery
+                                </h3>
+                            </a>
+                        </div>
+                        <div class="d-block d-sm-block d-md-block d-lg-none d-xl-none d-xxl-none">
+                        </div>
+                    </div>
+                    <div class="col text-center">
+                        <!-- display the whole search form above md breakpoint -->
+                        <div class="d-none d-sm-none d-md-none d-lg-block d-xl-block d-xxl-block">
+                            <form method="GET" action="{% url 'products' %}">
+                                <div class="input-group w-100">
+                                    <input class="form-control border border-charcoal rounded-0" type="text" name="q"
+                                        placeholder="SEARCH OUR SWEETS">
+                                    <div class="input-group-append">
+                                        <button class="form-control btn btn-black border border-black rounded-0"
+                                            type="submit" aria-label="preform search">
+                                            <span class="icon charcoal-navy">
+                                                <i class="fas fa-search fa-lg"></i>
+                                            </span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <!-- display search form as a dropdown below md breakpoint -->
+                        <div class="d-block d-sm-block d-md-block d-lg-none d-xl-none d-xxl-none">
+                            {% include 'includes/mobile_search_form.html' %}
+                        </div>
+                    </div>
+                    <div class="col d-flex justify-content-center">
+                        <a href="{% url 'view_cart' %}" class="text-decoration-none" aria-label="navigate to the shopping cart">
+                            <div class="icon charcoal-navy"><i class="fa-solid fa-cart-shopping fa-xl"></i></div>
                         </a>
                     </div>
-                    <!-- Product Search Form -->
-                    <div class="col-12 col-lg-4 my-auto py-1 py-lg-0 text-center text-lg-left">
-                        <form method="GET" action="{% url 'products' %}">
-                            <div class="input-group w-100">
-                                <input class="form-control border border-charcoal rounded-0" type="text" name="q"
-                                    placeholder="SEARCH OUR SWEETS">
-                                <div class="input-group-append">
-                                    <button class="form-control btn btn-black border border-black rounded-0"
-                                        type="submit" aria-label="preform search">
-                                        <span class="icon charcoal-navy">
-                                            <i class="fas fa-search fa-lg"></i>
-                                        </span>
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                    <!-- Shopping Cart Link -->
-                    <div class="col-12 col-lg-4 my-auto py-1 py-lg-0 text-center text-lg-left">
-                        <ul class="list-inline list-unstyled text-center text-lg-right my-0">
-                            <li class="list-inline-item">
-                                <a class="charcoal-navy nav-link" href="{% url 'view_cart' %}" aria-label="navigate to the shopping cart">
-                                    <div class="text-center">
-                                        <div class="icon"><i class="fa-solid fa-cart-shopping fa-lg"></i></div>
-                                    </div>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
                 </div>
-                <div class="row bg-white">
-                    <!-- Toggle Buttons for Search and Main Nav, plus include html files -->
-                    <nav class="navbar navbar-expand-lg navbar-light w-100">
-                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#main-nav" aria-label="collapses the main nav bar">
-                            <span class="navbar-toggler-icon"></span>
-                        </button>
-                        {% include 'includes/mobile-top-header.html' %}
-                        {% include 'includes/main-nav.html' %}
-                    </nav>
+                <div class="row mt-3 d-none d-sm-none d-md-none d-lg-block d-xl-block d-xxl-block">
+                    <div class="col d-flex justify-content-evenly flex-row">
+                        {% include 'includes/sweets_by_price.html' %}
+                        {% include 'includes/sweets_by_type.html' %}
+                        {% include 'includes/sweets_by_year.html' %}
+                    </div>
                 </div>
             </section>
-            <!-- End Main Nav -->
+            <!-- end main nav -->
         </header>
         <!-- End Header Section -->
 

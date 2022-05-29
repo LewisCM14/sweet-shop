@@ -47,3 +47,7 @@ def deliver_info(request):
 def about_us(request):
     """ Renders the about_us.html template in the browser """
     return render(request, 'home/about_us.html')
+
+def test(request):
+    """ Renders the about_us.html template in the browser """
+    return render(request, 'home/test.html')

@@ -52,11 +52,11 @@ body {
 
 .white-yellow {
     text-decoration: none;
-    color: #FFFFFF;
+    color: #FFFFFF !important;
     }
     .white-yellow:hover {
         text-decoration: none;
-        color: #F5E532;
+        color: #F5E532 !important;
     } /* text color & hover styling, used to contrast bg-charcoal */
 
 .charcoal-navy {

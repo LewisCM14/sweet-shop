@@ -1,0 +1,10 @@
+<div class="dropdown">
+    <button class="logo-font blank-btn font-weight-bold charcoal-navy mr-5" type="button" id="sweet-year-link" data-bs-toggle="dropdown" aria-expanded="false">
+        Sweets By Year
+    </button>
+    <ul class="dropdown-menu border-0" aria-labelledby="sweet-year-link">
+      <li><a href="{% url 'products' %}?year=80" class="dropdown-item">80s Sweets</a></li>
+      <li><a href="{% url 'products' %}?year=90" class="dropdown-item">90s Sweets</a></li>
+      <li><a href="{% url 'products' %}?year=00" class="dropdown-item">00s Sweets</a></li>
+    </ul>
+</div>

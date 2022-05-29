@@ -1,0 +1,9 @@
+<div class="dropdown">
+    <button class="logo-font blank-btn font-weight-bold charcoal-navy mr-5" type="button" id="all-products-link" data-bs-toggle="dropdown" aria-expanded="false">
+        All Products
+    </button>
+    <ul class="dropdown-menu border-0" aria-labelledby="all-products-link">
+      <li><a href="{% url 'products' %}" class="dropdown-item">All Products</a></li>
+      <li><a href="{% url 'products' %}?sort=price&direction=asc" class="dropdown-item">By Price</a></li>
+    </ul>
+</div>
