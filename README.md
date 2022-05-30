@@ -170,9 +170,15 @@ ___
 
 * Strategy
 
+    Having identified the sites target audience as millennials (people born between 1981-1996) and their children, in conjunction with Classic Confectionery being a company in it's infancy unable to currently provide a budget for marketing strategy, the primary methods of web marketing are organic social media marketing, coupled with email marketing and search engine optimization. With a mid term strategy of moving onto influencer marketing when the budget permits, the vibrant colors of sweets and there packaging lends itself greatly to being marketed on Instagram by influencers.
+
 * Newsletter
 
-* Facebook Business 
+    Newsletter sign-ups are an industry standard for marketing and competing sweet retailers seem to rely heavily on it in their marketing strategies. However, being easy and more importantly, free to setup and maintain Classic Confectionery has also decided to use it in their strategy. Opting to use the MailChip platform. From here the intention is to send out a monthly newsletter around the payday period which includes information on sales and discounts as well as coupons. This relatively low frequency of marketing emails is intended to sustain an audience by allowing Classic Confectionery emails to not be considered as span and also capitalize on the 'payday treat' mentality of the target audience. 
+
+* Facebook Business
+
+    Due to the target audience being labelled as the internet or global generation i felt social media marketing was a great fit for growing a consistent client based and would translate directly to the company's long term goal of being able to sell products on online takeaway platforms like Uber Eats & Just Eat. In order to achieve this Classic Confectionery has setup a Facebook business page, allowing them to develop a good reputation and be identifiable as a reputable business amongst their target audience. When assessing competing sweet retailers none seem to be utilizing social media marketing with the intention of bridging onto online takeaway platforms. Their target audience doesn't appear to be the millennial age range either, choosing to focus on the older generations by retailing 'retro' sweets or the extremely young generation and retailing 'american candy'. I feel these two factors prevent a market niche that marketing sweets to millennials via social media can capitalize on.
 
 [Return to Table of Contents](#contents)
 ___
