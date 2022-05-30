@@ -9,7 +9,6 @@ from .models import UserProfile
 from .profile_form import UserProfileForm, NameChange
 
 
-# pylint: disable=redefined-outer-name
 @login_required
 def profile(request):
     """
@@ -38,7 +37,9 @@ def profile(request):
             form.save()
             messages.success(request, 'Profile updated successfully')
         else:
-            messages.error(request, 'Update failed. Please ensure the form is valid.')  # noqa: E501
+            messages.error(
+                request, 'Update failed. Please ensure the form is valid.'
+            )
     else:  # return the form data back to the view if form not valid
         form = UserProfileForm(instance=profile)
 
@@ -77,7 +78,9 @@ def change_name(request):
             messages.success(request, 'Name updated successfully')
             user.save()
         else:
-            messages.error(request, 'Update failed. Please ensure the form is valid.')  # noqa: E501
+            messages.error(
+                request, 'Update failed. Please ensure the form is valid.'
+            )
     else:  # return the form data back to the view if form not valid
         form = NameChange()
 
