@@ -338,6 +338,17 @@ ___
 
 ### Unfixed Bugs <a name ='bugs'></a>
 
+* When using the website with the console open, depending on your settings, an error relating to source map not loading content may be displayed. This is an error relating to the Chrome browser and DevTools, in order to fix it Javascript and CSS source maps must be disabled. More information on how to do this can be found [here](https://stackoverflow.com/questions/61339968/error-message-devtools-failed-to-load-sourcemap-could-not-load-content-for-chr).
+
+* Another issue highlighted in the console is one relating to an 'uncaught promise', which is temporarily raised upon every click, this also appears to be due to the Chrome browser and DevTools, whilst fixes have been detailed online, due to this error causing no evident problems i chose to leave it exposed currently. This issue does not appear when viewing the site on the Brave browser with their DevTools console open.
+
+    ![image of the console error regarding uncaught promise above](media/console_error.png)
+
+* The final issue i found highlighted in the console of Chrome's DevTools is one relating to the Stripe JS and google fonts, again this issue is only highlighted on the Chrome browser. Upon initial opening of the DevTools console an error relating to the 'refusal of loading a stylesheet' for the Lato font family for use on the Stipe JS is raised, once the page is refreshed with the console open this issue disappears, and does't re-appear again whilst navigating the site with the console open. Due to the Stipe API and webhook requests succeeding on the projects account dashboard and everything displaying as intended it appears this issue is due to the Chrome browser again so at this point i have chosen not to address it.
+
+    ![image of the console error regarding lato above](media/lato_error.png)
+
+
 [Return to Table of Contents](#contents)
 ___
 
