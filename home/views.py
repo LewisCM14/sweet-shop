@@ -12,12 +12,12 @@ def index(request):
     returning the results to to context for use in display
     """
     products = Product.objects.all()
-    sour = Product.objects.filter(type=1)
-    fizzy = Product.objects.filter(type=2)
-    chocolate = Product.objects.filter(type=3)
-    chewy = Product.objects.filter(type=4)
-    sherbet = Product.objects.filter(type=5)
-    jellies_gums = Product.objects.filter(type=6)
+    sour = Product.objects.filter(type=6)
+    fizzy = Product.objects.filter(type=5)
+    chocolate = Product.objects.filter(type=4)
+    chewy = Product.objects.filter(type=3)
+    sherbet = Product.objects.filter(type=2)
+    jellies_gums = Product.objects.filter(type=1)
 
     template = 'home/index.html'
 
