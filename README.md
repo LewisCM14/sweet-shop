@@ -310,7 +310,7 @@ ___
         
         *The Heroku app is now using a Postgres database, from within the settings tab on the Heroku app the config vars now has a DATABASE_URL variable set.*
 
-        3: At this point, using the psycopg2-binary and dj_database_url packages preform a migration to the Postgres database from within the IDE. Within the settings.py file, comment out the existing database definition and replace it with the code below, ensuring once the migrations have been completed the settings file is reverted back before any commits are made.
+        3: At this point, using the psycopg2-binary and dj_database_url packages preform a migration to the Postgres database from within the IDE. Within the settings.py file, import dj_database_rul, comment out the existing database definition and replace it with the code below, ensuring once the migrations have been completed the settings file is reverted back before any commits are made.
 
             DATABASES = {
                 'default': dj_database_url.parse('The DATABASE_URL String from within the config vars on the Heroku app')
@@ -331,7 +331,7 @@ ___
     
     * STAGE FOUR - Update the settings.py file
 
-        1: Import dj_database_url and env.py into the settings.py file for the project.
+        1: Import env.py into the settings.py file for the project.
             
             import os
             import dj_database_url
@@ -415,7 +415,8 @@ ___
         1: Within the projects settings.py file, at the static file's definition for the project add the below code.
 
             STATIC_URL = '/static/'
-            STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
+            STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'), )
+            STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
             MEDIA_URL = '/media/'
             MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
@@ -458,13 +459,26 @@ ___
 
     * STAGE EIGHT - Link Deployed Project to Stripe
 
+        *It is assumed at this point a Stripe account has already been setup correctly*
+
         1: Add the below variables to the Heroku apps config vars with the corresponding string from the Stripe dashboard.
 
-            STRIPE_PUBLIC_KEY
-            STRIPE_SECRET_KEY
-            STRIPE_WH_SECRET
+            STRIPE_PUBLIC_KEY = 'some string'
+            STRIPE_SECRET_KEY = 'some string'
         
-        2: FINISH LATER
+        2: From within the Developers Dashboard on Stripe, setup a webhook end point which points to the hosted projects webhook URL. From here collect the singing secret and update the config vars on the Heroku app to include it.
+
+            STRIPE_WH_SECRET = 'some string'
+        
+        3: From here, update the setting.py file to include the below code in order to configure the site to use Stripe as the secure payment method. The free delivery threshold and currency variables are specific to this project and can be altered accordingly.
+
+            FREE_DELIVERY_THRESHOLD = 50
+            STRIPE_PUBLIC_KEY = os.environ.get('STRIPE_PUBLIC_KEY', '')
+            STRIPE_SECRET_KEY = os.environ.get('STRIPE_SECRET_KEY', '')
+            STRIPE_WH_SECRET = os.environ.get('STRIPE_WH_SECRET', '')
+            STRIPE_CURRENCY = 'gbp'
+
+        *The project now uses Stripe as its payment provider.*
     
     ---
     
