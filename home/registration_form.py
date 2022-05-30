@@ -18,15 +18,20 @@ class CustomSignupForm(SignupForm):
         the required fields, allowing for the field_order method to be set
         """
         model = User
-        fields = ('first_name', 'last_name', 'email', 'email2', 'password1', 'password2',)  # noqa: E501
+        fields = (
+            'first_name', 'last_name', 'email', 'email2', 'password1',
+            'password2',
+        )
 
-    field_order = ['first_name', 'last_name', 'email', 'email2', 'password1', 'password2', ]  # noqa: E501
+    field_order = [
+        'first_name', 'last_name', 'email', 'email2', 'password1', 'password2',
+    ]
 
     first_name = forms.CharField(
         label='First Name',
         max_length=30,
         required=True,
-        widget=forms.TextInput(attrs={'placeholder': 'Forname'})
+        widget=forms.TextInput(attrs={'placeholder': 'Forename'})
     )
 
     last_name = forms.CharField(
