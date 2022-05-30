@@ -758,6 +758,12 @@ ___
     
     * **[WebAIM Contrast Checker](https://webaim.org/resources/contrastchecker/).**
         * Used to ensure my color pallet met WCAG AAA accessibility guidelines.
+    
+    * **[XML Sitemaps](https://www.xml-sitemaps.com/).**
+        * Used to generate the site map for the deployed project.
+    
+    * **[PrivacyPolicyGenerator](https://www.privacypolicygenerator.info/).**
+        * Used to generate the privacy policy for the deployed project.
 
 - **Payment Processor** <a name='payment'></a>
 

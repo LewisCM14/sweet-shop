@@ -56,3 +56,15 @@ class TestView(TestCase):
         response = self.client.get('/about_us/')
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, ('home/about_us.html'))
+
+    def test_get_privacy_policy_page(self):
+        """
+        Tests the privacy page renders.
+
+        Uses Django's in-built HTTP client to get the privacy page URL.
+        Asserts equal to status code 200, a successful HTTP response.
+        Then asserts the correct template is used.
+        """
+        response = self.client.get('/privacy_policy/')
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, ('home/privacy_policy.html'))
