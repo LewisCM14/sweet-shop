@@ -148,9 +148,19 @@ ___
 
 - **Imagery** <a name='imagery'></a>
 
+    * As the main site components use a refined color pallet, i chose to use bright and colorful imagery in key areas across the site, attempting to capture the massive spectrum of colors used in the variety of sweets available. I particularly focused on imagery of pick & mix stands to appeal to a users inner child and bring back those memories of being a kid in a candy store. In terms of highlighting the products themselves, a clear single image set on a plain background has been used for each, as i felt the products essentially spoke for themselves.
+
+    * Within the checkout/profiles functionality a users current order and order history have been developed to appear like a receipt and packaging label respectfully. This is done deliberately as i felt this way of presenting the information would be familiar to users and easy to understand. A similar approach has been taken with the 'Favorites' functionality on items, with an heart icon being used that displays dynamically dependant on status and is reflective of the twitters favorites functionality, with the intention that it's use would be intuitive for users. 
+
 
 - **Layout** <a name='layout'></a>
 
+    * The app is built using a fully responsive multi-page layout, with a dynamic navigation bar and footer used across all pages, inviting the user to explore the stores selection of sweets at every possible opportunity. Within the footer key business details are presented as well as links to external sources related to the company and health related charities relevant to high sugar intake. 
+    
+    * Bootstrap toasts have also been utilized to highlight user actions and provide feedback on key functions. Aside from the core web app, email backend also provides user feedback on account authorization/update actions as well as successful orders and inquiries. With 404 & 500 errors being handled gracefully and in keeping with the websites theme. 
+    
+    * Particular attention has been paid to accessibility in the form of breadcrumbs and aria-labels aside from semantic html and contrasting colors. However there remains some areas for improvement in terms of the size of clickable links on mobile devices, i've chosen not to address this currently as the lighthouse scores remain at 90% across all pages regardless and i don't want to compromise the fully responsive layout i have developed for the site. The sequentially-descending order of heading elements on some pages also poses a risk to users navigating the site with assistive technologies, however, it only relates to the category headings for the stores products and i felt the potential benefits for search engine optimization outweigh those risks.
+    
 
 [Return to Table of Contents](#contents)
 ___
