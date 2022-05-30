@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: /accounts/
+Disallow: /cart/
+Sitemap: https://sweet-shop-lewiscm.herokuapp.com/sitemap.xml

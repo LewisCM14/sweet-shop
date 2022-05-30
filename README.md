@@ -183,9 +183,27 @@ ___
 [Return to Table of Contents](#contents)
 ___
 
-### SEO <a name='seo'></a>
+### Search Engine Optimization <a name='seo'></a>
 
-* Keywords
+**Keywords**
+
+Initial keyword development focused on three key areas: "Retro Sweets", "Sweet Gift Hamper's" and "Bulk Buy Sweets". From within these areas i managed to come up with around fifty short and long tailed key words. The process to filter these down by performing google searches highlighted that gift hampers and retro sweets is a heavily contested area for sweet retailers. However, company's appear to target their retro sweets at generations that grew up before the internet was big, due to this the decision was made to double down on targeting millennials specifically. Focus was also then placed more on marketing the sweets specifically, than marketing them for occasions. These two decisions lead to the below list of keywords. Although keywords surrounding value for money, sales and free delivery are heavily contested, the relevance these give against the less contested words should lead to the Classic Confectionary website being an authority in sweet retail. 
+
+        classic, confectionery, sweets, chewy, chocolate, fizzy, jellies, jelly, gums, gummy, sherbet, sour, 80s, 90s, 00s, sweet sales and promotions, sweets for millennials, candy, sweets for any occasion, assorted sweets, free delivery, tracked, deliver, UK, value for money.
+
+**Content**
+
+* Sweet Categories & Years
+
+    Due to the intention being that the sweets themselves are the focus and not the occasion they are brought for, navigation links to all the types of sweets offered, as well as sections that display what sweets where popular during time periods specific to millennials can be found in various places, consistently across the site. The goal here is to encourage users to navigate across the extent of the product range like a 'kid in a candy store' whilst allowing for keywords to be placed into the flow of the DOM and not stuffed.
+
+* FAQ, Delivery Information & About Us
+
+    These pages, which can be found in the footer, are used to display information regarding the company and the way they conduct business in a clear and concise manner. Providing key opportunities to make use of article element and other semantic HTML that utilizes the chosen keywords, all adding to the search engine optimization of the site as a whole. The footer also seizes on the opportunity to link to two external sites relating to charities dealing with issues related to high sugar intake.
+
+* Sitemap & robots.txt
+
+    A site map for the deployed project, which conveys the structure of the site to the search engine, has been created and saved at the root level, from here a robots.txt file points to it, with urls for accounts & cart disallowed as these offer no search engine optimization.
 
 [Return to Table of Contents](#contents)
 ___
