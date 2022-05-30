@@ -43,6 +43,7 @@ ___
     * [Version Control](#version)
     * [Libraries, Packages & Applications](#lib)
     * [Programs](#program)
+    * [Payment Processor](#payment)
 * [Credits](#credits)
     * [Content](#concred)
     * [Media](#media)
@@ -554,9 +555,6 @@ ___
     * **[Bootstrap](https://getbootstrap.com/).**
         * A front-end open source toolkit, used across the application.
     
-    * **[Font Awesome](https://fontawesome.com/).**
-        * The [font awesome free](https://pypi.org/project/fontawesomefree/) kit is used for icons across the site.
-
 - **DBMS** <a name='dbsm'></a>
     
     * **[PostgreSQL](https://www.postgresql.org/).**
@@ -638,7 +636,12 @@ ___
     
     * **[WebAIM Contrast Checker](https://webaim.org/resources/contrastchecker/).**
         * Used to ensure my color pallet met WCAG AAA accessibility guidelines.
-       
+
+- **Payment Processor** <a name='payment'></a>
+
+    * **[Stripe](https://stripe.com/gb)**
+        * The secure payment provider used to handle business operations.
+
 [Return to Table of Contents](#contents)
 ___
 ## Credits <a name = 'credits'></a> 
