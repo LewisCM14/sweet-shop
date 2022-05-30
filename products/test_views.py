@@ -9,7 +9,6 @@ from .models import Type, Product
 from .product_form import ProductForm
 
 
-# pylint: disable=no-member
 class TestProductViews(TestCase):
     """
     Contains the tests for the views located in the product app in views.py.
@@ -111,7 +110,9 @@ class TestProductViews(TestCase):
 
         messages = list(get_messages(response.wsgi_request))
         self.assertEqual(len(messages), 1)
-        self.assertEqual(str(messages[0]), "You didn't enter any search criteria!")  # noqa: E501
+        self.assertEqual(
+            str(messages[0]), "You didn't enter any search criteria!"
+        )
 
         self.assertRedirects(response, '/products/')
 
@@ -204,7 +205,6 @@ class TestProductViews(TestCase):
         self.assertEqual(response.status_code, 200)
 
 
-# pylint: disable=no-member
 class TestProductManagement(TestCase):
     """
     Contains the tests for the views located in the product app in views.py.
@@ -369,7 +369,9 @@ class TestProductManagement(TestCase):
         response = self.client.get('/products/edit/1/')
 
         self.assertEqual(response.status_code, 302)
-        self.assertRedirects(response, '/accounts/login/?next=/products/edit/1/')  # noqa: E501
+        self.assertRedirects(
+            response, '/accounts/login/?next=/products/edit/1/'
+        )
 
     def test_edit_product_view_updates_object_in_database(self):
         """
@@ -456,7 +458,9 @@ class TestProductManagement(TestCase):
         response = self.client.get('/products/delete/1/')
 
         self.assertEqual(response.status_code, 302)
-        self.assertRedirects(response, '/accounts/login/?next=/products/delete/1/')  # noqa: E501
+        self.assertRedirects(
+            response, '/accounts/login/?next=/products/delete/1/'
+        )
 
     def test_delete_product_view_removes_object_from_database(self):
         """

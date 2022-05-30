@@ -21,13 +21,11 @@ class TestModel(TestCase):
         returns the name value of the instance, which is sour_sweets.
         """
 
-        # pylint: disable=no-member
         Type.objects.create(
             name='sour_sweets',
             friendly_name='Sour Sweets',
         )
 
-        # pylint: disable=no-member
         sour = Type.objects.get(id=1)
         self.assertEqual(str(sour), 'sour_sweets')
 
@@ -42,13 +40,11 @@ class TestModel(TestCase):
         the result returned is the instances friendly_name value.
         In this case Sour Sweets
         """
-        # pylint: disable=no-member
         Type.objects.create(
             name='sour_sweets',
             friendly_name='Sour Sweets',
         )
 
-        # pylint: disable=no-member
         sour = Type.objects.get(id=1)
         self.assertEqual(Type.get_friendly_name(sour), 'Sour Sweets')
 
@@ -64,13 +60,11 @@ class TestModel(TestCase):
         returns the name value of the instance, which is Toxic Waste.
         """
 
-        # pylint: disable=no-member
         sour = Type.objects.create(
             name='sour_sweets',
             friendly_name='Sour Sweets',
         )
 
-        # pylint: disable=no-member
         Product.objects.create(
             type=sour,
             name='Toxic Waste',
@@ -82,6 +76,5 @@ class TestModel(TestCase):
             price='4.99',
         )
 
-        # pylint: disable=no-member
         toxic = Product.objects.get(id=1)
         self.assertEqual(str(toxic), 'Toxic Waste')
