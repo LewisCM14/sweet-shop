@@ -5,7 +5,6 @@ from django.contrib.auth.models import User
 from .models import Inquiry
 
 
-# pylint: disable=no-member
 class TestModel(TestCase):
     """
     Contains the tests for the Inquiry model.

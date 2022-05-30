@@ -28,7 +28,8 @@ class ContactForm(forms.ModelForm):
     phone_number = forms.CharField(
         label='Phone Number',
         required=True,
-        widget=forms.TextInput(attrs={'placeholder': 'Preferred contact number'}),  # noqa: E501
+        widget=forms.TextInput(
+            attrs={'placeholder': 'Preferred contact number'}),
     )
 
     subject = forms.CharField(
