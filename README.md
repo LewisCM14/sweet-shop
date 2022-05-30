@@ -32,6 +32,7 @@ ___
 * [Unfixed Bugs](#bugs)
 * [Deployment](#deployment)
 * [Create a Clone](#clone)
+* [Run Locally](#locally)
 * [Technologies Used](#tech)
     * [Languages Used](#lang)
     * [Frameworks & Toolkits](#frametool)
@@ -132,6 +133,7 @@ ___
 
 [Return to Table of Contents](#contents)
 ___
+
 ### Design <a name='design'></a>
 
 - **Color Scheme** <a name='colorscheme'></a>
@@ -161,7 +163,6 @@ ___
     
     * Particular attention has been paid to accessibility in the form of breadcrumbs and aria-labels aside from semantic html and contrasting colors. However there remains some areas for improvement in terms of the size of clickable links on mobile devices, i've chosen not to address this currently as the lighthouse scores remain at 90% across all pages regardless and i don't want to compromise the fully responsive layout i have developed for the site. The sequentially-descending order of heading elements on some pages also poses a risk to users navigating the site with assistive technologies, however, it only relates to the category headings for the stores products and i felt the potential benefits for search engine optimization outweigh those risks.
     
-
 [Return to Table of Contents](#contents)
 ___
 
@@ -182,6 +183,7 @@ ___
 
 [Return to Table of Contents](#contents)
 ___
+
 ### Development <a name='development'></a>
 
 *The project was developed using an agile methodology, with epics broken down into user stories with well defined acceptance criteria, tasks and wireframes. These issues where then worked on in incremental steps. The sprint times for my iterations was two weeks. The story points applied to my issues follow the fibonacci scale, with the 'Must Have' issues for each iteration kept at 60% of the total time box.*
@@ -207,17 +209,22 @@ ___
     * The Iteration 4 milestone can be found [here](https://github.com/LewisCM14/sweet-shop/milestone/5?closed=1)
     * Iteration 4 board can be found here [here](https://github.com/LewisCM14/sweet-shop/projects/4)
 
+
 [Return to Table of Contents](#contents)
 ___
 
 ### Database Schema <a name='database'></a>
 
-[Return to Table of Contents](#contents)
-___
-### Existing Features <a name='existingfeatures'></a>
 
 [Return to Table of Contents](#contents)
 ___
+
+### Existing Features <a name='existingfeatures'></a>
+
+
+[Return to Table of Contents](#contents)
+___
+
 ### Future Features <a name ='toimplement'></a>
 
 * Make a global variable that holds each type, so the templates can have their code abstracted, meaning as the site owner adds other types, they are reflected in the application. Preventing them needing to be 'hard' coded in.
@@ -226,6 +233,7 @@ ___
 
 [Return to Table of Contents](#contents)
 ___
+
 ### Testing <a name ='testing'></a> 
 
 - **Bugs found in Development** <a name='developmentbugs'></a>
@@ -287,12 +295,15 @@ ___
     
     * Outside of devtools i have ran the site on several browsers including: Brave, Chrome, Firefox and Edge. It appears to function as intended on these browsers. I have also ran it on my own personal pc, laptop and iphone, preforming as intended on each.
 
+
 [Return to Table of Contents](#contents)
 ___
+
 ### Unfixed Bugs <a name ='bugs'></a>
 
 [Return to Table of Contents](#contents)
 ___
+
 ### Deployment <a name ='deployment'></a>
 
 - The site is deployed via [Heroku](https://heroku.com/). The steps to deploy are as follows:
@@ -522,10 +533,11 @@ ___
         **Be aware, from this point onwards, all changes made to the database in development will have to be migrated to the deployed database separately in order to take effect. This can be done by changing the DATABASES dictionary in the settings.py file to point directly at the heroku database, as done in stage 2, DO NOT commit to GitHub with this setting saved.**
 
     ---
+
 [Return to Table of Contents](#contents)
 ___
 
-## Create a Local Clone <a name ='clone'></a>
+### Create a Local Clone <a name ='clone'></a>
 
 - Follow the steps below in order to create a local clone using HTTPS.
 
@@ -544,10 +556,35 @@ ___
     * STEP SIX - Press Enter to create your local clone.
 
     *If GitPod is your chosen IDE from the link above the Gitpod button can be clicked to open up the repository code on your local machine* 
+    
+    ---
 
 [Return to Table of Contents](#contents)
 ___
-## Technologies Used <a name ='tech'></a>
+
+### Deploy Locally <a name ='locally'></a>
+
+- Follow the steps below in order to run the app locally.
+
+    * Create a env.py file at the root level.
+
+    * Within this file add the below variables, if you wish to test the payment functionality locally a Stripe account with corresponding webhook will need to be setup and valid API keys set for the below variables.
+
+        os.environ["SECRET_KEY"] = "some string"
+        os.environ['STRIPE_PUBLIC_KEY'] "some string"
+        os.environ['STRIPE_SECRET_KEY'] "some string"
+        os.environ['STRIPE_WH_SECRET'] "some string"
+
+    * Within the GitPod workspaces settings tab. Set the 'DEVELOPMENT' variable as True for the local workspace. This will turn 'DEBUG' on and ensure the project uses the local sqlite database with static and media files hosted locally, as well as returning emails to the console.
+
+    * From here the project will run locally with the below command. Please be aware Products will have to be added manually through the admin panel or manage products tab to explore the complete functionality of the site at this point, which will require a superuser.
+
+        python3 manage.py runserver
+
+[Return to Table of Contents](#contents)
+___
+
+### Technologies Used <a name ='tech'></a>
 
 - **Languages Used** <a name='lang'></a>
 
@@ -654,7 +691,7 @@ ___
 
 [Return to Table of Contents](#contents)
 ___
-## Credits <a name = 'credits'></a> 
+### Credits <a name = 'credits'></a> 
 
 * A special thank you to my mentor Rohit Sharma. 
 
