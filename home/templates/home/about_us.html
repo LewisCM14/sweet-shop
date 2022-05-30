@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block page_header %}
+    <div class="container header-container">
+        <div class="row">
+            <div class="col">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">About Us</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <section class="container mb-4">
+        <div class="mb-2">
+            <span class="h4 text-uppercase">About Us</span>
+        </div>
+        <div class="row">
+            <div class="col-lg-6 col-md-12 about-us-img"></div>
+            <div class="col-lg-6 col-md-12">
+                <article>
+                    <span class="d-flex justify-content-center logo-font h5">Classic Confectionery</span>
+                    <p>
+                        A newly established, online sweet company founded in 2020 by Augustine Evanson. With a mission to serve
+                        customers their <strong>favorite childhood sweets.</strong> In the wake of the 2019 pandemic Augustine wanted to start a
+                        business that could be insulated from a new, ever changing, climate, whilst also wanting to bring
+                        comfort back into the lives of people. Thus, <strong>Classic Confectionary</strong> was born.
+                    </p>
+                    <p>
+                        Catering to Millennials and for some of the early ones, now their children as well, we strive to stock
+                        <strong>childhood favorites</strong> of the highest quality. At great <strong>value for money.</strong> All packaged in sustainable
+                        material, with <strong>tracked, free delivery available on orders.</strong>
+                    </p>
+                    <p>
+                        <strong>Classic Confectionary</strong> now finds itself in a dedicated warehouse and packing facility with a team of
+                        enthusiastic individuals. Being of the 'internet generation' we're aware that the Woolworths pick & mix
+                        section is no longer the place to go for a sweet treat (This setup definitely would't fly in the new
+                        socially distanced era). Everything is online now and delivered almost instantly and our aim is to bring
+                        those sweet treats to your door whilst protecting customers data and adhering to the highest hygiene
+                        standards and we're proud to make that happen!
+                    </p>
+                    <p>
+                        Being a relatively new business, our range of products is rapidly changing and always expanding, be sure
+                        to follow our socials and subscribe to the newsletter below to keep in the loop and be a part of our
+                        <strong>sweet sales and promotions.</strong>
+                        <br>
+                        <br>
+                        <span class="fw-700">All the best,</span>
+                        <br>
+                        <br>
+                        <span class="d-flex justify-content-end"><strong>The Classic Confectionary Team.</strong></span>
+                    </p>
+                </article>
+            </div>
+        </div>
+    </section>
+{% endblock %}

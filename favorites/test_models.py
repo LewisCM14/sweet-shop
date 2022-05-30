@@ -8,7 +8,6 @@ from products.models import Type, Product
 from .models import Favorites
 
 
-# pylint: disable=no-member
 class TestModel(TestCase):
     """
     Contains the tests for the Favorite model.

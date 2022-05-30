@@ -9,7 +9,6 @@ from .models import Type, Product
 from .product_form import ProductForm
 
 
-# pylint: disable=no-member
 class TestProductViews(TestCase):
     """
     Contains the tests for the views located in the product app in views.py.
@@ -111,7 +110,9 @@ class TestProductViews(TestCase):
 
         messages = list(get_messages(response.wsgi_request))
         self.assertEqual(len(messages), 1)
-        self.assertEqual(str(messages[0]), "You didn't enter any search criteria!")  # noqa: E501
+        self.assertEqual(
+            str(messages[0]), "You didn't enter any search criteria!"
+        )
 
         self.assertRedirects(response, '/products/')
 
@@ -204,7 +205,6 @@ class TestProductViews(TestCase):
         self.assertEqual(response.status_code, 200)
 
 
-# pylint: disable=no-member
 class TestProductManagement(TestCase):
     """
     Contains the tests for the views located in the product app in views.py.
@@ -213,8 +213,8 @@ class TestProductManagement(TestCase):
 
     def setUp(self):
         """
-        Initiates the Type & Product database;s with a single object.
-        Creates a test user with admin privileges.
+        Initiates the Type & Product database with a single object.
+        Creates a test user with admin privileges and a standard user.
         """
 
         sour = Type.objects.create(
@@ -238,6 +238,14 @@ class TestProductManagement(TestCase):
             first_name='John',
             last_name='Doe',
             email='johndoe@email.com',
+            password='password',
+        )
+
+        User.objects.create_user(
+            username='janedoe',
+            first_name='Jane',
+            last_name='Doe',
+            email='janedoe@email.com',
             password='password',
         )
 
@@ -361,7 +369,9 @@ class TestProductManagement(TestCase):
         response = self.client.get('/products/edit/1/')
 
         self.assertEqual(response.status_code, 302)
-        self.assertRedirects(response, '/accounts/login/?next=/products/edit/1/')  # noqa: E501
+        self.assertRedirects(
+            response, '/accounts/login/?next=/products/edit/1/'
+        )
 
     def test_edit_product_view_updates_object_in_database(self):
         """
@@ -448,7 +458,9 @@ class TestProductManagement(TestCase):
         response = self.client.get('/products/delete/1/')
 
         self.assertEqual(response.status_code, 302)
-        self.assertRedirects(response, '/accounts/login/?next=/products/delete/1/')  # noqa: E501
+        self.assertRedirects(
+            response, '/accounts/login/?next=/products/delete/1/'
+        )
 
     def test_delete_product_view_removes_object_from_database(self):
         """
@@ -481,3 +493,72 @@ class TestProductManagement(TestCase):
 
         products = Product.objects.all()
         self.assertEqual(len(products), 0)
+
+    def test_non_superusers_cant_delete_products(self):
+        """
+        A test to ensure authorized users cannot delete product.
+
+        Logs into the standard user created in the setUp method,
+        before collecting the Product database, asserting the length of
+        it is equal to 1.
+
+        Then passes this product to the delete product URL, stored in
+        the response. Asserts the correct user feedback message is returned
+        as well as a 302 status code, which redirects to the home page URL.
+
+        The Product database is then collected again and ensured it still
+        has a length of 1, meaning the product hasn't been deleted
+        """
+
+        self.client.login(
+            email='janedoe@email.com',
+            password='password',
+        )
+
+        products = Product.objects.all()
+        self.assertEqual(len(products), 1)
+
+        response = self.client.get('/products/delete/1/')
+
+        messages = list(get_messages(response.wsgi_request))
+        self.assertEqual(len(messages), 1)
+        self.assertEqual(
+            str(messages[0]),
+            'Sorry, only store owners can do that.'
+        )
+
+        self.assertEqual(response.status_code, 302)
+        self.assertRedirects(response, reverse('home'))
+
+        products = Product.objects.all()
+        self.assertEqual(len(products), 1)
+
+    def test_non_superusers_cant_edit_products(self):
+        """
+        A test to ensure authorized users cannot access the edit products
+        view.
+
+        Logs into the standard user created in the setUp method,
+
+        Then passes the product created in the setUp method to the
+        edit product URL, stored in the response. Asserts the correct user
+        feedback message is returned as well as a 302 status code,
+        which redirects to the home page URL.
+        """
+
+        self.client.login(
+            email='janedoe@email.com',
+            password='password',
+        )
+
+        response = self.client.get('/products/edit/1/')
+
+        messages = list(get_messages(response.wsgi_request))
+        self.assertEqual(len(messages), 1)
+        self.assertEqual(
+            str(messages[0]),
+            'Sorry, only store owners can do that.'
+        )
+
+        self.assertEqual(response.status_code, 302)
+        self.assertRedirects(response, reverse('home'))

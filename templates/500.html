@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block page_header %}
+<div class="container header-container">
+    <div class="row">
+        <div class="col">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">500</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block content %}
+
+<div class="container mb-4">
+    <span class="h4 text-uppercase">Internal Server Error</span>
+</div>
+
+<div class="container-fluid mb-4">
+    <div class="row">
+        <!-- background image container -->
+        <div class="col hero-img">
+            <!-- text overlay wrapper -->
+            <div class="overlay-wrapper">
+                <!-- sets the square -->
+                <div class="square">
+                    <!-- text container -->
+                    <div class="h-100 text-center d-flex justify-content-evenly flex-column">
+                        <!-- text -->
+                        <div class="row">
+                            <div class="col-12 text-white">
+                                <h4 class="logo-font">
+                                    Internal Server Error
+                                </h4>
+                                <p class="ps-2 pe-2">
+                                    Error 500
+                                    <br>
+                                    An error occurred processing your request, we've been notified and will correct it as soon as possible!
+                                    <br>
+                                    Please try your request again in a moment.
+                                </p>
+                            </div>
+                        </div>
+                        <!-- navigation buttons -->
+                        <div class="row">
+                            <div class="col d-flex justify-content-center">
+                                <a href="{% url 'products' %}" class="subscribe-button text-decoration-none me-1" aria-label="navigate to our store">Visit Store</a>
+                                <a href="{% url 'home' %}" class="subscribe-button text-decoration-none ms-1" aria-label="navigate to our homepage">Return Home</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

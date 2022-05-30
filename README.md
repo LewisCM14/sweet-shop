@@ -661,7 +661,21 @@ ___
 
     * I used the answer to this [question](https://github.com/pennersr/django-allauth/issues/131) on the allauth repo to set the ACCOUNT_USER_DISPLAY setting within my settings.py file.
 
+    * I used this [post](https://stackoverflow.com/questions/14977392/bootstrap-carousel-remove-auto-slide) & this [post](https://stackoverflow.com/questions/42905647/get-the-first-element-in-the-for-loops-in-the-django-template?rq=1) to help me setup the home page carousels.
+    
+    * I used this [post](https://stackoverflow.com/questions/7241341/can-i-set-an-opacity-only-to-the-background-image-of-a-div) in order to make the background image on my index page opaque.
+
 - **Media** <a name='media'></a>
+
+    * The hero background image used on the mail success, 404 and 500 pages was taken by Luis Aguila and can be found [here](https://unsplash.com/photos/xLvIcAYuuMQ).
+
+    * The image used above the large breakpoint on the about us page is taken by Karsten Winegeart and can be found [here](https://unsplash.com/photos/PL5FZkW0Qkk).
+
+    * The image used on the home page for the section which allows navigation to the shops selection of 00's sweets was taken by Jacqueline Brandwayn and can be found [here](https://unsplash.com/photos/fA_dsZkS87s).
+
+    * The image used on the home page for the section which allows navigation to the shops selection of 90's sweets was taken by Dmitry Mishin and can be found [here](https://unsplash.com/photos/m7m58SOtb6c).
+    
+    * The image used on the home page for the section which allows navigation to the shops selection of 80's sweets was taken by Matt Schwartz and can be found [here](https://unsplash.com/photos/SmZWvAkKRVM).   
 
 [Return to Table of Contents](#contents)
 ___

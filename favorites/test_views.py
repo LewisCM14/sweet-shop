@@ -11,7 +11,6 @@ from products.models import Type, Product
 from .models import Favorites
 
 
-# pylint: disable=no-member
 class TestViews(TestCase):
     """
     Contains the tests for the views located in the favorites app in views.py.
@@ -67,7 +66,7 @@ class TestViews(TestCase):
         database is then filtered via this user and it is asserted the
         length of the result is 1 and the product is 'Raspberry Bon Bons'.
 
-        As these assersions are imperative for the below testing
+        As these assertions are imperative for the below testing
         """
         user = User.objects.get(id=1)
         product = Product.objects.get(id=1)
@@ -126,8 +125,8 @@ class TestViews(TestCase):
         Then passes the product and user to the reverse of the favorite url.
         Stored in the response variable. Then uses Django's inbuilt
         HTTP client to assert a 302 redirect code is returned and the
-        reverse URL for this redirect is the prodcut_detail URL
-        with the id value of the product passed to the favorute URL.
+        reverse URL for this redirect is the product_detail URL
+        with the id value of the product passed to the favorite URL.
         """
         self.login()
 
@@ -140,7 +139,9 @@ class TestViews(TestCase):
                 'user': user,
             })
         self.assertEqual(response.status_code, 302)
-        self.assertRedirects(response, reverse("product_detail", args=[product.id]))  # noqa: E501
+        self.assertRedirects(
+            response, reverse("product_detail", args=[product.id])
+        )
 
     def test_check_favorite_deletes_existing_product(self):
         """
@@ -172,11 +173,15 @@ class TestViews(TestCase):
                 'user': user,
             })
         self.assertEqual(response.status_code, 302)
-        self.assertRedirects(response, reverse("product_detail", args=[product.id]))  # noqa: E501
+        self.assertRedirects(
+            response, reverse("product_detail", args=[product.id])
+        )
 
         messages = list(get_messages(response.wsgi_request))
         self.assertEqual(len(messages), 1)
-        self.assertEqual(str(messages[0]), f'Removed {product.name} from your favorites!')  # noqa: E501
+        self.assertEqual(
+            str(messages[0]), f'Removed {product.name} from your favorites!'
+        )
 
         favorites = Favorites.objects.filter(user=user)
         self.assertEqual(len(favorites), 0)
@@ -199,7 +204,9 @@ class TestViews(TestCase):
         self.login()
 
         response = self.client.get('/favorite/my_favorites/')
-        self.assertTemplateUsed(response, 'favorites/view_favorites.html', 'base.html')  # noqa: E501
+        self.assertTemplateUsed(
+            response, 'favorites/view_favorites.html', 'base.html'
+        )
 
         favorites = response.context['favorites']
         self.assertEqual(len(favorites), 1)
@@ -235,11 +242,15 @@ class TestViews(TestCase):
                 'user': user,
             })
         self.assertEqual(response.status_code, 302)
-        self.assertRedirects(response, reverse("my_favorites"))  # noqa: E501
+        self.assertRedirects(
+            response, reverse("my_favorites")
+        )
 
         messages = list(get_messages(response.wsgi_request))
         self.assertEqual(len(messages), 1)
-        self.assertEqual(str(messages[0]), f'Removed {product.name} from your favorites!')  # noqa: E501
+        self.assertEqual(
+            str(messages[0]), f'Removed {product.name} from your favorites!'
+        )
 
         favorites = Favorites.objects.filter(user=user)
         self.assertEqual(len(favorites), 0)

@@ -9,7 +9,6 @@ from products.models import Product
 from .models import Favorites
 
 
-# pylint: disable=no-member
 @login_required
 def check_favorite(request, product_id):
     """
@@ -21,7 +20,7 @@ def check_favorite(request, product_id):
 
     If that object exists, it is collected, stored and then deleted,
     if it doesn't exist it is created. User feedback is returned in
-    either instace and a Http redirect response is returned in order
+    either instance and a Http redirect response is returned in order
     to reload the product_detail page.
     """
 
@@ -35,15 +34,21 @@ def check_favorite(request, product_id):
                 user=user
             )
             favorites.delete()
-            messages.warning(request, f'Removed {product.name} from your favorites!')  # noqa: E501
+            messages.warning(
+                request, f'Removed {product.name} from your favorites!'
+            )
         else:
             Favorites.objects.create(
                 product=product,
                 user=user
             )
-            messages.info(request, f'Added {product.name} to your favorites!')  # noqa: E501
+            messages.info(
+                request, f'Added {product.name} to your favorites!'
+            )
 
-        return HttpResponseRedirect(reverse('product_detail', args=[product.id]))  # noqa: E501
+        return HttpResponseRedirect(
+            reverse('product_detail', args=[product.id])
+        )
 
 
 @login_required
@@ -85,6 +90,8 @@ def remove_favorite(request, product_id):
     )
 
     favorites.delete()
-    messages.warning(request, f'Removed {product.name} from your favorites!')  # noqa: E501
+    messages.warning(
+        request, f'Removed {product.name} from your favorites!'
+    )
 
     return HttpResponseRedirect(reverse('my_favorites'))

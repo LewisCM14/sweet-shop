@@ -1,0 +1,57 @@
+<div id="sherbet" class="carousel slide" data-interval="false">
+    <div class="carousel-inner carousel-border">
+        {% for product in sherbet %}
+            {% if forloop.first %}
+                {% if product.image %}
+                    <div class="carousel-item active product-carousel">
+                        <a href="{% url 'product_detail' product.id %}">
+                            <img class="carousel-img" src="{{ product.image.url }}" alt="{{ product.name }}">
+                        </a>
+                        <div class="carousel-caption d-flex justify-content-center">
+                            <a href="{% url 'products' %}?type_query=sherbet" class="text-decoration-none type-btn">Sherbet Sweets</a>
+                        </div>
+                    </div>
+                {% else %}
+                    <div class="carousel-item active product-carousel">
+                        <a>
+                            <img class="carousel-img" src="{{ MEDIA_URL }}noimage.png" alt="{{ product.name }}">
+                        </a>
+                        <div class="carousel-caption d-flex justify-content-center">
+                            <a href="{% url 'products' %}?type_query=sherbet" class="text-decoration-none type-btn">Sherbet Sweets</a>
+                        </div>
+                    </div>
+                {% endif %}
+            {% else %}
+                {% if product.image %}
+                    <div class="carousel-item product-carousel">
+                        <a href="{% url 'product_detail' product.id %}">
+                            <img class="carousel-img" src="{{ product.image.url }}" alt="{{ product.name }}">
+                        </a>
+                        <div class="carousel-caption d-flex justify-content-center">
+                            <a href="{% url 'products' %}?type_query=sherbet" class="text-decoration-none type-btn">Sherbet Sweets</a>
+                        </div>
+                    </div>
+                {% else %}
+                    <div class="carousel-item product-carousel">
+                        <a>
+                            <img class="carousel-img" src="{{ MEDIA_URL }}noimage.png" alt="{{ product.name }}">
+                        </a>
+                        <div class="carousel-caption d-flex justify-content-center">
+                            <a href="{% url 'products' %}?type_query=sherbet" class="text-decoration-none type-btn">Sherbet Sweets</a>
+                        </div>
+                    </div>
+                {% endif %}
+            {% endif %}
+        {% endfor %}
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#sherbet"
+        data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#sherbet"
+        data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+</div>

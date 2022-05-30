@@ -7,7 +7,7 @@
             <div class="col">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item active" aria-current="home">Home</li>
+                        <li class="breadcrumb-item active" aria-current="true">Home</li>
                     </ol>
                 </nav>
             </div>
@@ -16,4 +16,178 @@
 {% endblock %}
 
 {% block content %}
+
+<!-- header for devices below md breakpoint -->
+
+<div class="container">
+    <div class="row d-block d-sm-block d-md-block d-lg-none d-xl-none d-xxl-none">
+        <div class="col-12 text-center">
+            <h2 class="logo-font">Classic Confectionery</h2>
+        </div>
+    </div>
+</div>
+
+<!-- banner text -->
+
+<div class="container d-flex justify-content-center">
+    <div class="row banner mb-3">
+        <div class="col-12 text-white text-center logo-font text-uppercase">
+            <span class="h5 p-2 d-none d-sm-none d-md-none d-lg-block d-xl-block d-xxl-block mt-1"> 
+                <strong>Free delivery on orders over £50, Tracked delivery on all orders over 1kg!</strong>
+            </span>
+            <span class="h5 p-2 d-block d-sm-block d-md-block d-lg-none d-xl-none d-xxl-none mt-1">
+                <strong>
+                    Free delivery on orders over £50!
+                    <br>
+                    Tracked delivery on all orders over 1kg!
+                </strong>
+            </span>
+        </div>
+    </div>
+</div>
+
+<!-- shopping links -->
+
+<div class="container mb-4">
+    <!-- row for 00's sweets & 1 product type carousel -->
+    <div class="row p-1">
+        <!-- 00's sweets (image container) -->
+        <section class="col-lg-8 col-12 image-00 p-0">
+            <!-- image overlay container -->
+            <div class="blue-square-wrapper">
+                <!-- overlay -->
+                <div class="blue-square">
+                    <!-- text container -->
+                    <div class="h-100 text-center d-flex justify-content-evenly flex-column ps-2 pe-2">
+                        <!-- text -->
+                        <div class="row">
+                            <div class="col-12 text-white">
+                                <h4 class="logo-font">
+                                    Browse Our Selection of
+                                    <br>
+                                    00's Sweets
+                                </h4>
+                            </div>
+                        </div>
+                        <!-- navigation button -->
+                        <div class="row">
+                            <div class="col d-flex justify-content-center">
+                                <a href="{% url 'products' %}?year=00"
+                                    aria-label="navigate to our selection of 00's sweets" class="shop-now-blue-btn">
+                                    Shop Now
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- product type carousel -->
+        <section class="col-lg-4 col-12 d-flex justify-content-center justify-content-lg-end mt-lg-0 mt-3">
+            <div class="carousel-container">
+                {% include 'home/includes/jellies_gums.html' %}
+            </div>
+            <div class="carousel-container d-none d-sm-none d-md-block d-lg-none d-xl-none d-xxl-none ms-2">
+                {% include 'home/includes/chocolate.html' %}
+            </div>
+        </section>
+    </div>
+
+    <!-- row for 90's sweets & 1 product type carousel -->
+    <div class="row mt-3 d-flex flex-row-reverse p-1">
+        <!-- 00's sweets (image container) -->
+        <section class="col-lg-8 col-12 image-90 p-0 d-flex justify-content-end">
+            <!-- image overlay container -->
+            <div class="charcoal-square-wrapper">
+                <!-- overlay -->
+                <div class="charcoal-square">
+                    <!-- text container -->
+                    <div class="h-100 text-center d-flex justify-content-evenly flex-column ps-2 pe-2">
+                        <!-- text -->
+                        <div class="row">
+                            <div class="col-12 text-white">
+                                <h4 class="logo-font">
+                                    Browse Our Selection of
+                                    <br>
+                                    90's Sweets
+                                </h4>
+                            </div>
+                        </div>
+                        <!-- navigation button -->
+                        <div class="row">
+                            <div class="col d-flex justify-content-center">
+                                <a href="{% url 'products' %}?year=90"
+                                    aria-label="navigate to our selection of 90's sweets" class="shop-now-charcoal-btn">
+                                    Shop Now
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- product type carousel -->
+        <section class="container-fluid col-lg-4 col-12 d-flex justify-content-center justify-content-lg-start mt-lg-0 mt-3">
+            <div class="carousel-container">
+                {% include 'home/includes/fizzy.html' %}
+            </div>
+            <div class="carousel-container d-none d-sm-none d-md-block d-lg-none d-xl-none d-xxl-none ms-2">
+                {% include 'home/includes/sour.html' %}
+            </div>
+        </section>
+    </div>
+
+    <!-- row for 80's sweets & 1 product type carousel -->
+    <div class="row mt-3 p-1">
+        <!-- 00's sweets (image container) -->
+        <section class="col-lg-8 col-12 image-80 p-0 d-flex">
+            <!-- image overlay container -->
+            <div class="blue-square-wrapper">
+                <!-- overlay -->
+                <div class="blue-square">
+                    <!-- text container -->
+                    <div class="h-100 text-center d-flex justify-content-evenly flex-column ps-2 pe-2">
+                        <!-- text -->
+                        <div class="row">
+                            <div class="col-12 text-white">
+                                <h4 class="logo-font">
+                                    Browse Our Selection of
+                                    <br>
+                                    80's Sweets
+                                </h4>
+                            </div>
+                        </div>
+                        <!-- navigation button -->
+                        <div class="row">
+                            <div class="col d-flex justify-content-center">
+                                <a href="{% url 'products' %}?year=80"
+                                    aria-label="navigate to our selection of 80's sweets" class="shop-now-blue-btn">
+                                    Shop Now
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- product type carousel -->
+        <section class="col-lg-4 col-12 d-flex justify-content-center justify-content-lg-end mt-lg-0 mt-3">
+            <div class="carousel-container">
+                {% include 'home/includes/chewy.html' %}
+            </div>
+            <div class="carousel-container d-none d-sm-none d-md-block d-lg-none d-xl-none d-xxl-none ms-2">
+                {% include 'home/includes/sherbet.html' %}
+            </div>
+        </section>
+    </div>
+</div>
+
+<div class="container d-flex justify-content-center">
+    <div class="row banner mb-3">
+        <div class="col-12 text-white text-center logo-font text-uppercase">
+            <a href="{% url 'products' %}" class="h1 white-yellow">Shop All Products</a>
+        </div>
+    </div>
+</div>
+
 {% endblock %}

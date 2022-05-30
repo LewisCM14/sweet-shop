@@ -75,13 +75,13 @@
                         {% if item.product.image %}
                             <div class="col-md-1">
                                 <a href="{% url 'product_detail' item.product.id %}">
-                                    <img class="img-fluid rounded" src="{{ item.product.image.url }}" alt="{{ item.product.name }}">
+                                    <img class="img-fluid rounded product-card-img" src="{{ item.product.image.url }}" alt="{{ item.product.name }}">
                                 </a>
                             </div>
                         {% else %}
                             <div class="col-md-1">
                                 <a>
-                                    <img class="img-fluid rounded" src="{{ MEDIA_URL }}noimage.png" alt="{{ item.product.name }}">
+                                    <img class="img-fluid rounded product-card-img" src="{{ MEDIA_URL }}noimage.png" alt="{{ item.product.name }}">
                                 </a>
                             </div>
                         {% endif %}
@@ -102,7 +102,8 @@
                                 <div class="input-group">
                                     <!-- Minus Button -->
                                     <div class="input-group-prepend">
-                                        <button class="decrement-qty qty-buttons" data-item_id="{{ item.item_.id }}" id="decrement-qty_{{ item.item_.id }}">
+                                        <button class="decrement-qty qty-buttons" data-item_id="{{ item.item_.id }}"
+                                            id="decrement-qty_{{ item.item_.id }}" aria-label="decrease {{item.item.name}} quantity by 1">
                                             <span class="icon">
                                                 <i class="fa-solid fa-minus"></i>
                                             </span>
@@ -113,7 +114,8 @@
                                         min="1" max="25" data-item_id="{{ item.item_.id }}" id="id_qty_{{ item.item_.id }}">
                                     <!-- Plus Button -->
                                     <div class="input-group-append">
-                                        <button class="increment-qty qty-buttons" data-item_id="{{ item.item_.id }}" id="increment-qty_{{ item.item_.id }}">
+                                        <button class="increment-qty qty-buttons" data-item_id="{{ item.item_.id }}"
+                                            id="increment-qty_{{ item.item_.id }}" aria-label="increase {{item.item.name}} quantity by 1">
                                             <span class="icon">
                                                 <i class="fa-solid fa-plus"></i>
                                             </span>
@@ -122,7 +124,7 @@
                                 </div>
                             </form>
                             <!-- Update Button -->
-                            <a class="update-link text-decoration-none text-success">Update</a>
+                            <button class="blank-btn update-link text-decoration-none text-success" aria-label="update item quantity">Update</button>
                         </div>
                         <!-- Item Price -->
                         <div class="text-center col-md-2">
@@ -133,7 +135,10 @@
                         </div>
                         <!-- Remove Item -->
                         <div class="text-center col-md-2 mb-lg-0 mb-2">
-                            <a class="remove-item text-decoration-none text-red" id="remove_{{ item.item_id }}"><i class="fa-solid fa-trash-can fa-2xl"></i></a>
+                            <button class="blank-btn remove-item text-decoration-none text-red"
+                                id="remove_{{ item.item_id }}" aria-label="remove item from cart">
+                                <i class="fa-solid fa-trash-can fa-2xl"></i>
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -142,7 +147,7 @@
         <!-- Shopping Cart Total -->
         <div class="row p-1 mt-4 mb-4 text-center d-flex justify-content-md-end justify-content-sm-center">
             <!-- Container -->
-            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-8 border">
+            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-8 border bg-white">
                 {% if free_delivery_delta > 0 %}
                     <div class="row bg-charcoal">
                         <div class="col mt-2">
@@ -212,11 +217,9 @@
         <div class="row text-center mb-4">
             <div class="col d-flex flex-column align-items-center">
                 <span class="h5 mt-4 text-uppercase">Your cart is empty!</span>
-                <button class="shopping-button blue-charcoal-btn">
-                    <a class="text-white text-decoration-none" href="{% url 'products' %}">
-                        Continue Shopping
-                    </a>
-                </button>
+                <a class="text-white text-decoration-none shopping-button blue-charcoal-btn" href="{% url 'products' %}">
+                    Continue Shopping
+                </a>
             </div>
         </div>
     {% endif %}

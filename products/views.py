@@ -8,6 +8,7 @@ from django.db.models import Q
 
 from review.models import Reviews
 from review.review_form import PostReviewForm
+from favorites.models import Favorites
 
 from .models import Product, Type
 from .product_form import ProductForm
@@ -22,7 +23,7 @@ def all_products(request):
     Takes in the GET request from the form,
     storing the input named as 'q' in the query variable.
     If no value is input, an error message is returned
-    and the user is redirected to the prodcuts url.
+    and the user is redirected to the products url.
     If there is a value input, the queries variable is set
     equal to a Q object, where the name or the description,
     contains the query (case insensitive).
@@ -38,7 +39,7 @@ def all_products(request):
 
     Year Filtering:
     Filtering by year takes in the GET request, then uses an if/else
-    statement to filter prodcuts by the years_popular fields, based on
+    statement to filter products by the years_popular fields, based on
     the value given in the request.
 
     Product Sorting:
@@ -48,11 +49,10 @@ def all_products(request):
     for use in the template.
 
     Then checks if direction was in the GET request.
-    Prepending a minus to the sortkey variable if the direction was
+    Pre-pending a minus to the sortkey variable if the direction was
     equal to descending (desc) Before ordering the products by the
     final sortkey variable.
     """
-    # pylint: disable=no-member
     products = Product.objects.all()
     # Set to none initially to ensure no error is returned in context
     query = None
@@ -94,7 +94,9 @@ def all_products(request):
         if 'q' in request.GET:
             query = request.GET['q']
             if not query:
-                messages.error(request, "You didn't enter any search criteria!")  # noqa: E501
+                messages.error(
+                    request, "You didn't enter any search criteria!"
+                )
                 return redirect(reverse('products'))
 
             queries = Q(name__icontains=query) | Q(description__icontains=query)  # noqa: E501
@@ -113,7 +115,6 @@ def all_products(request):
     return render(request, 'products/products.html', context)
 
 
-# pylint: disable=no-member
 def product_detail(request, product_id):
     """
     A view to show individual product details.
@@ -121,18 +122,33 @@ def product_detail(request, product_id):
     Collects the product from the database to return as context.
     Also collects the PostReviewForm to return as context.
 
-    Uses the collected product to filter the Review database by
-    and return all reviews for it back as context
+    Uses the collected product to filter the Review database
+    and return all reviews for it back as context.
+
+    Collects the user, and if authenticated filters the Favorites
+    database by user & product to return as context in the view,
+    allowing for dynamic button display, false is returned if the
+    user hasn't added the product to their favorites.
     """
 
     product = get_object_or_404(Product, pk=product_id)
     review_form = PostReviewForm()
     reviews = Reviews.objects.filter(product=product)
 
+    user = request.user
+    if user.is_authenticated:
+        favorite = Favorites.objects.filter(
+            user=user,
+            product=product
+        )
+    else:
+        favorite = False
+
     context = {
         'product': product,
         'review_form': review_form,
         'reviews': reviews,
+        'favorite': favorite,
     }
 
     return render(request, 'products/product_detail.html', context)
@@ -166,7 +182,10 @@ def add_product(request):
             messages.success(request, 'Successfully added product!')
             return redirect(reverse('product_detail', args=[product.id]))
         else:
-            messages.error(request, 'Failed to add product. Please ensure the form is valid.')  # noqa: E501
+            messages.error(
+                request, 'Failed to add product.\
+                Please ensure the form is valid.'
+            )
     else:
         form = ProductForm()
 
@@ -209,7 +228,10 @@ def edit_product(request, product_id):
             messages.success(request, 'Successfully updated product!')
             return redirect(reverse('product_detail', args=[product.id]))
         else:
-            messages.error(request, 'Failed to update product. Please ensure the form is valid.')  # noqa: E501
+            messages.error(
+                request, 'Failed to update product.\
+                Please ensure the form is valid.'
+            )
     else:
         form = ProductForm(instance=product)
         messages.info(request, f'You are editing {product.name}')

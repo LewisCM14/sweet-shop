@@ -6,7 +6,6 @@ from django.contrib.messages import get_messages
 from products.models import Type, Product
 
 
-# pylint: disable=no-member
 class TestView(TestCase):
     """
     Contains the tests for the views located in the cart app in views.py.
@@ -295,8 +294,12 @@ class TestView(TestCase):
         self.assertRedirects(response, '/products/1/')
         messages = list(get_messages(response.wsgi_request))
         self.assertEqual(len(messages), 2)
-        self.assertEqual(str(messages[0]), f'Added {product.name} to your cart')  # noqa: E501
-        self.assertEqual(str(messages[1]), f'The total weight of {product.name} would now exceed 5kg, Please contact us directly to arrange purchase of individual items exceeding 5kg.')  # noqa: E501
+        self.assertEqual(
+            str(messages[0]), f'Added {product.name} to your cart'
+        )
+        self.assertEqual(
+            str(messages[1]), f'The total weight of {product.name} would now exceed 5kg, Please contact us directly to arrange purchase of individual items exceeding 5kg.'  # noqa: E501
+        )
 
         cart = session['cart']
         self.assertEqual(cart.get('1'), 25)

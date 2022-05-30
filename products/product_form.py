@@ -5,7 +5,6 @@ from .widgets import CustomClearableFileInput
 from .models import Product, Type
 
 
-# pylint: disable=no-member
 class ProductForm(forms.ModelForm):
     """
     Extends from the base model form.
@@ -29,7 +28,9 @@ class ProductForm(forms.ModelForm):
         widget=forms.TextInput(attrs={'placeholder': 'Minimum Value £0.01'}),
     )
 
-    image = forms.ImageField(label='Image', required=False, widget=CustomClearableFileInput)  # noqa: E501
+    image = forms.ImageField(
+        label='Image', required=False, widget=CustomClearableFileInput
+    )
 
     class Meta:
         """

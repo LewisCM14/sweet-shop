@@ -11,7 +11,6 @@ from products.models import Type, Product
 from .models import Reviews
 
 
-# pylint: disable=no-member
 class TestViews(TestCase):
     """
     Contains the tests for the Review app views.
@@ -150,13 +149,17 @@ class TestViews(TestCase):
             email="johndoe@email.com",
             password='password',
         )
-        response = self.client.post(reverse('delete_review', args=[product.id]))  # noqa: E501
+        response = self.client.post(
+            reverse('delete_review', args=[product.id])
+        )
 
         self.assertEqual(response.status_code, 302)
         self.assertRedirects(response, (reverse('my_reviews')))
         messages = list(get_messages(response.wsgi_request))
         self.assertEqual(len(messages), 1)
-        self.assertEqual(str(messages[0]), f'Deleted your review of {product.name}!')  # noqa: E501
+        self.assertEqual(
+            str(messages[0]), f'Deleted your review of {product.name}!'
+        )
 
         reviews = Reviews.objects.all()
         self.assertEqual(len(reviews), 1)
@@ -192,12 +195,16 @@ class TestViews(TestCase):
             password='password',
         )
 
-        response = self.client.post(reverse('post_review', args=[product.id]), {  # noqa: E501
-            'rating': 5,
-            'review': 'A nice review.'
-        })
+        response = self.client.post(
+            reverse('post_review', args=[product.id]), {
+                'rating': 5,
+                'review': 'A nice review.'
+            }
+        )
         self.assertEqual(response.status_code, 302)
-        self.assertRedirects(response, (reverse('product_detail', args=[product.id])))  # noqa: E501
+        self.assertRedirects(
+            response, (reverse('product_detail', args=[product.id]))
+        )
 
         reviews = Reviews.objects.all()
         self.assertEqual(len(reviews), 3)
@@ -236,16 +243,22 @@ class TestViews(TestCase):
             password='password',
         )
 
-        response = self.client.post(reverse('post_review', args=[product.id]), {  # noqa: E501
-            'rating': 3,
-            'review': 'An okay review.'
-        })
+        response = self.client.post(
+            reverse('post_review', args=[product.id]), {
+                'rating': 3,
+                'review': 'An okay review.'
+            }
+        )
 
         self.assertEqual(response.status_code, 302)
-        self.assertRedirects(response, (reverse('product_detail', args=[product.id])))  # noqa: E501
+        self.assertRedirects(
+            response, (reverse('product_detail', args=[product.id]))
+        )
         messages = list(get_messages(response.wsgi_request))
         self.assertEqual(len(messages), 1)
-        self.assertEqual(str(messages[0]), f'You have already reviewed {product.name}!')  # noqa: E501
+        self.assertEqual(
+            str(messages[0]), f'You have already reviewed {product.name}!'
+        )
 
         reviews = Reviews.objects.all()
         self.assertEqual(len(reviews), 2)
@@ -278,13 +291,17 @@ class TestViews(TestCase):
             password='password',
         )
 
-        response = self.client.post(reverse('post_review', args=[product.id]), {  # noqa: E501
-            'rating': 6,
-            'review': 'An invalid review.'
-        })
+        response = self.client.post(
+            reverse('post_review', args=[product.id]), {
+                'rating': 6,
+                'review': 'An invalid review.'
+            }
+        )
         messages = list(get_messages(response.wsgi_request))
         self.assertEqual(len(messages), 1)
-        self.assertEqual(str(messages[0]), 'Review failed. Please ensure the form is valid.')  # noqa: E501
+        self.assertEqual(
+            str(messages[0]), 'Review failed. Please ensure the form is valid.'
+        )
 
         reviews = Reviews.objects.all()
         self.assertEqual(len(reviews), 2)
@@ -340,17 +357,21 @@ class TestViews(TestCase):
             password='password',
         )
 
-        response = self.client.post(reverse('edit_review', args=[review.id]), {  # noqa: E501
-            'rating': 5,
-            'review': 'A good review.'
-        })
+        response = self.client.post(
+            reverse('edit_review', args=[review.id]), {
+                'rating': 5,
+                'review': 'A good review.'
+            }
+        )
 
         self.assertEqual(response.status_code, 302)
         self.assertRedirects(response, (reverse('my_reviews')))
 
         messages = list(get_messages(response.wsgi_request))
         self.assertEqual(len(messages), 1)
-        self.assertEqual(str(messages[0]), 'Review updated successfully!')  # noqa: E501
+        self.assertEqual(
+            str(messages[0]), 'Review updated successfully!'
+        )
 
         review = Reviews.objects.get(id=2)
         self.assertEqual(review.rating, 5)
@@ -387,17 +408,21 @@ class TestViews(TestCase):
             password='password',
         )
 
-        response = self.client.post(reverse('edit_review', args=[review.id]), {  # noqa: E501
-            'rating': 5,
-            'review': 'A good review.'
-        })
+        response = self.client.post(
+            reverse('edit_review', args=[review.id]), {
+                'rating': 5,
+                'review': 'A good review.'
+            }
+        )
 
         self.assertEqual(response.status_code, 302)
         self.assertRedirects(response, (reverse('my_reviews')))
 
         messages = list(get_messages(response.wsgi_request))
         self.assertEqual(len(messages), 1)
-        self.assertEqual(str(messages[0]), 'You cannot alter this review!')  # noqa: E501
+        self.assertEqual(
+            str(messages[0]), 'You cannot alter this review!'
+        )
 
         review = Reviews.objects.get(id=2)
         self.assertEqual(review.rating, 1)
@@ -430,10 +455,12 @@ class TestViews(TestCase):
             password='password',
         )
 
-        response = self.client.post(reverse('edit_review', args=[review.id]), {  # noqa: E501
-            'rating': 6,
-            'review': 'An invalid review.'
-        })
+        response = self.client.post(
+            reverse('edit_review', args=[review.id]), {
+                'rating': 6,
+                'review': 'An invalid review.'
+            }
+        )
 
         messages = list(get_messages(response.wsgi_request))
         self.assertEqual(len(messages), 1)

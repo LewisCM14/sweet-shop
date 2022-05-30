@@ -29,7 +29,6 @@ class TestModel(TestCase):
             password='password',
         )
 
-        # pylint: disable=no-member
         john = UserProfile.objects.get(id=1)
         self.assertEqual(str(john), 'johndoe')
 
@@ -50,6 +49,5 @@ class TestModel(TestCase):
             password='password',
         )
 
-        # pylint: disable=no-member
         count = UserProfile.objects.count()
         self.assertEqual(count, 1)

@@ -12,7 +12,6 @@ from profiles.models import UserProfile
 from .models import Order, OrderLineItem
 
 
-# pylint: disable=no-member
 class TestViews(TestCase):
     """
     Contains the tests for the views located in the checkout app in views.py.
@@ -62,12 +61,12 @@ class TestViews(TestCase):
     def initiate_cart(self):
         """
         A helper method to initiate an instance of the cart object.
-        Then stored within the session, used to then prefrom tests on.
+        Then stored within the session, used to then perform tests on.
 
         Then collects the created session,
         storing it in the 'session' variable. From this variable
         asserts the 'cart' key has a length of 1.
-        Meaing a cart object has been created and a key:value pair passed.
+        Meaning a cart object has been created and a key:value pair passed.
 
         From the session variable then collects the cart dict itself,
         storing it in the cart variable. From here asserts that the
@@ -109,7 +108,9 @@ class TestViews(TestCase):
         self.assertEqual(response.status_code, 302)
         messages = list(get_messages(response.wsgi_request))
         self.assertEqual(len(messages), 1)
-        self.assertEqual(str(messages[0]), "There's nothing in your cart at the moment")  # noqa: E501
+        self.assertEqual(
+            str(messages[0]), "There's nothing in your cart at the moment"
+        )
         self.assertRedirects(response, '/products/')
 
     def test_checkout_page_renders(self):
@@ -186,7 +187,9 @@ class TestViews(TestCase):
         self.assertEqual((line_item.lineitem_total), Decimal('1.99'))
         self.assertEqual((line_item.lineitem_weight), 200)
 
-        self.assertRedirects(response, reverse("checkout_success", args=[order.order_number]))  # noqa: E501
+        self.assertRedirects(
+            response, reverse("checkout_success", args=[order.order_number])
+        )
 
     def test_checkout_success_page_deletes_the_cart(self):
         """
@@ -225,7 +228,9 @@ class TestViews(TestCase):
         messages = list(get_messages(response.wsgi_request))
 
         self.assertEqual(len(messages), 1)
-        self.assertRedirects(response, reverse("checkout_success", args=[order.order_number]))  # noqa: E501
+        self.assertRedirects(
+            response, reverse("checkout_success", args=[order.order_number])
+        )
 
         session = self.client.session
         self.assertNotIn('cart', session)
@@ -269,7 +274,9 @@ class TestViews(TestCase):
         order = Order.objects.get(id=1)
         self.assertEqual(order.user_profile, None)
 
-        self.client.post(reverse("checkout_success", args=[order.order_number]))  # noqa: E501
+        self.client.post(
+            reverse("checkout_success", args=[order.order_number])
+        )
 
         order = Order.objects.get(id=1)
         self.assertEqual(order.user_profile, profile)

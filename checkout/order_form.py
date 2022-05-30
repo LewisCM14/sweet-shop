@@ -24,7 +24,8 @@ class OrderForm(forms.ModelForm):
     phone_number = forms.CharField(
         label='Phone Number',
         required=True,
-        widget=forms.TextInput(attrs={'placeholder': 'Preferred Contact Number'}),  # noqa: E501
+        widget=forms.TextInput(
+            attrs={'placeholder': 'Preferred Contact Number'}),
     )
 
     street_address1 = forms.CharField(

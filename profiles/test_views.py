@@ -12,7 +12,6 @@ from checkout.models import Order
 from .models import UserProfile
 
 
-# pylint: disable=no-member
 class TestView(TestCase):
     """
     Contains the tests for the views.
@@ -149,7 +148,9 @@ class TestView(TestCase):
         user_profile = UserProfile.objects.get(id=1)
 
         self.assertEqual(user_profile.default_phone_number, '11111111111')
-        self.assertEqual(user_profile.default_street_address1, '4 privet drive')  # noqa: E501
+        self.assertEqual(
+            user_profile.default_street_address1, '4 privet drive'
+        )
         self.assertEqual(user_profile.default_street_address2, '')
         self.assertEqual(user_profile.default_town_or_city, 'little whinging')
         self.assertEqual(user_profile.default_county, 'surrey')
@@ -188,13 +189,17 @@ class TestView(TestCase):
                 'client_secret': 'client secret test string',
             })
         order = Order.objects.get(id=1)
-        self.client.post(reverse("checkout_success", args=[order.order_number]))  # noqa: E501
+        self.client.post(
+            reverse("checkout_success", args=[order.order_number])
+        )
 
         profile = UserProfile.objects.get(id=1)
         orders = profile.orders.all()
         self.assertEqual(len(orders), 1)
 
-        response = self.client.get(reverse('order_history', args=[order.order_number]))  # noqa: E501
+        response = self.client.get(
+            reverse('order_history', args=[order.order_number])
+        )
         self.assertEqual(response.status_code, 200)
 
     def test_users_can_change_name(self):
@@ -256,7 +261,9 @@ class TestView(TestCase):
 
         messages = list(get_messages(response.wsgi_request))
         self.assertEqual(len(messages), 1)
-        self.assertEqual(str(messages[0]), "Update failed. Please ensure the form is valid.")  # noqa: E501
+        self.assertEqual(
+            str(messages[0]), "Update failed. Please ensure the form is valid."
+        )
 
         user = User.objects.get(id=1)
         self.assertEqual(user.first_name, 'john')

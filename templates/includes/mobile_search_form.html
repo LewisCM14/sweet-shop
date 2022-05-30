@@ -1,8 +1,7 @@
 <!-- Search Dropdown Toggle -->
-<li class="list-inline-item">
-    <a class="charcoal-navy nav-link d-block d-lg-none me-auto nav-link" href="#" id="mobile-search"
-        role="button" data-bs-toggle="dropdown" aria-expanded="false">
-        <div class="text-center icon"><i class="fas fa-search fa-lg"></i></div>
+<div class="list-inline-item">
+    <a class="charcoal-navy" href="#" id="mobile-search" role="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="toggle the search input dropdown">
+        <div class="text-center icon"><i class="fas fa-search fa-xl"></i></div>
     </a>
     <!-- Search Form -->
     <div class="dropdown-menu border-0 w-100 p-3 rounded-0 my-0" aria-labelledby="mobile-search">
@@ -20,12 +19,4 @@
             </div>
         </form>
     </div>
-</li>
-<!-- Shopping Cart Link -->
-<li class="list-inline-item">
-    <a class="charcoal-navy nav-link d-block d-lg-none" href="{% url 'view_cart' %}">
-        <div class="text-center">
-            <div class="icon"><i class="fa-solid fa-cart-shopping fa-lg"></i></div>
-        </div>
-    </a>
-</li>
+</div>

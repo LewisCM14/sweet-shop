@@ -6,8 +6,7 @@ from django.dispatch import receiver
 from .models import OrderLineItem
 
 
-# See apps.py for how these signals are implimented.
-# pylint: disable=unused-argument
+# See apps.py for how these signals are implemented.
 @receiver(post_save, sender=OrderLineItem)
 def update_on_save(sender, instance, created, **kwargs):
     """

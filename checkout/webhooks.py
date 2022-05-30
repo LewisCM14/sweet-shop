@@ -11,9 +11,6 @@ import stripe
 from checkout.webhook_handler import StripeWH_Handler
 
 
-# pylint: disable=unused-variable
-# pylint: disable=broad-except
-# pylint: disable=invalid-name
 @require_POST
 @csrf_exempt
 def webhook(request):
@@ -36,7 +33,7 @@ def webhook(request):
 
     Call the event_handler, passing it the 'event' and return the
     'response' to Stripe, i.e call the the function for handling the
-    specific event triggeed by stripe's payment intent.
+    specific event triggered by stripe's payment intent.
     """
     # Setup
     wh_secret = settings.STRIPE_WH_SECRET

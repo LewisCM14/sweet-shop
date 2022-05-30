@@ -10,7 +10,7 @@ class Favorites(models.Model):
     """
     A model to store a users favorites products.
 
-    Collects the user from the User model and the prodcut they
+    Collects the user from the User model and the products they
     have added to their favorites from the Product model,
     if either the User or the product is deleted,
     the database entry is removed.
@@ -26,7 +26,7 @@ class Favorites(models.Model):
     class Meta:
         """
         Class meta, sets the verbose name in the admin panel
-        and ensures each user can only favorite each prodcut once.
+        and ensures each user can only favorite each product once.
         """
         verbose_name_plural = "Favorites"
         unique_together = [['user', 'product']]

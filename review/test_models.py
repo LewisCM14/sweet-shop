@@ -9,7 +9,6 @@ from products.models import Type, Product
 from .models import Reviews
 
 
-# pylint: disable=no-member
 class TestModel(TestCase):
     """
     Contains the tests for the Reviews model.
@@ -65,5 +64,7 @@ class TestModel(TestCase):
             review='Some String',
         )
 
-        self.assertEqual(str(review), f'{review.product.name} rated {review.rating} stars')  # noqa: E501
+        self.assertEqual(
+            str(review), f'{review.product.name} rated {review.rating} stars'
+        )
         self.assertEqual(str(review), 'Raspberry Bon Bons rated 5 stars')

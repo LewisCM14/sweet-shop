@@ -1,0 +1,13 @@
+<div class="dropdown">
+    <button class="logo-font blank-btn font-weight-bold charcoal-navy mr-5" type="button" id="sweet-type-link" data-bs-toggle="dropdown" aria-expanded="false">
+        Sweets By Type
+    </button>
+    <ul class="dropdown-menu border-0" aria-labelledby="sweet-type-link">
+      <li><a href="{% url 'products' %}?type_query=chewy" class="dropdown-item">Chewy</a></li>
+      <li><a href="{% url 'products' %}?type_query=chocolate" class="dropdown-item">Chocolate</a></li>
+      <li><a href="{% url 'products' %}?type_query=fizzy" class="dropdown-item">Fizzy</a></li>
+      <li><a href="{% url 'products' %}?type_query=jellies_gums" class="dropdown-item">Jellies & Gums</a></li>
+      <li><a href="{% url 'products' %}?type_query=sherbet" class="dropdown-item">Sherbet</a></li>
+      <li><a href="{% url 'products' %}?type_query=sour" class="dropdown-item">Sour</a></li>
+    </ul>
+</div>

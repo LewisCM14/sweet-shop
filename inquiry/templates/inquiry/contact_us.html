@@ -1,0 +1,118 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block page_header %}
+    <div class="container header-container">
+        <div class="row">
+            <div class="col">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Contact Us</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <section class="container mb-4">
+        <div class="mb-2">
+            <span class="h4 text-uppercase">Contact Us</span>
+        </div>
+        <div class="row">
+            <div class="col-lg-4 col-md-5 col-sm-12">
+                <!-- Contact Details -->
+                <div class="container h-100 p-2 bg-white shadow">
+                    <!-- Address -->
+                    <div class="row">
+                        <div class="col">
+                            <p class="h5 fw-700"> 
+                                <i class="fa-solid fa-2xl fa-address-card text-navy"></i>
+                                <br>
+                                Address:
+                            </p>
+                            <p>
+                                <strong>Classic Confectionery.</strong>
+                                <br>
+                                Clegge Street Workshops,
+                                <br>
+                                Clegge St, Warrington,
+                                <br>
+                                Cheshire. WA2 7AT.
+                            </p>
+                        </div>
+                    </div>
+                    <!-- Telephone -->
+                    <div class="row">
+                        <div class="col">
+                            <p class="h5 fw-700">
+                                <i class="fa-solid fa-2xl fa-phone text-navy"></i>
+                                <br>
+                                Call Us On:
+                            </p>
+                            <p>
+                                0330 0882460
+                            </p>
+                            <p>
+                                Monday - Friday
+                                <br>
+                                10:30AM - 3:30PM
+                            </p>
+                        </div>
+                    </div>
+                    <!-- Email -->
+                    <div class="row">
+                        <div class="col">
+                            <p class="h5 fw-700">
+                                <i class="fa-solid fa-2xl fa-envelope text-navy"></i>
+                                <br>
+                                Mail Us At:
+                            </p>
+                            <p class="text-break">
+                                classicconfectionery.notice@gmail.com
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-8 col-md-7 col-sm-12 mt-md-0 mt-3">
+                <!-- Inquiry Form -->
+                <div class="container h-100 p-2 bg-white shadow">
+                    <div class="row">
+                        <div class="col">
+                            <form action="{% url 'contact_us' %}" method="POST">
+                                {% csrf_token %}
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-12">
+                                        {{ contact_form.full_name | as_crispy_field }}
+                                    </div>
+                                    <div class="col-lg-6 col-md-12">
+                                        {{ contact_form.subject | as_crispy_field }}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-12">
+                                        {{ contact_form.email | as_crispy_field }}
+                                    </div>
+                                    <div class="col-lg-6 col-md-12">
+                                        {{ contact_form.phone_number | as_crispy_field }}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        {{ contact_form.message | as_crispy_field }}
+                                    </div>
+                                </div>
+                                <div class="d-flex justify-content-end">
+                                    <button class="mt-2 mb-2 blue-charcoal-btn">Submit Message</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
