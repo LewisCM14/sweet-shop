@@ -15,9 +15,8 @@ from pathlib import Path
 import os
 import dj_database_url
 
-# pylint: disable=unused-import
 if os.path.isfile('env.py'):
-    import env  # noqa: F401
+    import env
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -163,6 +162,7 @@ else:
             'NAME': BASE_DIR / 'db.sqlite3',
         }
     }
+
 
 
 # Password validation
