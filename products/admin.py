@@ -31,6 +31,7 @@ class TypeAdmin(admin.ModelAdmin):
     extends from the base.
     """
     list_display = (
+        'id',
         'friendly_name',
         'name',
     )
