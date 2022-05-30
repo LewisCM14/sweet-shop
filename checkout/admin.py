@@ -20,7 +20,7 @@ class OrderAdmin(admin.ModelAdmin):
     """
     The admin class for the Order model.
 
-    Allows site adminstrators to manage Order status
+    Allows site admins to manage Order status
     from within the dropdown menu.
 
     Read only fields calculated by model methods.

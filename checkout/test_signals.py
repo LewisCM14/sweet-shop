@@ -6,7 +6,6 @@ from products.models import Type, Product
 from .models import Order, OrderLineItem
 
 
-# pylint: disable=no-member
 class TestSignals(TestCase):
     """
     Contains the tests for the signals.

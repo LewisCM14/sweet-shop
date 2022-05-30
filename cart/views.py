@@ -119,7 +119,6 @@ def remove_from_cart(request, item_id):
         request.session['cart'] = cart
         return HttpResponse(status=200)
 
-    # pylint: disable=broad-except
     except Exception as error:
         messages.error(request, f'Error removing item: {error}')
         return HttpResponse(status=500)

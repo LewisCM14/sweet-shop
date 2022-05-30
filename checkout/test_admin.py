@@ -10,7 +10,6 @@ from .models import Order
 from .admin import OrderAdmin
 
 
-# pylint: disable=no-member
 class TestAdmin(TestCase):
     """
     Contains the tests for the admin logic,
@@ -76,7 +75,9 @@ class TestAdmin(TestCase):
             })
 
         order = Order.objects.get(id=1)
-        self.client.post(reverse("checkout_success", args=[order.order_number]))  # noqa: E501
+        self.client.post(
+            reverse("checkout_success", args=[order.order_number])
+        )
 
     def test_status_tuple_values_correct(self):
         """

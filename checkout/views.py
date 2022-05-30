@@ -17,9 +17,6 @@ from .order_form import OrderForm
 from .models import OrderLineItem, Order
 
 
-# pylint: disable=unused-variable
-# pylint: disable=broad-except
-# pylint: disable=invalid-name
 @require_POST
 def cache_checkout_data(request):
     """
@@ -57,7 +54,6 @@ def cache_checkout_data(request):
         return HttpResponse(content=e, status=400)
 
 
-# pylint: disable=no-member
 def checkout(request):
     """
     The view to handle the checkout functionality.
@@ -137,14 +133,18 @@ def checkout(request):
                     order.delete()
                     return redirect(reverse('view_cart'))
             request.session['save_info'] = 'save-info' in request.POST
-            return redirect(reverse('checkout_success', args=[order.order_number]))  # noqa: E501
+            return redirect(
+                reverse('checkout_success', args=[order.order_number])
+            )
         else:
             messages.error(request, 'There was an error with your form. \
                 Please double check your information.')
     else:
         cart = request.session.get('cart', {})
         if not cart:
-            messages.error(request, "There's nothing in your cart at the moment")  # noqa: E501
+            messages.error(
+                request, "There's nothing in your cart at the moment"
+            )
             return redirect(reverse('products'))
         current_cart = cart_contents(request)
         total = current_cart['grand_total']
@@ -156,7 +156,7 @@ def checkout(request):
             )
         order_form = OrderForm()
 
-        # Prefills the OrderForm with the users saved delivery info if stored.
+        # Pre-fills the OrderForm with the users saved delivery info if stored.
         if request.user.is_authenticated:
             try:
                 profile = UserProfile.objects.get(user=request.user)
@@ -201,7 +201,7 @@ def checkout_success(request, order_number):
 
     Then checks if the user is authenticated and if so collects
     their UserProfile in order to save the order to it via the
-    user_profile forign key on the Order model.
+    user_profile foreign key on the Order model.
 
     If the user checked to save_info the UserProfile is then
     updated via the UserProfileForm via the passed in values for

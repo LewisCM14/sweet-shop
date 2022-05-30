@@ -13,9 +13,6 @@ from profiles.models import UserProfile
 from .models import Order, OrderLineItem
 
 
-# pylint: disable=invalid-name
-# pylint: disable=no-member
-# pylint: disable=broad-except
 class StripeWH_Handler:
     """ The class to handle stripes webhooks """
 
@@ -85,13 +82,13 @@ class StripeWH_Handler:
         The order_exists boolean is then set to false and the attempt
         counter set to 5. Then within a while loop the webhook checks
         if the Order instance already exists within the database.
-        If so breaks out of the loop sends the order confrimation
+        If so breaks out of the loop sends the order confirmation
         email and returns a HttpResponse 200.
 
         Once the counter reaches 0, 'order_exists' is set to False and the
         Order instance is created from within the webhook using
         the data collected in the shipping_details variable, before
-        sending a confrimation email and returning a HttpResponse 200.
+        sending a confirmation email and returning a HttpResponse 200.
 
         If the Order can not be found or created from within the webhook a
         HttpResponse 500 is returned along with the error message.

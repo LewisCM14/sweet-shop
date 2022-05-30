@@ -6,7 +6,6 @@ from products.models import Type, Product
 from .models import Order, OrderLineItem
 
 
-# pylint: disable=no-member
 class TestModel(TestCase):
     """
     Contains the tests for the Order and OrderLineItem models.
@@ -55,7 +54,7 @@ class TestModel(TestCase):
         )
 
         test_order2 = Order.objects.create(
-            order_number='Order Number Test String',
+            order_number='Test String',
             user_profile=None,
             full_name='John Doe',
             email='johndoe@email.com',
@@ -75,7 +74,7 @@ class TestModel(TestCase):
         )
 
         test_order3 = Order.objects.create(
-            order_number='Order Number Test String',
+            order_number='Test String',
             user_profile=None,
             full_name='John Doe',
             email='johndoe@email.com',
@@ -118,7 +117,7 @@ class TestModel(TestCase):
         self.assertEqual(str(order1), order1.order_number)
 
         order2 = Order.objects.get(id=2)
-        self.assertEqual(str(order2), 'Order Number Test String')
+        self.assertEqual(str(order2), 'Test String')
 
     def test_update_total_populates_fields(self):
         """
@@ -170,4 +169,6 @@ class TestModel(TestCase):
         """
 
         line_item = OrderLineItem.objects.get(id=2)
-        self.assertEqual(str(line_item), 'Raspberry Bon Bons on order Order Number Test String')  # noqa: E501
+        self.assertEqual(
+            str(line_item), 'Raspberry Bon Bons on order Test String'
+        )

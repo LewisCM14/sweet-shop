@@ -13,7 +13,6 @@ from products.models import Product
 from profiles.models import UserProfile
 
 
-# pylint: disable=no-member
 class Order(models.Model):
     """
     The Order model, handles all orders across the store.
@@ -47,7 +46,10 @@ class Order(models.Model):
     # Order Number
     order_number = models.CharField(max_length=32, null=False, editable=False)
     # Foreign Key to the User Model
-    user_profile = models.ForeignKey(UserProfile, on_delete=models.SET_NULL, null=True, blank=True, related_name='orders')  # noqa: E501
+    user_profile = models.ForeignKey(
+        UserProfile, on_delete=models.SET_NULL, null=True, blank=True,
+        related_name='orders'
+    )
     # User Contact Details
     full_name = models.CharField(max_length=50, null=True, blank=True)
     email = models.EmailField(max_length=254, null=False, blank=False)
@@ -156,11 +158,20 @@ class OrderLineItem(models.Model):
     lineitem_total is non editable and calculated within the save method.
     lineitem_weight is non editable and calculated within the save method.
     """
-    order = models.ForeignKey(Order, null=False, blank=False, on_delete=models.CASCADE, related_name='lineitems')  # noqa: E501
-    product = models.ForeignKey(Product, null=False, blank=False, on_delete=models.CASCADE)  # noqa: E501
+    order = models.ForeignKey(
+        Order, null=False, blank=False, on_delete=models.CASCADE,
+        related_name='lineitems'
+    )
+    product = models.ForeignKey(
+        Product, null=False, blank=False, on_delete=models.CASCADE
+    )
     quantity = models.IntegerField(null=False, blank=False, default=0)
-    lineitem_total = models.DecimalField(max_digits=6, decimal_places=2, null=False, blank=False, editable=False)  # noqa: E501
-    lineitem_weight = models.IntegerField(null=False, blank=False, editable=False)  # noqa: E501
+    lineitem_total = models.DecimalField(
+        max_digits=6, decimal_places=2, null=False, blank=False, editable=False
+    )
+    lineitem_weight = models.IntegerField(
+        null=False, blank=False, editable=False
+    )
 
     def save(self, *args, **kwargs):
         """
