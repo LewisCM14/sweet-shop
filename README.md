@@ -249,6 +249,42 @@ ___
 
 ### Existing Features <a name='existingfeatures'></a>
 
+**Product Search**
+
+* Due to the project being an e-commerce store, there is a lot of focus on product search and filtering functionalities. When the users arrives on the home page, for desktop devices, they are greeted with a main navigation bar that allows for search functionality as well as dropdown menus for: all products, sweet types and sweets by year. On mobile devices the search bar and product dropdowns collapse into magnifying glass and store icons respectively.
+
+    ![image of the desktop navbar](media/navbar_desktop.png)
+
+    ![image of the mobile navbar dropdown](media/nav_dropdown_mobile.png)
+
+* Below the navbar, the index page displays carousels of the store products, arranged by sweet type. From within these carousels users can scroll along the products for that type, or navigate to the product list for that category, allowing the users to browse the stores products as soon as they land on the site whilst also making use of high quality imagery used to represent each product in creation of an inviting landing page. To break up the product carousels high quality images of pick and mix selections are used with an opaque overlay detailing the sweets by year categories the site offers along with navigation buttons.
+
+    ![image of the display for products by year navigation](media/year_display.png)
+    ![image of the product carousels](media/product_carousels.png)
+
+* If the user makes it to the bottom of the index page without navigating away from it they are greeted by large button allow them to view all products with the shop categories again highlighted in the footer. Once a user reaches the product list page, on desktop devices side navigation for the shop categories is provided as well as sort options at the top. Each individual product card also highlights that items type as a clickable link to allow the user to filter products by it. On mobile devices this side navigation and sort bar re-organize to display vertically.
+
+    ![image of the shop all products banner](media/shop_all_products_banner.png)
+    ![image of the categories section of the footer](media/categories_footer.png)
+    ![image of the categories side navigation](media/side_nav.png)
+    ![image of the product sort dropdown](media/product_sort.png)
+    ![image of the product card](media/product_card.png)
+
+* When a user navigates to an individual items page, its type and time periods it was popular are highlighted as buttons, again allowing for the user to filter all products via that category. Site wide all images of product are always clickable and direct the user to that individual items page. This extensive range of navigation options always pointing towards products is intended to lend itself to the 'kid in a candy store' ethos of the site and encourage users to browse and add products to their cart for purchase.
+
+    ![image of the category buttons](media/category_buttons.png)
+
+Issues relating to [product filtering](https://github.com/LewisCM14/sweet-shop/issues?q=label%3A%22PRODUCT+SEARCH%22+is%3Aclosed)
+Issues relating to [viewing products](https://github.com/LewisCM14/sweet-shop/issues?q=label%3A%22VIEW+PRODUCTS%22+is%3Aclosed)
+
+**Checkout**
+
+**Favorites**
+
+**Reviews**
+
+**Inquiry**
+
 
 [Return to Table of Contents](#contents)
 ___
