@@ -75,18 +75,15 @@
                                     </a>
                                     <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                                         <li><a class="dropdown-item" href="{% url 'profile' %}">Account</a></li>
-                                        <li><hr style="width: 100%; background-color: #000080; height: 2px" class="dropdown-divider"></li>
                                         <li><a class="dropdown-item" href="{% url 'my_favorites' %}">Favorites</a></li>
                                         <li><a class="dropdown-item" href="{% url 'my_reviews' %}">Reviews</a></li>
-                                        <li><hr style="width: 100%; background-color: #000080; height: 2px" class="dropdown-divider"></li>
                                         <li><a class="dropdown-item" href="{% url 'change_name' %}">Change Name</a></li>
                                         <li><a class="dropdown-item" href="{% url 'account_email' %}">Change Email</a></li>
                                         <li><a class="dropdown-item" href="{% url 'account_change_password' %}">Change Password</a></li>
-                                        <li><hr style="width: 100%; background-color: #000080; height: 2px" class="dropdown-divider"></li>
                                         {% if request.user.is_superuser %}
                                             <li><a class="dropdown-item" href="{% url 'add_product' %}">Manage Products</a></li>
-                                            <li><hr style="width: 100%; background-color: #000080; height: 2px" class="dropdown-divider"></li>
                                         {% endif %}
+                                        <li><hr style="width: 100%; background-color: #000080; height: 2px" class="dropdown-divider"></li>
                                         <li><a class="dropdown-item" href="{% url 'account_logout' %}">Logout</a></li>
                                     </ul>
                                 </li>
@@ -115,6 +112,7 @@
                             </a>
                         </div>
                         <div class="d-block d-sm-block d-md-block d-lg-none d-xl-none d-xxl-none">
+                            {% include 'includes/main-nav.html' %}
                         </div>
                     </div>
                     <div class="col text-center">

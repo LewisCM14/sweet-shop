@@ -1,42 +1,32 @@
-<section class="navbar-collapse collapse" id="main-nav">
-    <ul class="navbar-nav w-auto mx-auto">
-        <!-- All Products -->
-        <li class="nav-item dropdown">
-            <a class="logo-font font-weight-bold nav-link charcoal-navy mr-5" href="#"
-                id="all-products-link" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                All Products
-            </a>
-            <div class="dropdown-menu border-0" aria-labelledby="all-products-link">
+<!-- Search Dropdown Toggle -->
+<div class="list-inline-item">
+    <a class="charcoal-navy" href="#" id="main-nav" role="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="toggle the shop categories main nav dropdown">
+        <div class="text-center icon"><i class="fa-solid fa-xl fa-shop"></i></div>
+    </a>
+    <!-- Search Form -->
+    <div class="dropdown-menu border-0 w-100 p-3 rounded-0 my-0" aria-labelledby="main-nav">
+        <div class="row d-flex justify-content-evenly">
+            <div class="col d-none d-sm-block d-md-block">
                 <a href="{% url 'products' %}" class="dropdown-item">All Products</a>
                 <a href="{% url 'products' %}?sort=price&direction=asc" class="dropdown-item">By Price</a>
             </div>
-        </li>
-        <!-- By Type -->
-        <li class="nav-item dropdown">
-            <a class="logo-font font-weight-bold nav-link charcoal-navy mr-5" href="#"
-                id="sweet-type-link" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Sweets By Type
-            </a>
-            <div class="dropdown-menu border-0" aria-labelledby="sweet-type-link">
-                <a href="{% url 'products' %}?type_query=chewy" class="dropdown-item"><h6>Chewy</h6></a>
-                <a href="{% url 'products' %}?type_query=chocolate" class="dropdown-item"><h6>Chocolate</h6></a>
-                <a href="{% url 'products' %}?type_query=fizzy" class="dropdown-item"><h6>Fizzy</h6></a>
-                <a href="{% url 'products' %}?type_query=jellies_gums" class="dropdown-item"><h6>Jellies & Gums</h6></a>
-                <a href="{% url 'products' %}?type_query=sherbet" class="dropdown-item"><h6>Sherbet</h6></a>
-                <a href="{% url 'products' %}?type_query=sour" class="dropdown-item"><h6>Sour</h6></a>
+            <div class="col">
+                <div class="col d-block d-sm-none d-md-none">
+                    <a href="{% url 'products' %}" class="dropdown-item">All Products</a>
+                    <a href="{% url 'products' %}?sort=price&direction=asc" class="dropdown-item">By Price</a>
+                </div>
+                <a href="{% url 'products' %}?year=80" class="dropdown-item">80s Sweets</a>
+                <a href="{% url 'products' %}?year=90" class="dropdown-item">90s Sweets</a>
+                <a href="{% url 'products' %}?year=00" class="dropdown-item">00s Sweets</a>
             </div>
-        </li>
-        <!-- By Year -->
-        <li class="nav-item dropdown">
-            <a class="logo-font font-weight-bold nav-link charcoal-navy mr-5" href="#"
-                id="sweet-year-link" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Sweets By Year
-            </a>
-            <div class="dropdown-menu border-0" aria-labelledby="sweet-year-link">
-                <a href="{% url 'products' %}?year=80" class="dropdown-item"><h6>80s Sweets</h6></a>
-                <a href="{% url 'products' %}?year=90" class="dropdown-item"><h6>90s Sweets</h6></a>
-                <a href="{% url 'products' %}?year=00" class="dropdown-item"><h6>00s Sweets</h6></a>
+            <div class="col">
+                <a href="{% url 'products' %}?type_query=chewy" class="dropdown-item">Chewy</a>
+                <a href="{% url 'products' %}?type_query=chocolate" class="dropdown-item">Chocolate</a>
+                <a href="{% url 'products' %}?type_query=fizzy" class="dropdown-item">Fizzy</a>
+                <a href="{% url 'products' %}?type_query=jellies_gums" class="dropdown-item">Jellies & Gums</a>
+                <a href="{% url 'products' %}?type_query=sherbet" class="dropdown-item">Sherbet</a>
+                <a href="{% url 'products' %}?type_query=sour" class="dropdown-item">Sour</a>
             </div>
-        </li>
-    </ul>
-</section>
+        </div>
+    </div>
+</div>
