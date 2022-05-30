@@ -10,18 +10,21 @@ class OrderForm(forms.ModelForm):
     """
 
     full_name = forms.CharField(
+        max_length=50,
         label='Full Name',
         required=True,
         widget=forms.TextInput(attrs={'placeholder': 'Full Name'}),
     )
 
     email = forms.EmailField(
+        max_length=254,
         label='Email Address',
         required=True,
         widget=forms.TextInput(attrs={'placeholder': 'Email Address'}),
     )
 
     phone_number = forms.CharField(
+        max_length=16,
         label='Phone Number',
         required=True,
         widget=forms.TextInput(
@@ -29,30 +32,35 @@ class OrderForm(forms.ModelForm):
     )
 
     street_address1 = forms.CharField(
+        max_length=80,
         label='First Street Address',
         required=True,
         widget=forms.TextInput(attrs={'placeholder': 'Street Address'}),
     )
 
     street_address2 = forms.CharField(
+        max_length=80,
         label='Second Street Address',
         required=False,
         widget=forms.TextInput(attrs={'placeholder': 'Street Address'}),
     )
 
     town_or_city = forms.CharField(
+        max_length=40,
         label='Town or City',
         required=True,
         widget=forms.TextInput(attrs={'placeholder': 'Town or City'}),
     )
 
     county = forms.CharField(
+        max_length=80,
         label='County',
         required=True,
         widget=forms.TextInput(attrs={'placeholder': 'County'}),
     )
 
     postcode = forms.CharField(
+        max_length=20,
         label='Postal Code',
         required=True,
         widget=forms.TextInput(attrs={'placeholder': 'Post Code'}),

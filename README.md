@@ -234,7 +234,11 @@ ___
 [Return to Table of Contents](#contents)
 ___
 
-### Testing <a name ='testing'></a> 
+### Testing <a name ='testing'></a>
+
+* Various forms of testing have been used in the project to ensure the app functions as intended. Automated testing is the key method used on the Python code, with the Coverage package being utilized to access coverage. With an intention to begin practicing test driven development i chose to write automated tests to cover each app of the project before pushing and deploying to the main branch, this afforded me the ability to test for how new features impacted on existing ones.
+
+* For the Javascript code my focus was manual limit testing in conjunction with the DevTools console and validation testing, similarly DevTools was utilized to ensure the website was responsive before moving onto a variety of devices to access if their was any discrepancies. From here Validators have been used on the HTML and CSS as well as making use of the Lighthouse application to ensure a wide and sufficient range of testing. Stripes webhook feature and the API dashboard has also been used to ensure payments are processed correctly.
 
 - **Bugs found in Development** <a name='developmentbugs'></a>
 
@@ -249,7 +253,7 @@ ___
         - No errors were found when passing through the [W3C Validator tool](https://jigsaw.w3.org/css-validator/)
 
     - JAVASCRIPT
-        - No custom Javascript is used in the project, so validator testing was not required.
+        - No errors were found when passing through the [JSHint Validator tool](https://jshint.com/)
 
     - Python
         - No errors were found when passing through the [PEP8 Validator tool](http://pep8online.com/).
@@ -257,11 +261,17 @@ ___
 
 - **Lighthouse** <a name='lighthouse'></a>
 
+    * The lighthouse application has been ran on each page of the site for mobile and desktop devices, with modifications to the code made in order to score above 90% on SEO, Best Practices and Accessibility for all. The only page where this score hasn't been reached is the product management feature of the application and is in relation to alt and aria label text of the image input, the score still remains above 80% though so i have chosen not to address this as it impacts on the custom widget utilized for image management. 
+    
+    * The performance score is generally above 80% site wide so i chose not to focus on improving it at this point of the project as i felt it wasn't a good use of time and held little influence over my ability to deploy a minimally viable product.
+
     ---
 
 - **Automated Tests** <a name='automated'></a>
 
-    * Using the coverage package, i have generated reports for the app
+    * Using the coverage package, i developed the project with a large focus on automated testing of my Python code, developing and testing it incrementally in an attempt to work towards TDD. My goal was achieve 90% or above test coverage of the application as a whole. For final deployment my coverage was 93%. The only modules with limited test coverage are those relating to stripes webhook & webhook handler and the checkout views which make use of this webhook feature. Due to being able to test this feature manually from within the Stripe dashboard i felt it wasn't necessary to write automated tests from within the application to cover it as this point.
+
+    ![image of the final coverage report score](media/coverage_report.png)
 
     ---
 
@@ -291,9 +301,27 @@ ___
 
 - **Manual Testing** <a name='manual'></a>
 
-    * Using devtools on google chrome the application has been tested on various devices to ensure it is fully responsive. 
+    **Responsiveness**
+
+    * Using DevTools on google chrome the application has been tested on various devices to ensure it is fully responsive, prior to running it on my own personal PC, laptop and iPhone to check for any discrepancies, performing as intended on each. Outside of DevTools i have ran the site on several browsers including: Brave, Chrome, Firefox and Edge. It appears to function as intended on these browsers also.
+
+    **Payment Processing and Webhook**
+
+    * Using the developers section of the Stripe dashboard i monitored the success of my API request and Webhook handler consistently through development in my local environment, forcing failure of the Webhook for testing purposes by temporarily altering the JavaScript which handles Stripes payment intent, i also tested the ability of the webhook handler to create and check for orders within the database this way. Once satisfied Stripe handled payments within my local environment i pushed the checkout app to main and deployed, adjusting the webhook to point to the new URL endpoint and submitted a large selection of new orders to the database through the deployed project ensuring it still performed as intended.
+
+    ![image of the stripe test data graph](media/stripe_test_data.png)
+
+    **Javascript Code Testing**
+
+    *The vast majority of the custom Javascript code in the project is used to handle passing form data to the server, due to this i felt automated testing at this point of the project wasn't a good use of time, due to me needing to post several orders to the database as well i felt it sufficient to limit test the JS code and Stipes functionality together manually.* 
     
-    * Outside of devtools i have ran the site on several browsers including: Brave, Chrome, Firefox and Edge. It appears to function as intended on these browsers. I have also ran it on my own personal pc, laptop and iphone, preforming as intended on each.
+    * A key area of the JS code i identified as having potential to cause problems was the quantity input script, found in the templates folder of the product app. Wanting to limit customers to not purchasing a single item exceeding a weight of 5kg i needed to limit the input total to 25 and prevent negative values being submitted. In order to achieve this the JS code disables the +/- buttons within a range of 2-24. Similarly each form instance this script is used on has an input range of 1-25. To further prevent the code from breaking the view which handles adding products to the cart checks if the quantity of each item within it would exceed 25 when updated to the new value being passed, and if so prevents the update and returns an error. I've attempted to break the quantity input feature by adding numbers outside of the range and updating existing products to exceed the range to no avail.
+
+    * Another area heavily reliant on JS code is StipesPaymentIntent method, found in the static folder of the checkout app. Due to this mostly being boilerplate code found in the Stipe documentation i again felt automated testing wasn't required, instead i was able to ensure the correct values where passed by the JS code to the view from within the printout of Stipes developers dashboard for each payment intent. Returning error messages and preventing submission of invalid order instances is all handled in the backend by Python code and covered by automated testing. To handle Stipe requiring the country field of its payment intent to meet ISO 3166-1 alpha-2, Django's countries package has been used to ensure the country field on forms is displayed as a dropdown option, preventing user input breaking the code. I again tried to break the code by inputting invalid values in various combinations into the order form, again to no avail. This in conjunction with the redundancy Stipes webhook handler provides i felt sufficiently covered the code relating to processing payments.
+
+    * Another feature which uses JS code is the save info feature of the order form, due to the order form being validated via python code incorrect values cannot be passed in the save info feature. So the only testing performed was to ensure that information is only saved to the user profile if checked and the feature was only presented to authorized users, for both instances the code performs as intended.
+
+    * The other instances of JS code include the code which validates the MailChimp newsletter sign up feature, as well as the code to mount Stipes card elements to the page, both copied from their relative documentation. Both these functions have been manually tested across multiple devices, with the Stripe card element always being displayed as intended and MailChip sign up retuning error messages for invalid email submissions as intended. Aside from this the return to top button found on product list template is the final piece of JS code, due to this not saving or passing information the only test required was that it returns a user to the top of the page when clicked, which as of final deployment it does.
 
 
 [Return to Table of Contents](#contents)
