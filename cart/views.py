@@ -43,7 +43,9 @@ def add_to_cart(request, item_id):
             return redirect(redirect_url)
         else:
             cart[item_id] += quantity
-            messages.success(request, f'Updated {product.name} quantity to {cart[item_id]}')  # noqa: E501
+            messages.success(
+                request, f'Updated {product.name} quantity to {cart[item_id]}'
+            )
     else:
         cart[item_id] = quantity
         messages.success(request, f'Added {product.name} to your cart')
@@ -82,7 +84,9 @@ def adjust_cart(request, item_id):
             return redirect(reverse('view_cart'))
         else:
             cart[item_id] = quantity
-            messages.success(request, f'Updated {product.name} quantity to {cart[item_id]}')  # noqa: E501
+            messages.success(
+                request, f'Updated {product.name} quantity to {cart[item_id]}'
+            )
     else:
         cart.pop(item_id)
         messages.success(request, f'Removed {product.name} from your cart')

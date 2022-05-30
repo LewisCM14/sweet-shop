@@ -49,10 +49,14 @@ def cart_contents(request):
         if total < settings.FREE_DELIVERY_THRESHOLD:
             if combined_weight + 100 < 1000:
                 delivery = Decimal(2.49)
-                free_delivery_delta = Decimal(settings.FREE_DELIVERY_THRESHOLD - total)  # noqa: E501
+                free_delivery_delta = Decimal(
+                    settings.FREE_DELIVERY_THRESHOLD - total
+                )
             elif combined_weight + 100 > 1000:
                 delivery = Decimal(3.49)
-                free_delivery_delta = Decimal(settings.FREE_DELIVERY_THRESHOLD - total)  # noqa: E501
+                free_delivery_delta = Decimal(
+                    settings.FREE_DELIVERY_THRESHOLD - total
+                )
         else:
             delivery = 0
             free_delivery_delta = 0
