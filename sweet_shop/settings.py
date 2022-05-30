@@ -63,7 +63,6 @@ INSTALLED_APPS = [
     'inquiry',
     # Other
     'storages',
-    'fontawesomefree',
     'crispy_forms',
 ]
 
@@ -99,7 +98,7 @@ TEMPLATES = [
                 'django.template.context_processors.media',  # req for no media
                 'cart.contexts.cart_contents',  # cart app context processor
             ],
-            'builtins': [  # Contains all the tags avaliable in templates
+            'builtins': [  # Contains all the tags available in templates
                 'crispy_forms.templatetags.crispy_forms_tags',
                 'crispy_forms.templatetags.crispy_forms_field',
             ]
