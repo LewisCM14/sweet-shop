@@ -42,7 +42,6 @@ class Reviews(models.Model):
         verbose_name_plural = "Reviews"
         unique_together = [['user', 'product']]
 
-    # pylint: disable=invalid-str-returned
     def __str__(self):
         """
         Returns the string value for the products name.

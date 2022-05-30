@@ -10,7 +10,6 @@ from .models import Reviews
 from .review_form import PostReviewForm
 
 
-# pylint: disable=no-member
 @login_required
 def post_review(request, product_id):
     """
@@ -37,8 +36,12 @@ def post_review(request, product_id):
 
     if request.method == 'POST':
         if Reviews.objects.filter(user=user, product=product,).exists():
-            messages.error(request, f'You have already reviewed {product.name}!')  # noqa: E501
-            return HttpResponseRedirect(reverse('product_detail', args=[product.id]))  # noqa: E501
+            messages.error(
+                request, f'You have already reviewed {product.name}!'
+            )
+            return HttpResponseRedirect(
+                reverse('product_detail', args=[product.id])
+            )
         else:
             form = PostReviewForm(request.POST)
             if form.is_valid():
@@ -48,10 +51,14 @@ def post_review(request, product_id):
                 review.save()
                 messages.info(request, 'Thanks for your review!')
             else:
-                messages.error(request, 'Review failed. Please ensure the form is valid.')  # noqa: E501
+                messages.error(
+                    request, 'Review failed. Please ensure the form is valid.'
+                )
                 form = PostReviewForm()
 
-        return HttpResponseRedirect(reverse('product_detail', args=[product.id]))  # noqa: E501
+        return HttpResponseRedirect(
+            reverse('product_detail', args=[product.id])
+        )
 
 
 @login_required
@@ -92,7 +99,9 @@ def delete_review(request, product_id):
     )
 
     review.delete()
-    messages.warning(request, f'Deleted your review of {product.name}!')  # noqa: E501
+    messages.warning(
+        request, f'Deleted your review of {product.name}!'
+    )
 
     return HttpResponseRedirect(reverse('my_reviews'))
 
@@ -116,7 +125,9 @@ def edit_review(request, review_id):
     review = get_object_or_404(Reviews, pk=review_id)
 
     if review.user != request.user:
-        messages.error(request, 'You cannot alter this review!')  # noqa: E501
+        messages.error(
+            request, 'You cannot alter this review!'
+        )
         return redirect(reverse('my_reviews'))
     else:
         form = PostReviewForm(instance=review)
@@ -127,7 +138,8 @@ def edit_review(request, review_id):
                 messages.success(request, 'Review updated successfully!')
                 return redirect(reverse('my_reviews'))
             else:
-                messages.error(request, 'Failed to update the review. Please ensure the form is valid.')  # noqa: E501
+                messages.error(
+                    request, 'Failed to update the review. Please ensure the form is valid.')  # noqa: E501
         else:
             form = PostReviewForm(instance=review)
             messages.info(request, f'You are editing your review of {review.product.name}')  # noqa: E501
