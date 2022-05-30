@@ -61,13 +61,13 @@
                                 </div>
                                 <!-- Remove Item from Favorites -->
                                 <div class="col-md-2 mb-2 mb-md-2 d-flex justify-content-center align-items-center">
-                                    <button class="blank-btn text-center text-decoration-none text-red"
+                                    <a class="blank-btn text-center text-decoration-none text-red"
                                         href="{% url 'remove_favorite' item.product.id %}"
                                         aria-label="remove {{ item.product.name }} from favorites">
                                         <span class="text-uppercase flex-column">
                                             <i class="fa-solid fa-trash-can fa-2xl"></i>
                                         </span>
-                                    </button>
+                                    </a>
                                 </div>
                                 <!-- Item Quantity -->
                                 <div class="col-md-3 d-flex justify-content-center align-items-center">
