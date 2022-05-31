@@ -105,7 +105,7 @@ ___
         * To regularly buy a selection of sweets to keep in the treat draw at home.
         ---
     * What is their barrier to achieving this goal?
-        * The ability to browse an online sweet store and create themselves a pick’n’mix style bundle for themselves. 
+        * The ability to browse an online sweet store and create themselves a pick’n’mix style bundle. 
         ---
 
 * **Augustine Evanson**
@@ -114,7 +114,7 @@ ___
         * | *Gender*: Male | *Age*: 33 | *Nationality*: British | *Location*: Warrington | *Occupation*: Sweet Seller |
         ---
     * What is their main goal?
-        * To start an e-commerce business selling sweets online.
+        * To expand their e-commerce business selling sweets online.
         ---
     * What is their barrier to achieving this goal?
         * They currently don’t have a website.
@@ -122,14 +122,37 @@ ___
 
 **Site Goal** <a name='sitegoal'></a>
 
+* The goal of the site is to meet the goals of the above user personas in a robust, secure and responsive web application.
 
 **Target Audience** <a name='targetaudience'></a>
 
+* The intended target audience of the application is the generation of people referred to as 'Millennials', people born between 1981-1996 and in turn their children, however the primary focus is on millennials.
 
 **Owner Goals** <a name='ownergoals'></a>
 
+* The site owners goal first and foremost is to become the owner of e-commerce store which meets their clients needs. In order to achieve this goal efforts to market their store and consistently build a client base must also be made with the long term goal of being able to offer services on online take away platforms like Uber Eats & Just Eat.
 
 **How These Goals are Addressed** <a name='goaladdress'></a>
+
+* Peyton Post
+
+    In order to meet the goals of Peyton, There is a strong focus on users being able to see sweets popular during the: 1980's, 1990's and 2000's. Key time periods which capture all the points at which millennials would have been kids and pre-teens with sweets being a key feature in their life. Due to them also being a student the ability to sort sweets by price is provided as it is reasonably safe to assume they have a limited budget. From here Peyton is able to add products like 'Fizzy Twin Cherries' or 'Raspberry Bon Bons' to their cart, which details the order subtotals clearly, before navigating to the order form and checking out using Stripes secure payment service. Successfully purchasing sweets as a birthday present for their older brother that they would have eaten as a child.
+
+* Rorie Wyatt
+
+    In order to meet the goals of Rorie, similar focus on filtering sweets by time periods covering millennial youth has been paid. However, Rorie intends on purchasing sweets to give her young children. Because of this each product has clear ingredient and allergen information displayed in its description. They also wish to order a variety of items in reasonable quantities, this is achieved by extensive site navigation options, allowing Rorie to explore the stores products and add them to her cart with ease. All whilst there weight and quantity fields are displayed clearly. Again, once Rorie has added her selection of sweets to her cart she can clearly see the subtotals, but also update items from within the cart itself. Allowing her to view her order as a whole and make the decision if her order is of a good variety of sweets at reasonable quantity. From here she can again complete her purchase using Stripes secure payment services, Successfully purchasing sweets she ate as a child in order to give to her kids.
+
+* Blair Horn
+
+    Blair has similar goals to Rorie, however they intend on making a considerably larger order. Naturally this raises concerns surrounding delivery. In order to meet the goals of Blair FAQ and Delivery Information pages have been setup, which cover order packaging. From here Blair can be satisfied in the knowledge that when their order makes it safely to them, they can then safely commute with it to work. A weight limit of 5kg per product also more than covers them wanting to purchase a large selection of sweets.
+
+* Rhys Powell
+
+    Whilst Rhys has similar goals to Rorie and Blair, in terms of wanting to purchase a large selection of sweets, they intend on making smaller more regular purchases. To help them achieve this goal user account creation capabilities are available. Once Rhys has created and verified their account, they can then begin adding products to their favorites list, from within this favorites list they can then add products directly to their cart without navigating across the site to find them. This also allows for them to create pick & mix styles orders. Once Rhys has made his initial purchase, provided he checked the save info box on the checkout form, he then doesn't need to enter his contact and delivery details again. Only his payment details, this is unavoidable as Classic Confectionery doesn't store or process payment information. However, user profile and favorite features successfully allow Rhys to achieve his goal of regularly purchasing sweets to keep in his treat draw at home.
+
+* Augustine Evanson
+
+    With Augustine being the site owner their main goal of becoming the owner of an e-commerce sweet store which meets their clients needs is met upon deployment of the Classic Confectionery website, as the website in its current state is able to allow the four user personas above to meet their goals. The secondary goal of Augustine, which is to market their store and build a consistent client base is harder to quantify at this point. However, web marketing in terms of organic social media marketing and newsletter services have been implemented along side search engine optimization, all which should help Augustine achieve his goals. 
 
 
 **Data Required** <a name='datarequired'></a>
@@ -199,7 +222,7 @@ ___
 
 * Facebook Business
 
-    Due to the target audience being labelled as the internet or global generation i felt social media marketing was a great fit for growing a consistent client based and would translate directly to the company's long term goal of being able to sell products on online takeaway platforms like Uber Eats & Just Eat. In order to achieve this Classic Confectionery has setup a Facebook business page, allowing them to develop a good reputation and be identifiable as a reputable business amongst their target audience. When assessing competing sweet retailers none seem to be utilizing social media marketing with the intention of bridging onto online takeaway platforms. Their target audience doesn't appear to be the millennial age range either, choosing to focus on the older generations by retailing 'retro' sweets or the extremely young generation and retailing 'american candy'. I feel these two factors prevent a market niche that marketing sweets to millennials via social media can capitalize on.
+    Due to the target audience being labelled as the internet or global generation i felt social media marketing was a great fit for growing a consistent client base and would translate directly to the company's long term goal of being able to sell products on online takeaway platforms like Uber Eats & Just Eat. In order to achieve this Classic Confectionery has setup a Facebook business page, allowing them to develop a good reputation and be identifiable as a reputable business amongst their target audience. When assessing competing sweet retailers none seem to be utilizing social media marketing with the intention of bridging onto online takeaway platforms. Their target audience doesn't appear to be the millennial age range either, choosing to focus on the older generations by retailing 'retro' sweets or the extremely young generation and retailing 'american candy'. I feel these two factors prevent a market niche that marketing sweets to millennials via social media can capitalize on.
 
 [Return to Table of Contents](#contents)
 ___

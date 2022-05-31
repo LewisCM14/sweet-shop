@@ -62,6 +62,15 @@ def all_products(request):
     direction = None
 
     if request.GET:
+        if 'year' in request.GET:
+            year = request.GET['year']
+            if year == '80':
+                products = Product.objects.filter(popular_in_80s=True)
+            elif year == '90':
+                products = Product.objects.filter(popular_in_90s=True)
+            elif year == '00':
+                products = Product.objects.filter(popular_in_00s=True)
+
         if 'sort' in request.GET:
             sortkey = request.GET['sort']
             sort = sortkey
@@ -76,15 +85,6 @@ def all_products(request):
                 if direction == 'desc':
                     sortkey = f'-{sortkey}'
             products = products.order_by(sortkey)
-
-        if 'year' in request.GET:
-            year = request.GET['year']
-            if year == '80':
-                products = Product.objects.filter(popular_in_80s=True)
-            elif year == '90':
-                products = Product.objects.filter(popular_in_90s=True)
-            elif year == '00':
-                products = Product.objects.filter(popular_in_00s=True)
 
         if 'type_query' in request.GET:
             type_filter = request.GET['type_query'].split(',')
