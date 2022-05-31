@@ -21,6 +21,12 @@ ___
 * [Development](#development)
 * [Database Schema](#database)
 * [Existing Features](#existingfeatures)
+    * [Product Search](#productsearch)
+    * [Checkout](#checkout)
+    * [User Profiles](#profiles)
+    * [Favorites](#favs)
+    * [Reviews](#review)
+    * [Inquiry](#inquire)
 * [Features Left to Implement](#toimplement)
 * [Testing](#testing)
     * [Bugs Found in Development](#developmentbugs)
@@ -249,7 +255,7 @@ ___
 
 ### Existing Features <a name='existingfeatures'></a>
 
-**Product Search**
+**Product Search** <a name='productsearch'></a>
 
 * Due to the project being an e-commerce store, there is a lot of focus on product search and filtering functionalities. When the users arrives on the home page, for desktop devices, they are greeted with a main navigation bar that allows for search functionality as well as dropdown menus for: all products, sweet types and sweets by year. On mobile devices the search bar and product dropdowns collapse into magnifying glass and store icons respectively.
 
@@ -277,7 +283,7 @@ ___
 Issues relating to [product filtering](https://github.com/LewisCM14/sweet-shop/issues?q=label%3A%22PRODUCT+SEARCH%22+is%3Aclosed).
 Issues relating to [viewing products](https://github.com/LewisCM14/sweet-shop/issues?q=label%3A%22VIEW+PRODUCTS%22+is%3Aclosed).
 
-**Checkout**
+**Checkout** <a name='checkout'></a>
 
 * Due to Classic Confectionery being a business to customer e-commerce application quick and easy checkout functionality is implemented. Whilst users can create orders without an account, they are encouraged to in order to access the applications full extent of features. Once an account has been created, upon submitting their first order, they are given the option to save the provided delivery info to their user profile, allowing them to complete future orders with this information pre-filled.
 
@@ -306,11 +312,30 @@ Issues relating to [ordering products](https://github.com/LewisCM14/sweet-shop/i
 Issues relating to [making payments](https://github.com/LewisCM14/sweet-shop/issues?q=label%3A%22PAY+FOR+PRODUCTS%22+is%3Aclosed).
 Issues relating to [cart functionality](https://github.com/LewisCM14/sweet-shop/issues?q=label%3A%22PRODUCT+CART%22+is%3Aclosed).
 
-**Favorites**
+**User Profiles** <a name='profiles'></a>
 
-**Reviews**
+* Allauth is used to build upon top of Django's core user authentication functionality, allowing the application to protect users data effectively. The custom user registration form collects a users first and last name, as well as email address and password before a confirmation email is sent to the provided email, once confirmed a user can log in. By requiring email and name fields, plus email confirmation for user registration key areas of information required to make orders have already been collected and a user profile instance created to store them. Once a user reaches the checkout form these areas are pre-filled, allowing for faster and easier purchases. This coupled with the save info box ensures default delivery and contact information needs to only be entered by the user once on the site.
 
-**Inquiry**
+    ![image of the user registration form](media/register.png)
+
+* Once a user profile has been created the site top bar allows for navigation options which in turn allow for all fields of the user profile to be updated, utilizing the allauth package for updating or resetting password and email fields and a custom template and view used to allow the user to update the full name associated with their account. This name field is used to highlight the signed in status of the user at all times from within the top bar. Default delivery information can also be updated within the accounts tab.
+    ![image of the top bar with dropdown](media/topbar_dropdown.png)
+    ![image of password change form](media/password_change.png)
+    ![image of password reset form](media/password_reset.png)
+    ![image of email update form](media/email_update.png)
+    ![image of name change form](media/name_change.png)
+    ![image of default delivery information](media/default_delivery.png)
+
+* The user profile feature also allows for users to access their order history for personal reference. The users order history is displayed as a list with the unique order number a clickable link which navigates to the checkout success page of the original order.
+
+    ![image of order history list](media/order_history_list.png)
+    ![image of previous order history](media/order_history.png)
+ 
+**Favorites** <a name='favs'></a>
+
+**Reviews** <a name='review'></a>
+
+**Inquiry** <a name='inquire'></a>
 
 
 [Return to Table of Contents](#contents)
