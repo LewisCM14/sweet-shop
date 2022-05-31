@@ -223,6 +223,10 @@ ___
 * Facebook Business
 
     Due to the target audience being labelled as the internet or global generation i felt social media marketing was a great fit for growing a consistent client base and would translate directly to the company's long term goal of being able to sell products on online takeaway platforms like Uber Eats & Just Eat. In order to achieve this Classic Confectionery has setup a Facebook business page, allowing them to develop a good reputation and be identifiable as a reputable business amongst their target audience. When assessing competing sweet retailers none seem to be utilizing social media marketing with the intention of bridging onto online takeaway platforms. Their target audience doesn't appear to be the millennial age range either, choosing to focus on the older generations by retailing 'retro' sweets or the extremely young generation and retailing 'american candy'. I feel these two factors prevent a market niche that marketing sweets to millennials via social media can capitalize on.
+    
+    ![image of the header for the facebook business page](media/fb_header.png)
+    ![image of the about section for the facebook business page](media/fb_about.png)
+    ![image of a post from the facebook business page](media/fb_post.png)
 
 [Return to Table of Contents](#contents)
 ___
