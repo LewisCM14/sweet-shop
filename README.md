@@ -27,6 +27,7 @@ ___
     * [Favorites](#favs)
     * [Reviews](#review)
     * [Inquiry](#inquire)
+    * [Product Management](#prodmanage)
 * [Features Left to Implement](#toimplement)
 * [Testing](#testing)
     * [Bugs Found in Development](#developmentbugs)
@@ -376,6 +377,23 @@ Issues relating to [the reviews app](https://github.com/LewisCM14/sweet-shop/iss
     ![image of the mail success page](media/mail_success.png)
 
 Issues relating to [the inquiry app](https://github.com/LewisCM14/sweet-shop/issues?q=label%3AINQUIRY+is%3Aclosed).
+
+**Product Management** <a name='prodmanage'></a>
+
+* The final feature of the application, but potentially the most important, is a site owners ability to add, edit and delete products. Whilst this is handled within the admin panel, site owners are also able to add products via the product management found in the top bar drop down. Edit and delete buttons are also provided on each products individual page. These three links are only displayed to site owners.
+
+    ![image of the edit and delete buttons](media/edit_delete_buttons.png)
+
+* The add product form utilizes a custom widget for the image field, allowing for quick and easy form entries. This same form is utilized with pre-filled information when a user edits a product.
+
+    ![image of the add product form](media/add_product.png)
+    ![image of the edit product form](media/edit_product.png)
+
+* Deleting products is protected behind a confirmation modal similarly to the delete reviews functionality. The main drawback of the current product management functionality though is that only the six defined types at final deployment are coded into the product search functionality, meaning that any products which fall outside of these types wont be found within those links and only available through the search functionality and all products tab. This currently isn't a major issue as excess types not only fall outside of the stores product range but also the minimum viable product goal of the application.
+
+    ![image of the delete product modal](media/delete_product.png)
+
+Issues relating to [product management](https://github.com/LewisCM14/sweet-shop/issues?q=label%3A%22MANAGE+PRODUCTS%22+is%3Aclosed).
 
 
 [Return to Table of Contents](#contents)
