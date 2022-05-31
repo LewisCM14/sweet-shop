@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+<!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
+
+
+<url>
+  <loc>https://sweet-shop-lewiscm.herokuapp.com/</loc>
+  <lastmod>2022-05-30T22:02:46+00:00</lastmod>
+  <priority>1.00</priority>
+</url>
+<url>
+  <loc>https://sweet-shop-lewiscm.herokuapp.com/accounts/signup/</loc>
+  <lastmod>2022-05-30T22:02:46+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://sweet-shop-lewiscm.herokuapp.com/accounts/login/</loc>
+  <lastmod>2022-05-30T22:02:46+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://sweet-shop-lewiscm.herokuapp.com/products/</loc>
+  <lastmod>2022-05-30T22:02:46+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://sweet-shop-lewiscm.herokuapp.com/products/?sort=price&amp;direction=asc</loc>
+  <lastmod>2022-05-30T22:02:46+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://sweet-shop-lewiscm.herokuapp.com/products/?year=80</loc>
+  <lastmod>2022-05-30T22:02:46+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://sweet-shop-lewiscm.herokuapp.com/products/?year=90</loc>
+  <lastmod>2022-05-30T22:02:46+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://sweet-shop-lewiscm.herokuapp.com/products/?year=00</loc>
+  <lastmod>2022-05-30T22:02:46+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://sweet-shop-lewiscm.herokuapp.com/products/?type_query=chewy</loc>
+  <lastmod>2022-05-30T22:02:46+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://sweet-shop-lewiscm.herokuapp.com/products/?type_query=chocolate</loc>
+  <lastmod>2022-05-30T22:02:46+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://sweet-shop-lewiscm.herokuapp.com/products/?type_query=fizzy</loc>
+  <lastmod>2022-05-30T22:02:46+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://sweet-shop-lewiscm.herokuapp.com/products/?type_query=jellies_gums</loc>
+  <lastmod>2022-05-30T22:02:46+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://sweet-shop-lewiscm.herokuapp.com/products/?type_query=sherbet</loc>
+  <lastmod>2022-05-30T22:02:46+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://sweet-shop-lewiscm.herokuapp.com/products/?type_query=sour</loc>
+  <lastmod>2022-05-30T22:02:46+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://sweet-shop-lewiscm.herokuapp.com/cart/</loc>
+  <lastmod>2022-05-30T22:02:46+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://sweet-shop-lewiscm.herokuapp.com/products/2/</loc>
+  <lastmod>2022-05-30T22:02:46+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://sweet-shop-lewiscm.herokuapp.com/products/3/</loc>
+  <lastmod>2022-05-30T22:02:46+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://sweet-shop-lewiscm.herokuapp.com/products/7/</loc>
+  <lastmod>2022-05-30T22:02:46+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://sweet-shop-lewiscm.herokuapp.com/products/8/</loc>
+  <lastmod>2022-05-30T22:02:46+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://sweet-shop-lewiscm.herokuapp.com/products/9/</loc>
+  <lastmod>2022-05-30T22:02:46+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://sweet-shop-lewiscm.herokuapp.com/products/18/</loc>
+  <lastmod>2022-05-30T22:02:46+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://sweet-shop-lewiscm.herokuapp.com/products/4/</loc>
+  <lastmod>2022-05-30T22:02:46+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://sweet-shop-lewiscm.herokuapp.com/products/5/</loc>
+  <lastmod>2022-05-30T22:02:46+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://sweet-shop-lewiscm.herokuapp.com/products/6/</loc>
+  <lastmod>2022-05-30T22:02:46+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://sweet-shop-lewiscm.herokuapp.com/products/13/</loc>
+  <lastmod>2022-05-30T22:02:46+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://sweet-shop-lewiscm.herokuapp.com/products/14/</loc>
+  <lastmod>2022-05-30T22:02:46+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://sweet-shop-lewiscm.herokuapp.com/products/15/</loc>
+  <lastmod>2022-05-30T22:02:46+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://sweet-shop-lewiscm.herokuapp.com/products/10/</loc>
+  <lastmod>2022-05-30T22:02:46+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://sweet-shop-lewiscm.herokuapp.com/products/11/</loc>
+  <lastmod>2022-05-30T22:02:46+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://sweet-shop-lewiscm.herokuapp.com/products/12/</loc>
+  <lastmod>2022-05-30T22:02:46+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://sweet-shop-lewiscm.herokuapp.com/products/1/</loc>
+  <lastmod>2022-05-30T22:02:46+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://sweet-shop-lewiscm.herokuapp.com/products/16/</loc>
+  <lastmod>2022-05-30T22:02:46+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://sweet-shop-lewiscm.herokuapp.com/products/17/</loc>
+  <lastmod>2022-05-30T22:02:46+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://sweet-shop-lewiscm.herokuapp.com/contact/</loc>
+  <lastmod>2022-05-30T22:02:46+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://sweet-shop-lewiscm.herokuapp.com/about_us/</loc>
+  <lastmod>2022-05-30T22:02:46+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://sweet-shop-lewiscm.herokuapp.com/faq/</loc>
+  <lastmod>2022-05-30T22:02:46+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://sweet-shop-lewiscm.herokuapp.com/delivery-information/</loc>
+  <lastmod>2022-05-30T22:02:46+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://sweet-shop-lewiscm.herokuapp.com/accounts/password/reset/</loc>
+  <lastmod>2022-05-30T22:02:46+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+
+
+</urlset>

@@ -238,7 +238,7 @@
             $('.update-link').click(function(e) {
                 var form = $(this).prev('.update-form');
                 form.submit();
-            })
+            });
 
             // Remove Item & Reload
             // On the click event of the remove-item button. 
@@ -257,6 +257,6 @@
                 .done(function() {
                     location.reload();
                 });
-            })
+            });
         </script>
 {% endblock %}

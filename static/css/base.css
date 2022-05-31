@@ -792,7 +792,7 @@ select option {
 } /* adds a border to the carousel */
 
 .image-00 {
-    background: url('/media/00_sweets.avif') no-repeat center center;
+    background: #000080 url('/media/00_sweets.avif') no-repeat center center;
     background-size: cover;
     border-radius: 25px;
     border-top: 7px solid rgba(0, 0, 128, 0.8);
@@ -802,7 +802,7 @@ select option {
 } /* the image for the 00's sweets section */
 
 .image-90 {
-    background: url('/media/90_sweets.avif') no-repeat center center;
+    background: #333333 url('/media/90_sweets.avif') no-repeat center center;
     background-size: cover;
     border-radius: 25px;
     border-top: 8px solid rgba(51, 51, 51, 0.8);
@@ -812,7 +812,7 @@ select option {
 } /* the image for the 00's sweets section */
 
 .image-80 {
-    background: url('/media/80_sweets.avif') no-repeat center center;
+    background: #000080 url('/media/80_sweets.avif') no-repeat center center;
     background-size: cover;
     border-radius: 25px;
     border-top: 8px solid rgba(0, 0, 128, 0.8);

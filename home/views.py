@@ -47,3 +47,8 @@ def deliver_info(request):
 def about_us(request):
     """ Renders the about_us.html template in the browser """
     return render(request, 'home/about_us.html')
+
+
+def privacy_policy(request):
+    """ Renders the privacy_policy.html template in the browser """
+    return render(request, 'home/privacy_policy.html')
