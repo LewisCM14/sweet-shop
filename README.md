@@ -341,7 +341,7 @@ Issues relating to [viewing products](https://github.com/LewisCM14/sweet-shop/is
     ![image of the cart totals container](media/cart_totals.png)
     ![image of order summary display](media/order_summary.png)
 
-* Stripe is used, along with a custom webhook_handler in order to process payments, this allows for users to be confident in a secure payment provider and business owners that all orders paid for are entered into the database for processing, allowing them to build a reputable business. Once the user submits an order they are directed to the checkout success page, where they're order is displayed to them, they also receive a confirmation email with this information on. The checkout form is displayed within an accordion, the input fields adjust in display size and order dependant upon screen size, always labelled, make sure the user is given the upmost clarity on the purchase they are about to make.
+* Stripe is used, along with a custom webhook_handler in order to process payments, this allows for users to be confident in a secure payment provider and business owners that all orders paid for are entered into the database for processing, allowing them to build a reputable business. Once the user submits an order they are directed to the checkout success page, where they're order is displayed to them, they also receive a confirmation email with this information on. The checkout form is displayed within an accordion, the input fields adjust in display size and order dependant upon screen size, always labelled, make sure the user is given the upmost clarity on the purchase they are about to make. Stipes payment intent method also provides realtime error handling on the order form, providing users with clear feedback messages displayed in the error div attached.
 
     ![image of checkout form for desktop devices](media/checkout_form.png)
     ![image of checkout form for mobile devices](media/checkout_form_mobile.png)
@@ -472,6 +472,8 @@ ___
 
     - Python
         - No errors were found when passing through the [PEP8 Validator tool](http://pep8online.com/).
+    
+        *Please note all pylint issues raised in the terminal, are to the best of my knowledge, in relation to the Django framework. Whilst these issues can be ignored with inline comments, in many instances the inline comment raises a flake8 E501 error instead, so whilst i acknowledge the errors are raised it is a false positive in my opinion and doesn't need addressing at this point.*
     ---
 
 - **Lighthouse** <a name='lighthouse'></a>
@@ -535,7 +537,7 @@ ___
 
     * Another area heavily reliant on JS code is StipesPaymentIntent method, found in the static folder of the checkout app. Due to this mostly being boilerplate code found in the Stipe documentation i again felt automated testing wasn't required, instead i was able to ensure the correct values where passed by the JS code to the view from within the printout of Stipes developers dashboard for each payment intent. Returning error messages and preventing submission of invalid order instances is all handled in the backend by Python code and covered by automated testing. To handle Stipe requiring the country field of its payment intent to meet ISO 3166-1 alpha-2, Django's countries package has been used to ensure the country field on forms is displayed as a dropdown option, preventing user input breaking the code. I again tried to break the code by inputting invalid values in various combinations into the order form, again to no avail. This in conjunction with the redundancy Stipes webhook handler provides i felt sufficiently covered the code relating to processing payments.
 
-    * Another feature which uses JS code is the save info feature of the order form, due to the order form being validated via python code incorrect values cannot be passed in the save info feature. So the only testing performed was to ensure that information is only saved to the user profile if checked and the feature was only presented to authorized users, for both instances the code performs as intended.
+    * Another feature which uses JS code is the save info feature of the order form, due to the order form being validated via python code incorrect values cannot be passed in the save info feature to the user profile. So the only testing performed was to ensure that information is only saved to the user profile if the save info box is checked and the feature was only presented to authorized users, for both instances the code performs as intended.
 
     * The other instances of JS code include the code which validates the MailChimp newsletter sign up feature, as well as the code to mount Stipes card elements to the page, both copied from their relative documentation. Both these functions have been manually tested across multiple devices, with the Stripe card element always being displayed as intended and MailChip sign up retuning error messages for invalid email submissions as intended. Aside from this the return to top button found on product list template is the final piece of JS code, due to this not saving or passing information the only test required was that it returns a user to the top of the page when clicked, which as of final deployment it does.
 

@@ -4,7 +4,6 @@ import uuid
 from decimal import Decimal
 
 from django.db import models
-from django.core.validators import RegexValidator
 from django.db.models import Sum
 from django.conf import settings
 from django_countries.fields import CountryField
@@ -53,11 +52,8 @@ class Order(models.Model):
     # User Contact Details
     full_name = models.CharField(max_length=50, null=True, blank=True)
     email = models.EmailField(max_length=50, null=False, blank=False)
-    # User Phone Number & Validators
-    phoneNumberRegex = RegexValidator(regex=r'^\+?1?\d{9,15}$')
-    phone_number = models.CharField(
-        validators=[phoneNumberRegex], max_length=16, null=False, blank=False
-        )
+    # User Phone Number
+    phone_number = models.CharField(max_length=16, null=False, blank=False)
     # User Address
     street_address1 = models.CharField(max_length=80, null=False, blank=False)
     street_address2 = models.CharField(max_length=80, null=True, blank=True)
