@@ -274,10 +274,37 @@ ___
 
     ![image of the category buttons](media/category_buttons.png)
 
-Issues relating to [product filtering](https://github.com/LewisCM14/sweet-shop/issues?q=label%3A%22PRODUCT+SEARCH%22+is%3Aclosed)
-Issues relating to [viewing products](https://github.com/LewisCM14/sweet-shop/issues?q=label%3A%22VIEW+PRODUCTS%22+is%3Aclosed)
+Issues relating to [product filtering](https://github.com/LewisCM14/sweet-shop/issues?q=label%3A%22PRODUCT+SEARCH%22+is%3Aclosed).
+Issues relating to [viewing products](https://github.com/LewisCM14/sweet-shop/issues?q=label%3A%22VIEW+PRODUCTS%22+is%3Aclosed).
 
 **Checkout**
+
+* Due to Classic Confectionery being a business to customer e-commerce application quick and easy checkout functionality is implemented. Whilst users can create orders without an account, they are encouraged to in order to access the applications full extent of features. Once an account has been created, upon submitting their first order, they are given the option to save the provided delivery info to their user profile, allowing them to complete future orders with this information pre-filled.
+
+    ![image of the save info checkbox](media/save_info.png)
+
+* Individual items can be added to the cart in two clicks, with the quantity input utilizing plus and minus buttons to aide functionality ease. Once an item has been added a toast notification is presented to the user, this notification highlights the carts current contents and remaining spend total to qualify for free delivery. From within this notification the user can also navigate to the secure checkout page. The intention of this, is when paired with the extensive product navigation options, users add items to their cart with reckless abandon like a 'kid in a candy store' until they qualify for free delivery at which point then can escape the rabbit whole of products they've navigated down directly to the checkout page.
+
+    ![image of the quantity input and add to cart buttons](media/add_to_cart_buttons.png)
+    ![image of the success toast when item added to cart](media/cart_toast.png)
+
+* Once at the checkout page adjustments to individual items can be made and prior to payment confirmation an option to adjust the cart again is presented, this allows the user to tweek an order without navigating away from the checkout feature completely, keeping them at the checkout page is deliberate, with an end goal of having them finish their purchase. Cart subtotal and total is always visible to the user at the checkout point, allowing for Classic Confectionery to conduct clear and transparent business. On desktop devices items within the cart display as line items, however on mobile devices these line items display as card fields, allowing for clear display of the products details.
+
+    ![image of the cart page containing items](media/adjust_cart_items.png)
+    ![image of the cart card for items](media/cart_card.png)
+    ![image of the cart totals container](media/cart_totals.png)
+    ![image of order summary display](media/order_summary.png)
+
+* Stripe is used, along with a custom webhook_handler in order to process payments, this allows for users to be confident in a secure payment provider and business owners that all orders paid for are entered into the database for processing, allowing them to build a reputable business. Once the user submits an order they are directed to the checkout success page, where they're order is displayed to them, they also receive a confirmation email with this information on. The checkout form is displayed within an accordion, the input fields adjust in display size and order dependant upon screen size, always labelled, make sure the user is given the upmost clarity on the purchase they are about to make.
+
+    ![image of checkout form for desktop devices](media/checkout_form.png)
+    ![image of checkout form for mobile devices](media/checkout_form_mobile.png)
+    ![image of payment form for desktop devices](media/payment_form.png)
+    ![image of checkout success page](media/checkout_success.png)
+
+Issues relating to [ordering products](https://github.com/LewisCM14/sweet-shop/issues?q=label%3A%22ORDER+PRODUCTS%22+is%3Aclosed).
+Issues relating to [making payments](https://github.com/LewisCM14/sweet-shop/issues?q=label%3A%22PAY+FOR+PRODUCTS%22+is%3Aclosed).
+Issues relating to [cart functionality](https://github.com/LewisCM14/sweet-shop/issues?q=label%3A%22PRODUCT+CART%22+is%3Aclosed).
 
 **Favorites**
 
