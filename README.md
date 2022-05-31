@@ -1,6 +1,6 @@
 # Classic Confectionery
 
-An e-commerce sweet shop.
+A business to customer e-commerce application for an online sweet retailer. Built using the Django framework. Allowing for user account creation and authorization capabilities, in order to implement favorite's and reviews features, along with fast and secure checkout functionality. Payment processing is handled securely by Stipe. Anonymous users are still able to sort & filter products, view product reviews and complete purchases however. An inquiry feature is also offered to all site users.
 ___
 ## Table of Contents <a name='contents'></a>
 
@@ -1009,7 +1009,9 @@ ___
 
     * The image used on the home page for the section which allows navigation to the shops selection of 90's sweets was taken by Dmitry Mishin and can be found [here](https://unsplash.com/photos/m7m58SOtb6c).
     
-    * The image used on the home page for the section which allows navigation to the shops selection of 80's sweets was taken by Matt Schwartz and can be found [here](https://unsplash.com/photos/SmZWvAkKRVM).   
+    * The image used on the home page for the section which allows navigation to the shops selection of 80's sweets was taken by Matt Schwartz and can be found [here](https://unsplash.com/photos/SmZWvAkKRVM).
+
+    * The image used for the favicon can be found [here](https://www.seekpng.com/ipng/u2w7e6w7y3e6u2a9_graphic-transparent-candy-bar-clipart-yellow-candy-clipart/).
 
 [Return to Table of Contents](#contents)
 ___
