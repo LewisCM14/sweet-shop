@@ -134,8 +134,22 @@ ___
 
 **Data Required** <a name='datarequired'></a>
 
+* Due to the nature of the application a large amount of sensitive user data is required. Efforts to mitigate the extent of this have been made in the form of using a secure payment provider which allows for anonymous users to complete purchases. Being an online e-commerce store though means contact and delivery information is required for orders to be shipped, storing this information in an authorized users profile is optional and raw passwords are never stored within the application, further allowing users to limit the amount of their data the application stores. Inline with EU GDPR laws the websites privacy policy information can be found with the site footer.
+
 
 **Security Features** <a name='securityfeatures'></a>
+
+* User Authentication
+
+    Django's allauth package is used to implement user authentication. This coupled with Django's login_required decorator ensures that a users personal information regarding order history and their user profile can only be accessed by the owner of it. Similar measures have been taken on the favorites app, as well as the CRUD functionality of a users reviews. When adding, editing or deleting products on the store extra conditions have been implemented in the view to ensure only users with super status can perform these actions.
+
+* Secure Payment Method
+
+    Stipe is used as a secure payment provider for the store, this robust and trusted services means no payment information is stored within the application, protecting both site users and site owner.
+
+* env.py
+
+    An env.py file is utilized in conjunction with a .gitignore file to prevent API keys being visible in version control.
 
 
 [Return to Table of Contents](#contents)
