@@ -23,14 +23,14 @@
         <div class="row bg-white">
             <!-- Product Image -->
             <div class="col-lg-6 col-md-12">
-                <div class="image-container">
+                <div>
                     {% if product.image %}
                         <a href="{{ product.image.url }}" target="_blank">
-                            <img class="card-img-top img-fluid product-card-img" src="{{ product.image.url }}" alt="{{ product.name }}">
+                            <img class="card-img-top img-fluid" src="{{ product.image.url }}" alt="{{ product.name }}">
                         </a>
                         {% else %}
                         <a>
-                            <img class="card-img-top img-fluid product-card-img" src="{{ MEDIA_URL }}noimage.png" alt="{{ product.name }}">
+                            <img class="card-img-top img-fluid" src="{{ MEDIA_URL }}noimage.png" alt="{{ product.name }}">
                         </a>
                     {% endif %}
                 </div>
@@ -47,11 +47,11 @@
                                 <!-- favorite button -->
                                 {% if favorite %}
                                     <button class="fav-btn blank-btn ms-2" aria-label="remove product from favorites">
-                                        <i class="fa-solid fa-2xl fa-heart"></i>
+                                        <i class="fa-solid fa-xl fa-heart"></i>
                                     </button>
                                 {% else %}
                                     <button class="fav-btn blank-btn ms-2" aria-label="add product from favorites">
-                                        <i class="fa-regular fa-2xl fa-heart"></i>
+                                        <i class="fa-regular fa-xl fa-heart"></i>
                                     </button>
                                 {% endif %}
                             </form>

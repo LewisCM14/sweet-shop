@@ -17,7 +17,7 @@ class OrderForm(forms.ModelForm):
     )
 
     email = forms.EmailField(
-        max_length=254,
+        max_length=50,
         label='Email Address',
         required=True,
         widget=forms.TextInput(attrs={'placeholder': 'Email Address'}),
@@ -53,7 +53,7 @@ class OrderForm(forms.ModelForm):
     )
 
     county = forms.CharField(
-        max_length=80,
+        max_length=40,
         label='County',
         required=True,
         widget=forms.TextInput(attrs={'placeholder': 'County'}),

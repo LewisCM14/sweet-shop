@@ -75,13 +75,13 @@
                         {% if item.product.image %}
                             <div class="col-md-1">
                                 <a href="{% url 'product_detail' item.product.id %}">
-                                    <img class="img-fluid rounded product-card-img" src="{{ item.product.image.url }}" alt="{{ item.product.name }}">
+                                    <img class="img-fluid rounded" src="{{ item.product.image.url }}" alt="{{ item.product.name }}">
                                 </a>
                             </div>
                         {% else %}
                             <div class="col-md-1">
                                 <a>
-                                    <img class="img-fluid rounded product-card-img" src="{{ MEDIA_URL }}noimage.png" alt="{{ item.product.name }}">
+                                    <img class="img-fluid rounded" src="{{ MEDIA_URL }}noimage.png" alt="{{ item.product.name }}">
                                 </a>
                             </div>
                         {% endif %}
@@ -137,7 +137,7 @@
                         <div class="text-center col-md-2 mb-lg-0 mb-2">
                             <button class="blank-btn remove-item text-decoration-none text-red"
                                 id="remove_{{ item.item_id }}" aria-label="remove item from cart">
-                                <i class="fa-solid fa-trash-can fa-2xl"></i>
+                                <i class="fa-solid fa-trash-can fa-xl"></i>
                             </button>
                         </div>
                     </div>
