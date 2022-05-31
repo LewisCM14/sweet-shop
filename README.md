@@ -330,10 +330,42 @@ Issues relating to [cart functionality](https://github.com/LewisCM14/sweet-shop/
 
     ![image of order history list](media/order_history_list.png)
     ![image of previous order history](media/order_history.png)
+
+Issues relating to [user profiles](https://github.com/LewisCM14/sweet-shop/issues?q=label%3A%22USER+AUTHENTICATION%22+is%3Aclosed).
+Issues relating to [order history](https://github.com/LewisCM14/sweet-shop/issues?q=label%3A%22VIEW+ORDERS%22+is%3Aclosed).
  
 **Favorites** <a name='favs'></a>
 
+* The favorites feature has three main goals: to encourage users to create an account, encourage users to return to the site and make the checkout process fast and efficient for established users. In order to achieve this the feature requires authorized users to be signed in before they can add a product to their favorites. The process of then adding an item to their favorites is then intended to give the user a personal connection with the product and in turn the site, hopefully encouraging them to return in the future to make another purchase. Next to each items name on their product page a heart outline is displayed, that once the product has been added to their favorites, becomes filled. This heart icon works as a toggle button for adding and removing the item from the users favorites.
+
+    ![image of the favorite button toggled on](media/fav_button.png)
+    ![image of the favorite button toggled off](media/unfav_button.png)
+
+* The third goal of the favorites app is achieved by allowing users to add items to their cart directly form within their favorites list. Although this goes against the 'kid in a candy store' ethos of the site, the primary target audience of the favorites feature is established site users. Mitigating the drawbacks of going against the status quo as these users are already familiar with the application and the novelty of browsing the products will have worn off. The favorites list follows a similar layout to the cart page, adjusting between line items and product cards dependant on screen size. From a business perspective the favorites app provides store owners with the ability to see which items are user favorites as a whole, again mitigating the drawbacks of reducing users navigating the stores products. With the intention being the stores most liked products will be those offered at discount prices within the newsletter.
+
+    ![image of the favorite lists for desktops](media/fav_list.png)
+    ![image of the favorite lists for mobile devices](media/fav_list_mobile.png)
+
+Issues relating to [the favorites app](https://github.com/LewisCM14/sweet-shop/issues?q=label%3AFAVORITES+is%3Aclosed).
+
 **Reviews** <a name='review'></a>
+
+* The main goal of the reviews app is to encourage new business by displaying the reviews of existing customers to them. Again, only registered users can access this feature. Once a user reviews a product though, their rating and write up is displayed to all users below the product information on each individual products page. Because of this, CRUD functionality is provided to the user, allowing them to fix potential spelling mistakes or remove it completely if they don't feel comfortable displaying it to everybody at a later date.
+
+    ![image of the review card displayed underneath a product](media/review_card.png)
+
+* Prompts are given in multiple places on the products page for users to leave a review, with the review form appearing on that page in a modal. This is intended to make the process quick and easy as leaving a review offers little to no benefit for users currently.
+
+    ![image of the write a review links](media/write_a_review_links.png)
+    ![image of the review modal](media/review_modal.png)
+
+* It is in the business' best interests that users don't delete their reviews, because of this navigation to all their reviews and in turn the edit review form is accessed through the top bar and not on the review itself when displayed underneath the product. A users list of reviews are displayed as cards regardless of the screen size, with the delete button having a confirmation modal attached. The edit button directs the user to a form instance pre-filled with the review in its current state.
+
+    ![image of the review card on the users reviews list](media/review_list.png)
+    ![image of the delete review modal](media/delete_review.png)
+    ![image of the edit review modal](media/edit_review.png)
+
+Issues relating to [the reviews app](https://github.com/LewisCM14/sweet-shop/issues?q=label%3AREVIEW+is%3Aclosed).
 
 **Inquiry** <a name='inquire'></a>
 
