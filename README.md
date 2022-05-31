@@ -270,10 +270,12 @@ ___
     * Iteration 2 board can be found [here](https://github.com/LewisCM14/sweet-shop/projects/2)
 
 - **Iteration 3**
+    ![image of the iteration 3 milestone](media/iteration_3.png)
     * The iteration 3 milestone can be found [here](https://github.com/LewisCM14/sweet-shop/milestone/4?closed=1)
     * Iteration 3 board can be found here [here](https://github.com/LewisCM14/sweet-shop/projects/3)
 
 - **Iteration 4**
+    ![image of the iteration 4 milestone](media/iteration4.png)
     * The Iteration 4 milestone can be found [here](https://github.com/LewisCM14/sweet-shop/milestone/5?closed=1)
     * Iteration 4 board can be found here [here](https://github.com/LewisCM14/sweet-shop/projects/4)
 
