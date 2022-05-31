@@ -369,6 +369,14 @@ Issues relating to [the reviews app](https://github.com/LewisCM14/sweet-shop/iss
 
 **Inquiry** <a name='inquire'></a>
 
+* The main goal of the inquiry app is to provide an official and formal point of contact between site owner and user. This feature is available to every user regardless of authorization status. The contact us link in the footer provides the user with a simple form in which to submit an inquiry to the store, once a valid form is submitted they are redirect to a mail success page and a notification email is sent to the contact address they provided. This formal and evident contact process is designed to instill confidence in site users that Classic Confectionery intends to provide great customer service.
+
+
+    ![image of the contact form](media/contact_form.png)
+    ![image of the mail success page](media/mail_success.png)
+
+Issues relating to [the inquiry app](https://github.com/LewisCM14/sweet-shop/issues?q=label%3AINQUIRY+is%3Aclosed).
+
 
 [Return to Table of Contents](#contents)
 ___
