@@ -401,7 +401,13 @@ ___
 
 ### Future Features <a name ='toimplement'></a>
 
+*The below future features are potential areas for improvement on the site rather than pre-determined future features*
+
 * Make a global variable that holds each type, so the templates can have their code abstracted, meaning as the site owner adds other types, they are reflected in the application. Preventing them needing to be 'hard' coded in.
+
+* Allow for users to navigate to the inquiry form from within the order history tab, attaching the orders information automatically. This functionality would allow for disputes around orders to be opened more efficiently.
+
+* Allow for individual products to have different weight options rather than forcing site owners to limit each items weight to 200g in order for price sorting to be correct and quantity input values.
 
 *The product backlog can be viewed [here](https://github.com/LewisCM14/sweet-shop/milestone/1).*
 
